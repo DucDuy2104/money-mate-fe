@@ -12,7 +12,7 @@
 - **Secure & Private**: Data encryption ensures security.
 
 ## 🛠️ Technologies Used
-- **Frontend**: Flutter
+- **Frontend**: Flutter (Clean Architecture, BLoC pattern)
 - **Backend**: NestJS
 - **Database**: PostgreSQL
 - **Authentication**: Firebase Auth / JWT
@@ -24,15 +24,22 @@
 git clone https://github.com/yourusername/moneymate.git
 cd moneymate
 
-# Install dependencies
+# Install dependencies for Flutter
+flutter pub get
+
+# Run the Flutter app
+flutter run
+
+# Install dependencies for NestJS backend
+cd backend
 npm install
 
-# Start the app
-npm start
+# Start the backend server
+npm run start
 ```
 
 ## 📄 License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## 📞 Contact
-For any inquiries or contributions, reach out to **your.email@example.com**.
+For any inquiries or contributions, reach out to **cvducduy@gmail.com**.
