@@ -1,0 +1,29 @@
+scripts:
+  # 🎯 BASIC FLUTTER COMMANDS
+  clean: flutter clean && flutter pub get   # Clean and fetch dependencies
+  build-apk: flutter build apk              # Build APK for Android
+  build-ios: flutter build ios              # Build iOS app (Mac only)
+  run: flutter run                          # Run the app
+  analyze: flutter analyze                  # Analyze the code for issues
+  test: flutter test                        # Run unit tests
+  doctor: flutter doctor                    # Check Flutter environment setup
+
+  # 🔄 STATE MANAGEMENT WITH BLOC
+  bloc-create: flutter pub run bloc:main    # Create a new Bloc template
+  bloc-watch: flutter pub run build_runner watch --delete-conflicting-outputs  # Auto-generate Bloc code on file changes
+
+  # ❄️ GENERATE CODE FOR FREEZED & JSON SERIALIZABLE
+  freezed-build: flutter pub run build_runner build --delete-conflicting-outputs  # Generate models and other files
+  freezed-watch: flutter pub run build_runner watch --delete-conflicting-outputs  # Watch mode for automatic code generation
+
+  # 🎯 FORMAT & FIX CODE
+  format: 
+    - dart format lib/                      # Format Dart files
+    - dart fix --apply                      # Automatically fix issues
+
+  # 🚀 FULL BUILD PROCESS (CLEAN, GENERATE, BUILD)
+  full-build:
+    - derry clean
+    - derry freezed-build
+    - derry bloc-watch
+    - derry build-apk
