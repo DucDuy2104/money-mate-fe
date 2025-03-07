@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:money_mate/shared/constants/app_colors.dart';
+import 'package:money_mate/shared/constants/app_dimens.dart';
 
-const _primaryColor = Color(0xFF4CAF50); 
-const _secondaryColor = Color(0xFF388E3C); 
-const _backgroundColor = Color(0xFFF5F5F5);
+const _primaryColor = AppColors.primaryColor;
+const _secondaryColor = Color(0xFF4CAF50); 
+const _backgroundColor = Color(0xFFFFFFFF);
 const _darkBackgroundColor = Color(0xFF121212);
 const _textColor = Color(0xFF212121); 
 
@@ -148,7 +150,7 @@ class AppThemeData {
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
         fillColor: Colors.grey.shade900,
-        contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        contentPadding: const EdgeInsets.all(AppDimens.padding),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
           borderSide: BorderSide(color: _primaryColor.withOpacity(0.5)),
