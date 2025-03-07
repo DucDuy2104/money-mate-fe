@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:money_mate/presentation/pages/splash/splash_screen.dart';
+import 'package:money_mate/shared/constants/app_theme.dart';
 
 class AppStartupCubit extends Cubit<AppStartupState> {
   AppStartupCubit() : super(AppStartupLoading());
@@ -53,8 +54,12 @@ class AppStartupWidget extends StatelessWidget {
                       context.read<AppStartupCubit>().initializeApp(),
                 );
               }
-              return const MaterialApp(
-                  debugShowCheckedModeBanner: false, home: SplashScreen());
+              return MaterialApp(
+                  theme: AppThemeData.lightTheme(context),
+                  darkTheme: AppThemeData.darkTheme(context),
+                  themeMode: ThemeMode.system,
+                  debugShowCheckedModeBanner: false,
+                  home: SplashScreen());
             },
           );
         },
