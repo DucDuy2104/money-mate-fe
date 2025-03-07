@@ -6,8 +6,8 @@ import 'package:money_mate/shared/constants/app_colors.dart';
 import 'package:money_mate/shared/constants/app_dimens.dart';
 import 'package:money_mate/shared/constants/app_theme.dart';
 
-class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
+class RegisterScreen extends StatelessWidget {
+  const RegisterScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -18,14 +18,15 @@ class LoginScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset('assets/images/story_set_back.png',
+            Image.asset('assets/images/story_set_wellcome.png',
                 width: 200, height: 200, fit: BoxFit.contain),
             AppDimens.spaceLarge,
             TextField(
               decoration: InputDecoration(
                 labelText: 'Email',
-                border:
-                    OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
+                border: OutlineInputBorder(
+                    borderRadius:
+                        BorderRadius.circular(AppDimens.borderRadiusSmall)),
               ),
             ),
             AppDimens.spaceLarge,
@@ -33,48 +34,47 @@ class LoginScreen extends StatelessWidget {
               obscureText: true,
               decoration: InputDecoration(
                 labelText: 'Mật khẩu',
-                border:
-                    OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
+                border: OutlineInputBorder(
+                    borderRadius:
+                        BorderRadius.circular(AppDimens.borderRadiusSmall)),
               ),
             ),
-            AppDimens.space,
-            Align(
-                alignment: Alignment.centerLeft,
-                child: GestureDetector(
-                    onTap: () {
-                      // Navigate to Forgot Password screen
-                    },
-                    child: Text(
-                      'Quên mật khẩu?',
-                      style: context.textTheme.bodyMedium
-                          ?.copyWith(color: AppColors.primaryColor),
-                    ))),
+            AppDimens.spaceLarge,
+            TextField(
+              obscureText: true,
+              decoration: InputDecoration(
+                labelText: 'Nhập lại mật khẩu',
+                border: OutlineInputBorder(
+                    borderRadius:
+                        BorderRadius.circular(AppDimens.borderRadiusSmall)),
+              ),
+            ),
             AppDimens.space,
             Container(
               width: double.infinity,
               child: ElevatedButton(
                 onPressed: () {},
                 child: Text(
-                  'Đăng nhập',
+                  'Đăng ký',
                   style: context.textTheme.bodyLarge
                       ?.copyWith(color: Colors.white),
                 ),
               ),
             ),
             AppDimens.space,
-            GoogleSignInButton(content: 'Đăng nhập với Google'),
+            GoogleSignInButton(content: 'Đăng ký với Google'),
             const SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text("Bạn chưa có tài khoản?"),
+                const Text("Bạn đã có tài khoản?"),
                 AppDimens.spaceSmall,
                 GestureDetector(
                   onTap: () {
-                    // Navigate to Register screen
-                    context.goNamed(RouteNames.registerName);
+                    // Navigate to Login screen
+                    context.goNamed(RouteNames.loginName);
                   },
-                  child: Text('Đăng ký ngay',
+                  child: Text('Đăng nhập ngay',
                       style: context.textTheme.bodyMedium
                           ?.copyWith(color: AppColors.primaryColor)),
                 )
