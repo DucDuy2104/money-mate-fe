@@ -1,0 +1,2 @@
+/Users/mac/Desktop/ducduy/dev/flutter/money-mate/android/app/.cxx/Debug/6u73g735/arm64-v8a/CMakeFiles/edit_cache.dir
+/Users/mac/Desktop/ducduy/dev/flutter/money-mate/android/app/.cxx/Debug/6u73g735/arm64-v8a/CMakeFiles/rebuild_cache.dir

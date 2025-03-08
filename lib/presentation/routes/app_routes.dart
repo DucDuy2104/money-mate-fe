@@ -19,7 +19,7 @@ final List<GoRoute> appRoutes = [
   GoRoute(
     path: RouteNames.home,
     name: RouteNames.homeName,
-    builder: (context, state) => const HomeScreen(),
+    builder: (context, state) => HomeScreen(),
   ),
   GoRoute(
     path: RouteNames.settings,

@@ -32,7 +32,7 @@ class AppThemeData {
       brightness: Brightness.light,
       primarySwatch: _materialColorPrimary,
       primaryColor: _primaryColor,
-      scaffoldBackgroundColor: _backgroundColor,
+      scaffoldBackgroundColor: AppColors.background,
       colorScheme: const ColorScheme.light(
         primary: _primaryColor,
         secondary: _secondaryColor,
@@ -107,7 +107,7 @@ class AppThemeData {
     return ThemeData(
       brightness: Brightness.dark,
       primarySwatch: _materialColorPrimary,
-      scaffoldBackgroundColor: _darkBackgroundColor,
+      scaffoldBackgroundColor: AppColors.darkBackground,
       colorScheme: const ColorScheme.dark(
         primary: _primaryColor,
         secondary: _secondaryColor,

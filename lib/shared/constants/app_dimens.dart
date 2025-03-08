@@ -15,4 +15,5 @@ class AppDimens {
   static const Widget spaceSmall = SizedBox(height: paddingSmall, width: paddingSmall);
   static const Widget spaceMedium = SizedBox(height: paddingMedium, width: paddingMedium);
   static const Widget spaceLarge = SizedBox(height: paddingLarge, width: paddingLarge);
+  static const Widget divider = SizedBox(height: paddingSmall / 2, width: paddingSmall);
 }

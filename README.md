@@ -21,7 +21,7 @@
 ## 📥 Installation
 ```sh
 # Clone the repository
-git clone https://github.com/yourusername/moneymate.git
+git clone https://github.com/DucDuy2104/money-mate-fe.git
 cd moneymate
 
 # Install dependencies for Flutter

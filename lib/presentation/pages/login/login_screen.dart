@@ -53,7 +53,10 @@ class LoginScreen extends StatelessWidget {
             Container(
               width: double.infinity,
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  //TODO: Handle login
+                  context.goNamed(RouteNames.homeName);
+                },
                 child: Text(
                   'Đăng nhập',
                   style: context.textTheme.bodyLarge
@@ -71,7 +74,7 @@ class LoginScreen extends StatelessWidget {
                 AppDimens.spaceSmall,
                 GestureDetector(
                   onTap: () {
-                    // Navigate to Register screen
+                    // TODO: Navigate to Register screen
                     context.goNamed(RouteNames.registerName);
                   },
                   child: Text('Đăng ký ngay',
