@@ -2,6 +2,7 @@ import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:money_mate/domain/entities/category.dart';
 import 'package:money_mate/domain/entities/transaction.dart';
+import 'package:money_mate/presentation/drawer_navigation/app_drawer.dart';
 import 'package:money_mate/presentation/pages/home/widgets/category_item.dart';
 import 'package:money_mate/presentation/pages/home/widgets/expense_chart.dart';
 import 'package:money_mate/presentation/pages/home/widgets/text_logo.dart';
@@ -92,18 +93,23 @@ final List<Category> sampleCategories = [
   ),
 ];
 
-
 class HomeScreen extends StatelessWidget {
-
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(onPressed: () {
-
-        }, icon: const Icon(EvaIcons.menu2Outline)),
+        leading: Builder(
+          builder: (context) {
+            return IconButton(
+              icon: const Icon(EvaIcons.menu2Outline),
+              onPressed: () {
+                Scaffold.of(context).openDrawer();
+              },
+            );
+          },
+        ),
         title: const MoneyMateLogo(),
         actions: [
           IconButton(
@@ -112,12 +118,12 @@ class HomeScreen extends StatelessWidget {
           ),
         ],
       ),
+      drawer: const AppDrawer(currentRoute: '/home'),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.white,
-        onPressed: () {
-
-      },
-      child: Image.asset('assets/images/otter.png', width: 100, height: 100, fit: BoxFit.cover)),
+          backgroundColor: Colors.white,
+          onPressed: () {},
+          child: Image.asset('assets/images/otter.png',
+              width: 100, height: 100, fit: BoxFit.cover)),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: AppDimens.paddingSmall),
         child: Column(
@@ -136,7 +142,9 @@ class HomeScreen extends StatelessWidget {
                 itemBuilder: (context, index) {
                   final category = sampleCategories[index];
                   return CategoryItem(category: category);
-                }, separatorBuilder: (BuildContext context, int index) => AppDimens.divider,
+                },
+                separatorBuilder: (BuildContext context, int index) =>
+                    AppDimens.divider,
               ),
             ),
             const SizedBox(height: 20),

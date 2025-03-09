@@ -1,7 +1,7 @@
 class RouteNames {
 
   // Home
-  static const String home = '/home';
+  static const String home = '/';
   static const String homeName = 'home';
 
   // Login
