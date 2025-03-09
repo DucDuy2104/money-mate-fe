@@ -92,27 +92,27 @@ final List<Category> sampleCategories = [
 
 
 class HomeScreen extends StatelessWidget {
-  final double totalBudget = 1200000;
-  final double totalSpent = 600000;
-  final double progress = 600000 / 1200000;
 
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Money Mate")),
+      appBar: AppBar(
+        title: const Text("Money Mate"),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.notifications),
+            onPressed: () {},
+          ),
+        ],
+      ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: AppDimens.paddingSmall),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const IncomeExpenseChart(),
-            const SizedBox(height: 4),
-            Text(
-              "${totalSpent.toStringAsFixed(2)} / ${totalBudget.toStringAsFixed(2)} VND",
-              style: const TextStyle(fontSize: 16),
-            ),
             const SizedBox(height: 20),
             const Text("Danh mục tiêu dùng",
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),

@@ -6,88 +6,102 @@ class IncomeExpenseChart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AspectRatio(
-      aspectRatio: 1.7,
-      child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: LineChart(
-          LineChartData(
-            titlesData: FlTitlesData(
-              leftTitles: const AxisTitles(
-                sideTitles: SideTitles(showTitles: true, reservedSize: 40),
-              ),
-              bottomTitles: AxisTitles(
-                sideTitles: SideTitles(
-                  showTitles: true,
-                  getTitlesWidget: (value, meta) {
-                    const months = [
-                      'Jan',
-                      'Feb',
-                      'Mar',
-                      'Apr',
-                      'May',
-                      'Jun',
-                      'Jul',
-                      'Aug',
-                      'Sep',
-                      'Oct',
-                      'Nov',
-                      'Dec'
-                    ];
-                    return Text(months[value.toInt()], style: const TextStyle(fontSize: 12));
-                  },
-                  reservedSize: 32,
+    return Padding(
+      padding: const EdgeInsets.all(16),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(16),
+        child: Container(
+          width: double.infinity,
+          height: 200,
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                Colors.black.withOpacity(0.85),
+                Colors.blueGrey.shade900.withOpacity(0.8),
+              ],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+          ),
+          padding: const EdgeInsets.all(16),
+          child: LineChart(
+            LineChartData(
+              titlesData: FlTitlesData(
+                leftTitles: const AxisTitles(
+                  sideTitles: SideTitles(showTitles: false),
+                ),
+                bottomTitles: AxisTitles(
+                  sideTitles: SideTitles(
+                    showTitles: true,
+                    interval: 1,
+                    reservedSize: 32,
+                    getTitlesWidget: (value, meta) {
+                      const style = TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white70,
+                      );
+
+                      const months = ['Jan', 'Apr', 'Jul', 'Oct'];
+
+                      if (value.toInt() >= 0 && value.toInt() < months.length) {
+                        return Padding(
+                          padding: const EdgeInsets.only(top: 8.0),
+                          child: Text(months[value.toInt()], style: style),
+                        );
+                      }
+                      return const SizedBox.shrink();
+                    },
+                  ),
+                ),
+                rightTitles: const AxisTitles(
+                  sideTitles: SideTitles(showTitles: false),
+                ),
+                topTitles: const AxisTitles(
+                  sideTitles: SideTitles(showTitles: false),
                 ),
               ),
+              borderData: FlBorderData(show: false),
+              minX: 0,
+              maxX: 3,
+              minY: 0,
+              maxY: 1300,
+              gridData: const FlGridData(show: false),
+              lineBarsData: [
+                LineChartBarData(
+                  spots: const [
+                    FlSpot(0, 400),
+                    FlSpot(1, 700),
+                    FlSpot(2, 750),
+                    FlSpot(3, 1200),
+                  ],
+                  isCurved: true,
+                  gradient: const LinearGradient(
+                    colors: [Colors.purpleAccent, Colors.pinkAccent],
+                  ),
+                  barWidth: 4,
+                  isStrokeCapRound: true,
+                  dotData: const FlDotData(show: false),
+                  belowBarData: BarAreaData(show: false),
+                ),
+                LineChartBarData(
+                  spots: const [
+                    FlSpot(0, 300),
+                    FlSpot(1, 600),
+                    FlSpot(2, 700),
+                    FlSpot(3, 1100),
+                  ],
+                  isCurved: true,
+                  gradient: const LinearGradient(
+                    colors: [Colors.blueAccent, Colors.cyanAccent],
+                  ),
+                  barWidth: 4,
+                  isStrokeCapRound: true,
+                  dotData: const FlDotData(show: false),
+                  belowBarData: BarAreaData(show: false),
+                ),
+              ],
             ),
-            borderData: FlBorderData(show: true),
-            gridData: FlGridData(show: true),
-            lineBarsData: [
-              // Line cho thu nhập
-              LineChartBarData(
-                spots: [
-                  FlSpot(0, 400),
-                  FlSpot(1, 600),
-                  FlSpot(2, 500),
-                  FlSpot(3, 700),
-                  FlSpot(4, 650),
-                  FlSpot(5, 800),
-                  FlSpot(6, 750),
-                  FlSpot(7, 900),
-                  FlSpot(8, 850),
-                  FlSpot(9, 1100),
-                  FlSpot(10, 1050),
-                  FlSpot(11, 1200),
-                ],
-                isCurved: true,
-                color: Colors.green,
-                barWidth: 4,
-                isStrokeCapRound: true,
-                belowBarData: BarAreaData(show: false),
-              ),
-              // Line cho chi tiêu
-              LineChartBarData(
-                spots: [
-                  FlSpot(0, 300),
-                  FlSpot(1, 500),
-                  FlSpot(2, 450),
-                  FlSpot(3, 600),
-                  FlSpot(4, 580),
-                  FlSpot(5, 720),
-                  FlSpot(6, 700),
-                  FlSpot(7, 850),
-                  FlSpot(8, 800),
-                  FlSpot(9, 950),
-                  FlSpot(10, 900),
-                  FlSpot(11, 1100),
-                ],
-                isCurved: true,
-                color: Colors.red,
-                barWidth: 4,
-                isStrokeCapRound: true,
-                belowBarData: BarAreaData(show: false),
-              ),
-            ],
           ),
         ),
       ),
