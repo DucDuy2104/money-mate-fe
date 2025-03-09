@@ -1,8 +1,10 @@
+import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:money_mate/domain/entities/category.dart';
 import 'package:money_mate/domain/entities/transaction.dart';
 import 'package:money_mate/presentation/pages/home/widgets/category_item.dart';
 import 'package:money_mate/presentation/pages/home/widgets/expense_chart.dart';
+import 'package:money_mate/presentation/pages/home/widgets/text_logo.dart';
 import 'package:money_mate/presentation/pages/home/widgets/transaction_item.dart';
 import 'package:money_mate/shared/constants/app_dimens.dart';
 import 'package:money_mate/shared/constants/constants.dart';
@@ -99,7 +101,10 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Money Mate"),
+        leading: IconButton(onPressed: () {
+
+        }, icon: const Icon(EvaIcons.menu2Outline)),
+        title: const MoneyMateLogo(),
         actions: [
           IconButton(
             icon: const Icon(Icons.notifications),
@@ -107,6 +112,12 @@ class HomeScreen extends StatelessWidget {
           ),
         ],
       ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.white,
+        onPressed: () {
+
+      },
+      child: Image.asset('assets/images/otter.png', width: 100, height: 100, fit: BoxFit.cover)),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: AppDimens.paddingSmall),
         child: Column(
