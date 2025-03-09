@@ -1,29 +1,86 @@
-scripts:
-  # 🎯 BASIC FLUTTER COMMANDS
-  clean: flutter clean && flutter pub get   # Clean and fetch dependencies
-  build-apk: flutter build apk              # Build APK for Android
-  build-ios: flutter build ios              # Build iOS app (Mac only)
-  run: flutter run                          # Run the app
-  analyze: flutter analyze                  # Analyze the code for issues
-  test: flutter test                        # Run unit tests
-  doctor: flutter doctor                    # Check Flutter environment setup
+format:
+  - dart format lib .
+  - flutter pub run import_sorter:main
 
-  # 🔄 STATE MANAGEMENT WITH BLOC
-  bloc-create: flutter pub run bloc:main    # Create a new Bloc template
-  bloc-watch: flutter pub run build_runner watch --delete-conflicting-outputs  # Auto-generate Bloc code on file changes
+build: dart run build_runner build --delete-conflicting-outputs
+# Run whenever start working. It will generate Freezed classes
+watch: dart run build_runner watch --delete-conflicting-outputs
 
-  # ❄️ GENERATE CODE FOR FREEZED & JSON SERIALIZABLE
-  freezed-build: flutter pub run build_runner build --delete-conflicting-outputs  # Generate models and other files
-  freezed-watch: flutter pub run build_runner watch --delete-conflicting-outputs  # Watch mode for automatic code generation
+start:
+  - fvm flutter run
 
-  # 🎯 FORMAT & FIX CODE
-  format: 
-    - dart format lib/                      # Format Dart files
-    - dart fix --apply                      # Automatically fix issues
+gen_assets:
+  - fluttergen
 
-  # 🚀 FULL BUILD PROCESS (CLEAN, GENERATE, BUILD)
-  full-build:
-    - derry clean
-    - derry freezed-build
-    - derry bloc-watch
-    - derry build-apk
+gen_launcher_icon:
+  - dart run flutter_launcher_icons
+
+create_native_splash:
+  - dart run flutter_native_splash:create
+
+gen_intl:
+  - flutter gen-l10n
+
+flutter_log:
+  - flutter logs
+
+gen:
+  - flutter pub get
+  - dart run build_runner build --delete-conflicting-outputs
+
+build_apk_dev:
+  - flutter clean
+  - flutter pub get
+  - flutter build apk --flavor development -t lib/main_development.dart
+
+build_apk_stg:
+  - flutter clean
+  - flutter pub get
+  - flutter build apk --flavor staging -t lib/main_staging.dart
+
+build_apk_prod:
+  - flutter clean
+  - flutter pub get
+  - flutter build apk --release
+
+build_apk_resize:
+  - flutter clean
+  - flutter pub get
+  - flutter build apk --target-platform=android-arm64
+
+build_prod_appbundle:
+  # - flutter clean
+  # - flutter pub get
+  - flutter build appbundle --release -t lib/main.dart
+
+build_dev_appbundle:
+  # - flutter clean
+  # - flutter pub get
+  - flutter build appbundle --release -t lib/main_dev.dart
+
+start_ios:
+  - xcrun simctl list
+  - open /Applications/Xcode.app/Contents/Developer/Applications/Simulator.app/
+
+clean:
+  - flutter clean
+  - flutter pub get
+  - cd ios && pod install
+  - cd ..
+
+purge:
+  - pod deintegrate
+  #- rm Flutter/Flutter.podspec
+  - flutter clean
+  - flutter pub get
+  #- pod install
+  #- flutter run
+
+purge_all:
+  - pod deintegrate
+  - rm Flutter/Flutter.podspec
+  - flutter clean
+  - flutter pub cache repair
+  - flutter pub get
+  #- pod install
+  - flutter run

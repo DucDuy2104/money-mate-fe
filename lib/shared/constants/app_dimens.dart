@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
 class AppDimens {
+  static const double iconSize = 24.0;
+  static const double avatar = 48.0;
+
   static const double padding = 16.0;
   static const double paddingSmall = 8.0;
   static const double paddingMedium = 12.0;
@@ -15,4 +18,5 @@ class AppDimens {
   static const Widget spaceSmall = SizedBox(height: paddingSmall, width: paddingSmall);
   static const Widget spaceMedium = SizedBox(height: paddingMedium, width: paddingMedium);
   static const Widget spaceLarge = SizedBox(height: paddingLarge, width: paddingLarge);
+  static const Widget divider = SizedBox(height: paddingSmall / 2, width: paddingSmall);
 }
