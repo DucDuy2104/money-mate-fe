@@ -12,4 +12,5 @@ class AppColors {
 
   // Dark mode colors
   static const darkBackground = Color(0xFF121212);
+  static var darkCardColor = Colors.grey.shade900;
 }

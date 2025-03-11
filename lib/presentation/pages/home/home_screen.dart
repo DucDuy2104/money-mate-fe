@@ -1,5 +1,6 @@
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:money_mate/domain/entities/category.dart';
 import 'package:money_mate/domain/entities/transaction.dart';
 import 'package:money_mate/presentation/drawer_navigation/app_drawer.dart';
@@ -7,6 +8,7 @@ import 'package:money_mate/presentation/pages/home/widgets/category_item.dart';
 import 'package:money_mate/presentation/pages/home/widgets/expense_chart.dart';
 import 'package:money_mate/presentation/pages/home/widgets/text_logo.dart';
 import 'package:money_mate/presentation/pages/home/widgets/transaction_item.dart';
+import 'package:money_mate/presentation/routes/route_name.dart';
 import 'package:money_mate/shared/constants/app_dimens.dart';
 import 'package:money_mate/shared/constants/constants.dart';
 import 'package:money_mate/shared/enums/transaction_types.dart';
@@ -113,7 +115,7 @@ class HomeScreen extends StatelessWidget {
         title: const MoneyMateLogo(),
         actions: [
           IconButton(
-            icon: const Icon(Icons.notifications),
+            icon: const Icon(EvaIcons.bell),
             onPressed: () {},
           ),
         ],
@@ -121,7 +123,10 @@ class HomeScreen extends StatelessWidget {
       drawer: const AppDrawer(currentRoute: '/home'),
       floatingActionButton: FloatingActionButton(
           backgroundColor: Colors.white,
-          onPressed: () {},
+          onPressed: () {
+            // TODO: go to chat screen
+            context.pushNamed(RouteNames.chatName);
+          },
           child: Image.asset('assets/images/otter.png',
               width: 100, height: 100, fit: BoxFit.cover)),
       body: Padding(
