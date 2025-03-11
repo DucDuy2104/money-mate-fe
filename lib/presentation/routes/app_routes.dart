@@ -1,4 +1,5 @@
 import 'package:go_router/go_router.dart';
+import 'package:money_mate/presentation/pages/chat/chat_screen.dart';
 import 'package:money_mate/presentation/pages/login/login_screen.dart';
 import 'package:money_mate/presentation/pages/home/home_screen.dart';
 import 'package:money_mate/presentation/pages/register/register_screen.dart';
@@ -26,4 +27,8 @@ final List<GoRoute> appRoutes = [
     name: RouteNames.settingsName,
     builder: (context, state) => const SettingScreen(),
   ),
+  GoRoute(
+      path: RouteNames.chat,
+      name: RouteNames.chatName,
+      builder: (context, state) => ChatScreen()),
 ];

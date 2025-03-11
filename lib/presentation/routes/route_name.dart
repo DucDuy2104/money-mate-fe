@@ -15,4 +15,8 @@ class RouteNames {
   // Settings
   static const String settings = '/setting';
   static const String settingsName = 'setting';
+
+  // Chat 
+  static const String chat = '/chat';
+  static const String chatName = 'chat';
 }
