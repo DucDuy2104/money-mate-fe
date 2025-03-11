@@ -120,7 +120,7 @@ class HomeScreen extends StatelessWidget {
           ),
         ],
       ),
-      drawer: const AppDrawer(currentRoute: '/home'),
+      drawer: const AppDrawer(currentRoute: RouteNames.home),
       floatingActionButton: FloatingActionButton(
           backgroundColor: Colors.white,
           onPressed: () {
