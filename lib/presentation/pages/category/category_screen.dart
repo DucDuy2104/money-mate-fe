@@ -10,12 +10,14 @@ class ExpenseCategory {
   final String name;
   final IconData icon;
   final Color color;
+  double? limit; // Thêm hạn mức chi tiêu
 
   ExpenseCategory({
     required this.id,
     required this.name,
     required this.icon,
     required this.color,
+    this.limit,
   });
 }
 
@@ -26,8 +28,7 @@ class CategoryScreen extends StatefulWidget {
   State<CategoryScreen> createState() => _CategoryScreenState();
 }
 
-class _CategoryScreenState extends State<CategoryScreen>
-    with SingleTickerProviderStateMixin {
+class _CategoryScreenState extends State<CategoryScreen> {
   // Danh sách các danh mục có sẵn trong hệ thống
   final List<ExpenseCategory> _systemCategories = [
     ExpenseCategory(
@@ -120,71 +121,210 @@ class _CategoryScreenState extends State<CategoryScreen>
   ];
 
   // Danh sách các danh mục của người dùng
-  List<ExpenseCategory> _userCategories = [];
-
-  late TabController _tabController;
+  List<int> _selectedCategoryIds = [];
 
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 2, vsync: this);
-
-    // Giả lập danh mục của người dùng đã chọn
-    _userCategories = [
-      _systemCategories[0], // Thực phẩm
-      _systemCategories[1], // Đi lại
-      _systemCategories[4], // Giải trí
-    ];
+    // Giả lập danh mục của người dùng đã chọn với hạn mức
+    _selectedCategoryIds = [1, 2, 5]; // Thực phẩm, Đi lại, Giải trí
+    
+    // Thiết lập hạn mức cho các danh mục đã chọn
+    _systemCategories[0].limit = 2000000; // Thực phẩm
+    _systemCategories[1].limit = 1500000; // Đi lại
+    _systemCategories[4].limit = 1000000; // Giải trí
   }
 
-  @override
-  void dispose() {
-    _tabController.dispose();
-    super.dispose();
-  }
-
-  void _addCategory(ExpenseCategory category) {
-    if (_userCategories.length < 10) {
-      if (!_userCategories.any((element) => element.id == category.id)) {
-        setState(() {
-          _userCategories.add(category);
-        });
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('Đã thêm "${category.name}" vào danh mục của bạn'),
-            duration: const Duration(seconds: 1),
+  Future<void> _showRemoveCategoryDialog(ExpenseCategory category) async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: Colors.grey.shade900,
+          title: Text('Bỏ chọn danh mục', style: TextStyle(color: Colors.white)),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                RichText(
+                  text: TextSpan(
+                    text: 'Bạn có chắc muốn bỏ chọn ',
+                    style: TextStyle(color: Colors.white),
+                    children: <TextSpan>[
+                      TextSpan(
+                        text: category.name,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: category.color,
+                        ),
+                      ),
+                      TextSpan(text: ' khỏi danh sách của bạn?'),
+                    ],
+                  ),
+                ),
+                SizedBox(height: 8),
+                Text(
+                  'Hạn mức: ${category.limit?.toStringAsFixed(0) ?? 0} đồng',
+                  style: TextStyle(color: Colors.grey),
+                ),
+              ],
+            ),
           ),
+          actions: <Widget>[
+            TextButton(
+              child: Text('Hủy', style: TextStyle(color: Colors.grey)),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              child: Text('Bỏ chọn', style: TextStyle(color: Colors.red)),
+              onPressed: () {
+                setState(() {
+                  _selectedCategoryIds.remove(category.id);
+                  category.limit = null;
+                });
+                Navigator.of(context).pop();
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text('Đã bỏ chọn "${category.name}" khỏi danh mục của bạn'),
+                    duration: const Duration(seconds: 1),
+                  ),
+                );
+              },
+            ),
+          ],
         );
+      },
+    );
+  }
+
+  Future<void> _showAddCategoryDialog(ExpenseCategory category) async {
+    final TextEditingController _limitController = TextEditingController();
+    
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: Colors.grey.shade900,
+          title: Text('Thêm danh mục', style: TextStyle(color: Colors.white)),
+          content: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                Row(
+                  children: [
+                    Container(
+                      width: 40,
+                      height: 40,
+                      decoration: BoxDecoration(
+                        color: category.color.withOpacity(0.2),
+                        shape: BoxShape.circle,
+                      ),
+                      child: Icon(
+                        category.icon,
+                        color: category.color,
+                        size: 24,
+                      ),
+                    ),
+                    SizedBox(width: 12),
+                    Text(
+                      category.name,
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 16),
+                TextField(
+                  controller: _limitController,
+                  keyboardType: TextInputType.number,
+                  style: TextStyle(color: Colors.white),
+                  decoration: InputDecoration(
+                    labelText: 'Hạn mức chi tiêu (đồng)',
+                    labelStyle: TextStyle(color: Colors.grey),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.grey.shade700),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: category.color),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    hintText: 'Ví dụ: 1000000',
+                    hintStyle: TextStyle(color: Colors.grey.shade600),
+                    suffixText: 'đồng',
+                    suffixStyle: TextStyle(color: Colors.grey),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: Text('Hủy', style: TextStyle(color: Colors.grey)),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              child: Text('Thêm', style: TextStyle(color: category.color)),
+              onPressed: () {
+                double? limit;
+                if (_limitController.text.isNotEmpty) {
+                  limit = double.tryParse(_limitController.text);
+                }
+
+                if (_selectedCategoryIds.length < 10) {
+                  setState(() {
+                    _selectedCategoryIds.add(category.id);
+                    category.limit = limit;
+                  });
+                  Navigator.of(context).pop();
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text('Đã thêm "${category.name}" vào danh mục của bạn'),
+                      duration: const Duration(seconds: 1),
+                    ),
+                  );
+                } else {
+                  Navigator.of(context).pop();
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text('Bạn chỉ có thể chọn tối đa 10 danh mục'),
+                      backgroundColor: Colors.red,
+                      duration: Duration(seconds: 2),
+                    ),
+                  );
+                }
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void _handleCategoryTap(ExpenseCategory category) {
+    if (_selectedCategoryIds.contains(category.id)) {
+      _showRemoveCategoryDialog(category);
+    } else {
+      if (_selectedCategoryIds.length < 10) {
+        _showAddCategoryDialog(category);
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('Danh mục "${category.name}" đã tồn tại'),
-            backgroundColor: Colors.orange,
-            duration: const Duration(seconds: 1),
+          const SnackBar(
+            content: Text('Bạn chỉ có thể chọn tối đa 10 danh mục'),
+            backgroundColor: Colors.red,
+            duration: Duration(seconds: 2),
           ),
         );
       }
-    } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Bạn chỉ có thể chọn tối đa 10 danh mục'),
-          backgroundColor: Colors.red,
-          duration: Duration(seconds: 2),
-        ),
-      );
     }
-  }
-
-  void _removeCategory(ExpenseCategory category) {
-    setState(() {
-      _userCategories.removeWhere((element) => element.id == category.id);
-    });
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text('Đã xóa "${category.name}" khỏi danh mục của bạn'),
-        duration: const Duration(seconds: 1),
-      ),
-    );
   }
 
   @override
@@ -202,125 +342,45 @@ class _CategoryScreenState extends State<CategoryScreen>
             );
           },
         ),
-        bottom: TabBar(
-          dividerHeight: 0,
-          controller: _tabController,
-          indicator: BoxDecoration(
-            color: AppColors.darkCardColor, 
-          ),
-          indicatorSize: TabBarIndicatorSize.tab,
-          labelColor: Colors.white,
-          unselectedLabelColor:
-              Colors.grey.shade500, 
-          labelStyle: const TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.bold,
-          ),
-          unselectedLabelStyle: const TextStyle(
-            fontSize: 14,
-            fontWeight: FontWeight.normal,
-          ),
-          tabs: const [
-            Tab(text: 'Danh mục của tôi'),
-            Tab(text: 'Tất cả danh mục'),
-          ],
-        ),
       ),
       drawer: const AppDrawer(currentRoute: RouteNames.category),
-      body: TabBarView(
-        controller: _tabController,
+      body: Column(
         children: [
-          // Tab 1: Danh mục của người dùng
-          Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Row(
-                  children: [
-                    const Icon(Icons.info_outline),
-                    const SizedBox(width: 8),
-                    Expanded(
-                      child: Text(
-                        'Danh mục của bạn (${_userCategories.length}/10). Nhấn vào danh mục để xóa.',
-                        style: TextStyle(color: Colors.grey[700]),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Expanded(
-                child: _userCategories.isEmpty
-                    ? const Center(
-                        child: Text(
-                          'Bạn chưa chọn danh mục nào.\nVui lòng chọn từ tab "Tất cả danh mục"',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(fontSize: 16, color: Colors.grey),
-                        ),
-                      )
-                    : GridView.builder(
-                        padding: const EdgeInsets.all(16),
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 3,
-                          childAspectRatio: 1.0,
-                          crossAxisSpacing: 12,
-                          mainAxisSpacing: 12,
-                        ),
-                        itemCount: _userCategories.length,
-                        itemBuilder: (context, index) {
-                          final category = _userCategories[index];
-                          return _buildCategoryCard(
-                            category,
-                            onTap: () => _removeCategory(category),
-                            showDeleteIcon: true,
-                          );
-                        },
-                      ),
-              ),
-            ],
-          ),
-
-          // Tab 2: Tất cả danh mục hệ thống
-          Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Row(
-                  children: [
-                    const Icon(Icons.info_outline),
-                    const SizedBox(width: 8),
-                    Expanded(
-                      child: Text(
-                        'Nhấn vào danh mục để thêm vào danh sách của bạn.',
-                        style: TextStyle(color: Colors.grey[700]),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Expanded(
-                child: GridView.builder(
-                  padding: const EdgeInsets.all(16),
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 3,
-                    childAspectRatio: 1.0,
-                    crossAxisSpacing: 12,
-                    mainAxisSpacing: 12,
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Row(
+              children: [
+                const Icon(Icons.info_outline, color: Colors.grey),
+                const SizedBox(width: 8),
+                Expanded(
+                  child: Text(
+                    'Danh mục đã chọn (${_selectedCategoryIds.length}/10). Nhấn vào danh mục để thêm hoặc bỏ chọn.',
+                    style: TextStyle(color: Colors.grey[500]),
                   ),
-                  itemCount: _systemCategories.length,
-                  itemBuilder: (context, index) {
-                    final category = _systemCategories[index];
-                    final bool isSelected = _userCategories
-                        .any((element) => element.id == category.id);
-                    return _buildCategoryCard(
-                      category,
-                      onTap: () => _addCategory(category),
-                      isSelected: isSelected,
-                    );
-                  },
                 ),
+              ],
+            ),
+          ),
+          Expanded(
+            child: GridView.builder(
+              padding: const EdgeInsets.all(16),
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 3,
+                childAspectRatio: 0.85, // Điều chỉnh tỷ lệ để hiển thị thêm hạn mức
+                crossAxisSpacing: 12,
+                mainAxisSpacing: 12,
               ),
-            ],
+              itemCount: _systemCategories.length,
+              itemBuilder: (context, index) {
+                final category = _systemCategories[index];
+                final bool isSelected = _selectedCategoryIds.contains(category.id);
+                return _buildCategoryCard(
+                  category,
+                  isSelected: isSelected,
+                  onTap: () => _handleCategoryTap(category),
+                );
+              },
+            ),
           ),
         ],
       ),
@@ -330,8 +390,7 @@ class _CategoryScreenState extends State<CategoryScreen>
   Widget _buildCategoryCard(
     ExpenseCategory category, {
     required VoidCallback onTap,
-    bool isSelected = false,
-    bool showDeleteIcon = false,
+    required bool isSelected,
   }) {
     return GestureDetector(
       onTap: onTap,
@@ -370,9 +429,22 @@ class _CategoryScreenState extends State<CategoryScreen>
                 fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
                 color: Colors.white,
               ),
-              maxLines: 2,
+              maxLines: 1,
               overflow: TextOverflow.ellipsis,
             ),
+            if (isSelected && category.limit != null) ...[
+              const SizedBox(height: 4),
+              Text(
+                '${category.limit!.toStringAsFixed(0)} đ',
+                style: TextStyle(
+                  fontSize: 12,
+                  color: category.color,
+                  fontWeight: FontWeight.w500,
+                ),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ],
           ],
         ),
       ),
