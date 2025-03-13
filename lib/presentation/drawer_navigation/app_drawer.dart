@@ -37,21 +37,13 @@ class _AppDrawerState extends State<AppDrawer> {
         ),
         child: Column(
           children: [
-            // Drawer Header
-            const UserAccountsDrawerHeader(
-              accountName: const Text('Cao Vũ Đức Duy'),
-              accountEmail: const Text('cvducduy@gmail.com'),
-              currentAccountPicture: const CircleAvatar(
-                backgroundImage: NetworkImage(tempImage),
-              ),
-              decoration: BoxDecoration(
-                color: Colors.transparent, // Gradient đã bao phủ toàn bộ
-              ),
-            ),
+            // Modern Drawer Header
+            _buildModernHeader(context, isDarkMode),
 
             // Drawer Items
             Expanded(
               child: ListView.builder(
+                padding: const EdgeInsets.only(top: 8),
                 itemCount: items.length,
                 itemBuilder: (context, index) {
                   return _buildDrawerItem(context, items[index]);
@@ -74,6 +66,139 @@ class _AppDrawerState extends State<AppDrawer> {
     );
   }
 
+  Widget _buildModernHeader(BuildContext context, bool isDarkMode) {
+    return Container(
+      padding: const EdgeInsets.fromLTRB(16, 48, 16, 16),
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: isDarkMode
+              ? [const Color(0xFF232526), const Color(0xFF414345)]
+              : [const Color(0xFF2193b0), const Color(0xFF6dd5ed)],
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.2),
+            blurRadius: 8,
+            offset: const Offset(0, 2),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Container(
+                width: 70,
+                height: 70,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  border: Border.all(color: Colors.white, width: 2),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.3),
+                      blurRadius: 8,
+                      offset: const Offset(0, 3),
+                    ),
+                  ],
+                ),
+                child: CircleAvatar(
+                  radius: 35,
+                  backgroundImage: const NetworkImage(tempImage),
+                  backgroundColor: Colors.grey[200],
+                ),
+              ),
+              const SizedBox(width: 16),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      'Cao Vũ Đức Duy',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        letterSpacing: 0.5,
+                      ),
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    const SizedBox(height: 4),
+                    Row(
+                      children: [
+                        const Icon(
+                          Icons.email_outlined,
+                          color: Colors.white70,
+                          size: 14,
+                        ),
+                        const SizedBox(width: 4),
+                        const Expanded(
+                          child: Text(
+                            'cvducduy@gmail.com',
+                            style: TextStyle(
+                              color: Colors.white70,
+                              fontSize: 14,
+                            ),
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 16),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              _buildStatItem('43', 'Transactions'),
+              Container(
+                height: 24,
+                width: 1,
+                color: Colors.white24,
+              ),
+              _buildStatItem('3', 'Categories'),
+              Container(
+                height: 24,
+                width: 1,
+                color: Colors.white24,
+              ),
+              _buildStatItem('15', 'Reports'),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildStatItem(String count, String label) {
+    return Expanded(
+      child: Column(
+        children: [
+          Text(
+            count,
+            style: const TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+            ),
+          ),
+          const SizedBox(height: 2),
+          Text(
+            label,
+            style: const TextStyle(
+              fontSize: 12,
+              color: Colors.white70,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 
   Widget _buildDrawerItem(BuildContext context, DrawerItem item) {
     final isSelected = widget.currentRoute == item.route || 
