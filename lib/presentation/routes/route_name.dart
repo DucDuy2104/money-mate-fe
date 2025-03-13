@@ -23,4 +23,8 @@ class RouteNames {
   // Category
   static const String category = '/category';
   static const String categoryName = 'category';
+
+  // Profile
+  static const String profile = '/profile';
+  static const String profileName = 'profile';
 }

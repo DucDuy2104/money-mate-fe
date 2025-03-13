@@ -3,6 +3,7 @@ import 'package:money_mate/presentation/pages/category/category_screen.dart';
 import 'package:money_mate/presentation/pages/chat/chat_screen.dart';
 import 'package:money_mate/presentation/pages/login/login_screen.dart';
 import 'package:money_mate/presentation/pages/home/home_screen.dart';
+import 'package:money_mate/presentation/pages/profile/profile_screen.dart';
 import 'package:money_mate/presentation/pages/register/register_screen.dart';
 import 'package:money_mate/presentation/pages/setting/setting_screen.dart';
 import 'package:money_mate/presentation/routes/route_name.dart';
@@ -36,4 +37,8 @@ final List<GoRoute> appRoutes = [
       path: RouteNames.category,
       name: RouteNames.categoryName,
       builder: (context, state) => const CategoryScreen()),
+  GoRoute(
+      path: RouteNames.profile,
+      name: RouteNames.profileName,
+      builder: (context, state) => ProfileScreen()),
 ];
