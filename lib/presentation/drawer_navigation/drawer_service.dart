@@ -6,10 +6,10 @@ import 'package:money_mate/presentation/routes/route_name.dart';
 class DrawerService {
   static List<DrawerItem> getDrawerItems() {
     return [
-      DrawerItem(title: 'Home', icon: EvaIcons.home, route: RouteNames.home),
-      DrawerItem(title: 'Category', icon: EvaIcons.cube, route: RouteNames.category),
-      DrawerItem(title: 'Profile', icon: Icons.person, route: '/profile'),
-      DrawerItem(title: 'Settings', icon: Icons.settings, route: RouteNames.settings),
+      DrawerItem(title: 'Trang chủ', icon: EvaIcons.home, route: RouteNames.home),
+      DrawerItem(title: 'Danh mục', icon: EvaIcons.cube, route: RouteNames.category),
+      DrawerItem(title: 'Tài khoản', icon: Icons.person, route: '/profile'),
+      DrawerItem(title: 'Cài đặt', icon: Icons.settings, route: RouteNames.settings),
     ];
   }
 }
