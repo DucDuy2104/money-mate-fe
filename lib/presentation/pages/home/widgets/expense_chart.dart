@@ -25,7 +25,7 @@ class IncomeExpenseChart extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             SizedBox(
-              height: 200,
+              height: 150,
               child: LineChart(
                 LineChartData(
                   titlesData: FlTitlesData(
