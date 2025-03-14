@@ -27,7 +27,7 @@ final List<GoRoute> appRoutes = [
   GoRoute(
     path: RouteNames.settings,
     name: RouteNames.settingsName,
-    builder: (context, state) => const SettingScreen(),
+    builder: (context, state) => const SettingsScreen(),
   ),
   GoRoute(
       path: RouteNames.chat,
