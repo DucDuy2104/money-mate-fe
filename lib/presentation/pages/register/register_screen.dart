@@ -53,7 +53,10 @@ class RegisterScreen extends StatelessWidget {
             Container(
               width: double.infinity,
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  //TODO: handle register
+                  context.goNamed(RouteNames.categoryRegisterName);
+                },
                 child: Text(
                   'Đăng ký',
                   style: context.textTheme.bodyLarge
