@@ -116,7 +116,10 @@ class HomeScreen extends StatelessWidget {
         actions: [
           IconButton(
             icon: const Icon(EvaIcons.bell),
-            onPressed: () {},
+            onPressed: () {
+              // TODO: go to notification screen
+              context.pushNamed(RouteNames.notificationsName);
+            },
           ),
         ],
       ),

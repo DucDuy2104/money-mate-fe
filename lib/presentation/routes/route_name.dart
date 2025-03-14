@@ -27,4 +27,8 @@ class RouteNames {
   // Profile
   static const String profile = '/profile';
   static const String profileName = 'profile';
+
+  // Notifications
+  static const String notifications = '/notifications';
+  static const String notificationsName = 'notifications';
 }
