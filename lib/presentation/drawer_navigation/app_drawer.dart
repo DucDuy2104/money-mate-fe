@@ -26,6 +26,7 @@ class _AppDrawerState extends State<AppDrawer> {
 
     return Drawer(
       child: Container(
+        padding: EdgeInsets.only(bottom: MediaQuery.of(context).padding.bottom),
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: isDarkMode
@@ -51,6 +52,9 @@ class _AppDrawerState extends State<AppDrawer> {
               ),
             ),
 
+            // Logout Button
+            _buildLogoutButton(context),
+
             // App Version
             const Divider(color: Colors.white70),
             const Padding(
@@ -62,6 +66,62 @@ class _AppDrawerState extends State<AppDrawer> {
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _buildLogoutButton(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+      child: ElevatedButton.icon(
+        icon: const Icon(Icons.logout, color: Colors.white),
+        label: const Text(
+          'Đăng xuất',
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.redAccent,
+          minimumSize: const Size.fromHeight(48),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(8),
+          ),
+          elevation: 3,
+        ),
+        onPressed: () {
+          // Close the drawer
+          Navigator.pop(context);
+          
+          // Show confirmation dialog
+          showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: const Text('Xác nhận đăng xuất'),
+                content: const Text('Bạn có chắc chắn muốn đăng xuất?'),
+                actions: [
+                  TextButton(
+                    onPressed: () => Navigator.pop(context),
+                    child: const Text('Hủy'),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                      // TODO: Implement logout logic here
+                      // For example:
+                      // AuthService.logout();
+                      // Then navigate to login page
+                      context.go('/login');
+                    },
+                    child: const Text('Đăng xuất'),
+                  ),
+                ],
+              );
+            },
+          );
+        },
       ),
     );
   }
@@ -111,7 +171,7 @@ class _AppDrawerState extends State<AppDrawer> {
                 ),
               ),
               const SizedBox(width: 16),
-              Expanded(
+              const Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
