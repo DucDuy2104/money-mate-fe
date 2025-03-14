@@ -8,7 +8,8 @@ class DrawerService {
     return [
       DrawerItem(title: 'Trang chủ', icon: EvaIcons.home, route: RouteNames.home),
       DrawerItem(title: 'Danh mục', icon: EvaIcons.cube, route: RouteNames.category),
-      DrawerItem(title: 'Tài khoản', icon: Icons.person, route: '/profile'),
+      DrawerItem(title: 'Thông báo', icon: EvaIcons.bell, route: RouteNames.notifications),
+      DrawerItem(title: 'Tài khoản', icon: Icons.person, route: RouteNames.profile),
       DrawerItem(title: 'Cài đặt', icon: Icons.settings, route: RouteNames.settings),
     ];
   }

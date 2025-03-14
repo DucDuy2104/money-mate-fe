@@ -6,7 +6,6 @@ import 'package:money_mate/domain/entities/transaction.dart';
 import 'package:money_mate/presentation/drawer_navigation/app_drawer.dart';
 import 'package:money_mate/presentation/pages/home/widgets/category_item.dart';
 import 'package:money_mate/presentation/pages/home/widgets/expense_chart.dart';
-import 'package:money_mate/presentation/pages/home/widgets/text_logo.dart';
 import 'package:money_mate/presentation/pages/home/widgets/transaction_item.dart';
 import 'package:money_mate/presentation/routes/route_name.dart';
 import 'package:money_mate/shared/constants/app_dimens.dart';
@@ -112,16 +111,7 @@ class HomeScreen extends StatelessWidget {
             );
           },
         ),
-        title: const MoneyMateLogo(),
-        actions: [
-          IconButton(
-            icon: const Icon(EvaIcons.bell),
-            onPressed: () {
-              // TODO: go to notification screen
-              context.pushNamed(RouteNames.notificationsName);
-            },
-          ),
-        ],
+        title: Text('👋Hôm nay bạn thế nào?'),
       ),
       drawer: const AppDrawer(currentRoute: RouteNames.home),
       floatingActionButton: FloatingActionButton(

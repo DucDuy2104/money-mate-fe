@@ -60,7 +60,7 @@ class _AppDrawerState extends State<AppDrawer> {
             const Padding(
               padding: EdgeInsets.all(16.0),
               child: Text(
-                'App Version 1.0.0',
+                'Money Mate Version 1.0.0',
                 style: TextStyle(color: Colors.white70),
               ),
             ),
