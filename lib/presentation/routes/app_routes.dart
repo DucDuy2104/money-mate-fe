@@ -1,5 +1,6 @@
 import 'package:go_router/go_router.dart';
 import 'package:money_mate/presentation/pages/category/category_screen.dart';
+import 'package:money_mate/presentation/pages/cateogries_first_set/categories_first_set_screen.dart';
 import 'package:money_mate/presentation/pages/chat/chat_screen.dart';
 import 'package:money_mate/presentation/pages/login/login_screen.dart';
 import 'package:money_mate/presentation/pages/home/home_screen.dart';
@@ -38,6 +39,10 @@ final List<GoRoute> appRoutes = [
       path: RouteNames.category,
       name: RouteNames.categoryName,
       builder: (context, state) => const CategoryScreen()),
+  GoRoute(
+      path: RouteNames.categoryRegister,
+      name: RouteNames.categoryRegisterName,
+      builder: (context, state) => const CategoriesFirstSetScreen()),
   GoRoute(
       path: RouteNames.profile,
       name: RouteNames.profileName,

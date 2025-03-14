@@ -24,6 +24,10 @@ class RouteNames {
   static const String category = '/category';
   static const String categoryName = 'category';
 
+  // Category register
+  static const String categoryRegister = '/category_register';
+  static const String categoryRegisterName = 'category_register';
+
   // Profile
   static const String profile = '/profile';
   static const String profileName = 'profile';
