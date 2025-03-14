@@ -1,5 +1,6 @@
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
+import 'package:money_mate/presentation/pages/chat/widgets/confirm_message.dart';
 import 'package:money_mate/shared/constants/app_colors.dart';
 import 'package:money_mate/shared/constants/app_dimens.dart';
 import 'package:money_mate/shared/constants/app_theme.dart';
@@ -123,61 +124,73 @@ class _ChatScreenState extends State<ChatScreen> {
   }
 
   Widget _buildMessageItem(ChatMessage message) {
-  return Container(
-    margin: const EdgeInsets.symmetric(vertical: AppDimens.paddingSmall),
-    child: Row(
-      mainAxisAlignment: message.isSentByMe 
-          ? MainAxisAlignment.end 
-          : MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.end,
-      children: [
-        Flexible(
-          child: Column(
-            crossAxisAlignment: message.isSentByMe 
-                ? CrossAxisAlignment.end 
-                : CrossAxisAlignment.start,
-            children: [
-              Container(
-                constraints: BoxConstraints(
-                  maxWidth: MediaQuery.of(context).size.width * 0.7,
+    return Container(
+      margin: const EdgeInsets.symmetric(vertical: AppDimens.paddingSmall),
+      child: Row(
+        mainAxisAlignment: message.isSentByMe
+            ? MainAxisAlignment.end
+            : MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: [
+          Flexible(
+            child: Column(
+              crossAxisAlignment: message.isSentByMe
+                  ? CrossAxisAlignment.end
+                  : CrossAxisAlignment.start,
+              children: [
+                ExpenseConfirmMessage(
+                  amount: 12000,
+                  category: "Ăn uống",
+                  onConfirm: () {
+                    // Handle confirmation
+                    print("User confirmed adding expense to Ăn uống category");
+                  },
+                  onDecline: () {
+                    // Handle decline
+                    print("User declined");
+                  },
                 ),
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 16,
-                  vertical: 12,
-                ),
-                decoration: BoxDecoration(
-                  color: message.isSentByMe 
-                      ? AppColors.darkCardColor
-                      : Colors.grey[200],
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(message.isSentByMe ? 20 : 4),
-                    topRight: Radius.circular(message.isSentByMe ? 4 : 20),
-                    bottomLeft: Radius.circular(message.isSentByMe ? 20 : 20),
-                    bottomRight: Radius.circular(message.isSentByMe ? 20 : 20),
-                  )
-                ),
-                child: Text(
-                  message.text,
-                  style: TextStyle(
-                    fontSize: 15,
-                    color: message.isSentByMe ? Colors.white : Colors.black87,
+                Container(
+                  constraints: BoxConstraints(
+                    maxWidth: MediaQuery.of(context).size.width * 0.7,
+                  ),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 12,
+                  ),
+                  decoration: BoxDecoration(
+                      color: message.isSentByMe
+                          ? AppColors.darkCardColor
+                          : Colors.grey[200],
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(message.isSentByMe ? 20 : 4),
+                        topRight: Radius.circular(message.isSentByMe ? 4 : 20),
+                        bottomLeft:
+                            Radius.circular(message.isSentByMe ? 20 : 20),
+                        bottomRight:
+                            Radius.circular(message.isSentByMe ? 20 : 20),
+                      )),
+                  child: Text(
+                    message.text,
+                    style: TextStyle(
+                      fontSize: 15,
+                      color: message.isSentByMe ? Colors.white : Colors.black87,
+                    ),
                   ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 4, left: 4, right: 4),
-                child: Text(
-                  message.time,
-                  style: context.textTheme.bodySmall?.copyWith( fontSize: 10, color: AppColors.subText)
+                Padding(
+                  padding: const EdgeInsets.only(top: 4, left: 4, right: 4),
+                  child: Text(message.time,
+                      style: context.textTheme.bodySmall
+                          ?.copyWith(fontSize: 10, color: AppColors.subText)),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
-      ],
-    ),
-  );
-}
+        ],
+      ),
+    );
+  }
 
   Widget _buildTextComposer() {
     return Container(
@@ -190,12 +203,12 @@ class _ChatScreenState extends State<ChatScreen> {
               onSubmitted: _handleSubmitted,
               decoration: InputDecoration(
                 suffixIcon: IconButton(
-                        icon: const Icon(
-                          EvaIcons.navigation,
-                          color: AppColors.primaryColor,
-                        ),
-                        onPressed: () => _handleSubmitted(_textController.text),
-                      ),
+                  icon: const Icon(
+                    EvaIcons.navigation,
+                    color: AppColors.primaryColor,
+                  ),
+                  onPressed: () => _handleSubmitted(_textController.text),
+                ),
                 hintText: "Bạn vừa chi tiền vào thứ gì?",
                 border: OutlineInputBorder(
                   borderRadius:
