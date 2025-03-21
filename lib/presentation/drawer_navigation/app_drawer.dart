@@ -166,7 +166,7 @@ class _AppDrawerState extends State<AppDrawer> {
                 ),
                 child: CircleAvatar(
                   radius: 35,
-                  backgroundImage: const NetworkImage(tempImage),
+                  backgroundImage: const NetworkImage(AppConstants.tempImage),
                   backgroundColor: Colors.grey[200],
                 ),
               ),

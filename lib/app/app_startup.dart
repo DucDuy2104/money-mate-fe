@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:money_mate/core/service/getit/locator.dart';
 import 'package:money_mate/presentation/pages/splash/splash_screen.dart';
 import 'package:money_mate/shared/constants/app_theme.dart';
 
@@ -12,6 +13,7 @@ class AppStartupCubit extends Cubit<AppStartupState> {
       // Initialize app box
       // await AppStorageService.init();
       // Add any other initialization tasks here
+      await setupLocator();
       await Future.delayed(const Duration(seconds: 2));
       emit(AppStartupLoaded());
     } catch (e) {
@@ -59,7 +61,7 @@ class AppStartupWidget extends StatelessWidget {
                   darkTheme: AppThemeData.darkTheme(context),
                   themeMode: ThemeMode.system,
                   debugShowCheckedModeBanner: false,
-                  home: SplashScreen());
+                  home: const SplashScreen());
             },
           );
         },
