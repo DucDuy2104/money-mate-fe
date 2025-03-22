@@ -44,7 +44,6 @@ class AppStartupWidget extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => AppStartupCubit()..initializeApp()),
-        BlocProvider(create: (context) => RegisterBloc()),
       ],
       child: ScreenUtilInit(
         designSize: const Size(375, 812),

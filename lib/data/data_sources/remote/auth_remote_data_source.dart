@@ -5,6 +5,8 @@ import 'package:money_mate/shared/utils/typedefs.dart';
 
 abstract class AuthRemoteDataSource {
   ResultFuture<UserModel> register(String email, String password);
+  ResultFuture<bool> sendVerificationCode(String userId);
+  ResultFuture<UserModel> verification(String userId, String code);
 }
 
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
@@ -16,6 +18,29 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       'email': email,
       'password': password,
     });
+
+    return _apiClient.post(
+        req: req, parser: (data) => UserModel.fromJson(data));
+  }
+
+  @override
+  ResultFuture<bool> sendVerificationCode(String userId) {
+    final req = ApiRequest(url: '/mail/send-verification-code', body: {
+      'id': userId,
+    });
+
+    return _apiClient.post(req: req, parser: (data) => data as bool);
+  }
+
+  @override
+  ResultFuture<UserModel> verification(String userId, String code) {
+    final req = ApiRequest(
+      url: '/auth/verify-code',
+      body: {
+        'id': userId,
+        'code': code,
+      },
+    );
 
     return _apiClient.post(
         req: req, parser: (data) => UserModel.fromJson(data));

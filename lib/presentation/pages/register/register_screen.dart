@@ -43,8 +43,10 @@ class RegisterScreen extends StatelessWidget {
     return BlocConsumer<RegisterBloc, RegisterState>(
       listener: (BuildContext context, RegisterState state) {
         state.maybeMap(
-            success: (data) =>
-                {context.pushNamed(RouteNames.otpVerificationName)},
+            success: (data) => {
+                  context.pushNamed(RouteNames.otpVerificationName,
+                      extra: data.user)
+                },
             failure: (failure) => {AppToast.error(context, failure.error)},
             orElse: () {});
       },
