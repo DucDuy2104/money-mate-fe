@@ -14,4 +14,11 @@ class AuthRepositoryImpl extends AuthRepository {
     return result.fold(
         (failure) => Left(failure), (userModel) => Right(userModel.toEntity()));
   }
+
+  @override
+  ResultFuture<bool> sendVerificationCode(String userId) async {
+    final result = await _authRemoteDataSource.sendVerificationCode(userId);
+    return result.fold(
+        (failure) => Left(failure), (isSuccess) => Right(isSuccess));
+  }
 }

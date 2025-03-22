@@ -1,12 +1,16 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:money_mate/domain/entities/user.dart';
 import 'package:money_mate/presentation/pages/category/category_screen.dart';
 import 'package:money_mate/presentation/pages/cateogries_first_set/categories_first_set_screen.dart';
 import 'package:money_mate/presentation/pages/chat/chat_screen.dart';
 import 'package:money_mate/presentation/pages/login/login_screen.dart';
 import 'package:money_mate/presentation/pages/home/home_screen.dart';
 import 'package:money_mate/presentation/pages/notifications/notifications_screen.dart';
+import 'package:money_mate/presentation/pages/opt_verify/bloc/verification_bloc.dart';
 import 'package:money_mate/presentation/pages/opt_verify/otp_verify_screen.dart';
 import 'package:money_mate/presentation/pages/profile/profile_screen.dart';
+import 'package:money_mate/presentation/pages/register/bloc/register_bloc.dart';
 import 'package:money_mate/presentation/pages/register/register_screen.dart';
 import 'package:money_mate/presentation/pages/setting/setting_screen.dart';
 import 'package:money_mate/presentation/routes/route_name.dart';
@@ -20,12 +24,21 @@ final List<GoRoute> appRoutes = [
   GoRoute(
     path: RouteNames.register,
     name: RouteNames.registerName,
-    builder: (context, state) => RegisterScreen(),
+    builder: (context, state) => BlocProvider(
+      create: (context) => RegisterBloc(),
+      child: RegisterScreen(),
+    ),
   ),
   GoRoute(
     path: RouteNames.otpVerification,
     name: RouteNames.otpVerificationName,
-    builder: (context, state) => OtpVerificationScreen(),
+    builder: (context, state) {
+      final user = state.extra as User;
+      return BlocProvider(
+        create: (context) => VerificationBloc(),
+        child: OtpVerificationScreen(user: user),
+      );
+    },
   ),
   GoRoute(
     path: RouteNames.home,
