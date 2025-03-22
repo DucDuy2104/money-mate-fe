@@ -19,7 +19,7 @@ final List<GoRoute> appRoutes = [
   GoRoute(
     path: RouteNames.register,
     name: RouteNames.registerName,
-    builder: (context, state) => const RegisterScreen(),
+    builder: (context, state) => RegisterScreen(),
   ),
   GoRoute(
     path: RouteNames.home,
