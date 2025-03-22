@@ -16,22 +16,23 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$VerificationEvent {
+  String get id => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String id) sendCode,
-    required TResult Function(String code) verify,
+    required TResult Function(String id, String code) verify,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String id)? sendCode,
-    TResult? Function(String code)? verify,
+    TResult? Function(String id, String code)? verify,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String id)? sendCode,
-    TResult Function(String code)? verify,
+    TResult Function(String id, String code)? verify,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -54,6 +55,12 @@ mixin _$VerificationEvent {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
+
+  /// Create a copy of VerificationEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $VerificationEventCopyWith<VerificationEvent> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -61,6 +68,8 @@ abstract class $VerificationEventCopyWith<$Res> {
   factory $VerificationEventCopyWith(
           VerificationEvent value, $Res Function(VerificationEvent) then) =
       _$VerificationEventCopyWithImpl<$Res, VerificationEvent>;
+  @useResult
+  $Res call({String id});
 }
 
 /// @nodoc
@@ -75,13 +84,27 @@ class _$VerificationEventCopyWithImpl<$Res, $Val extends VerificationEvent>
 
   /// Create a copy of VerificationEvent
   /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+  }) {
+    return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+    ) as $Val);
+  }
 }
 
 /// @nodoc
-abstract class _$$SendCodeImplCopyWith<$Res> {
+abstract class _$$SendCodeImplCopyWith<$Res>
+    implements $VerificationEventCopyWith<$Res> {
   factory _$$SendCodeImplCopyWith(
           _$SendCodeImpl value, $Res Function(_$SendCodeImpl) then) =
       __$$SendCodeImplCopyWithImpl<$Res>;
+  @override
   @useResult
   $Res call({String id});
 }
@@ -146,7 +169,7 @@ class _$SendCodeImpl implements _SendCode {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String id) sendCode,
-    required TResult Function(String code) verify,
+    required TResult Function(String id, String code) verify,
   }) {
     return sendCode(id);
   }
@@ -155,7 +178,7 @@ class _$SendCodeImpl implements _SendCode {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String id)? sendCode,
-    TResult? Function(String code)? verify,
+    TResult? Function(String id, String code)? verify,
   }) {
     return sendCode?.call(id);
   }
@@ -164,7 +187,7 @@ class _$SendCodeImpl implements _SendCode {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String id)? sendCode,
-    TResult Function(String code)? verify,
+    TResult Function(String id, String code)? verify,
     required TResult orElse(),
   }) {
     if (sendCode != null) {
@@ -208,22 +231,26 @@ class _$SendCodeImpl implements _SendCode {
 abstract class _SendCode implements VerificationEvent {
   const factory _SendCode(final String id) = _$SendCodeImpl;
 
+  @override
   String get id;
 
   /// Create a copy of VerificationEvent
   /// with the given fields replaced by the non-null parameter values.
+  @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SendCodeImplCopyWith<_$SendCodeImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$VerifyImplCopyWith<$Res> {
+abstract class _$$VerifyImplCopyWith<$Res>
+    implements $VerificationEventCopyWith<$Res> {
   factory _$$VerifyImplCopyWith(
           _$VerifyImpl value, $Res Function(_$VerifyImpl) then) =
       __$$VerifyImplCopyWithImpl<$Res>;
+  @override
   @useResult
-  $Res call({String code});
+  $Res call({String id, String code});
 }
 
 /// @nodoc
@@ -239,9 +266,14 @@ class __$$VerifyImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = null,
     Object? code = null,
   }) {
     return _then(_$VerifyImpl(
+      null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
       null == code
           ? _value.code
           : code // ignore: cast_nullable_to_non_nullable
@@ -253,14 +285,16 @@ class __$$VerifyImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$VerifyImpl implements _Verify {
-  const _$VerifyImpl(this.code);
+  const _$VerifyImpl(this.id, this.code);
 
+  @override
+  final String id;
   @override
   final String code;
 
   @override
   String toString() {
-    return 'VerificationEvent.verify(code: $code)';
+    return 'VerificationEvent.verify(id: $id, code: $code)';
   }
 
   @override
@@ -268,11 +302,12 @@ class _$VerifyImpl implements _Verify {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$VerifyImpl &&
+            (identical(other.id, id) || other.id == id) &&
             (identical(other.code, code) || other.code == code));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, code);
+  int get hashCode => Object.hash(runtimeType, id, code);
 
   /// Create a copy of VerificationEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -286,29 +321,29 @@ class _$VerifyImpl implements _Verify {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String id) sendCode,
-    required TResult Function(String code) verify,
+    required TResult Function(String id, String code) verify,
   }) {
-    return verify(code);
+    return verify(id, code);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String id)? sendCode,
-    TResult? Function(String code)? verify,
+    TResult? Function(String id, String code)? verify,
   }) {
-    return verify?.call(code);
+    return verify?.call(id, code);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String id)? sendCode,
-    TResult Function(String code)? verify,
+    TResult Function(String id, String code)? verify,
     required TResult orElse(),
   }) {
     if (verify != null) {
-      return verify(code);
+      return verify(id, code);
     }
     return orElse();
   }
@@ -346,12 +381,15 @@ class _$VerifyImpl implements _Verify {
 }
 
 abstract class _Verify implements VerificationEvent {
-  const factory _Verify(final String code) = _$VerifyImpl;
+  const factory _Verify(final String id, final String code) = _$VerifyImpl;
 
+  @override
+  String get id;
   String get code;
 
   /// Create a copy of VerificationEvent
   /// with the given fields replaced by the non-null parameter values.
+  @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$VerifyImplCopyWith<_$VerifyImpl> get copyWith =>
       throw _privateConstructorUsedError;

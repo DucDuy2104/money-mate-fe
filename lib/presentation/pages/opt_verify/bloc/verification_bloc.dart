@@ -11,6 +11,7 @@ class VerificationBloc extends Bloc<VerificationEvent, VerificationState> {
   final AuthRepository _authRepository = getIt<AuthRepository>();
   VerificationBloc() : super(const VerificationState.initial()) {
     on<_SendCode>(_onSendVerification);
+    on<_Verify>(_onVerifyCode);
   }
 
   void _onSendVerification(
@@ -24,6 +25,24 @@ class VerificationBloc extends Bloc<VerificationEvent, VerificationState> {
         return;
       }, (isSuccess) {
         emit(VerificationState.codeSent(isSuccess));
+        return;
+      });
+    } catch (e) {
+      emit(VerificationState.error(e.toString()));
+      return;
+    }
+  }
+
+  void _onVerifyCode(_Verify event, Emitter<VerificationState> emit) async {
+    try {
+      emit(const VerificationState.verifying());
+      await Future.delayed(const Duration(seconds: 2));
+      final result = await _authRepository.verification(event.id, event.code);
+      result.fold((failure) {
+        emit(VerificationState.error(failure.message));
+        return;
+      }, (user) {
+        emit(const VerificationState.verified());
         return;
       });
     } catch (e) {
