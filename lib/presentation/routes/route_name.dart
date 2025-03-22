@@ -12,6 +12,10 @@ class RouteNames {
   static const String register = '/register';
   static const String registerName = 'register';
 
+  // OTP verification
+  static const String otpVerification = '/otp_verification';
+  static const String otpVerificationName = 'otp_verification';
+
   // Settings
   static const String settings = '/setting';
   static const String settingsName = 'setting';

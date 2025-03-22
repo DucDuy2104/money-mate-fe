@@ -5,6 +5,7 @@ import 'package:money_mate/presentation/pages/chat/chat_screen.dart';
 import 'package:money_mate/presentation/pages/login/login_screen.dart';
 import 'package:money_mate/presentation/pages/home/home_screen.dart';
 import 'package:money_mate/presentation/pages/notifications/notifications_screen.dart';
+import 'package:money_mate/presentation/pages/opt_verify/otp_verify_screen.dart';
 import 'package:money_mate/presentation/pages/profile/profile_screen.dart';
 import 'package:money_mate/presentation/pages/register/register_screen.dart';
 import 'package:money_mate/presentation/pages/setting/setting_screen.dart';
@@ -20,6 +21,11 @@ final List<GoRoute> appRoutes = [
     path: RouteNames.register,
     name: RouteNames.registerName,
     builder: (context, state) => RegisterScreen(),
+  ),
+  GoRoute(
+    path: RouteNames.otpVerification,
+    name: RouteNames.otpVerificationName,
+    builder: (context, state) => OtpVerificationScreen(),
   ),
   GoRoute(
     path: RouteNames.home,

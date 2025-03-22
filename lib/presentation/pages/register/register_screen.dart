@@ -6,6 +6,7 @@ import 'package:money_mate/presentation/routes/route_name.dart';
 import 'package:money_mate/shared/components/app_toast.dart';
 import 'package:money_mate/shared/components/google_button.dart';
 import 'package:money_mate/shared/components/loading_scafford.dart';
+import 'package:money_mate/shared/constants/app_assets.dart';
 import 'package:money_mate/shared/constants/app_colors.dart';
 import 'package:money_mate/shared/constants/app_dimens.dart';
 import 'package:money_mate/shared/constants/app_theme.dart';
@@ -43,7 +44,7 @@ class RegisterScreen extends StatelessWidget {
       listener: (BuildContext context, RegisterState state) {
         state.maybeMap(
             success: (data) =>
-                {AppToast.success(context, 'Đăng ký thành công')},
+                {context.pushNamed(RouteNames.otpVerificationName)},
             failure: (failure) => {AppToast.error(context, failure.error)},
             orElse: () {});
       },
@@ -60,7 +61,7 @@ class RegisterScreen extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Image.asset('assets/images/story_set_wellcome.png',
+                  Image.asset(AppAssets.storySetWellcome,
                       width: 200, height: 200, fit: BoxFit.contain),
                   AppDimens.spaceLarge,
                   TextField(
