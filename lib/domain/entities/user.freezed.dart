@@ -20,10 +20,10 @@ mixin _$User {
   String? get name => throw _privateConstructorUsedError;
   String get email => throw _privateConstructorUsedError;
   String? get phoneNumber => throw _privateConstructorUsedError;
-  bool? get isActive => throw _privateConstructorUsedError;
-  double? get budget => throw _privateConstructorUsedError;
+  bool get isActive => throw _privateConstructorUsedError;
+  double get budget => throw _privateConstructorUsedError;
   String? get avatarUrl => throw _privateConstructorUsedError;
-  String? get role => throw _privateConstructorUsedError;
+  String get role => throw _privateConstructorUsedError;
   DateTime get createdAt => throw _privateConstructorUsedError;
   DateTime get updatedAt => throw _privateConstructorUsedError;
 
@@ -43,10 +43,10 @@ abstract class $UserCopyWith<$Res> {
       String? name,
       String email,
       String? phoneNumber,
-      bool? isActive,
-      double? budget,
+      bool isActive,
+      double budget,
       String? avatarUrl,
-      String? role,
+      String role,
       DateTime createdAt,
       DateTime updatedAt});
 }
@@ -70,10 +70,10 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? name = freezed,
     Object? email = null,
     Object? phoneNumber = freezed,
-    Object? isActive = freezed,
-    Object? budget = freezed,
+    Object? isActive = null,
+    Object? budget = null,
     Object? avatarUrl = freezed,
-    Object? role = freezed,
+    Object? role = null,
     Object? createdAt = null,
     Object? updatedAt = null,
   }) {
@@ -94,22 +94,22 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.phoneNumber
           : phoneNumber // ignore: cast_nullable_to_non_nullable
               as String?,
-      isActive: freezed == isActive
+      isActive: null == isActive
           ? _value.isActive
           : isActive // ignore: cast_nullable_to_non_nullable
-              as bool?,
-      budget: freezed == budget
+              as bool,
+      budget: null == budget
           ? _value.budget
           : budget // ignore: cast_nullable_to_non_nullable
-              as double?,
+              as double,
       avatarUrl: freezed == avatarUrl
           ? _value.avatarUrl
           : avatarUrl // ignore: cast_nullable_to_non_nullable
               as String?,
-      role: freezed == role
+      role: null == role
           ? _value.role
           : role // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -134,10 +134,10 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
       String? name,
       String email,
       String? phoneNumber,
-      bool? isActive,
-      double? budget,
+      bool isActive,
+      double budget,
       String? avatarUrl,
-      String? role,
+      String role,
       DateTime createdAt,
       DateTime updatedAt});
 }
@@ -158,10 +158,10 @@ class __$$UserImplCopyWithImpl<$Res>
     Object? name = freezed,
     Object? email = null,
     Object? phoneNumber = freezed,
-    Object? isActive = freezed,
-    Object? budget = freezed,
+    Object? isActive = null,
+    Object? budget = null,
     Object? avatarUrl = freezed,
-    Object? role = freezed,
+    Object? role = null,
     Object? createdAt = null,
     Object? updatedAt = null,
   }) {
@@ -182,22 +182,22 @@ class __$$UserImplCopyWithImpl<$Res>
           ? _value.phoneNumber
           : phoneNumber // ignore: cast_nullable_to_non_nullable
               as String?,
-      isActive: freezed == isActive
+      isActive: null == isActive
           ? _value.isActive
           : isActive // ignore: cast_nullable_to_non_nullable
-              as bool?,
-      budget: freezed == budget
+              as bool,
+      budget: null == budget
           ? _value.budget
           : budget // ignore: cast_nullable_to_non_nullable
-              as double?,
+              as double,
       avatarUrl: freezed == avatarUrl
           ? _value.avatarUrl
           : avatarUrl // ignore: cast_nullable_to_non_nullable
               as String?,
-      role: freezed == role
+      role: null == role
           ? _value.role
           : role // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -217,11 +217,11 @@ class _$UserImpl implements _User {
       {required this.id,
       this.name,
       required this.email,
-      this.phoneNumber,
-      this.isActive,
-      this.budget,
+      required this.phoneNumber,
+      required this.isActive,
+      required this.budget,
       this.avatarUrl,
-      this.role,
+      required this.role,
       required this.createdAt,
       required this.updatedAt});
 
@@ -234,13 +234,13 @@ class _$UserImpl implements _User {
   @override
   final String? phoneNumber;
   @override
-  final bool? isActive;
+  final bool isActive;
   @override
-  final double? budget;
+  final double budget;
   @override
   final String? avatarUrl;
   @override
-  final String? role;
+  final String role;
   @override
   final DateTime createdAt;
   @override
@@ -291,11 +291,11 @@ abstract class _User implements User {
       {required final String id,
       final String? name,
       required final String email,
-      final String? phoneNumber,
-      final bool? isActive,
-      final double? budget,
+      required final String? phoneNumber,
+      required final bool isActive,
+      required final double budget,
       final String? avatarUrl,
-      final String? role,
+      required final String role,
       required final DateTime createdAt,
       required final DateTime updatedAt}) = _$UserImpl;
 
@@ -308,13 +308,13 @@ abstract class _User implements User {
   @override
   String? get phoneNumber;
   @override
-  bool? get isActive;
+  bool get isActive;
   @override
-  double? get budget;
+  double get budget;
   @override
   String? get avatarUrl;
   @override
-  String? get role;
+  String get role;
   @override
   DateTime get createdAt;
   @override

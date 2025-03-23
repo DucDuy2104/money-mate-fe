@@ -1,9 +1,11 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:money_mate/domain/entities/user.dart';
 import 'package:money_mate/presentation/pages/opt_verify/bloc/verification_bloc.dart';
 import 'package:money_mate/presentation/pages/opt_verify/widgets/otp_textfield.dart';
+import 'package:money_mate/presentation/routes/route_name.dart';
 import 'package:money_mate/shared/components/app_toast.dart';
 import 'package:money_mate/shared/components/loading_scafford.dart';
 import 'package:money_mate/shared/constants/app_assets.dart';
@@ -129,7 +131,9 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
             },
             verifying: (value) {},
             verified: (value) {
-              AppToast.success(context, 'Xác thực thành công');
+              AppToast.success(
+                  context, 'Xác thực thành công, vui lòng đăng nhập');
+              context.goNamed(RouteNames.loginName);
             },
             sendingCode: (value) =>
                 {AppToast.info(context, 'Mã đang được gửi...')},
