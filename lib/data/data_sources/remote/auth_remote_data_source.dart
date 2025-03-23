@@ -1,5 +1,6 @@
 import 'package:money_mate/core/network/api_client.dart';
 import 'package:money_mate/core/network/models/api_request.dart';
+import 'package:money_mate/data/models/login_data_model.dart';
 import 'package:money_mate/data/models/user_model.dart';
 import 'package:money_mate/shared/utils/typedefs.dart';
 
@@ -7,6 +8,7 @@ abstract class AuthRemoteDataSource {
   ResultFuture<UserModel> register(String email, String password);
   ResultFuture<bool> sendVerificationCode(String userId);
   ResultFuture<UserModel> verification(String userId, String code);
+  ResultFuture<LoginDataModel> login(String email, String password);
 }
 
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
@@ -44,5 +46,19 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
 
     return _apiClient.post(
         req: req, parser: (data) => UserModel.fromJson(data));
+  }
+
+  @override
+  ResultFuture<LoginDataModel> login(String email, String password) {
+    final req = ApiRequest(
+      url: '/auth/login',
+      body: {
+        'email': email,
+        'password': password,
+      },
+    );
+
+    return _apiClient.post(
+        req: req, parser: (data) => LoginDataModel.fromJson(data));
   }
 }
