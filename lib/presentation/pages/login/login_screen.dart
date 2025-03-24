@@ -41,11 +41,16 @@ class LoginScreen extends StatelessWidget {
         state.maybeMap(
             success: (value) {
               final user = value.data.user;
-              if (user.isActive) {
-                context.goNamed(RouteNames.homeName);
-              } else {
+              if(!user.isActive) {
                 context.goNamed(RouteNames.otpVerificationName, extra: user);
+                return;
               }
+              if(!user.isSetup) {
+                context.goNamed(RouteNames.setupName);
+                return;
+              }
+
+              context.goNamed(RouteNames.homeName);
             },
             error: (value) {
               AppToast.error(context, value.errorMessage);

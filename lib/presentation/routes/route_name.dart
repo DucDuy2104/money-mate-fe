@@ -16,6 +16,10 @@ class RouteNames {
   static const String otpVerification = '/otp_verification';
   static const String otpVerificationName = 'otp_verification';
 
+  // Setup
+  static const String setup = '/setup';
+  static const String setupName ='setup';
+
   // Settings
   static const String settings = '/setting';
   static const String settingsName = 'setting';

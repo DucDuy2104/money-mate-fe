@@ -25,6 +25,7 @@ mixin _$UserModel {
   String get email => throw _privateConstructorUsedError;
   String? get phoneNumber => throw _privateConstructorUsedError;
   bool get isActive => throw _privateConstructorUsedError;
+  bool get isSetup => throw _privateConstructorUsedError;
   double get budget => throw _privateConstructorUsedError;
   String? get avatarUrl => throw _privateConstructorUsedError;
   String get role => throw _privateConstructorUsedError;
@@ -55,6 +56,7 @@ abstract class $UserModelCopyWith<$Res> {
       String email,
       String? phoneNumber,
       bool isActive,
+      bool isSetup,
       double budget,
       String? avatarUrl,
       String role,
@@ -85,6 +87,7 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
     Object? email = null,
     Object? phoneNumber = freezed,
     Object? isActive = null,
+    Object? isSetup = null,
     Object? budget = null,
     Object? avatarUrl = freezed,
     Object? role = null,
@@ -114,6 +117,10 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
       isActive: null == isActive
           ? _value.isActive
           : isActive // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isSetup: null == isSetup
+          ? _value.isSetup
+          : isSetup // ignore: cast_nullable_to_non_nullable
               as bool,
       budget: null == budget
           ? _value.budget
@@ -165,6 +172,7 @@ abstract class _$$UserModelImplCopyWith<$Res>
       String email,
       String? phoneNumber,
       bool isActive,
+      bool isSetup,
       double budget,
       String? avatarUrl,
       String role,
@@ -193,6 +201,7 @@ class __$$UserModelImplCopyWithImpl<$Res>
     Object? email = null,
     Object? phoneNumber = freezed,
     Object? isActive = null,
+    Object? isSetup = null,
     Object? budget = null,
     Object? avatarUrl = freezed,
     Object? role = null,
@@ -222,6 +231,10 @@ class __$$UserModelImplCopyWithImpl<$Res>
       isActive: null == isActive
           ? _value.isActive
           : isActive // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isSetup: null == isSetup
+          ? _value.isSetup
+          : isSetup // ignore: cast_nullable_to_non_nullable
               as bool,
       budget: null == budget
           ? _value.budget
@@ -268,6 +281,7 @@ class _$UserModelImpl implements _UserModel {
       required this.email,
       this.phoneNumber,
       this.isActive = false,
+      this.isSetup = false,
       this.budget = 0.0,
       this.avatarUrl,
       this.role = 'user',
@@ -293,6 +307,9 @@ class _$UserModelImpl implements _UserModel {
   final bool isActive;
   @override
   @JsonKey()
+  final bool isSetup;
+  @override
+  @JsonKey()
   final double budget;
   @override
   final String? avatarUrl;
@@ -312,7 +329,7 @@ class _$UserModelImpl implements _UserModel {
 
   @override
   String toString() {
-    return 'UserModel(id: $id, name: $name, email: $email, phoneNumber: $phoneNumber, isActive: $isActive, budget: $budget, avatarUrl: $avatarUrl, role: $role, refreshToken: $refreshToken, verificationCode: $verificationCode, verificationCodeExpire: $verificationCodeExpire, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'UserModel(id: $id, name: $name, email: $email, phoneNumber: $phoneNumber, isActive: $isActive, isSetup: $isSetup, budget: $budget, avatarUrl: $avatarUrl, role: $role, refreshToken: $refreshToken, verificationCode: $verificationCode, verificationCodeExpire: $verificationCodeExpire, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
@@ -327,6 +344,7 @@ class _$UserModelImpl implements _UserModel {
                 other.phoneNumber == phoneNumber) &&
             (identical(other.isActive, isActive) ||
                 other.isActive == isActive) &&
+            (identical(other.isSetup, isSetup) || other.isSetup == isSetup) &&
             (identical(other.budget, budget) || other.budget == budget) &&
             (identical(other.avatarUrl, avatarUrl) ||
                 other.avatarUrl == avatarUrl) &&
@@ -352,6 +370,7 @@ class _$UserModelImpl implements _UserModel {
       email,
       phoneNumber,
       isActive,
+      isSetup,
       budget,
       avatarUrl,
       role,
@@ -384,6 +403,7 @@ abstract class _UserModel implements UserModel {
       required final String email,
       final String? phoneNumber,
       final bool isActive,
+      final bool isSetup,
       final double budget,
       final String? avatarUrl,
       final String role,
@@ -406,6 +426,8 @@ abstract class _UserModel implements UserModel {
   String? get phoneNumber;
   @override
   bool get isActive;
+  @override
+  bool get isSetup;
   @override
   double get budget;
   @override

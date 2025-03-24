@@ -4,8 +4,11 @@ import 'package:money_mate/core/network/api_client.dart';
 import 'package:money_mate/core/service/local_storage/app_storage.dart';
 import 'package:money_mate/data/data_sources/local/local_data_source.dart';
 import 'package:money_mate/data/data_sources/remote/auth_remote_data_source.dart';
+import 'package:money_mate/data/data_sources/remote/users_remote_data_source.dart';
 import 'package:money_mate/data/repositories/auth_repository.dart';
+import 'package:money_mate/data/repositories/users_repository.dart';
 import 'package:money_mate/domain/repositories/auth_repository_impl.dart';
+import 'package:money_mate/domain/repositories/users_repository_impl.dart';
 
 final GetIt getIt = GetIt.instance;
 
@@ -42,6 +45,10 @@ registerRemoteDataSources() {
   // AuthRemoteDataSources
   getIt.registerLazySingleton<AuthRemoteDataSource>(
       () => AuthRemoteDataSourceImpl(getIt<ApiClient>()));
+
+  // UsersRemoteDataSources
+  getIt.registerLazySingleton<UsersRemoteDataSource>(
+      () => UsersRemoteDataSourceImpl(getIt<ApiClient>()));
 }
 
 registerRepositories() {
@@ -51,4 +58,8 @@ registerRepositories() {
   // AuthRepository
   getIt.registerLazySingleton<AuthRepository>(
       () => AuthRepositoryImpl(getIt<AuthRemoteDataSource>()));
+
+  // UsersRepository
+  getIt.registerLazySingleton<UsersRepository>(
+      () => UsersRepositoryImpl(getIt<UsersRemoteDataSource>()));
 }
