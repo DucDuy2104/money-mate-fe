@@ -10,6 +10,7 @@ class User with _$User {
     required String email,
     required String? phoneNumber,
     required bool isActive,
+    required bool isSetup,
     required double budget,
     String? avatarUrl,
     required String role,

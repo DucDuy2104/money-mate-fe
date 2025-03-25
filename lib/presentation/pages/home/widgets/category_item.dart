@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:money_mate/domain/entities/category.dart';
+import 'package:money_mate/presentation/pages/home/models/category.dart';
 
 class CategoryItem extends StatelessWidget {
   final Category category;

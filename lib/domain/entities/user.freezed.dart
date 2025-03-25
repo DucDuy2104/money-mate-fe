@@ -21,6 +21,7 @@ mixin _$User {
   String get email => throw _privateConstructorUsedError;
   String? get phoneNumber => throw _privateConstructorUsedError;
   bool get isActive => throw _privateConstructorUsedError;
+  bool get isSetup => throw _privateConstructorUsedError;
   double get budget => throw _privateConstructorUsedError;
   String? get avatarUrl => throw _privateConstructorUsedError;
   String get role => throw _privateConstructorUsedError;
@@ -44,6 +45,7 @@ abstract class $UserCopyWith<$Res> {
       String email,
       String? phoneNumber,
       bool isActive,
+      bool isSetup,
       double budget,
       String? avatarUrl,
       String role,
@@ -71,6 +73,7 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? email = null,
     Object? phoneNumber = freezed,
     Object? isActive = null,
+    Object? isSetup = null,
     Object? budget = null,
     Object? avatarUrl = freezed,
     Object? role = null,
@@ -97,6 +100,10 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
       isActive: null == isActive
           ? _value.isActive
           : isActive // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isSetup: null == isSetup
+          ? _value.isSetup
+          : isSetup // ignore: cast_nullable_to_non_nullable
               as bool,
       budget: null == budget
           ? _value.budget
@@ -135,6 +142,7 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
       String email,
       String? phoneNumber,
       bool isActive,
+      bool isSetup,
       double budget,
       String? avatarUrl,
       String role,
@@ -159,6 +167,7 @@ class __$$UserImplCopyWithImpl<$Res>
     Object? email = null,
     Object? phoneNumber = freezed,
     Object? isActive = null,
+    Object? isSetup = null,
     Object? budget = null,
     Object? avatarUrl = freezed,
     Object? role = null,
@@ -185,6 +194,10 @@ class __$$UserImplCopyWithImpl<$Res>
       isActive: null == isActive
           ? _value.isActive
           : isActive // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isSetup: null == isSetup
+          ? _value.isSetup
+          : isSetup // ignore: cast_nullable_to_non_nullable
               as bool,
       budget: null == budget
           ? _value.budget
@@ -219,6 +232,7 @@ class _$UserImpl implements _User {
       required this.email,
       required this.phoneNumber,
       required this.isActive,
+      required this.isSetup,
       required this.budget,
       this.avatarUrl,
       required this.role,
@@ -236,6 +250,8 @@ class _$UserImpl implements _User {
   @override
   final bool isActive;
   @override
+  final bool isSetup;
+  @override
   final double budget;
   @override
   final String? avatarUrl;
@@ -248,7 +264,7 @@ class _$UserImpl implements _User {
 
   @override
   String toString() {
-    return 'User(id: $id, name: $name, email: $email, phoneNumber: $phoneNumber, isActive: $isActive, budget: $budget, avatarUrl: $avatarUrl, role: $role, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'User(id: $id, name: $name, email: $email, phoneNumber: $phoneNumber, isActive: $isActive, isSetup: $isSetup, budget: $budget, avatarUrl: $avatarUrl, role: $role, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
@@ -263,6 +279,7 @@ class _$UserImpl implements _User {
                 other.phoneNumber == phoneNumber) &&
             (identical(other.isActive, isActive) ||
                 other.isActive == isActive) &&
+            (identical(other.isSetup, isSetup) || other.isSetup == isSetup) &&
             (identical(other.budget, budget) || other.budget == budget) &&
             (identical(other.avatarUrl, avatarUrl) ||
                 other.avatarUrl == avatarUrl) &&
@@ -275,7 +292,7 @@ class _$UserImpl implements _User {
 
   @override
   int get hashCode => Object.hash(runtimeType, id, name, email, phoneNumber,
-      isActive, budget, avatarUrl, role, createdAt, updatedAt);
+      isActive, isSetup, budget, avatarUrl, role, createdAt, updatedAt);
 
   /// Create a copy of User
   /// with the given fields replaced by the non-null parameter values.
@@ -293,6 +310,7 @@ abstract class _User implements User {
       required final String email,
       required final String? phoneNumber,
       required final bool isActive,
+      required final bool isSetup,
       required final double budget,
       final String? avatarUrl,
       required final String role,
@@ -309,6 +327,8 @@ abstract class _User implements User {
   String? get phoneNumber;
   @override
   bool get isActive;
+  @override
+  bool get isSetup;
   @override
   double get budget;
   @override

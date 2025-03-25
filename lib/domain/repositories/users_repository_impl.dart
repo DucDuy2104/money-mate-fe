@@ -1,0 +1,17 @@
+import 'package:dartz/dartz.dart';
+import 'package:money_mate/data/data_sources/remote/users_remote_data_source.dart';
+import 'package:money_mate/data/models/user_model.dart';
+import 'package:money_mate/data/repositories/users_repository.dart';
+import 'package:money_mate/domain/entities/user.dart';
+import 'package:money_mate/shared/utils/typedefs.dart';
+
+class UsersRepositoryImpl extends UsersRepository {
+  final UsersRemoteDataSource _usersRemoteDataSource;
+  UsersRepositoryImpl(this._usersRemoteDataSource);
+  @override
+  ResultFuture<User> update(Map<String, dynamic> body) async {
+    final result = await _usersRemoteDataSource.update(body);
+    return result.fold(
+        (failure) => Left(failure), (userModel) => Right(userModel.toEntity()));
+  }
+}
