@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 
-class ProfileTab extends StatelessWidget {
-  const ProfileTab({super.key});
+class AppTab extends StatelessWidget {
+  final String tab1Name;
+  final String tab2Name;
+  final TabController? controller;
+  const AppTab({super.key, required this.tab1Name, required this.tab2Name, required this.controller});
 
   @override
   Widget build(BuildContext context) {
-    return // TabBar với thiết kế hiện đại và dark mode
-        Container(
+    return Container(
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       height: 56,
       decoration: BoxDecoration(
@@ -30,6 +32,7 @@ class ProfileTab extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(4),
         child: TabBar(
+          controller: controller,
           labelColor: Colors.white,
           unselectedLabelColor: Colors.grey[400],
           labelStyle: const TextStyle(
@@ -62,24 +65,24 @@ class ProfileTab extends StatelessWidget {
           dividerColor: Colors.transparent,
           splashBorderRadius: BorderRadius.circular(30),
           overlayColor: MaterialStateProperty.all(Colors.transparent),
-          tabs: const [
+          tabs: [
             Tab(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
+                children: [
                   Icon(Icons.calendar_today, size: 16),
                   SizedBox(width: 6),
-                  Text("Hôm nay"),
+                  Text(tab1Name),
                 ],
               ),
             ),
             Tab(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
+                children: [
                   Icon(Icons.calendar_month, size: 16),
                   SizedBox(width: 6),
-                  Text("Tháng này"),
+                  Text(tab2Name),
                 ],
               ),
             ),

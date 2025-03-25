@@ -18,11 +18,8 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$Category {
   String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
-  CategoriesType get type => throw _privateConstructorUsedError;
-  IconData get icon => throw _privateConstructorUsedError;
-  Color get color => throw _privateConstructorUsedError;
-  double? get budget => throw _privateConstructorUsedError;
-  bool get isSelected => throw _privateConstructorUsedError;
+  double get maxExpense => throw _privateConstructorUsedError;
+  double get currentExpense => throw _privateConstructorUsedError;
 
   /// Create a copy of Category
   /// with the given fields replaced by the non-null parameter values.
@@ -36,14 +33,7 @@ abstract class $CategoryCopyWith<$Res> {
   factory $CategoryCopyWith(Category value, $Res Function(Category) then) =
       _$CategoryCopyWithImpl<$Res, Category>;
   @useResult
-  $Res call(
-      {String id,
-      String name,
-      CategoriesType type,
-      IconData icon,
-      Color color,
-      double? budget,
-      bool isSelected});
+  $Res call({String id, String name, double maxExpense, double currentExpense});
 }
 
 /// @nodoc
@@ -63,11 +53,8 @@ class _$CategoryCopyWithImpl<$Res, $Val extends Category>
   $Res call({
     Object? id = null,
     Object? name = null,
-    Object? type = null,
-    Object? icon = null,
-    Object? color = freezed,
-    Object? budget = freezed,
-    Object? isSelected = null,
+    Object? maxExpense = null,
+    Object? currentExpense = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -78,26 +65,14 @@ class _$CategoryCopyWithImpl<$Res, $Val extends Category>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      type: null == type
-          ? _value.type
-          : type // ignore: cast_nullable_to_non_nullable
-              as CategoriesType,
-      icon: null == icon
-          ? _value.icon
-          : icon // ignore: cast_nullable_to_non_nullable
-              as IconData,
-      color: freezed == color
-          ? _value.color
-          : color // ignore: cast_nullable_to_non_nullable
-              as Color,
-      budget: freezed == budget
-          ? _value.budget
-          : budget // ignore: cast_nullable_to_non_nullable
-              as double?,
-      isSelected: null == isSelected
-          ? _value.isSelected
-          : isSelected // ignore: cast_nullable_to_non_nullable
-              as bool,
+      maxExpense: null == maxExpense
+          ? _value.maxExpense
+          : maxExpense // ignore: cast_nullable_to_non_nullable
+              as double,
+      currentExpense: null == currentExpense
+          ? _value.currentExpense
+          : currentExpense // ignore: cast_nullable_to_non_nullable
+              as double,
     ) as $Val);
   }
 }
@@ -110,14 +85,7 @@ abstract class _$$CategoryImplCopyWith<$Res>
       __$$CategoryImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {String id,
-      String name,
-      CategoriesType type,
-      IconData icon,
-      Color color,
-      double? budget,
-      bool isSelected});
+  $Res call({String id, String name, double maxExpense, double currentExpense});
 }
 
 /// @nodoc
@@ -135,11 +103,8 @@ class __$$CategoryImplCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? name = null,
-    Object? type = null,
-    Object? icon = null,
-    Object? color = freezed,
-    Object? budget = freezed,
-    Object? isSelected = null,
+    Object? maxExpense = null,
+    Object? currentExpense = null,
   }) {
     return _then(_$CategoryImpl(
       id: null == id
@@ -150,26 +115,14 @@ class __$$CategoryImplCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      type: null == type
-          ? _value.type
-          : type // ignore: cast_nullable_to_non_nullable
-              as CategoriesType,
-      icon: null == icon
-          ? _value.icon
-          : icon // ignore: cast_nullable_to_non_nullable
-              as IconData,
-      color: freezed == color
-          ? _value.color
-          : color // ignore: cast_nullable_to_non_nullable
-              as Color,
-      budget: freezed == budget
-          ? _value.budget
-          : budget // ignore: cast_nullable_to_non_nullable
-              as double?,
-      isSelected: null == isSelected
-          ? _value.isSelected
-          : isSelected // ignore: cast_nullable_to_non_nullable
-              as bool,
+      maxExpense: null == maxExpense
+          ? _value.maxExpense
+          : maxExpense // ignore: cast_nullable_to_non_nullable
+              as double,
+      currentExpense: null == currentExpense
+          ? _value.currentExpense
+          : currentExpense // ignore: cast_nullable_to_non_nullable
+              as double,
     ));
   }
 }
@@ -180,31 +133,21 @@ class _$CategoryImpl implements _Category {
   const _$CategoryImpl(
       {required this.id,
       required this.name,
-      required this.type,
-      required this.icon,
-      required this.color,
-      required this.budget,
-      this.isSelected = false});
+      required this.maxExpense,
+      required this.currentExpense});
 
   @override
   final String id;
   @override
   final String name;
   @override
-  final CategoriesType type;
+  final double maxExpense;
   @override
-  final IconData icon;
-  @override
-  final Color color;
-  @override
-  final double? budget;
-  @override
-  @JsonKey()
-  final bool isSelected;
+  final double currentExpense;
 
   @override
   String toString() {
-    return 'Category(id: $id, name: $name, type: $type, icon: $icon, color: $color, budget: $budget, isSelected: $isSelected)';
+    return 'Category(id: $id, name: $name, maxExpense: $maxExpense, currentExpense: $currentExpense)';
   }
 
   @override
@@ -214,17 +157,15 @@ class _$CategoryImpl implements _Category {
             other is _$CategoryImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
-            (identical(other.type, type) || other.type == type) &&
-            (identical(other.icon, icon) || other.icon == icon) &&
-            const DeepCollectionEquality().equals(other.color, color) &&
-            (identical(other.budget, budget) || other.budget == budget) &&
-            (identical(other.isSelected, isSelected) ||
-                other.isSelected == isSelected));
+            (identical(other.maxExpense, maxExpense) ||
+                other.maxExpense == maxExpense) &&
+            (identical(other.currentExpense, currentExpense) ||
+                other.currentExpense == currentExpense));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, id, name, type, icon,
-      const DeepCollectionEquality().hash(color), budget, isSelected);
+  int get hashCode =>
+      Object.hash(runtimeType, id, name, maxExpense, currentExpense);
 
   /// Create a copy of Category
   /// with the given fields replaced by the non-null parameter values.
@@ -239,26 +180,17 @@ abstract class _Category implements Category {
   const factory _Category(
       {required final String id,
       required final String name,
-      required final CategoriesType type,
-      required final IconData icon,
-      required final Color color,
-      required final double? budget,
-      final bool isSelected}) = _$CategoryImpl;
+      required final double maxExpense,
+      required final double currentExpense}) = _$CategoryImpl;
 
   @override
   String get id;
   @override
   String get name;
   @override
-  CategoriesType get type;
+  double get maxExpense;
   @override
-  IconData get icon;
-  @override
-  Color get color;
-  @override
-  double? get budget;
-  @override
-  bool get isSelected;
+  double get currentExpense;
 
   /// Create a copy of Category
   /// with the given fields replaced by the non-null parameter values.

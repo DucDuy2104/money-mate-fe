@@ -18,6 +18,7 @@ class SetupBloc extends Bloc<SetupEvent, SetupState> {
   void _onSetup(_Setup event, Emitter<SetupState> emit) async {
     try {
       emit(const SetupState.loading());
+      await Future.delayed(const Duration(seconds: 2));
       final result = await _usersRepository.update({
         'name': event.name,
         'budget': event.budget,

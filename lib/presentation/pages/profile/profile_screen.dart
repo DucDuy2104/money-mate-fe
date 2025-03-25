@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:money_mate/presentation/drawer_navigation/app_drawer.dart';
 import 'package:money_mate/presentation/pages/profile/widgets/expense_pie_chart.dart';
 import 'package:money_mate/presentation/pages/profile/widgets/profile_card.dart';
-import 'package:money_mate/presentation/pages/profile/widgets/profile_tab.dart';
+import 'package:money_mate/shared/components/app_tab.dart';
 import 'package:money_mate/presentation/routes/route_name.dart';
 import 'package:money_mate/shared/constants/app_dimens.dart';
 
@@ -21,7 +21,6 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return DefaultTabController(
       length: 2, // 2 tabs: Ngày - Tháng
       child: Scaffold(
@@ -41,16 +40,13 @@ class ProfileScreen extends StatelessWidget {
           children: [
             const ProfileCard(),
             AppDimens.spaceSmall,
-
-            // TabBar với thiết kế hiện đại
-            const ProfileTab(),
-
-            // TabBarView hiển thị nội dung theo từng tab
+            const AppTab(
+                tab1Name: 'Hôm nay', tab2Name: 'Tháng này', controller: null),
             Expanded(
               child: TabBarView(
                 children: [
-                  ExpensePieChart(data: sampleExpenseData), // Theo Ngày
-                  ExpensePieChart(data: sampleExpenseData), // Theo Tháng
+                  ExpensePieChart(data: sampleExpenseData),
+                  ExpensePieChart(data: sampleExpenseData),
                 ],
               ),
             ),

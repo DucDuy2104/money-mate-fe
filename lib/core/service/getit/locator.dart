@@ -4,10 +4,13 @@ import 'package:money_mate/core/network/api_client.dart';
 import 'package:money_mate/core/service/local_storage/app_storage.dart';
 import 'package:money_mate/data/data_sources/local/local_data_source.dart';
 import 'package:money_mate/data/data_sources/remote/auth_remote_data_source.dart';
+import 'package:money_mate/data/data_sources/remote/categories_remote_data_source.dart';
 import 'package:money_mate/data/data_sources/remote/users_remote_data_source.dart';
 import 'package:money_mate/data/repositories/auth_repository.dart';
+import 'package:money_mate/data/repositories/categories_repository.dart';
 import 'package:money_mate/data/repositories/users_repository.dart';
 import 'package:money_mate/domain/repositories/auth_repository_impl.dart';
+import 'package:money_mate/domain/repositories/categories_repository_impl.dart';
 import 'package:money_mate/domain/repositories/users_repository_impl.dart';
 
 final GetIt getIt = GetIt.instance;
@@ -49,6 +52,10 @@ registerRemoteDataSources() {
   // UsersRemoteDataSources
   getIt.registerLazySingleton<UsersRemoteDataSource>(
       () => UsersRemoteDataSourceImpl(getIt<ApiClient>()));
+
+  // CategoriesRemoteDataSources
+  getIt.registerLazySingleton<CategoriesRemoteDataSource>(
+      () => CategoriesRemoteDataSourceImpl(getIt<ApiClient>()));
 }
 
 registerRepositories() {
@@ -62,4 +69,8 @@ registerRepositories() {
   // UsersRepository
   getIt.registerLazySingleton<UsersRepository>(
       () => UsersRepositoryImpl(getIt<UsersRemoteDataSource>()));
+
+  // CategoriesRepository
+  getIt.registerLazySingleton<CategoriesRepository>(
+      () => CategoriesRepositoryImpl(getIt<CategoriesRemoteDataSource>()));
 }

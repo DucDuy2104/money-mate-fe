@@ -1,0 +1,1121 @@
+// coverage:ignore-file
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
+
+part of 'categories_bloc.dart';
+
+// **************************************************************************
+// FreezedGenerator
+// **************************************************************************
+
+T _$identity<T>(T value) => value;
+
+final _privateConstructorUsedError = UnsupportedError(
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
+
+/// @nodoc
+mixin _$CategoriesEvent {
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() getCategories,
+    required TResult Function(String id) toggleCategory,
+    required TResult Function(String id, double? budget) updateCategoryBudget,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? getCategories,
+    TResult? Function(String id)? toggleCategory,
+    TResult? Function(String id, double? budget)? updateCategoryBudget,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? getCategories,
+    TResult Function(String id)? toggleCategory,
+    TResult Function(String id, double? budget)? updateCategoryBudget,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetCategories value) getCategories,
+    required TResult Function(_ToggleCategory value) toggleCategory,
+    required TResult Function(_UpdateCategoryBudget value) updateCategoryBudget,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetCategories value)? getCategories,
+    TResult? Function(_ToggleCategory value)? toggleCategory,
+    TResult? Function(_UpdateCategoryBudget value)? updateCategoryBudget,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetCategories value)? getCategories,
+    TResult Function(_ToggleCategory value)? toggleCategory,
+    TResult Function(_UpdateCategoryBudget value)? updateCategoryBudget,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $CategoriesEventCopyWith<$Res> {
+  factory $CategoriesEventCopyWith(
+          CategoriesEvent value, $Res Function(CategoriesEvent) then) =
+      _$CategoriesEventCopyWithImpl<$Res, CategoriesEvent>;
+}
+
+/// @nodoc
+class _$CategoriesEventCopyWithImpl<$Res, $Val extends CategoriesEvent>
+    implements $CategoriesEventCopyWith<$Res> {
+  _$CategoriesEventCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of CategoriesEvent
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+abstract class _$$GetCategoriesImplCopyWith<$Res> {
+  factory _$$GetCategoriesImplCopyWith(
+          _$GetCategoriesImpl value, $Res Function(_$GetCategoriesImpl) then) =
+      __$$GetCategoriesImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$GetCategoriesImplCopyWithImpl<$Res>
+    extends _$CategoriesEventCopyWithImpl<$Res, _$GetCategoriesImpl>
+    implements _$$GetCategoriesImplCopyWith<$Res> {
+  __$$GetCategoriesImplCopyWithImpl(
+      _$GetCategoriesImpl _value, $Res Function(_$GetCategoriesImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of CategoriesEvent
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$GetCategoriesImpl implements _GetCategories {
+  _$GetCategoriesImpl();
+
+  @override
+  String toString() {
+    return 'CategoriesEvent.getCategories()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$GetCategoriesImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() getCategories,
+    required TResult Function(String id) toggleCategory,
+    required TResult Function(String id, double? budget) updateCategoryBudget,
+  }) {
+    return getCategories();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? getCategories,
+    TResult? Function(String id)? toggleCategory,
+    TResult? Function(String id, double? budget)? updateCategoryBudget,
+  }) {
+    return getCategories?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? getCategories,
+    TResult Function(String id)? toggleCategory,
+    TResult Function(String id, double? budget)? updateCategoryBudget,
+    required TResult orElse(),
+  }) {
+    if (getCategories != null) {
+      return getCategories();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetCategories value) getCategories,
+    required TResult Function(_ToggleCategory value) toggleCategory,
+    required TResult Function(_UpdateCategoryBudget value) updateCategoryBudget,
+  }) {
+    return getCategories(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetCategories value)? getCategories,
+    TResult? Function(_ToggleCategory value)? toggleCategory,
+    TResult? Function(_UpdateCategoryBudget value)? updateCategoryBudget,
+  }) {
+    return getCategories?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetCategories value)? getCategories,
+    TResult Function(_ToggleCategory value)? toggleCategory,
+    TResult Function(_UpdateCategoryBudget value)? updateCategoryBudget,
+    required TResult orElse(),
+  }) {
+    if (getCategories != null) {
+      return getCategories(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _GetCategories implements CategoriesEvent {
+  factory _GetCategories() = _$GetCategoriesImpl;
+}
+
+/// @nodoc
+abstract class _$$ToggleCategoryImplCopyWith<$Res> {
+  factory _$$ToggleCategoryImplCopyWith(_$ToggleCategoryImpl value,
+          $Res Function(_$ToggleCategoryImpl) then) =
+      __$$ToggleCategoryImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String id});
+}
+
+/// @nodoc
+class __$$ToggleCategoryImplCopyWithImpl<$Res>
+    extends _$CategoriesEventCopyWithImpl<$Res, _$ToggleCategoryImpl>
+    implements _$$ToggleCategoryImplCopyWith<$Res> {
+  __$$ToggleCategoryImplCopyWithImpl(
+      _$ToggleCategoryImpl _value, $Res Function(_$ToggleCategoryImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of CategoriesEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+  }) {
+    return _then(_$ToggleCategoryImpl(
+      null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$ToggleCategoryImpl implements _ToggleCategory {
+  const _$ToggleCategoryImpl(this.id);
+
+  @override
+  final String id;
+
+  @override
+  String toString() {
+    return 'CategoriesEvent.toggleCategory(id: $id)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ToggleCategoryImpl &&
+            (identical(other.id, id) || other.id == id));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, id);
+
+  /// Create a copy of CategoriesEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ToggleCategoryImplCopyWith<_$ToggleCategoryImpl> get copyWith =>
+      __$$ToggleCategoryImplCopyWithImpl<_$ToggleCategoryImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() getCategories,
+    required TResult Function(String id) toggleCategory,
+    required TResult Function(String id, double? budget) updateCategoryBudget,
+  }) {
+    return toggleCategory(id);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? getCategories,
+    TResult? Function(String id)? toggleCategory,
+    TResult? Function(String id, double? budget)? updateCategoryBudget,
+  }) {
+    return toggleCategory?.call(id);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? getCategories,
+    TResult Function(String id)? toggleCategory,
+    TResult Function(String id, double? budget)? updateCategoryBudget,
+    required TResult orElse(),
+  }) {
+    if (toggleCategory != null) {
+      return toggleCategory(id);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetCategories value) getCategories,
+    required TResult Function(_ToggleCategory value) toggleCategory,
+    required TResult Function(_UpdateCategoryBudget value) updateCategoryBudget,
+  }) {
+    return toggleCategory(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetCategories value)? getCategories,
+    TResult? Function(_ToggleCategory value)? toggleCategory,
+    TResult? Function(_UpdateCategoryBudget value)? updateCategoryBudget,
+  }) {
+    return toggleCategory?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetCategories value)? getCategories,
+    TResult Function(_ToggleCategory value)? toggleCategory,
+    TResult Function(_UpdateCategoryBudget value)? updateCategoryBudget,
+    required TResult orElse(),
+  }) {
+    if (toggleCategory != null) {
+      return toggleCategory(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ToggleCategory implements CategoriesEvent {
+  const factory _ToggleCategory(final String id) = _$ToggleCategoryImpl;
+
+  String get id;
+
+  /// Create a copy of CategoriesEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$ToggleCategoryImplCopyWith<_$ToggleCategoryImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$UpdateCategoryBudgetImplCopyWith<$Res> {
+  factory _$$UpdateCategoryBudgetImplCopyWith(_$UpdateCategoryBudgetImpl value,
+          $Res Function(_$UpdateCategoryBudgetImpl) then) =
+      __$$UpdateCategoryBudgetImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String id, double? budget});
+}
+
+/// @nodoc
+class __$$UpdateCategoryBudgetImplCopyWithImpl<$Res>
+    extends _$CategoriesEventCopyWithImpl<$Res, _$UpdateCategoryBudgetImpl>
+    implements _$$UpdateCategoryBudgetImplCopyWith<$Res> {
+  __$$UpdateCategoryBudgetImplCopyWithImpl(_$UpdateCategoryBudgetImpl _value,
+      $Res Function(_$UpdateCategoryBudgetImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of CategoriesEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+    Object? budget = freezed,
+  }) {
+    return _then(_$UpdateCategoryBudgetImpl(
+      null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      freezed == budget
+          ? _value.budget
+          : budget // ignore: cast_nullable_to_non_nullable
+              as double?,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$UpdateCategoryBudgetImpl implements _UpdateCategoryBudget {
+  const _$UpdateCategoryBudgetImpl(this.id, this.budget);
+
+  @override
+  final String id;
+  @override
+  final double? budget;
+
+  @override
+  String toString() {
+    return 'CategoriesEvent.updateCategoryBudget(id: $id, budget: $budget)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$UpdateCategoryBudgetImpl &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.budget, budget) || other.budget == budget));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, id, budget);
+
+  /// Create a copy of CategoriesEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$UpdateCategoryBudgetImplCopyWith<_$UpdateCategoryBudgetImpl>
+      get copyWith =>
+          __$$UpdateCategoryBudgetImplCopyWithImpl<_$UpdateCategoryBudgetImpl>(
+              this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() getCategories,
+    required TResult Function(String id) toggleCategory,
+    required TResult Function(String id, double? budget) updateCategoryBudget,
+  }) {
+    return updateCategoryBudget(id, budget);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? getCategories,
+    TResult? Function(String id)? toggleCategory,
+    TResult? Function(String id, double? budget)? updateCategoryBudget,
+  }) {
+    return updateCategoryBudget?.call(id, budget);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? getCategories,
+    TResult Function(String id)? toggleCategory,
+    TResult Function(String id, double? budget)? updateCategoryBudget,
+    required TResult orElse(),
+  }) {
+    if (updateCategoryBudget != null) {
+      return updateCategoryBudget(id, budget);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetCategories value) getCategories,
+    required TResult Function(_ToggleCategory value) toggleCategory,
+    required TResult Function(_UpdateCategoryBudget value) updateCategoryBudget,
+  }) {
+    return updateCategoryBudget(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetCategories value)? getCategories,
+    TResult? Function(_ToggleCategory value)? toggleCategory,
+    TResult? Function(_UpdateCategoryBudget value)? updateCategoryBudget,
+  }) {
+    return updateCategoryBudget?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetCategories value)? getCategories,
+    TResult Function(_ToggleCategory value)? toggleCategory,
+    TResult Function(_UpdateCategoryBudget value)? updateCategoryBudget,
+    required TResult orElse(),
+  }) {
+    if (updateCategoryBudget != null) {
+      return updateCategoryBudget(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _UpdateCategoryBudget implements CategoriesEvent {
+  const factory _UpdateCategoryBudget(final String id, final double? budget) =
+      _$UpdateCategoryBudgetImpl;
+
+  String get id;
+  double? get budget;
+
+  /// Create a copy of CategoriesEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$UpdateCategoryBudgetImplCopyWith<_$UpdateCategoryBudgetImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+mixin _$CategoriesState {
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function(List<Category> categories) success,
+    required TResult Function(String message) error,
+    required TResult Function() loading,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function(List<Category> categories)? success,
+    TResult? Function(String message)? error,
+    TResult? Function()? loading,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function(List<Category> categories)? success,
+    TResult Function(String message)? error,
+    TResult Function()? loading,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Success value) success,
+    required TResult Function(_Error value) error,
+    required TResult Function(_Loading value) loading,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_Success value)? success,
+    TResult? Function(_Error value)? error,
+    TResult? Function(_Loading value)? loading,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Success value)? success,
+    TResult Function(_Error value)? error,
+    TResult Function(_Loading value)? loading,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $CategoriesStateCopyWith<$Res> {
+  factory $CategoriesStateCopyWith(
+          CategoriesState value, $Res Function(CategoriesState) then) =
+      _$CategoriesStateCopyWithImpl<$Res, CategoriesState>;
+}
+
+/// @nodoc
+class _$CategoriesStateCopyWithImpl<$Res, $Val extends CategoriesState>
+    implements $CategoriesStateCopyWith<$Res> {
+  _$CategoriesStateCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of CategoriesState
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+abstract class _$$InitialImplCopyWith<$Res> {
+  factory _$$InitialImplCopyWith(
+          _$InitialImpl value, $Res Function(_$InitialImpl) then) =
+      __$$InitialImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$InitialImplCopyWithImpl<$Res>
+    extends _$CategoriesStateCopyWithImpl<$Res, _$InitialImpl>
+    implements _$$InitialImplCopyWith<$Res> {
+  __$$InitialImplCopyWithImpl(
+      _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of CategoriesState
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$InitialImpl implements _Initial {
+  const _$InitialImpl();
+
+  @override
+  String toString() {
+    return 'CategoriesState.initial()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$InitialImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function(List<Category> categories) success,
+    required TResult Function(String message) error,
+    required TResult Function() loading,
+  }) {
+    return initial();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function(List<Category> categories)? success,
+    TResult? Function(String message)? error,
+    TResult? Function()? loading,
+  }) {
+    return initial?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function(List<Category> categories)? success,
+    TResult Function(String message)? error,
+    TResult Function()? loading,
+    required TResult orElse(),
+  }) {
+    if (initial != null) {
+      return initial();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Success value) success,
+    required TResult Function(_Error value) error,
+    required TResult Function(_Loading value) loading,
+  }) {
+    return initial(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_Success value)? success,
+    TResult? Function(_Error value)? error,
+    TResult? Function(_Loading value)? loading,
+  }) {
+    return initial?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Success value)? success,
+    TResult Function(_Error value)? error,
+    TResult Function(_Loading value)? loading,
+    required TResult orElse(),
+  }) {
+    if (initial != null) {
+      return initial(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Initial implements CategoriesState {
+  const factory _Initial() = _$InitialImpl;
+}
+
+/// @nodoc
+abstract class _$$SuccessImplCopyWith<$Res> {
+  factory _$$SuccessImplCopyWith(
+          _$SuccessImpl value, $Res Function(_$SuccessImpl) then) =
+      __$$SuccessImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({List<Category> categories});
+}
+
+/// @nodoc
+class __$$SuccessImplCopyWithImpl<$Res>
+    extends _$CategoriesStateCopyWithImpl<$Res, _$SuccessImpl>
+    implements _$$SuccessImplCopyWith<$Res> {
+  __$$SuccessImplCopyWithImpl(
+      _$SuccessImpl _value, $Res Function(_$SuccessImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of CategoriesState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? categories = null,
+  }) {
+    return _then(_$SuccessImpl(
+      null == categories
+          ? _value._categories
+          : categories // ignore: cast_nullable_to_non_nullable
+              as List<Category>,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$SuccessImpl implements _Success {
+  const _$SuccessImpl(final List<Category> categories)
+      : _categories = categories;
+
+  final List<Category> _categories;
+  @override
+  List<Category> get categories {
+    if (_categories is EqualUnmodifiableListView) return _categories;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_categories);
+  }
+
+  @override
+  String toString() {
+    return 'CategoriesState.success(categories: $categories)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$SuccessImpl &&
+            const DeepCollectionEquality()
+                .equals(other._categories, _categories));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(_categories));
+
+  /// Create a copy of CategoriesState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$SuccessImplCopyWith<_$SuccessImpl> get copyWith =>
+      __$$SuccessImplCopyWithImpl<_$SuccessImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function(List<Category> categories) success,
+    required TResult Function(String message) error,
+    required TResult Function() loading,
+  }) {
+    return success(categories);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function(List<Category> categories)? success,
+    TResult? Function(String message)? error,
+    TResult? Function()? loading,
+  }) {
+    return success?.call(categories);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function(List<Category> categories)? success,
+    TResult Function(String message)? error,
+    TResult Function()? loading,
+    required TResult orElse(),
+  }) {
+    if (success != null) {
+      return success(categories);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Success value) success,
+    required TResult Function(_Error value) error,
+    required TResult Function(_Loading value) loading,
+  }) {
+    return success(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_Success value)? success,
+    TResult? Function(_Error value)? error,
+    TResult? Function(_Loading value)? loading,
+  }) {
+    return success?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Success value)? success,
+    TResult Function(_Error value)? error,
+    TResult Function(_Loading value)? loading,
+    required TResult orElse(),
+  }) {
+    if (success != null) {
+      return success(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Success implements CategoriesState {
+  const factory _Success(final List<Category> categories) = _$SuccessImpl;
+
+  List<Category> get categories;
+
+  /// Create a copy of CategoriesState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$SuccessImplCopyWith<_$SuccessImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$ErrorImplCopyWith<$Res> {
+  factory _$$ErrorImplCopyWith(
+          _$ErrorImpl value, $Res Function(_$ErrorImpl) then) =
+      __$$ErrorImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String message});
+}
+
+/// @nodoc
+class __$$ErrorImplCopyWithImpl<$Res>
+    extends _$CategoriesStateCopyWithImpl<$Res, _$ErrorImpl>
+    implements _$$ErrorImplCopyWith<$Res> {
+  __$$ErrorImplCopyWithImpl(
+      _$ErrorImpl _value, $Res Function(_$ErrorImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of CategoriesState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? message = null,
+  }) {
+    return _then(_$ErrorImpl(
+      null == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$ErrorImpl implements _Error {
+  const _$ErrorImpl(this.message);
+
+  @override
+  final String message;
+
+  @override
+  String toString() {
+    return 'CategoriesState.error(message: $message)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ErrorImpl &&
+            (identical(other.message, message) || other.message == message));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, message);
+
+  /// Create a copy of CategoriesState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ErrorImplCopyWith<_$ErrorImpl> get copyWith =>
+      __$$ErrorImplCopyWithImpl<_$ErrorImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function(List<Category> categories) success,
+    required TResult Function(String message) error,
+    required TResult Function() loading,
+  }) {
+    return error(message);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function(List<Category> categories)? success,
+    TResult? Function(String message)? error,
+    TResult? Function()? loading,
+  }) {
+    return error?.call(message);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function(List<Category> categories)? success,
+    TResult Function(String message)? error,
+    TResult Function()? loading,
+    required TResult orElse(),
+  }) {
+    if (error != null) {
+      return error(message);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Success value) success,
+    required TResult Function(_Error value) error,
+    required TResult Function(_Loading value) loading,
+  }) {
+    return error(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_Success value)? success,
+    TResult? Function(_Error value)? error,
+    TResult? Function(_Loading value)? loading,
+  }) {
+    return error?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Success value)? success,
+    TResult Function(_Error value)? error,
+    TResult Function(_Loading value)? loading,
+    required TResult orElse(),
+  }) {
+    if (error != null) {
+      return error(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Error implements CategoriesState {
+  const factory _Error(final String message) = _$ErrorImpl;
+
+  String get message;
+
+  /// Create a copy of CategoriesState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$ErrorImplCopyWith<_$ErrorImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$LoadingImplCopyWith<$Res> {
+  factory _$$LoadingImplCopyWith(
+          _$LoadingImpl value, $Res Function(_$LoadingImpl) then) =
+      __$$LoadingImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$LoadingImplCopyWithImpl<$Res>
+    extends _$CategoriesStateCopyWithImpl<$Res, _$LoadingImpl>
+    implements _$$LoadingImplCopyWith<$Res> {
+  __$$LoadingImplCopyWithImpl(
+      _$LoadingImpl _value, $Res Function(_$LoadingImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of CategoriesState
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$LoadingImpl implements _Loading {
+  const _$LoadingImpl();
+
+  @override
+  String toString() {
+    return 'CategoriesState.loading()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$LoadingImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function(List<Category> categories) success,
+    required TResult Function(String message) error,
+    required TResult Function() loading,
+  }) {
+    return loading();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function(List<Category> categories)? success,
+    TResult? Function(String message)? error,
+    TResult? Function()? loading,
+  }) {
+    return loading?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function(List<Category> categories)? success,
+    TResult Function(String message)? error,
+    TResult Function()? loading,
+    required TResult orElse(),
+  }) {
+    if (loading != null) {
+      return loading();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Success value) success,
+    required TResult Function(_Error value) error,
+    required TResult Function(_Loading value) loading,
+  }) {
+    return loading(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_Success value)? success,
+    TResult? Function(_Error value)? error,
+    TResult? Function(_Loading value)? loading,
+  }) {
+    return loading?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Success value)? success,
+    TResult Function(_Error value)? error,
+    TResult Function(_Loading value)? loading,
+    required TResult orElse(),
+  }) {
+    if (loading != null) {
+      return loading(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Loading implements CategoriesState {
+  const factory _Loading() = _$LoadingImpl;
+}
