@@ -6,4 +6,5 @@ class CategoriesEvent with _$CategoriesEvent {
   const factory CategoriesEvent.toggleCategory(String id) = _ToggleCategory;
   const factory CategoriesEvent.updateCategoryBudget(
       String id, double? budget) = _UpdateCategoryBudget;
+  const factory CategoriesEvent.setupCategories(List<Category> categories) = _SetupCategories;
 }

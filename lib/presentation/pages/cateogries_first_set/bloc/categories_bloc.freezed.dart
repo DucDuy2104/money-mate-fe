@@ -21,6 +21,7 @@ mixin _$CategoriesEvent {
     required TResult Function() getCategories,
     required TResult Function(String id) toggleCategory,
     required TResult Function(String id, double? budget) updateCategoryBudget,
+    required TResult Function(List<Category> categories) setupCategories,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -28,6 +29,7 @@ mixin _$CategoriesEvent {
     TResult? Function()? getCategories,
     TResult? Function(String id)? toggleCategory,
     TResult? Function(String id, double? budget)? updateCategoryBudget,
+    TResult? Function(List<Category> categories)? setupCategories,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -35,6 +37,7 @@ mixin _$CategoriesEvent {
     TResult Function()? getCategories,
     TResult Function(String id)? toggleCategory,
     TResult Function(String id, double? budget)? updateCategoryBudget,
+    TResult Function(List<Category> categories)? setupCategories,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -43,6 +46,7 @@ mixin _$CategoriesEvent {
     required TResult Function(_GetCategories value) getCategories,
     required TResult Function(_ToggleCategory value) toggleCategory,
     required TResult Function(_UpdateCategoryBudget value) updateCategoryBudget,
+    required TResult Function(_SetupCategories value) setupCategories,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -50,6 +54,7 @@ mixin _$CategoriesEvent {
     TResult? Function(_GetCategories value)? getCategories,
     TResult? Function(_ToggleCategory value)? toggleCategory,
     TResult? Function(_UpdateCategoryBudget value)? updateCategoryBudget,
+    TResult? Function(_SetupCategories value)? setupCategories,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -57,6 +62,7 @@ mixin _$CategoriesEvent {
     TResult Function(_GetCategories value)? getCategories,
     TResult Function(_ToggleCategory value)? toggleCategory,
     TResult Function(_UpdateCategoryBudget value)? updateCategoryBudget,
+    TResult Function(_SetupCategories value)? setupCategories,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -127,6 +133,7 @@ class _$GetCategoriesImpl implements _GetCategories {
     required TResult Function() getCategories,
     required TResult Function(String id) toggleCategory,
     required TResult Function(String id, double? budget) updateCategoryBudget,
+    required TResult Function(List<Category> categories) setupCategories,
   }) {
     return getCategories();
   }
@@ -137,6 +144,7 @@ class _$GetCategoriesImpl implements _GetCategories {
     TResult? Function()? getCategories,
     TResult? Function(String id)? toggleCategory,
     TResult? Function(String id, double? budget)? updateCategoryBudget,
+    TResult? Function(List<Category> categories)? setupCategories,
   }) {
     return getCategories?.call();
   }
@@ -147,6 +155,7 @@ class _$GetCategoriesImpl implements _GetCategories {
     TResult Function()? getCategories,
     TResult Function(String id)? toggleCategory,
     TResult Function(String id, double? budget)? updateCategoryBudget,
+    TResult Function(List<Category> categories)? setupCategories,
     required TResult orElse(),
   }) {
     if (getCategories != null) {
@@ -161,6 +170,7 @@ class _$GetCategoriesImpl implements _GetCategories {
     required TResult Function(_GetCategories value) getCategories,
     required TResult Function(_ToggleCategory value) toggleCategory,
     required TResult Function(_UpdateCategoryBudget value) updateCategoryBudget,
+    required TResult Function(_SetupCategories value) setupCategories,
   }) {
     return getCategories(this);
   }
@@ -171,6 +181,7 @@ class _$GetCategoriesImpl implements _GetCategories {
     TResult? Function(_GetCategories value)? getCategories,
     TResult? Function(_ToggleCategory value)? toggleCategory,
     TResult? Function(_UpdateCategoryBudget value)? updateCategoryBudget,
+    TResult? Function(_SetupCategories value)? setupCategories,
   }) {
     return getCategories?.call(this);
   }
@@ -181,6 +192,7 @@ class _$GetCategoriesImpl implements _GetCategories {
     TResult Function(_GetCategories value)? getCategories,
     TResult Function(_ToggleCategory value)? toggleCategory,
     TResult Function(_UpdateCategoryBudget value)? updateCategoryBudget,
+    TResult Function(_SetupCategories value)? setupCategories,
     required TResult orElse(),
   }) {
     if (getCategories != null) {
@@ -266,6 +278,7 @@ class _$ToggleCategoryImpl implements _ToggleCategory {
     required TResult Function() getCategories,
     required TResult Function(String id) toggleCategory,
     required TResult Function(String id, double? budget) updateCategoryBudget,
+    required TResult Function(List<Category> categories) setupCategories,
   }) {
     return toggleCategory(id);
   }
@@ -276,6 +289,7 @@ class _$ToggleCategoryImpl implements _ToggleCategory {
     TResult? Function()? getCategories,
     TResult? Function(String id)? toggleCategory,
     TResult? Function(String id, double? budget)? updateCategoryBudget,
+    TResult? Function(List<Category> categories)? setupCategories,
   }) {
     return toggleCategory?.call(id);
   }
@@ -286,6 +300,7 @@ class _$ToggleCategoryImpl implements _ToggleCategory {
     TResult Function()? getCategories,
     TResult Function(String id)? toggleCategory,
     TResult Function(String id, double? budget)? updateCategoryBudget,
+    TResult Function(List<Category> categories)? setupCategories,
     required TResult orElse(),
   }) {
     if (toggleCategory != null) {
@@ -300,6 +315,7 @@ class _$ToggleCategoryImpl implements _ToggleCategory {
     required TResult Function(_GetCategories value) getCategories,
     required TResult Function(_ToggleCategory value) toggleCategory,
     required TResult Function(_UpdateCategoryBudget value) updateCategoryBudget,
+    required TResult Function(_SetupCategories value) setupCategories,
   }) {
     return toggleCategory(this);
   }
@@ -310,6 +326,7 @@ class _$ToggleCategoryImpl implements _ToggleCategory {
     TResult? Function(_GetCategories value)? getCategories,
     TResult? Function(_ToggleCategory value)? toggleCategory,
     TResult? Function(_UpdateCategoryBudget value)? updateCategoryBudget,
+    TResult? Function(_SetupCategories value)? setupCategories,
   }) {
     return toggleCategory?.call(this);
   }
@@ -320,6 +337,7 @@ class _$ToggleCategoryImpl implements _ToggleCategory {
     TResult Function(_GetCategories value)? getCategories,
     TResult Function(_ToggleCategory value)? toggleCategory,
     TResult Function(_UpdateCategoryBudget value)? updateCategoryBudget,
+    TResult Function(_SetupCategories value)? setupCategories,
     required TResult orElse(),
   }) {
     if (toggleCategory != null) {
@@ -422,6 +440,7 @@ class _$UpdateCategoryBudgetImpl implements _UpdateCategoryBudget {
     required TResult Function() getCategories,
     required TResult Function(String id) toggleCategory,
     required TResult Function(String id, double? budget) updateCategoryBudget,
+    required TResult Function(List<Category> categories) setupCategories,
   }) {
     return updateCategoryBudget(id, budget);
   }
@@ -432,6 +451,7 @@ class _$UpdateCategoryBudgetImpl implements _UpdateCategoryBudget {
     TResult? Function()? getCategories,
     TResult? Function(String id)? toggleCategory,
     TResult? Function(String id, double? budget)? updateCategoryBudget,
+    TResult? Function(List<Category> categories)? setupCategories,
   }) {
     return updateCategoryBudget?.call(id, budget);
   }
@@ -442,6 +462,7 @@ class _$UpdateCategoryBudgetImpl implements _UpdateCategoryBudget {
     TResult Function()? getCategories,
     TResult Function(String id)? toggleCategory,
     TResult Function(String id, double? budget)? updateCategoryBudget,
+    TResult Function(List<Category> categories)? setupCategories,
     required TResult orElse(),
   }) {
     if (updateCategoryBudget != null) {
@@ -456,6 +477,7 @@ class _$UpdateCategoryBudgetImpl implements _UpdateCategoryBudget {
     required TResult Function(_GetCategories value) getCategories,
     required TResult Function(_ToggleCategory value) toggleCategory,
     required TResult Function(_UpdateCategoryBudget value) updateCategoryBudget,
+    required TResult Function(_SetupCategories value) setupCategories,
   }) {
     return updateCategoryBudget(this);
   }
@@ -466,6 +488,7 @@ class _$UpdateCategoryBudgetImpl implements _UpdateCategoryBudget {
     TResult? Function(_GetCategories value)? getCategories,
     TResult? Function(_ToggleCategory value)? toggleCategory,
     TResult? Function(_UpdateCategoryBudget value)? updateCategoryBudget,
+    TResult? Function(_SetupCategories value)? setupCategories,
   }) {
     return updateCategoryBudget?.call(this);
   }
@@ -476,6 +499,7 @@ class _$UpdateCategoryBudgetImpl implements _UpdateCategoryBudget {
     TResult Function(_GetCategories value)? getCategories,
     TResult Function(_ToggleCategory value)? toggleCategory,
     TResult Function(_UpdateCategoryBudget value)? updateCategoryBudget,
+    TResult Function(_SetupCategories value)? setupCategories,
     required TResult orElse(),
   }) {
     if (updateCategoryBudget != null) {
@@ -500,13 +524,176 @@ abstract class _UpdateCategoryBudget implements CategoriesEvent {
 }
 
 /// @nodoc
+abstract class _$$SetupCategoriesImplCopyWith<$Res> {
+  factory _$$SetupCategoriesImplCopyWith(_$SetupCategoriesImpl value,
+          $Res Function(_$SetupCategoriesImpl) then) =
+      __$$SetupCategoriesImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({List<Category> categories});
+}
+
+/// @nodoc
+class __$$SetupCategoriesImplCopyWithImpl<$Res>
+    extends _$CategoriesEventCopyWithImpl<$Res, _$SetupCategoriesImpl>
+    implements _$$SetupCategoriesImplCopyWith<$Res> {
+  __$$SetupCategoriesImplCopyWithImpl(
+      _$SetupCategoriesImpl _value, $Res Function(_$SetupCategoriesImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of CategoriesEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? categories = null,
+  }) {
+    return _then(_$SetupCategoriesImpl(
+      null == categories
+          ? _value._categories
+          : categories // ignore: cast_nullable_to_non_nullable
+              as List<Category>,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$SetupCategoriesImpl implements _SetupCategories {
+  const _$SetupCategoriesImpl(final List<Category> categories)
+      : _categories = categories;
+
+  final List<Category> _categories;
+  @override
+  List<Category> get categories {
+    if (_categories is EqualUnmodifiableListView) return _categories;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_categories);
+  }
+
+  @override
+  String toString() {
+    return 'CategoriesEvent.setupCategories(categories: $categories)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$SetupCategoriesImpl &&
+            const DeepCollectionEquality()
+                .equals(other._categories, _categories));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(_categories));
+
+  /// Create a copy of CategoriesEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$SetupCategoriesImplCopyWith<_$SetupCategoriesImpl> get copyWith =>
+      __$$SetupCategoriesImplCopyWithImpl<_$SetupCategoriesImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() getCategories,
+    required TResult Function(String id) toggleCategory,
+    required TResult Function(String id, double? budget) updateCategoryBudget,
+    required TResult Function(List<Category> categories) setupCategories,
+  }) {
+    return setupCategories(categories);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? getCategories,
+    TResult? Function(String id)? toggleCategory,
+    TResult? Function(String id, double? budget)? updateCategoryBudget,
+    TResult? Function(List<Category> categories)? setupCategories,
+  }) {
+    return setupCategories?.call(categories);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? getCategories,
+    TResult Function(String id)? toggleCategory,
+    TResult Function(String id, double? budget)? updateCategoryBudget,
+    TResult Function(List<Category> categories)? setupCategories,
+    required TResult orElse(),
+  }) {
+    if (setupCategories != null) {
+      return setupCategories(categories);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetCategories value) getCategories,
+    required TResult Function(_ToggleCategory value) toggleCategory,
+    required TResult Function(_UpdateCategoryBudget value) updateCategoryBudget,
+    required TResult Function(_SetupCategories value) setupCategories,
+  }) {
+    return setupCategories(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetCategories value)? getCategories,
+    TResult? Function(_ToggleCategory value)? toggleCategory,
+    TResult? Function(_UpdateCategoryBudget value)? updateCategoryBudget,
+    TResult? Function(_SetupCategories value)? setupCategories,
+  }) {
+    return setupCategories?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetCategories value)? getCategories,
+    TResult Function(_ToggleCategory value)? toggleCategory,
+    TResult Function(_UpdateCategoryBudget value)? updateCategoryBudget,
+    TResult Function(_SetupCategories value)? setupCategories,
+    required TResult orElse(),
+  }) {
+    if (setupCategories != null) {
+      return setupCategories(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _SetupCategories implements CategoriesEvent {
+  const factory _SetupCategories(final List<Category> categories) =
+      _$SetupCategoriesImpl;
+
+  List<Category> get categories;
+
+  /// Create a copy of CategoriesEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$SetupCategoriesImplCopyWith<_$SetupCategoriesImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 mixin _$CategoriesState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function(List<Category> categories) success,
     required TResult Function(String message) error,
-    required TResult Function() loading,
+    required TResult Function(List<Category> categories) loading,
+    required TResult Function(List<Category> categories) setupSuccess,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -514,7 +701,8 @@ mixin _$CategoriesState {
     TResult? Function()? initial,
     TResult? Function(List<Category> categories)? success,
     TResult? Function(String message)? error,
-    TResult? Function()? loading,
+    TResult? Function(List<Category> categories)? loading,
+    TResult? Function(List<Category> categories)? setupSuccess,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -522,7 +710,8 @@ mixin _$CategoriesState {
     TResult Function()? initial,
     TResult Function(List<Category> categories)? success,
     TResult Function(String message)? error,
-    TResult Function()? loading,
+    TResult Function(List<Category> categories)? loading,
+    TResult Function(List<Category> categories)? setupSuccess,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -532,6 +721,7 @@ mixin _$CategoriesState {
     required TResult Function(_Success value) success,
     required TResult Function(_Error value) error,
     required TResult Function(_Loading value) loading,
+    required TResult Function(_SetupSuccess value) setupSuccess,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -540,6 +730,7 @@ mixin _$CategoriesState {
     TResult? Function(_Success value)? success,
     TResult? Function(_Error value)? error,
     TResult? Function(_Loading value)? loading,
+    TResult? Function(_SetupSuccess value)? setupSuccess,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -548,6 +739,7 @@ mixin _$CategoriesState {
     TResult Function(_Success value)? success,
     TResult Function(_Error value)? error,
     TResult Function(_Loading value)? loading,
+    TResult Function(_SetupSuccess value)? setupSuccess,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -618,7 +810,8 @@ class _$InitialImpl implements _Initial {
     required TResult Function() initial,
     required TResult Function(List<Category> categories) success,
     required TResult Function(String message) error,
-    required TResult Function() loading,
+    required TResult Function(List<Category> categories) loading,
+    required TResult Function(List<Category> categories) setupSuccess,
   }) {
     return initial();
   }
@@ -629,7 +822,8 @@ class _$InitialImpl implements _Initial {
     TResult? Function()? initial,
     TResult? Function(List<Category> categories)? success,
     TResult? Function(String message)? error,
-    TResult? Function()? loading,
+    TResult? Function(List<Category> categories)? loading,
+    TResult? Function(List<Category> categories)? setupSuccess,
   }) {
     return initial?.call();
   }
@@ -640,7 +834,8 @@ class _$InitialImpl implements _Initial {
     TResult Function()? initial,
     TResult Function(List<Category> categories)? success,
     TResult Function(String message)? error,
-    TResult Function()? loading,
+    TResult Function(List<Category> categories)? loading,
+    TResult Function(List<Category> categories)? setupSuccess,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -656,6 +851,7 @@ class _$InitialImpl implements _Initial {
     required TResult Function(_Success value) success,
     required TResult Function(_Error value) error,
     required TResult Function(_Loading value) loading,
+    required TResult Function(_SetupSuccess value) setupSuccess,
   }) {
     return initial(this);
   }
@@ -667,6 +863,7 @@ class _$InitialImpl implements _Initial {
     TResult? Function(_Success value)? success,
     TResult? Function(_Error value)? error,
     TResult? Function(_Loading value)? loading,
+    TResult? Function(_SetupSuccess value)? setupSuccess,
   }) {
     return initial?.call(this);
   }
@@ -678,6 +875,7 @@ class _$InitialImpl implements _Initial {
     TResult Function(_Success value)? success,
     TResult Function(_Error value)? error,
     TResult Function(_Loading value)? loading,
+    TResult Function(_SetupSuccess value)? setupSuccess,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -770,7 +968,8 @@ class _$SuccessImpl implements _Success {
     required TResult Function() initial,
     required TResult Function(List<Category> categories) success,
     required TResult Function(String message) error,
-    required TResult Function() loading,
+    required TResult Function(List<Category> categories) loading,
+    required TResult Function(List<Category> categories) setupSuccess,
   }) {
     return success(categories);
   }
@@ -781,7 +980,8 @@ class _$SuccessImpl implements _Success {
     TResult? Function()? initial,
     TResult? Function(List<Category> categories)? success,
     TResult? Function(String message)? error,
-    TResult? Function()? loading,
+    TResult? Function(List<Category> categories)? loading,
+    TResult? Function(List<Category> categories)? setupSuccess,
   }) {
     return success?.call(categories);
   }
@@ -792,7 +992,8 @@ class _$SuccessImpl implements _Success {
     TResult Function()? initial,
     TResult Function(List<Category> categories)? success,
     TResult Function(String message)? error,
-    TResult Function()? loading,
+    TResult Function(List<Category> categories)? loading,
+    TResult Function(List<Category> categories)? setupSuccess,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -808,6 +1009,7 @@ class _$SuccessImpl implements _Success {
     required TResult Function(_Success value) success,
     required TResult Function(_Error value) error,
     required TResult Function(_Loading value) loading,
+    required TResult Function(_SetupSuccess value) setupSuccess,
   }) {
     return success(this);
   }
@@ -819,6 +1021,7 @@ class _$SuccessImpl implements _Success {
     TResult? Function(_Success value)? success,
     TResult? Function(_Error value)? error,
     TResult? Function(_Loading value)? loading,
+    TResult? Function(_SetupSuccess value)? setupSuccess,
   }) {
     return success?.call(this);
   }
@@ -830,6 +1033,7 @@ class _$SuccessImpl implements _Success {
     TResult Function(_Success value)? success,
     TResult Function(_Error value)? error,
     TResult Function(_Loading value)? loading,
+    TResult Function(_SetupSuccess value)? setupSuccess,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -922,7 +1126,8 @@ class _$ErrorImpl implements _Error {
     required TResult Function() initial,
     required TResult Function(List<Category> categories) success,
     required TResult Function(String message) error,
-    required TResult Function() loading,
+    required TResult Function(List<Category> categories) loading,
+    required TResult Function(List<Category> categories) setupSuccess,
   }) {
     return error(message);
   }
@@ -933,7 +1138,8 @@ class _$ErrorImpl implements _Error {
     TResult? Function()? initial,
     TResult? Function(List<Category> categories)? success,
     TResult? Function(String message)? error,
-    TResult? Function()? loading,
+    TResult? Function(List<Category> categories)? loading,
+    TResult? Function(List<Category> categories)? setupSuccess,
   }) {
     return error?.call(message);
   }
@@ -944,7 +1150,8 @@ class _$ErrorImpl implements _Error {
     TResult Function()? initial,
     TResult Function(List<Category> categories)? success,
     TResult Function(String message)? error,
-    TResult Function()? loading,
+    TResult Function(List<Category> categories)? loading,
+    TResult Function(List<Category> categories)? setupSuccess,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -960,6 +1167,7 @@ class _$ErrorImpl implements _Error {
     required TResult Function(_Success value) success,
     required TResult Function(_Error value) error,
     required TResult Function(_Loading value) loading,
+    required TResult Function(_SetupSuccess value) setupSuccess,
   }) {
     return error(this);
   }
@@ -971,6 +1179,7 @@ class _$ErrorImpl implements _Error {
     TResult? Function(_Success value)? success,
     TResult? Function(_Error value)? error,
     TResult? Function(_Loading value)? loading,
+    TResult? Function(_SetupSuccess value)? setupSuccess,
   }) {
     return error?.call(this);
   }
@@ -982,6 +1191,7 @@ class _$ErrorImpl implements _Error {
     TResult Function(_Success value)? success,
     TResult Function(_Error value)? error,
     TResult Function(_Loading value)? loading,
+    TResult Function(_SetupSuccess value)? setupSuccess,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -1008,6 +1218,8 @@ abstract class _$$LoadingImplCopyWith<$Res> {
   factory _$$LoadingImplCopyWith(
           _$LoadingImpl value, $Res Function(_$LoadingImpl) then) =
       __$$LoadingImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({List<Category> categories});
 }
 
 /// @nodoc
@@ -1020,26 +1232,59 @@ class __$$LoadingImplCopyWithImpl<$Res>
 
   /// Create a copy of CategoriesState
   /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? categories = null,
+  }) {
+    return _then(_$LoadingImpl(
+      null == categories
+          ? _value._categories
+          : categories // ignore: cast_nullable_to_non_nullable
+              as List<Category>,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$LoadingImpl implements _Loading {
-  const _$LoadingImpl();
+  const _$LoadingImpl(final List<Category> categories)
+      : _categories = categories;
+
+  final List<Category> _categories;
+  @override
+  List<Category> get categories {
+    if (_categories is EqualUnmodifiableListView) return _categories;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_categories);
+  }
 
   @override
   String toString() {
-    return 'CategoriesState.loading()';
+    return 'CategoriesState.loading(categories: $categories)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$LoadingImpl);
+        (other.runtimeType == runtimeType &&
+            other is _$LoadingImpl &&
+            const DeepCollectionEquality()
+                .equals(other._categories, _categories));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(_categories));
+
+  /// Create a copy of CategoriesState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$LoadingImplCopyWith<_$LoadingImpl> get copyWith =>
+      __$$LoadingImplCopyWithImpl<_$LoadingImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1047,9 +1292,10 @@ class _$LoadingImpl implements _Loading {
     required TResult Function() initial,
     required TResult Function(List<Category> categories) success,
     required TResult Function(String message) error,
-    required TResult Function() loading,
+    required TResult Function(List<Category> categories) loading,
+    required TResult Function(List<Category> categories) setupSuccess,
   }) {
-    return loading();
+    return loading(categories);
   }
 
   @override
@@ -1058,9 +1304,10 @@ class _$LoadingImpl implements _Loading {
     TResult? Function()? initial,
     TResult? Function(List<Category> categories)? success,
     TResult? Function(String message)? error,
-    TResult? Function()? loading,
+    TResult? Function(List<Category> categories)? loading,
+    TResult? Function(List<Category> categories)? setupSuccess,
   }) {
-    return loading?.call();
+    return loading?.call(categories);
   }
 
   @override
@@ -1069,11 +1316,12 @@ class _$LoadingImpl implements _Loading {
     TResult Function()? initial,
     TResult Function(List<Category> categories)? success,
     TResult Function(String message)? error,
-    TResult Function()? loading,
+    TResult Function(List<Category> categories)? loading,
+    TResult Function(List<Category> categories)? setupSuccess,
     required TResult orElse(),
   }) {
     if (loading != null) {
-      return loading();
+      return loading(categories);
     }
     return orElse();
   }
@@ -1085,6 +1333,7 @@ class _$LoadingImpl implements _Loading {
     required TResult Function(_Success value) success,
     required TResult Function(_Error value) error,
     required TResult Function(_Loading value) loading,
+    required TResult Function(_SetupSuccess value) setupSuccess,
   }) {
     return loading(this);
   }
@@ -1096,6 +1345,7 @@ class _$LoadingImpl implements _Loading {
     TResult? Function(_Success value)? success,
     TResult? Function(_Error value)? error,
     TResult? Function(_Loading value)? loading,
+    TResult? Function(_SetupSuccess value)? setupSuccess,
   }) {
     return loading?.call(this);
   }
@@ -1107,6 +1357,7 @@ class _$LoadingImpl implements _Loading {
     TResult Function(_Success value)? success,
     TResult Function(_Error value)? error,
     TResult Function(_Loading value)? loading,
+    TResult Function(_SetupSuccess value)? setupSuccess,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -1117,5 +1368,180 @@ class _$LoadingImpl implements _Loading {
 }
 
 abstract class _Loading implements CategoriesState {
-  const factory _Loading() = _$LoadingImpl;
+  const factory _Loading(final List<Category> categories) = _$LoadingImpl;
+
+  List<Category> get categories;
+
+  /// Create a copy of CategoriesState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$LoadingImplCopyWith<_$LoadingImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$SetupSuccessImplCopyWith<$Res> {
+  factory _$$SetupSuccessImplCopyWith(
+          _$SetupSuccessImpl value, $Res Function(_$SetupSuccessImpl) then) =
+      __$$SetupSuccessImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({List<Category> categories});
+}
+
+/// @nodoc
+class __$$SetupSuccessImplCopyWithImpl<$Res>
+    extends _$CategoriesStateCopyWithImpl<$Res, _$SetupSuccessImpl>
+    implements _$$SetupSuccessImplCopyWith<$Res> {
+  __$$SetupSuccessImplCopyWithImpl(
+      _$SetupSuccessImpl _value, $Res Function(_$SetupSuccessImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of CategoriesState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? categories = null,
+  }) {
+    return _then(_$SetupSuccessImpl(
+      null == categories
+          ? _value._categories
+          : categories // ignore: cast_nullable_to_non_nullable
+              as List<Category>,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$SetupSuccessImpl implements _SetupSuccess {
+  const _$SetupSuccessImpl(final List<Category> categories)
+      : _categories = categories;
+
+  final List<Category> _categories;
+  @override
+  List<Category> get categories {
+    if (_categories is EqualUnmodifiableListView) return _categories;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_categories);
+  }
+
+  @override
+  String toString() {
+    return 'CategoriesState.setupSuccess(categories: $categories)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$SetupSuccessImpl &&
+            const DeepCollectionEquality()
+                .equals(other._categories, _categories));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(_categories));
+
+  /// Create a copy of CategoriesState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$SetupSuccessImplCopyWith<_$SetupSuccessImpl> get copyWith =>
+      __$$SetupSuccessImplCopyWithImpl<_$SetupSuccessImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function(List<Category> categories) success,
+    required TResult Function(String message) error,
+    required TResult Function(List<Category> categories) loading,
+    required TResult Function(List<Category> categories) setupSuccess,
+  }) {
+    return setupSuccess(categories);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function(List<Category> categories)? success,
+    TResult? Function(String message)? error,
+    TResult? Function(List<Category> categories)? loading,
+    TResult? Function(List<Category> categories)? setupSuccess,
+  }) {
+    return setupSuccess?.call(categories);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function(List<Category> categories)? success,
+    TResult Function(String message)? error,
+    TResult Function(List<Category> categories)? loading,
+    TResult Function(List<Category> categories)? setupSuccess,
+    required TResult orElse(),
+  }) {
+    if (setupSuccess != null) {
+      return setupSuccess(categories);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Success value) success,
+    required TResult Function(_Error value) error,
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_SetupSuccess value) setupSuccess,
+  }) {
+    return setupSuccess(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_Success value)? success,
+    TResult? Function(_Error value)? error,
+    TResult? Function(_Loading value)? loading,
+    TResult? Function(_SetupSuccess value)? setupSuccess,
+  }) {
+    return setupSuccess?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Success value)? success,
+    TResult Function(_Error value)? error,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_SetupSuccess value)? setupSuccess,
+    required TResult orElse(),
+  }) {
+    if (setupSuccess != null) {
+      return setupSuccess(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _SetupSuccess implements CategoriesState {
+  const factory _SetupSuccess(final List<Category> categories) =
+      _$SetupSuccessImpl;
+
+  List<Category> get categories;
+
+  /// Create a copy of CategoriesState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$SetupSuccessImplCopyWith<_$SetupSuccessImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }

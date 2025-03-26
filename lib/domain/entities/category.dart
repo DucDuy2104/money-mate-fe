@@ -6,12 +6,22 @@ part 'category.freezed.dart';
 
 @freezed
 class Category with _$Category {
-  const factory Category(
-      {required String id,
-      required String name,
-      required CategoriesType type,
-      required IconData icon,
-      required Color color,
-      required double? budget,
-      @Default(false) bool isSelected}) = _Category;
+  const factory Category({
+    required String id,
+    required String name,
+    required CategoriesType type,
+    required IconData icon,
+    required Color color,
+    required double? budget,
+    @Default(false) bool isSelected,
+  }) = _Category;
+}
+
+extension CategoryX on Category {
+  Map<String, dynamic> toLimitedJson() {
+    return {
+      'category': id,
+      'budget': budget,
+    };
+  }
 }

@@ -17,12 +17,12 @@ class CategoriesBloc extends Bloc<CategoriesEvent, CategoriesState> {
     on<_GetCategories>(_onGetCategories);
     on<_ToggleCategory>(_onToggleCategory);
     on<_UpdateCategoryBudget>(_onUpdateCategoryBudget);
+    on<_SetupCategories>(_onSetupCategories);
   }
 
   void _onGetCategories(
       _GetCategories event, Emitter<CategoriesState> emit) async {
     try {
-      emit(const CategoriesState.loading());
       await Future.delayed(const Duration(seconds: 2));
       final result = await _categoriesRepository.getCategories();
       result.fold((failure) {
@@ -69,9 +69,33 @@ class CategoriesBloc extends Bloc<CategoriesEvent, CategoriesState> {
     );
   }
 
+  void _onSetupCategories(
+      _SetupCategories event, Emitter<CategoriesState> emit) async {
+    try {
+      final temptCategories = state.maybeMap(
+          success: (value) => value.categories,
+          orElse: () => [] as List<Category>);
+      emit(CategoriesState.loading(temptCategories));
+      await Future.delayed(const Duration(seconds: 2));
+      final result =
+          await _categoriesRepository.setupCategories(event.categories);
+      result.fold((failure) {
+        emit(CategoriesState.error(failure.message));
+      }, (categories) {
+        emit(CategoriesState.setupSuccess(categories));
+      });
+    } catch (e) {
+      emit(CategoriesState.error(e.toString()));
+      debugPrint(e.toString());
+    }
+  }
+
   List<Category> getExpensesCategories() {
     return state.maybeMap(
         success: (state) => state.categories
+            .where((c) => c.type == CategoriesType.expense)
+            .toList(),
+        loading: (state) => state.categories
             .where((c) => c.type == CategoriesType.expense)
             .toList(),
         orElse: () => []);
@@ -82,6 +106,9 @@ class CategoriesBloc extends Bloc<CategoriesEvent, CategoriesState> {
         success: (state) => state.categories
             .where((c) => c.type == CategoriesType.income)
             .toList(),
+        loading: (state) => state.categories
+            .where((c) => c.type == CategoriesType.income)
+            .toList(),
         orElse: () => []);
   }
 
@@ -89,6 +116,30 @@ class CategoriesBloc extends Bloc<CategoriesEvent, CategoriesState> {
     return state.maybeMap(
       success: (state) => state.categories.where((c) => c.isSelected).toList(),
       orElse: () => [],
+    );
+  }
+
+  int countSelectedExpenseCategories() {
+    return state.maybeMap(
+      success: (state) => state.categories
+          .where((c) => c.type == CategoriesType.expense && c.isSelected)
+          .length,
+      loading: (state) => state.categories
+          .where((c) => c.type == CategoriesType.expense && c.isSelected)
+          .length,
+      orElse: () => 0,
+    );
+  }
+
+  int countSelectedIncomeCategories() {
+    return state.maybeMap(
+      success: (state) => state.categories
+          .where((c) => c.type == CategoriesType.income && c.isSelected)
+          .length,
+      loading: (state) => state.categories
+          .where((c) => c.type == CategoriesType.income && c.isSelected)
+          .length,
+      orElse: () => 0,
     );
   }
 }

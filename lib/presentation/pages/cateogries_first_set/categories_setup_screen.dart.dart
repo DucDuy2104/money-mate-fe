@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:money_mate/domain/entities/category.dart';
 import 'package:money_mate/presentation/pages/cateogries_first_set/bloc/categories_bloc.dart';
 import 'package:money_mate/presentation/pages/cateogries_first_set/funcs/add_category_dialog.dart';
 import 'package:money_mate/presentation/pages/cateogries_first_set/funcs/limit_dialog.dart';
 import 'package:money_mate/presentation/pages/cateogries_first_set/widgets/categories_grid.dart';
+import 'package:money_mate/presentation/routes/route_name.dart';
 import 'package:money_mate/shared/components/app_tab.dart';
 import 'package:money_mate/shared/components/app_toast.dart';
+import 'package:money_mate/shared/components/loading_scafford.dart';
 
 class CategoriesSetupScreen extends StatefulWidget {
   const CategoriesSetupScreen({super.key});
@@ -39,7 +42,7 @@ class _CategoriesSetupScreenState extends State<CategoriesSetupScreen>
     _animationController.forward();
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      getCategories(context);
+      getCategories();
     });
   }
 
@@ -84,7 +87,7 @@ class _CategoriesSetupScreenState extends State<CategoriesSetupScreen>
     }
   }
 
-  void getCategories(BuildContext context) {
+  void getCategories() {
     try {
       BlocProvider.of<CategoriesBloc>(context)
           .add(CategoriesEvent.getCategories());
@@ -94,162 +97,195 @@ class _CategoriesSetupScreenState extends State<CategoriesSetupScreen>
     }
   }
 
+  void onSetupCategories() {
+    try {
+      final bloc = BlocProvider.of<CategoriesBloc>(context);
+      if (bloc.countSelectedExpenseCategories() < 3) {
+        AppToast.error(context, 'Vui lòng chọn ít nhất 3 danh mục chi tiêu');
+        return;
+      }
+
+      if (bloc.countSelectedIncomeCategories() == 0) {
+        AppToast.error(context, 'Vui lòng chọn ít nhất 1 danh mục thu nhập');
+        return;
+      }
+
+      final selectedCategories = bloc.getSelectedCategories();
+      bloc.add(CategoriesEvent.setupCategories(selectedCategories));
+    } catch (e) {
+      AppToast.error(context, 'Lỗi khi cài đặt danh mục, vui lòng thử lại');
+      debugPrint(e.toString());
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<CategoriesBloc, CategoriesState>(
       listener: (context, state) {
-        // TODO: implement listener
+        state.maybeMap(
+          setupSuccess: (state) {
+            context.goNamed(RouteNames.homeName);
+          },
+          error: (state) {
+            AppToast.error(context, state.message);
+          },
+          orElse: () {},
+        );
       },
       builder: (context, state) {
-        final List<Category> systemExpenseCategories = state.maybeMap(
-            success: (state) => BlocProvider.of<CategoriesBloc>(context)
-                .getExpensesCategories(),
-            orElse: () => []);
+        final bloc = BlocProvider.of<CategoriesBloc>(context);
+        final List<Category> systemExpenseCategories =
+            bloc.getExpensesCategories();
 
-        final List<Category> systemIncomeCategories = state.maybeMap(
-            success: (state) =>
-                BlocProvider.of<CategoriesBloc>(context).getIncomeCategories(),
-            orElse: () => []);
-        return Scaffold(
-          backgroundColor: const Color(0xFF121212),
-          body: SafeArea(
-            child: FadeTransition(
-              opacity: _fadeAnimation,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Padding(
-                    padding: EdgeInsets.fromLTRB(16, 16, 16, 0),
-                    child: Text(
-                      'Chọn danh mục',
-                      style: TextStyle(
-                        fontSize: 28,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
+        final List<Category> systemIncomeCategories =
+            bloc.getIncomeCategories();
+        return LoadingScaffold(
+          isLoading: state.maybeMap(loading: (_) => true, orElse: () => false),
+          child: Scaffold(
+            backgroundColor: const Color(0xFF121212),
+            body: SafeArea(
+              child: FadeTransition(
+                opacity: _fadeAnimation,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Padding(
+                      padding: EdgeInsets.fromLTRB(16, 16, 16, 0),
+                      child: Text(
+                        'Chọn danh mục',
+                        style: TextStyle(
+                          fontSize: 28,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
                       ),
                     ),
-                  ),
-                  const SizedBox(height: 8),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    child: Text(
-                      'Chọn các danh mục phù hợp với thu chi của bạn (tối đa 10 danh mục mỗi loại)',
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: Colors.grey[400],
+                    const SizedBox(height: 8),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      child: Text(
+                        'Chọn các danh mục phù hợp với thu chi của bạn (tối đa 10 danh mục mỗi loại)',
+                        style: TextStyle(
+                          fontSize: 16,
+                          color: Colors.grey[400],
+                        ),
                       ),
                     ),
-                  ),
-                  const SizedBox(height: 16),
-                  AppTab(tab1Name: 'Chi tiêu', tab2Name: 'Thu nhập', controller: _tabController),
-                  const SizedBox(height: 16),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    child: Builder(
-                      builder: (context) {
-                        bool isExpenseTab = _tabController.index == 0;
-                        int selectedCount =
-                            BlocProvider.of<CategoriesBloc>(context)
-                                .getSelectedCategories()
-                                .length;
+                    const SizedBox(height: 16),
+                    AppTab(
+                        tab1Name: 'Chi tiêu',
+                        tab2Name: 'Thu nhập',
+                        controller: _tabController),
+                    const SizedBox(height: 16),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      child: Builder(
+                        builder: (context) {
+                          bool isExpenseTab = _tabController.index == 0;
+                          int selectedCount =
+                              BlocProvider.of<CategoriesBloc>(context)
+                                  .getSelectedCategories()
+                                  .length;
 
-                        return Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(16),
-                            gradient: LinearGradient(
-                              colors: isExpenseTab
-                                  ? [
-                                      Colors.blue.withOpacity(0.2),
-                                      Colors.purple.withOpacity(0.2)
-                                    ]
-                                  : [
-                                      Colors.green.withOpacity(0.2),
-                                      Colors.teal.withOpacity(0.2)
-                                    ],
-                            ),
-                          ),
-                          padding: const EdgeInsets.all(12),
-                          child: Row(
-                            children: [
-                              Container(
-                                padding: const EdgeInsets.all(8),
-                                decoration: BoxDecoration(
-                                  color: Colors.white.withOpacity(0.2),
-                                  shape: BoxShape.circle,
-                                ),
-                                child: Icon(
-                                  Icons.lightbulb_outline,
-                                  color: isExpenseTab
-                                      ? Colors.amber
-                                      : Colors.lightGreen,
-                                ),
+                          return Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(16),
+                              gradient: LinearGradient(
+                                colors: isExpenseTab
+                                    ? [
+                                        Colors.blue.withOpacity(0.2),
+                                        Colors.purple.withOpacity(0.2)
+                                      ]
+                                    : [
+                                        Colors.green.withOpacity(0.2),
+                                        Colors.teal.withOpacity(0.2)
+                                      ],
                               ),
-                              const SizedBox(width: 12),
-                              Expanded(
-                                child: Text(
-                                  'Đã chọn $selectedCount/10 danh mục. Nhấn vào danh mục để thêm hoặc cập nhật hạn mức.',
-                                  style: TextStyle(
-                                    color: Colors.grey[300],
-                                    fontSize: 14,
+                            ),
+                            padding: const EdgeInsets.all(12),
+                            child: Row(
+                              children: [
+                                Container(
+                                  padding: const EdgeInsets.all(8),
+                                  decoration: BoxDecoration(
+                                    color: Colors.white.withOpacity(0.2),
+                                    shape: BoxShape.circle,
+                                  ),
+                                  child: Icon(
+                                    Icons.lightbulb_outline,
+                                    color: isExpenseTab
+                                        ? Colors.amber
+                                        : Colors.lightGreen,
                                   ),
                                 ),
-                              ),
-                            ],
-                          ),
-                        );
-                      },
+                                const SizedBox(width: 12),
+                                Expanded(
+                                  child: Text(
+                                    'Đã chọn $selectedCount/10 danh mục. Nhấn vào danh mục để thêm hoặc cập nhật hạn mức.',
+                                    style: TextStyle(
+                                      color: Colors.grey[300],
+                                      fontSize: 14,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          );
+                        },
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 16),
-                  Expanded(
-                    child: TabBarView(
-                      controller: _tabController,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 16),
-                          child: CategoriesGrid(
-                            categories: systemExpenseCategories,
-                            onCategorySelected: toggleCategory,
+                    const SizedBox(height: 16),
+                    Expanded(
+                      child: TabBarView(
+                        controller: _tabController,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 16),
+                            child: CategoriesGrid(
+                              categories: systemExpenseCategories,
+                              onCategorySelected: toggleCategory,
+                            ),
                           ),
-                        ),
-
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 16),
-                          child: CategoriesGrid(
-                            categories: systemIncomeCategories,
-                            onCategorySelected: toggleCategory,
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 16),
+                            child: CategoriesGrid(
+                              categories: systemIncomeCategories,
+                              onCategorySelected: toggleCategory,
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 16, vertical: 24),
-                    child: SizedBox(
-                      width: double.infinity,
-                      height: 56,
-                      child: ElevatedButton(
-                        onPressed: () {},
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color(0xFF6200EE),
-                          foregroundColor: Colors.white,
-                          elevation: 0,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(16),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 16, vertical: 24),
+                      child: SizedBox(
+                        width: double.infinity,
+                        height: 56,
+                        child: ElevatedButton(
+                          onPressed: () {
+                            onSetupCategories();
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: const Color(0xFF6200EE),
+                            foregroundColor: Colors.white,
+                            elevation: 0,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(16),
+                            ),
                           ),
-                        ),
-                        child: const Text(
-                          'Bắt đầu sử dụng',
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
+                          child: const Text(
+                            'Bắt đầu sử dụng',
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),
