@@ -65,7 +65,7 @@ class _$CategoryCopyWithImpl<$Res, $Val extends Category>
     Object? name = null,
     Object? type = null,
     Object? icon = null,
-    Object? color = freezed,
+    Object? color = null,
     Object? budget = freezed,
     Object? isSelected = null,
   }) {
@@ -86,7 +86,7 @@ class _$CategoryCopyWithImpl<$Res, $Val extends Category>
           ? _value.icon
           : icon // ignore: cast_nullable_to_non_nullable
               as IconData,
-      color: freezed == color
+      color: null == color
           ? _value.color
           : color // ignore: cast_nullable_to_non_nullable
               as Color,
@@ -137,7 +137,7 @@ class __$$CategoryImplCopyWithImpl<$Res>
     Object? name = null,
     Object? type = null,
     Object? icon = null,
-    Object? color = freezed,
+    Object? color = null,
     Object? budget = freezed,
     Object? isSelected = null,
   }) {
@@ -158,7 +158,7 @@ class __$$CategoryImplCopyWithImpl<$Res>
           ? _value.icon
           : icon // ignore: cast_nullable_to_non_nullable
               as IconData,
-      color: freezed == color
+      color: null == color
           ? _value.color
           : color // ignore: cast_nullable_to_non_nullable
               as Color,
@@ -216,15 +216,15 @@ class _$CategoryImpl implements _Category {
             (identical(other.name, name) || other.name == name) &&
             (identical(other.type, type) || other.type == type) &&
             (identical(other.icon, icon) || other.icon == icon) &&
-            const DeepCollectionEquality().equals(other.color, color) &&
+            (identical(other.color, color) || other.color == color) &&
             (identical(other.budget, budget) || other.budget == budget) &&
             (identical(other.isSelected, isSelected) ||
                 other.isSelected == isSelected));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, id, name, type, icon,
-      const DeepCollectionEquality().hash(color), budget, isSelected);
+  int get hashCode =>
+      Object.hash(runtimeType, id, name, type, icon, color, budget, isSelected);
 
   /// Create a copy of Category
   /// with the given fields replaced by the non-null parameter values.
