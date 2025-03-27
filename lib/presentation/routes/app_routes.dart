@@ -4,6 +4,7 @@ import 'package:money_mate/domain/entities/user.dart';
 import 'package:money_mate/presentation/pages/category/category_screen.dart';
 import 'package:money_mate/presentation/pages/cateogries_first_set/bloc/categories_bloc.dart';
 import 'package:money_mate/presentation/pages/cateogries_first_set/categories_setup_screen.dart.dart';
+import 'package:money_mate/presentation/pages/chat/bloc/chat_bloc.dart';
 import 'package:money_mate/presentation/pages/chat/chat_screen.dart';
 import 'package:money_mate/presentation/pages/login/bloc/login_bloc.dart';
 import 'package:money_mate/presentation/pages/login/login_screen.dart';
@@ -67,7 +68,10 @@ final List<GoRoute> appRoutes = [
   GoRoute(
       path: RouteNames.chat,
       name: RouteNames.chatName,
-      builder: (context, state) => ChatScreen()),
+      builder: (context, state) => BlocProvider(
+            create: (context) => ChatBloc(),
+            child: ChatScreen(),
+          )),
   GoRoute(
       path: RouteNames.category,
       name: RouteNames.categoryName,
