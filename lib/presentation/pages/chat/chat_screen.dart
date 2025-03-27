@@ -1,6 +1,12 @@
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
-import 'package:money_mate/presentation/pages/chat/widgets/confirm_message.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:money_mate/domain/entities/conversation.dart';
+import 'package:money_mate/presentation/pages/chat/bloc/chat_bloc.dart';
+import 'package:money_mate/presentation/pages/chat/widgets/message_input.dart';
+import 'package:money_mate/presentation/pages/chat/widgets/message_item.dart';
+import 'package:money_mate/shared/components/app_toast.dart';
+import 'package:money_mate/shared/components/loading_scafford.dart';
 import 'package:money_mate/shared/constants/app_colors.dart';
 import 'package:money_mate/shared/constants/app_dimens.dart';
 import 'package:money_mate/shared/constants/app_theme.dart';
@@ -27,13 +33,31 @@ class _ChatScreenState extends State<ChatScreen> {
   final List<ChatMessage> _messages = [];
   final ScrollController _scrollController = ScrollController();
 
-  void _handleSubmitted(String text) {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      getBotConversation();
+    });
+  }
+
+  void getBotConversation() {
+    try {
+      context.read<ChatBloc>().add(const ChatEvent.getConversation());
+    } catch (e) {
+      AppToast.error(context, 'Lỗi khi tải dữ liệu');
+      debugPrint(e.toString());
+    }
+  }
+
+  void onSendMessage() {
+    final content = _textController.text;
     _textController.clear();
 
-    if (text.trim().isEmpty) return;
+    if (content.trim().isEmpty) return;
 
     final message = ChatMessage(
-      text: text,
+      text: content,
       isSentByMe: true,
       time:
           '${DateTime.now().hour}:${DateTime.now().minute.toString().padLeft(2, '0')}',
@@ -46,7 +70,7 @@ class _ChatScreenState extends State<ChatScreen> {
     // Auto-reply for demo purposes
     Future.delayed(Duration(seconds: 1), () {
       final reply = ChatMessage(
-        text: 'Đây là tin nhắn tự động phản hồi: "$text"',
+        text: 'Đây là tin nhắn tự động phản hồi: "$content"',
         isSentByMe: false,
         time:
             '${DateTime.now().hour}:${DateTime.now().minute.toString().padLeft(2, '0')}',
@@ -76,150 +100,66 @@ class _ChatScreenState extends State<ChatScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text('Eva', style: context.textTheme.bodyLarge),
-            Text('Money Mate bot',
-                style: context.textTheme.bodySmall
-                    ?.copyWith(color: AppColors.subText)),
-          ],
-        ),
-        actions: [
-          IconButton(
-            icon: const Icon(EvaIcons.moreVertical),
-            onPressed: () {
-              // TODO: go to chat settings
-            },
-          ),
-        ],
-      ),
-      body: Padding(
-        padding: const EdgeInsets.only(bottom: kBottomNavigationBarHeight),
-        child: Column(
-          children: [
-            Expanded(
-              child: ListView.builder(
-                controller: _scrollController,
-                padding: const EdgeInsets.all(AppDimens.paddingSmall),
-                itemCount: _messages.length,
-                itemBuilder: (context, index) {
-                  final message = _messages[index];
-                  return _buildMessageItem(message);
-                },
-              ),
-            ),
-            Container(
-              decoration: BoxDecoration(
-                color: Theme.of(context).cardColor,
-              ),
-              child: _buildTextComposer(),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildMessageItem(ChatMessage message) {
-    return Container(
-      margin: const EdgeInsets.symmetric(vertical: AppDimens.paddingSmall),
-      child: Row(
-        mainAxisAlignment: message.isSentByMe
-            ? MainAxisAlignment.end
-            : MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.end,
-        children: [
-          Flexible(
-            child: Column(
-              crossAxisAlignment: message.isSentByMe
-                  ? CrossAxisAlignment.end
-                  : CrossAxisAlignment.start,
-              children: [
-                ExpenseConfirmMessage(
-                  amount: 12000,
-                  category: "Ăn uống",
-                  onConfirm: () {
-                    // Handle confirmation
-                    print("User confirmed adding expense to Ăn uống category");
-                  },
-                  onDecline: () {
-                    // Handle decline
-                    print("User declined");
-                  },
-                ),
-                Container(
-                  constraints: BoxConstraints(
-                    maxWidth: MediaQuery.of(context).size.width * 0.7,
-                  ),
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 16,
-                    vertical: 12,
-                  ),
-                  decoration: BoxDecoration(
-                      color: message.isSentByMe
-                          ? AppColors.darkCardColor
-                          : Colors.grey[200],
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(message.isSentByMe ? 20 : 4),
-                        topRight: Radius.circular(message.isSentByMe ? 4 : 20),
-                        bottomLeft:
-                            Radius.circular(message.isSentByMe ? 20 : 20),
-                        bottomRight:
-                            Radius.circular(message.isSentByMe ? 20 : 20),
-                      )),
-                  child: Text(
-                    message.text,
-                    style: TextStyle(
-                      fontSize: 15,
-                      color: message.isSentByMe ? Colors.white : Colors.black87,
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 4, left: 4, right: 4),
-                  child: Text(message.time,
+    return BlocConsumer<ChatBloc, ChatState>(
+      listener: (context, state) {},
+      builder: (context, state) {
+        final Conversation? conversation = state.maybeMap(
+            loaded: (data) => data.conversation, orElse: () => null);
+        final botName = conversation?.bot.name ?? "";
+        final botDesc = conversation?.bot.description ?? "";
+        return LoadingScaffold(
+          isLoading:
+              state.maybeMap(loading: (state) => true, orElse: () => false),
+          child: Scaffold(
+            appBar: AppBar(
+              title: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(botName, style: context.textTheme.bodyLarge),
+                  Text(botDesc,
                       style: context.textTheme.bodySmall
-                          ?.copyWith(fontSize: 10, color: AppColors.subText)),
+                          ?.copyWith(color: AppColors.subText)),
+                ],
+              ),
+              actions: [
+                IconButton(
+                  icon: const Icon(EvaIcons.moreVertical),
+                  onPressed: () {
+                    // TODO: go to chat settings
+                  },
                 ),
               ],
             ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildTextComposer() {
-    return Container(
-      margin: const EdgeInsets.symmetric(horizontal: AppDimens.paddingSmall),
-      child: Row(
-        children: [
-          Expanded(
-            child: TextField(
-              controller: _textController,
-              onSubmitted: _handleSubmitted,
-              decoration: InputDecoration(
-                suffixIcon: IconButton(
-                  icon: const Icon(
-                    EvaIcons.navigation,
-                    color: AppColors.primaryColor,
+            body: Padding(
+              padding:
+                  const EdgeInsets.only(bottom: kBottomNavigationBarHeight),
+              child: Column(
+                children: [
+                  Expanded(
+                    child: ListView.builder(
+                      controller: _scrollController,
+                      padding: const EdgeInsets.all(AppDimens.paddingSmall),
+                      itemCount: _messages.length,
+                      itemBuilder: (context, index) {
+                        final message = _messages[index];
+                        return MessageItem(message: message);
+                      },
+                    ),
                   ),
-                  onPressed: () => _handleSubmitted(_textController.text),
-                ),
-                hintText: "Bạn vừa chi tiền vào thứ gì?",
-                border: OutlineInputBorder(
-                  borderRadius:
-                      BorderRadius.circular(AppDimens.borderRadiusMedium),
-                  borderSide: const BorderSide(color: AppColors.subText),
-                ),
+                  Container(
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).cardColor,
+                    ),
+                    child: MessageInput(
+                        textController: _textController,
+                        onSendMessage: onSendMessage),
+                  ),
+                ],
               ),
             ),
           ),
-        ],
-      ),
+        );
+      },
     );
   }
 }
