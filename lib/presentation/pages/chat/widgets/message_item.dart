@@ -4,6 +4,7 @@ import 'package:money_mate/presentation/pages/chat/widgets/confirm_message.dart'
 import 'package:money_mate/shared/constants/app_colors.dart';
 import 'package:money_mate/shared/constants/app_dimens.dart';
 import 'package:money_mate/shared/constants/app_theme.dart';
+import 'package:money_mate/shared/enums/message_type.dart';
 import 'package:money_mate/shared/extensions/datetime_ext.dart';
 
 class MessageItem extends StatelessWidget {
@@ -53,7 +54,7 @@ class MessageItem extends StatelessWidget {
                     ),
                   ),
                 ),
-                if (!message.isSentByMe) ...[
+                if (!message.isSentByMe && message.type == MessageType.transaction) ...[
                   AppDimens.spaceSmall,
                   TransactionInfoMessage(
                     amount: 12000,

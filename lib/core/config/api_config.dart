@@ -4,5 +4,5 @@ class ApiConfig {
   static const apiBaseUrl = 'http://192.168.26.83:3000/';
   // static const imageBaseUrl = 'https://spm.syncbim.com:6081/user-picture/';
 
-  // static const socketBaseUrl = 'https://spm.syncbim.com:6081';
+  static const socketBaseUrl = 'http://192.168.26.83:3000/chat';
 }

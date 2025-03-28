@@ -2,6 +2,7 @@ import 'package:get_it/get_it.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:money_mate/core/network/api_client.dart';
 import 'package:money_mate/core/service/local_storage/app_storage.dart';
+import 'package:money_mate/core/service/socket/socket_service.dart';
 import 'package:money_mate/data/data_sources/local/local_data_source.dart';
 import 'package:money_mate/data/data_sources/remote/auth_remote_data_source.dart';
 import 'package:money_mate/data/data_sources/remote/categories_remote_data_source.dart';
@@ -36,6 +37,10 @@ Future<void> setupLocator() async {
     () => OnboardLocalDataSourceImpl(getIt<AppStorage>()),
   );
 
+  // SocketService
+  getIt.registerLazySingleton<SocketService>(
+      () => SocketService(getIt<OnboardLocalDataSource>()));
+
   // Register ApiClient
   getIt.registerLazySingleton<ApiClient>(
       () => ApiClientImpl(configureDio(getIt<OnboardLocalDataSource>())));
@@ -66,7 +71,7 @@ registerRemoteDataSources() {
   // ConversationRemoteDataSources
   getIt.registerLazySingleton<ConversationRemoteDataSource>(
       () => ConversationRemoteDataSourceImpl(getIt<ApiClient>()));
-  
+
   // MessagesRemoteDataSources
   getIt.registerLazySingleton<MessagesRemoteDataSource>(
       () => MessagesRemoteDataSourceImpl(getIt<ApiClient>()));

@@ -19,32 +19,50 @@ mixin _$ChatEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() getChatData,
+    required TResult Function() connect,
+    required TResult Function(Message message) updateMessages,
+    required TResult Function() disconnect,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? getChatData,
+    TResult? Function()? connect,
+    TResult? Function(Message message)? updateMessages,
+    TResult? Function()? disconnect,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? getChatData,
+    TResult Function()? connect,
+    TResult Function(Message message)? updateMessages,
+    TResult Function()? disconnect,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_GetChatData value) getChatData,
+    required TResult Function(_Connect value) connect,
+    required TResult Function(_UpdateMessages value) updateMessages,
+    required TResult Function(_Disconnect value) disconnect,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetChatData value)? getChatData,
+    TResult? Function(_Connect value)? connect,
+    TResult? Function(_UpdateMessages value)? updateMessages,
+    TResult? Function(_Disconnect value)? disconnect,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetChatData value)? getChatData,
+    TResult Function(_Connect value)? connect,
+    TResult Function(_UpdateMessages value)? updateMessages,
+    TResult Function(_Disconnect value)? disconnect,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -112,6 +130,9 @@ class _$GetChatDataImpl implements _GetChatData {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() getChatData,
+    required TResult Function() connect,
+    required TResult Function(Message message) updateMessages,
+    required TResult Function() disconnect,
   }) {
     return getChatData();
   }
@@ -120,6 +141,9 @@ class _$GetChatDataImpl implements _GetChatData {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? getChatData,
+    TResult? Function()? connect,
+    TResult? Function(Message message)? updateMessages,
+    TResult? Function()? disconnect,
   }) {
     return getChatData?.call();
   }
@@ -128,6 +152,9 @@ class _$GetChatDataImpl implements _GetChatData {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? getChatData,
+    TResult Function()? connect,
+    TResult Function(Message message)? updateMessages,
+    TResult Function()? disconnect,
     required TResult orElse(),
   }) {
     if (getChatData != null) {
@@ -140,6 +167,9 @@ class _$GetChatDataImpl implements _GetChatData {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_GetChatData value) getChatData,
+    required TResult Function(_Connect value) connect,
+    required TResult Function(_UpdateMessages value) updateMessages,
+    required TResult Function(_Disconnect value) disconnect,
   }) {
     return getChatData(this);
   }
@@ -148,6 +178,9 @@ class _$GetChatDataImpl implements _GetChatData {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetChatData value)? getChatData,
+    TResult? Function(_Connect value)? connect,
+    TResult? Function(_UpdateMessages value)? updateMessages,
+    TResult? Function(_Disconnect value)? disconnect,
   }) {
     return getChatData?.call(this);
   }
@@ -156,6 +189,9 @@ class _$GetChatDataImpl implements _GetChatData {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetChatData value)? getChatData,
+    TResult Function(_Connect value)? connect,
+    TResult Function(_UpdateMessages value)? updateMessages,
+    TResult Function(_Disconnect value)? disconnect,
     required TResult orElse(),
   }) {
     if (getChatData != null) {
@@ -167,6 +203,405 @@ class _$GetChatDataImpl implements _GetChatData {
 
 abstract class _GetChatData implements ChatEvent {
   const factory _GetChatData() = _$GetChatDataImpl;
+}
+
+/// @nodoc
+abstract class _$$ConnectImplCopyWith<$Res> {
+  factory _$$ConnectImplCopyWith(
+          _$ConnectImpl value, $Res Function(_$ConnectImpl) then) =
+      __$$ConnectImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$ConnectImplCopyWithImpl<$Res>
+    extends _$ChatEventCopyWithImpl<$Res, _$ConnectImpl>
+    implements _$$ConnectImplCopyWith<$Res> {
+  __$$ConnectImplCopyWithImpl(
+      _$ConnectImpl _value, $Res Function(_$ConnectImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of ChatEvent
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$ConnectImpl implements _Connect {
+  const _$ConnectImpl();
+
+  @override
+  String toString() {
+    return 'ChatEvent.connect()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$ConnectImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() getChatData,
+    required TResult Function() connect,
+    required TResult Function(Message message) updateMessages,
+    required TResult Function() disconnect,
+  }) {
+    return connect();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? getChatData,
+    TResult? Function()? connect,
+    TResult? Function(Message message)? updateMessages,
+    TResult? Function()? disconnect,
+  }) {
+    return connect?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? getChatData,
+    TResult Function()? connect,
+    TResult Function(Message message)? updateMessages,
+    TResult Function()? disconnect,
+    required TResult orElse(),
+  }) {
+    if (connect != null) {
+      return connect();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetChatData value) getChatData,
+    required TResult Function(_Connect value) connect,
+    required TResult Function(_UpdateMessages value) updateMessages,
+    required TResult Function(_Disconnect value) disconnect,
+  }) {
+    return connect(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetChatData value)? getChatData,
+    TResult? Function(_Connect value)? connect,
+    TResult? Function(_UpdateMessages value)? updateMessages,
+    TResult? Function(_Disconnect value)? disconnect,
+  }) {
+    return connect?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetChatData value)? getChatData,
+    TResult Function(_Connect value)? connect,
+    TResult Function(_UpdateMessages value)? updateMessages,
+    TResult Function(_Disconnect value)? disconnect,
+    required TResult orElse(),
+  }) {
+    if (connect != null) {
+      return connect(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Connect implements ChatEvent {
+  const factory _Connect() = _$ConnectImpl;
+}
+
+/// @nodoc
+abstract class _$$UpdateMessagesImplCopyWith<$Res> {
+  factory _$$UpdateMessagesImplCopyWith(_$UpdateMessagesImpl value,
+          $Res Function(_$UpdateMessagesImpl) then) =
+      __$$UpdateMessagesImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({Message message});
+
+  $MessageCopyWith<$Res> get message;
+}
+
+/// @nodoc
+class __$$UpdateMessagesImplCopyWithImpl<$Res>
+    extends _$ChatEventCopyWithImpl<$Res, _$UpdateMessagesImpl>
+    implements _$$UpdateMessagesImplCopyWith<$Res> {
+  __$$UpdateMessagesImplCopyWithImpl(
+      _$UpdateMessagesImpl _value, $Res Function(_$UpdateMessagesImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of ChatEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? message = null,
+  }) {
+    return _then(_$UpdateMessagesImpl(
+      null == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as Message,
+    ));
+  }
+
+  /// Create a copy of ChatEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $MessageCopyWith<$Res> get message {
+    return $MessageCopyWith<$Res>(_value.message, (value) {
+      return _then(_value.copyWith(message: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$UpdateMessagesImpl implements _UpdateMessages {
+  const _$UpdateMessagesImpl(this.message);
+
+  @override
+  final Message message;
+
+  @override
+  String toString() {
+    return 'ChatEvent.updateMessages(message: $message)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$UpdateMessagesImpl &&
+            (identical(other.message, message) || other.message == message));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, message);
+
+  /// Create a copy of ChatEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$UpdateMessagesImplCopyWith<_$UpdateMessagesImpl> get copyWith =>
+      __$$UpdateMessagesImplCopyWithImpl<_$UpdateMessagesImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() getChatData,
+    required TResult Function() connect,
+    required TResult Function(Message message) updateMessages,
+    required TResult Function() disconnect,
+  }) {
+    return updateMessages(message);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? getChatData,
+    TResult? Function()? connect,
+    TResult? Function(Message message)? updateMessages,
+    TResult? Function()? disconnect,
+  }) {
+    return updateMessages?.call(message);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? getChatData,
+    TResult Function()? connect,
+    TResult Function(Message message)? updateMessages,
+    TResult Function()? disconnect,
+    required TResult orElse(),
+  }) {
+    if (updateMessages != null) {
+      return updateMessages(message);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetChatData value) getChatData,
+    required TResult Function(_Connect value) connect,
+    required TResult Function(_UpdateMessages value) updateMessages,
+    required TResult Function(_Disconnect value) disconnect,
+  }) {
+    return updateMessages(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetChatData value)? getChatData,
+    TResult? Function(_Connect value)? connect,
+    TResult? Function(_UpdateMessages value)? updateMessages,
+    TResult? Function(_Disconnect value)? disconnect,
+  }) {
+    return updateMessages?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetChatData value)? getChatData,
+    TResult Function(_Connect value)? connect,
+    TResult Function(_UpdateMessages value)? updateMessages,
+    TResult Function(_Disconnect value)? disconnect,
+    required TResult orElse(),
+  }) {
+    if (updateMessages != null) {
+      return updateMessages(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _UpdateMessages implements ChatEvent {
+  const factory _UpdateMessages(final Message message) = _$UpdateMessagesImpl;
+
+  Message get message;
+
+  /// Create a copy of ChatEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$UpdateMessagesImplCopyWith<_$UpdateMessagesImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$DisconnectImplCopyWith<$Res> {
+  factory _$$DisconnectImplCopyWith(
+          _$DisconnectImpl value, $Res Function(_$DisconnectImpl) then) =
+      __$$DisconnectImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$DisconnectImplCopyWithImpl<$Res>
+    extends _$ChatEventCopyWithImpl<$Res, _$DisconnectImpl>
+    implements _$$DisconnectImplCopyWith<$Res> {
+  __$$DisconnectImplCopyWithImpl(
+      _$DisconnectImpl _value, $Res Function(_$DisconnectImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of ChatEvent
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$DisconnectImpl implements _Disconnect {
+  const _$DisconnectImpl();
+
+  @override
+  String toString() {
+    return 'ChatEvent.disconnect()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$DisconnectImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() getChatData,
+    required TResult Function() connect,
+    required TResult Function(Message message) updateMessages,
+    required TResult Function() disconnect,
+  }) {
+    return disconnect();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? getChatData,
+    TResult? Function()? connect,
+    TResult? Function(Message message)? updateMessages,
+    TResult? Function()? disconnect,
+  }) {
+    return disconnect?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? getChatData,
+    TResult Function()? connect,
+    TResult Function(Message message)? updateMessages,
+    TResult Function()? disconnect,
+    required TResult orElse(),
+  }) {
+    if (disconnect != null) {
+      return disconnect();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetChatData value) getChatData,
+    required TResult Function(_Connect value) connect,
+    required TResult Function(_UpdateMessages value) updateMessages,
+    required TResult Function(_Disconnect value) disconnect,
+  }) {
+    return disconnect(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetChatData value)? getChatData,
+    TResult? Function(_Connect value)? connect,
+    TResult? Function(_UpdateMessages value)? updateMessages,
+    TResult? Function(_Disconnect value)? disconnect,
+  }) {
+    return disconnect?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetChatData value)? getChatData,
+    TResult Function(_Connect value)? connect,
+    TResult Function(_UpdateMessages value)? updateMessages,
+    TResult Function(_Disconnect value)? disconnect,
+    required TResult orElse(),
+  }) {
+    if (disconnect != null) {
+      return disconnect(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Disconnect implements ChatEvent {
+  const factory _Disconnect() = _$DisconnectImpl;
 }
 
 /// @nodoc

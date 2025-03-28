@@ -26,8 +26,16 @@ class _ChatScreenState extends State<ChatScreen> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
+      connectSocket();
       getBotConversation();
     });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    disconnectSocket();
+    _textController.dispose();
   }
 
   void getBotConversation() {
@@ -40,7 +48,21 @@ class _ChatScreenState extends State<ChatScreen> {
   }
 
   void onSendMessage() {
+    final content = _textController.text;
+    if (content.isEmpty) {
+      AppToast.error(context, 'Nội dung tin nhắn không được để trống');
+      return;
+    }
+    BlocProvider.of<ChatBloc>(context).sendMessage(content);
+    _textController.clear();
+  }
 
+  void connectSocket() {
+    BlocProvider.of<ChatBloc>(context).add(const ChatEvent.connect());
+  }
+
+  void disconnectSocket() {
+    BlocProvider.of<ChatBloc>(context).add(const ChatEvent.disconnect());
   }
 
   void _scrollToBottom() {
@@ -61,64 +83,66 @@ class _ChatScreenState extends State<ChatScreen> {
       listener: (context, state) {},
       builder: (context, state) {
         return state.maybeMap(
-          loaded: (value) {
-            final chatData = value.chatData;
-            final conversation = chatData.conversation;
-            final messages = chatData.messages;
-            return LoadingScaffold(
-          isLoading:
-              state.maybeMap(loading: (state) => true, orElse: () => false),
-          child: Scaffold(
-            appBar: AppBar(
-              title: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(conversation.bot.name, style: context.textTheme.bodyLarge),
-                  Text(conversation.bot.description,
-                      style: context.textTheme.bodySmall
-                          ?.copyWith(color: AppColors.subText)),
-                ],
-              ),
-              actions: [
-                IconButton(
-                  icon: const Icon(EvaIcons.moreVertical),
-                  onPressed: () {
-                    // TODO: go to chat settings
-                  },
+            loaded: (value) {
+              final chatData = value.chatData;
+              final conversation = chatData.conversation;
+              final messages = chatData.messages;
+              return LoadingScaffold(
+                isLoading: state.maybeMap(
+                    loading: (state) => true, orElse: () => false),
+                child: Scaffold(
+                  appBar: AppBar(
+                    title: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(conversation.bot.name,
+                            style: context.textTheme.bodyLarge),
+                        Text(conversation.bot.description,
+                            style: context.textTheme.bodySmall
+                                ?.copyWith(color: AppColors.subText)),
+                      ],
+                    ),
+                    actions: [
+                      IconButton(
+                        icon: const Icon(EvaIcons.moreVertical),
+                        onPressed: () {
+                          // TODO: go to chat settings
+                        },
+                      ),
+                    ],
+                  ),
+                  body: Padding(
+                    padding: const EdgeInsets.only(
+                        bottom: kBottomNavigationBarHeight),
+                    child: Column(
+                      children: [
+                        Expanded(
+                          child: ListView.builder(
+                            controller: _scrollController,
+                            padding:
+                                const EdgeInsets.all(AppDimens.paddingSmall),
+                            itemCount: messages.length,
+                            itemBuilder: (context, index) {
+                              final message = messages[index];
+                              return MessageItem(message: message);
+                            },
+                          ),
+                        ),
+                        Container(
+                          decoration: BoxDecoration(
+                            color: Theme.of(context).cardColor,
+                          ),
+                          child: MessageInput(
+                              textController: _textController,
+                              onSendMessage: onSendMessage),
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
-              ],
-            ),
-            body: Padding(
-              padding:
-                  const EdgeInsets.only(bottom: kBottomNavigationBarHeight),
-              child: Column(
-                children: [
-                  Expanded(
-                    child: ListView.builder(
-                      controller: _scrollController,
-                      padding: const EdgeInsets.all(AppDimens.paddingSmall),
-                      itemCount: messages.length,
-                      itemBuilder: (context, index) {
-                        final message = messages[index];
-                        return MessageItem(message: message);
-                      },
-                    ),
-                  ),
-                  Container(
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).cardColor,
-                    ),
-                    child: MessageInput(
-                        textController: _textController,
-                        onSendMessage: onSendMessage),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        );
-          },
-          orElse: () => LoadingScaffold(isLoading: true, child: Container()));
+              );
+            },
+            orElse: () => LoadingScaffold(isLoading: true, child: Container()));
       },
     );
   }
