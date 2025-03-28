@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:money_mate/domain/entities/category.dart';
-import 'package:money_mate/shared/enums/categories_enum.dart';
+import 'package:money_mate/shared/enums/category_enum.dart';
 import 'package:money_mate/shared/enums/category_type.dart';
 
 part 'category_model.freezed.dart';
@@ -21,7 +21,7 @@ class CategoryModel with _$CategoryModel {
 
 extension CategoryModelX on CategoryModel {
   Category toEntity() {
-    final catEnum = CategoriesEnum.parseEnum(data);
+    final catEnum = CategoryEnum.parseEnum(data);
     final catType = CategoriesType.fromString(type);
     return Category(
         id: id,

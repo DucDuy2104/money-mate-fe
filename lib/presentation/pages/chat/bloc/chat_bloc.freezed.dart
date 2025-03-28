@@ -18,33 +18,33 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$ChatEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() getConversation,
+    required TResult Function() getChatData,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? getConversation,
+    TResult? Function()? getChatData,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? getConversation,
+    TResult Function()? getChatData,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_GetConversation value) getConversation,
+    required TResult Function(_GetChatData value) getChatData,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_GetConversation value)? getConversation,
+    TResult? Function(_GetChatData value)? getChatData,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_GetConversation value)? getConversation,
+    TResult Function(_GetChatData value)? getChatData,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -71,18 +71,18 @@ class _$ChatEventCopyWithImpl<$Res, $Val extends ChatEvent>
 }
 
 /// @nodoc
-abstract class _$$GetConversationImplCopyWith<$Res> {
-  factory _$$GetConversationImplCopyWith(_$GetConversationImpl value,
-          $Res Function(_$GetConversationImpl) then) =
-      __$$GetConversationImplCopyWithImpl<$Res>;
+abstract class _$$GetChatDataImplCopyWith<$Res> {
+  factory _$$GetChatDataImplCopyWith(
+          _$GetChatDataImpl value, $Res Function(_$GetChatDataImpl) then) =
+      __$$GetChatDataImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$GetConversationImplCopyWithImpl<$Res>
-    extends _$ChatEventCopyWithImpl<$Res, _$GetConversationImpl>
-    implements _$$GetConversationImplCopyWith<$Res> {
-  __$$GetConversationImplCopyWithImpl(
-      _$GetConversationImpl _value, $Res Function(_$GetConversationImpl) _then)
+class __$$GetChatDataImplCopyWithImpl<$Res>
+    extends _$ChatEventCopyWithImpl<$Res, _$GetChatDataImpl>
+    implements _$$GetChatDataImplCopyWith<$Res> {
+  __$$GetChatDataImplCopyWithImpl(
+      _$GetChatDataImpl _value, $Res Function(_$GetChatDataImpl) _then)
       : super(_value, _then);
 
   /// Create a copy of ChatEvent
@@ -91,18 +91,18 @@ class __$$GetConversationImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$GetConversationImpl implements _GetConversation {
-  const _$GetConversationImpl();
+class _$GetChatDataImpl implements _GetChatData {
+  const _$GetChatDataImpl();
 
   @override
   String toString() {
-    return 'ChatEvent.getConversation()';
+    return 'ChatEvent.getChatData()';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$GetConversationImpl);
+        (other.runtimeType == runtimeType && other is _$GetChatDataImpl);
   }
 
   @override
@@ -111,27 +111,27 @@ class _$GetConversationImpl implements _GetConversation {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() getConversation,
+    required TResult Function() getChatData,
   }) {
-    return getConversation();
+    return getChatData();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? getConversation,
+    TResult? Function()? getChatData,
   }) {
-    return getConversation?.call();
+    return getChatData?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? getConversation,
+    TResult Function()? getChatData,
     required TResult orElse(),
   }) {
-    if (getConversation != null) {
-      return getConversation();
+    if (getChatData != null) {
+      return getChatData();
     }
     return orElse();
   }
@@ -139,34 +139,34 @@ class _$GetConversationImpl implements _GetConversation {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_GetConversation value) getConversation,
+    required TResult Function(_GetChatData value) getChatData,
   }) {
-    return getConversation(this);
+    return getChatData(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_GetConversation value)? getConversation,
+    TResult? Function(_GetChatData value)? getChatData,
   }) {
-    return getConversation?.call(this);
+    return getChatData?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_GetConversation value)? getConversation,
+    TResult Function(_GetChatData value)? getChatData,
     required TResult orElse(),
   }) {
-    if (getConversation != null) {
-      return getConversation(this);
+    if (getChatData != null) {
+      return getChatData(this);
     }
     return orElse();
   }
 }
 
-abstract class _GetConversation implements ChatEvent {
-  const factory _GetConversation() = _$GetConversationImpl;
+abstract class _GetChatData implements ChatEvent {
+  const factory _GetChatData() = _$GetChatDataImpl;
 }
 
 /// @nodoc
@@ -175,7 +175,7 @@ mixin _$ChatState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(Conversation conversation) loaded,
+    required TResult Function(ChatLoadedData chatData) loaded,
     required TResult Function(String error) error,
   }) =>
       throw _privateConstructorUsedError;
@@ -183,7 +183,7 @@ mixin _$ChatState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(Conversation conversation)? loaded,
+    TResult? Function(ChatLoadedData chatData)? loaded,
     TResult? Function(String error)? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -191,7 +191,7 @@ mixin _$ChatState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(Conversation conversation)? loaded,
+    TResult Function(ChatLoadedData chatData)? loaded,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) =>
@@ -286,7 +286,7 @@ class _$InitialImpl implements _Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(Conversation conversation) loaded,
+    required TResult Function(ChatLoadedData chatData) loaded,
     required TResult Function(String error) error,
   }) {
     return initial();
@@ -297,7 +297,7 @@ class _$InitialImpl implements _Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(Conversation conversation)? loaded,
+    TResult? Function(ChatLoadedData chatData)? loaded,
     TResult? Function(String error)? error,
   }) {
     return initial?.call();
@@ -308,7 +308,7 @@ class _$InitialImpl implements _Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(Conversation conversation)? loaded,
+    TResult Function(ChatLoadedData chatData)? loaded,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) {
@@ -403,7 +403,7 @@ class _$LoadingImpl implements _Loading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(Conversation conversation) loaded,
+    required TResult Function(ChatLoadedData chatData) loaded,
     required TResult Function(String error) error,
   }) {
     return loading();
@@ -414,7 +414,7 @@ class _$LoadingImpl implements _Loading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(Conversation conversation)? loaded,
+    TResult? Function(ChatLoadedData chatData)? loaded,
     TResult? Function(String error)? error,
   }) {
     return loading?.call();
@@ -425,7 +425,7 @@ class _$LoadingImpl implements _Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(Conversation conversation)? loaded,
+    TResult Function(ChatLoadedData chatData)? loaded,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) {
@@ -483,9 +483,9 @@ abstract class _$$LoadedImplCopyWith<$Res> {
           _$LoadedImpl value, $Res Function(_$LoadedImpl) then) =
       __$$LoadedImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({Conversation conversation});
+  $Res call({ChatLoadedData chatData});
 
-  $ConversationCopyWith<$Res> get conversation;
+  $ChatLoadedDataCopyWith<$Res> get chatData;
 }
 
 /// @nodoc
@@ -501,13 +501,13 @@ class __$$LoadedImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? conversation = null,
+    Object? chatData = null,
   }) {
     return _then(_$LoadedImpl(
-      null == conversation
-          ? _value.conversation
-          : conversation // ignore: cast_nullable_to_non_nullable
-              as Conversation,
+      null == chatData
+          ? _value.chatData
+          : chatData // ignore: cast_nullable_to_non_nullable
+              as ChatLoadedData,
     ));
   }
 
@@ -515,9 +515,9 @@ class __$$LoadedImplCopyWithImpl<$Res>
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  $ConversationCopyWith<$Res> get conversation {
-    return $ConversationCopyWith<$Res>(_value.conversation, (value) {
-      return _then(_value.copyWith(conversation: value));
+  $ChatLoadedDataCopyWith<$Res> get chatData {
+    return $ChatLoadedDataCopyWith<$Res>(_value.chatData, (value) {
+      return _then(_value.copyWith(chatData: value));
     });
   }
 }
@@ -525,14 +525,14 @@ class __$$LoadedImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$LoadedImpl implements _Loaded {
-  const _$LoadedImpl(this.conversation);
+  const _$LoadedImpl(this.chatData);
 
   @override
-  final Conversation conversation;
+  final ChatLoadedData chatData;
 
   @override
   String toString() {
-    return 'ChatState.loaded(conversation: $conversation)';
+    return 'ChatState.loaded(chatData: $chatData)';
   }
 
   @override
@@ -540,12 +540,12 @@ class _$LoadedImpl implements _Loaded {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$LoadedImpl &&
-            (identical(other.conversation, conversation) ||
-                other.conversation == conversation));
+            (identical(other.chatData, chatData) ||
+                other.chatData == chatData));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, conversation);
+  int get hashCode => Object.hash(runtimeType, chatData);
 
   /// Create a copy of ChatState
   /// with the given fields replaced by the non-null parameter values.
@@ -560,10 +560,10 @@ class _$LoadedImpl implements _Loaded {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(Conversation conversation) loaded,
+    required TResult Function(ChatLoadedData chatData) loaded,
     required TResult Function(String error) error,
   }) {
-    return loaded(conversation);
+    return loaded(chatData);
   }
 
   @override
@@ -571,10 +571,10 @@ class _$LoadedImpl implements _Loaded {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(Conversation conversation)? loaded,
+    TResult? Function(ChatLoadedData chatData)? loaded,
     TResult? Function(String error)? error,
   }) {
-    return loaded?.call(conversation);
+    return loaded?.call(chatData);
   }
 
   @override
@@ -582,12 +582,12 @@ class _$LoadedImpl implements _Loaded {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(Conversation conversation)? loaded,
+    TResult Function(ChatLoadedData chatData)? loaded,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) {
     if (loaded != null) {
-      return loaded(conversation);
+      return loaded(chatData);
     }
     return orElse();
   }
@@ -631,9 +631,9 @@ class _$LoadedImpl implements _Loaded {
 }
 
 abstract class _Loaded implements ChatState {
-  const factory _Loaded(final Conversation conversation) = _$LoadedImpl;
+  const factory _Loaded(final ChatLoadedData chatData) = _$LoadedImpl;
 
-  Conversation get conversation;
+  ChatLoadedData get chatData;
 
   /// Create a copy of ChatState
   /// with the given fields replaced by the non-null parameter values.
@@ -712,7 +712,7 @@ class _$ErrorImpl implements _Error {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(Conversation conversation) loaded,
+    required TResult Function(ChatLoadedData chatData) loaded,
     required TResult Function(String error) error,
   }) {
     return error(this.error);
@@ -723,7 +723,7 @@ class _$ErrorImpl implements _Error {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(Conversation conversation)? loaded,
+    TResult? Function(ChatLoadedData chatData)? loaded,
     TResult? Function(String error)? error,
   }) {
     return error?.call(this.error);
@@ -734,7 +734,7 @@ class _$ErrorImpl implements _Error {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(Conversation conversation)? loaded,
+    TResult Function(ChatLoadedData chatData)? loaded,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) {
@@ -791,5 +791,177 @@ abstract class _Error implements ChatState {
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ErrorImplCopyWith<_$ErrorImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+mixin _$ChatLoadedData {
+  List<Message> get messages => throw _privateConstructorUsedError;
+  Conversation get conversation => throw _privateConstructorUsedError;
+
+  /// Create a copy of ChatLoadedData
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $ChatLoadedDataCopyWith<ChatLoadedData> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $ChatLoadedDataCopyWith<$Res> {
+  factory $ChatLoadedDataCopyWith(
+          ChatLoadedData value, $Res Function(ChatLoadedData) then) =
+      _$ChatLoadedDataCopyWithImpl<$Res, ChatLoadedData>;
+  @useResult
+  $Res call({List<Message> messages, Conversation conversation});
+
+  $ConversationCopyWith<$Res> get conversation;
+}
+
+/// @nodoc
+class _$ChatLoadedDataCopyWithImpl<$Res, $Val extends ChatLoadedData>
+    implements $ChatLoadedDataCopyWith<$Res> {
+  _$ChatLoadedDataCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of ChatLoadedData
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? messages = null,
+    Object? conversation = null,
+  }) {
+    return _then(_value.copyWith(
+      messages: null == messages
+          ? _value.messages
+          : messages // ignore: cast_nullable_to_non_nullable
+              as List<Message>,
+      conversation: null == conversation
+          ? _value.conversation
+          : conversation // ignore: cast_nullable_to_non_nullable
+              as Conversation,
+    ) as $Val);
+  }
+
+  /// Create a copy of ChatLoadedData
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $ConversationCopyWith<$Res> get conversation {
+    return $ConversationCopyWith<$Res>(_value.conversation, (value) {
+      return _then(_value.copyWith(conversation: value) as $Val);
+    });
+  }
+}
+
+/// @nodoc
+abstract class _$$ChatLoadedDataImplCopyWith<$Res>
+    implements $ChatLoadedDataCopyWith<$Res> {
+  factory _$$ChatLoadedDataImplCopyWith(_$ChatLoadedDataImpl value,
+          $Res Function(_$ChatLoadedDataImpl) then) =
+      __$$ChatLoadedDataImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({List<Message> messages, Conversation conversation});
+
+  @override
+  $ConversationCopyWith<$Res> get conversation;
+}
+
+/// @nodoc
+class __$$ChatLoadedDataImplCopyWithImpl<$Res>
+    extends _$ChatLoadedDataCopyWithImpl<$Res, _$ChatLoadedDataImpl>
+    implements _$$ChatLoadedDataImplCopyWith<$Res> {
+  __$$ChatLoadedDataImplCopyWithImpl(
+      _$ChatLoadedDataImpl _value, $Res Function(_$ChatLoadedDataImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of ChatLoadedData
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? messages = null,
+    Object? conversation = null,
+  }) {
+    return _then(_$ChatLoadedDataImpl(
+      messages: null == messages
+          ? _value._messages
+          : messages // ignore: cast_nullable_to_non_nullable
+              as List<Message>,
+      conversation: null == conversation
+          ? _value.conversation
+          : conversation // ignore: cast_nullable_to_non_nullable
+              as Conversation,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$ChatLoadedDataImpl implements _ChatLoadedData {
+  const _$ChatLoadedDataImpl(
+      {required final List<Message> messages, required this.conversation})
+      : _messages = messages;
+
+  final List<Message> _messages;
+  @override
+  List<Message> get messages {
+    if (_messages is EqualUnmodifiableListView) return _messages;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_messages);
+  }
+
+  @override
+  final Conversation conversation;
+
+  @override
+  String toString() {
+    return 'ChatLoadedData(messages: $messages, conversation: $conversation)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ChatLoadedDataImpl &&
+            const DeepCollectionEquality().equals(other._messages, _messages) &&
+            (identical(other.conversation, conversation) ||
+                other.conversation == conversation));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType,
+      const DeepCollectionEquality().hash(_messages), conversation);
+
+  /// Create a copy of ChatLoadedData
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ChatLoadedDataImplCopyWith<_$ChatLoadedDataImpl> get copyWith =>
+      __$$ChatLoadedDataImplCopyWithImpl<_$ChatLoadedDataImpl>(
+          this, _$identity);
+}
+
+abstract class _ChatLoadedData implements ChatLoadedData {
+  const factory _ChatLoadedData(
+      {required final List<Message> messages,
+      required final Conversation conversation}) = _$ChatLoadedDataImpl;
+
+  @override
+  List<Message> get messages;
+  @override
+  Conversation get conversation;
+
+  /// Create a copy of ChatLoadedData
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$ChatLoadedDataImplCopyWith<_$ChatLoadedDataImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

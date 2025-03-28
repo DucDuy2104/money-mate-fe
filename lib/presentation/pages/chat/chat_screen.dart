@@ -1,7 +1,6 @@
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:money_mate/domain/entities/conversation.dart';
 import 'package:money_mate/presentation/pages/chat/bloc/chat_bloc.dart';
 import 'package:money_mate/presentation/pages/chat/widgets/message_input.dart';
 import 'package:money_mate/presentation/pages/chat/widgets/message_item.dart';
@@ -11,26 +10,16 @@ import 'package:money_mate/shared/constants/app_colors.dart';
 import 'package:money_mate/shared/constants/app_dimens.dart';
 import 'package:money_mate/shared/constants/app_theme.dart';
 
-class ChatMessage {
-  final String text;
-  final bool isSentByMe;
-  final String time;
-
-  ChatMessage({
-    required this.text,
-    required this.isSentByMe,
-    required this.time,
-  });
-}
-
 class ChatScreen extends StatefulWidget {
+  const ChatScreen({super.key});
+
   @override
+  // ignore: library_private_types_in_public_api
   _ChatScreenState createState() => _ChatScreenState();
 }
 
 class _ChatScreenState extends State<ChatScreen> {
   final TextEditingController _textController = TextEditingController();
-  final List<ChatMessage> _messages = [];
   final ScrollController _scrollController = ScrollController();
 
   @override
@@ -43,7 +32,7 @@ class _ChatScreenState extends State<ChatScreen> {
 
   void getBotConversation() {
     try {
-      context.read<ChatBloc>().add(const ChatEvent.getConversation());
+      context.read<ChatBloc>().add(const ChatEvent.getChatData());
     } catch (e) {
       AppToast.error(context, 'Lỗi khi tải dữ liệu');
       debugPrint(e.toString());
@@ -51,39 +40,7 @@ class _ChatScreenState extends State<ChatScreen> {
   }
 
   void onSendMessage() {
-    final content = _textController.text;
-    _textController.clear();
 
-    if (content.trim().isEmpty) return;
-
-    final message = ChatMessage(
-      text: content,
-      isSentByMe: true,
-      time:
-          '${DateTime.now().hour}:${DateTime.now().minute.toString().padLeft(2, '0')}',
-    );
-
-    setState(() {
-      _messages.add(message);
-    });
-
-    // Auto-reply for demo purposes
-    Future.delayed(Duration(seconds: 1), () {
-      final reply = ChatMessage(
-        text: 'Đây là tin nhắn tự động phản hồi: "$content"',
-        isSentByMe: false,
-        time:
-            '${DateTime.now().hour}:${DateTime.now().minute.toString().padLeft(2, '0')}',
-      );
-
-      setState(() {
-        _messages.add(reply);
-      });
-
-      _scrollToBottom();
-    });
-
-    _scrollToBottom();
   }
 
   void _scrollToBottom() {
@@ -103,11 +60,12 @@ class _ChatScreenState extends State<ChatScreen> {
     return BlocConsumer<ChatBloc, ChatState>(
       listener: (context, state) {},
       builder: (context, state) {
-        final Conversation? conversation = state.maybeMap(
-            loaded: (data) => data.conversation, orElse: () => null);
-        final botName = conversation?.bot.name ?? "";
-        final botDesc = conversation?.bot.description ?? "";
-        return LoadingScaffold(
+        return state.maybeMap(
+          loaded: (value) {
+            final chatData = value.chatData;
+            final conversation = chatData.conversation;
+            final messages = chatData.messages;
+            return LoadingScaffold(
           isLoading:
               state.maybeMap(loading: (state) => true, orElse: () => false),
           child: Scaffold(
@@ -115,8 +73,8 @@ class _ChatScreenState extends State<ChatScreen> {
               title: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(botName, style: context.textTheme.bodyLarge),
-                  Text(botDesc,
+                  Text(conversation.bot.name, style: context.textTheme.bodyLarge),
+                  Text(conversation.bot.description,
                       style: context.textTheme.bodySmall
                           ?.copyWith(color: AppColors.subText)),
                 ],
@@ -139,9 +97,9 @@ class _ChatScreenState extends State<ChatScreen> {
                     child: ListView.builder(
                       controller: _scrollController,
                       padding: const EdgeInsets.all(AppDimens.paddingSmall),
-                      itemCount: _messages.length,
+                      itemCount: messages.length,
                       itemBuilder: (context, index) {
-                        final message = _messages[index];
+                        final message = messages[index];
                         return MessageItem(message: message);
                       },
                     ),
@@ -159,6 +117,8 @@ class _ChatScreenState extends State<ChatScreen> {
             ),
           ),
         );
+          },
+          orElse: () => LoadingScaffold(isLoading: true, child: Container()));
       },
     );
   }
