@@ -65,18 +65,6 @@ class _ChatScreenState extends State<ChatScreen> {
     BlocProvider.of<ChatBloc>(context).add(const ChatEvent.disconnect());
   }
 
-  void _scrollToBottom() {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (_scrollController.hasClients) {
-        _scrollController.animateTo(
-          _scrollController.position.maxScrollExtent,
-          duration: Duration(milliseconds: 300),
-          curve: Curves.easeOut,
-        );
-      }
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<ChatBloc, ChatState>(
@@ -118,6 +106,7 @@ class _ChatScreenState extends State<ChatScreen> {
                       children: [
                         Expanded(
                           child: ListView.builder(
+                            reverse: true,
                             controller: _scrollController,
                             padding:
                                 const EdgeInsets.all(AppDimens.paddingSmall),
