@@ -12,6 +12,7 @@ class MessageItem extends StatefulWidget {
   const MessageItem({super.key, required this.message});
 
   @override
+  // ignore: library_private_types_in_public_api
   _MessageItemState createState() => _MessageItemState();
 }
 
