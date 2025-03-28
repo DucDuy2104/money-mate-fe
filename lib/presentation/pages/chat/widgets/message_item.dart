@@ -7,75 +7,135 @@ import 'package:money_mate/shared/constants/app_theme.dart';
 import 'package:money_mate/shared/enums/message_type.dart';
 import 'package:money_mate/shared/extensions/datetime_ext.dart';
 
-class MessageItem extends StatelessWidget {
+class MessageItem extends StatefulWidget {
   final Message message;
   const MessageItem({super.key, required this.message});
+
+  @override
+  _MessageItemState createState() => _MessageItemState();
+}
+
+class _MessageItemState extends State<MessageItem>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _animationController;
+  late Animation<Offset> _slideAnimation;
+  late Animation<double> _fadeAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+
+    // Initialize animation controller
+    _animationController = AnimationController(
+      duration: const Duration(milliseconds: 300),
+      vsync: this,
+    );
+
+    // Create slide animation (sliding from right or left based on message origin)
+    _slideAnimation = Tween<Offset>(
+      begin: Offset(widget.message.isSentByMe ? 0.1 : -0.1, 0),
+      end: Offset.zero,
+    ).animate(CurvedAnimation(
+      parent: _animationController,
+      curve: Curves.easeOut,
+    ));
+
+    // Create fade animation
+    _fadeAnimation = Tween<double>(
+      begin: 0,
+      end: 1,
+    ).animate(CurvedAnimation(
+      parent: _animationController,
+      curve: Curves.easeOut,
+    ));
+
+    // Start the animation
+    _animationController.forward();
+  }
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.symmetric(vertical: AppDimens.paddingSmall),
-      child: Row(
-        mainAxisAlignment: message.isSentByMe
-            ? MainAxisAlignment.end
-            : MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.end,
-        children: [
-          Flexible(
-            child: Column(
-              crossAxisAlignment: message.isSentByMe
-                  ? CrossAxisAlignment.end
-                  : CrossAxisAlignment.start,
-              children: [
-                Container(
-                  constraints: BoxConstraints(
-                    maxWidth: MediaQuery.of(context).size.width * 0.7,
-                  ),
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 16,
-                    vertical: 12,
-                  ),
-                  decoration: BoxDecoration(
-                      color: message.isSentByMe
-                          ? AppColors.darkCardColor
-                          : Colors.grey[200],
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(message.isSentByMe ? 20 : 4),
-                        topRight: Radius.circular(message.isSentByMe ? 4 : 20),
-                        bottomLeft:
-                            Radius.circular(message.isSentByMe ? 20 : 20),
-                        bottomRight:
-                            Radius.circular(message.isSentByMe ? 20 : 20),
-                      )),
-                  child: Text(
-                    message.content,
-                    style: TextStyle(
-                      fontSize: 15,
-                      color: message.isSentByMe ? Colors.white : Colors.black87,
+    return FadeTransition(
+      opacity: _fadeAnimation,
+      child: SlideTransition(
+        position: _slideAnimation,
+        child: Container(
+          margin: const EdgeInsets.symmetric(vertical: AppDimens.paddingSmall),
+          child: Row(
+            mainAxisAlignment: widget.message.isSentByMe
+                ? MainAxisAlignment.end
+                : MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Flexible(
+                child: Column(
+                  crossAxisAlignment: widget.message.isSentByMe
+                      ? CrossAxisAlignment.end
+                      : CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      constraints: BoxConstraints(
+                        maxWidth: MediaQuery.of(context).size.width * 0.7,
+                      ),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 12,
+                      ),
+                      decoration: BoxDecoration(
+                          color: widget.message.isSentByMe
+                              ? AppColors.darkCardColor
+                              : Colors.grey[200],
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(
+                                widget.message.isSentByMe ? 20 : 4),
+                            topRight: Radius.circular(
+                                widget.message.isSentByMe ? 4 : 20),
+                            bottomLeft: Radius.circular(
+                                widget.message.isSentByMe ? 20 : 20),
+                            bottomRight: Radius.circular(
+                                widget.message.isSentByMe ? 20 : 20),
+                          )),
+                      child: Text(
+                        widget.message.content,
+                        style: TextStyle(
+                          fontSize: 15,
+                          color: widget.message.isSentByMe
+                              ? Colors.white
+                              : Colors.black87,
+                        ),
+                      ),
                     ),
-                  ),
+                    if (!widget.message.isSentByMe &&
+                        widget.message.type == MessageType.transaction) ...[
+                      AppDimens.spaceSmall,
+                      TransactionInfoMessage(
+                        amount: 12000,
+                        category: "Ăn uống",
+                        onCancel: () {
+                          // Handle confirmation
+                          print(
+                              "User confirmed adding expense to Ăn uống category");
+                        },
+                      )
+                    ],
+                    Padding(
+                      padding: const EdgeInsets.only(top: 4, left: 4, right: 4),
+                      child: Text(widget.message.createdAt.toHourMinute(),
+                          style: context.textTheme.bodySmall?.copyWith(
+                              fontSize: 10, color: AppColors.subText)),
+                    ),
+                  ],
                 ),
-                if (!message.isSentByMe && message.type == MessageType.transaction) ...[
-                  AppDimens.spaceSmall,
-                  TransactionInfoMessage(
-                    amount: 12000,
-                    category: "Ăn uống",
-                    onCancel: () {
-                      // Handle confirmation
-                      print(
-                          "User confirmed adding expense to Ăn uống category");
-                    },
-                  )
-                ],
-                Padding(
-                  padding: const EdgeInsets.only(top: 4, left: 4, right: 4),
-                  child: Text(message.createdAt.toHourMinute(),
-                      style: context.textTheme.bodySmall
-                          ?.copyWith(fontSize: 10, color: AppColors.subText)),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }
