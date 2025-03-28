@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:money_mate/presentation/pages/chat/chat_screen.dart';
+import 'package:money_mate/domain/entities/message.dart';
 import 'package:money_mate/presentation/pages/chat/widgets/confirm_message.dart';
 import 'package:money_mate/shared/constants/app_colors.dart';
 import 'package:money_mate/shared/constants/app_dimens.dart';
 import 'package:money_mate/shared/constants/app_theme.dart';
+import 'package:money_mate/shared/enums/message_type.dart';
+import 'package:money_mate/shared/extensions/datetime_ext.dart';
 
 class MessageItem extends StatelessWidget {
-  final ChatMessage message;
+  final Message message;
   const MessageItem({super.key, required this.message});
   @override
   Widget build(BuildContext context) {
@@ -45,14 +47,14 @@ class MessageItem extends StatelessWidget {
                             Radius.circular(message.isSentByMe ? 20 : 20),
                       )),
                   child: Text(
-                    message.text,
+                    message.content,
                     style: TextStyle(
                       fontSize: 15,
                       color: message.isSentByMe ? Colors.white : Colors.black87,
                     ),
                   ),
                 ),
-                if (!message.isSentByMe) ...[
+                if (!message.isSentByMe && message.type == MessageType.transaction) ...[
                   AppDimens.spaceSmall,
                   TransactionInfoMessage(
                     amount: 12000,
@@ -66,7 +68,7 @@ class MessageItem extends StatelessWidget {
                 ],
                 Padding(
                   padding: const EdgeInsets.only(top: 4, left: 4, right: 4),
-                  child: Text(message.time,
+                  child: Text(message.createdAt.toHourMinute(),
                       style: context.textTheme.bodySmall
                           ?.copyWith(fontSize: 10, color: AppColors.subText)),
                 ),

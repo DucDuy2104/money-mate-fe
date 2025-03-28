@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-enum CategoriesEnum {
+enum CategoryEnum {
   // Expense Categories
   food(Icons.fastfood, Colors.orange),
   transport(Icons.directions_car, Colors.blue),
@@ -40,12 +40,12 @@ enum CategoriesEnum {
   final IconData icon;
   final Color color;
 
-  const CategoriesEnum(this.icon, this.color);
+  const CategoryEnum(this.icon, this.color);
 
-  static CategoriesEnum parseEnum(String value) {
-    return CategoriesEnum.values.firstWhere(
+  static CategoryEnum parseEnum(String value) {
+    return CategoryEnum.values.firstWhere(
       (e) => e.name.toLowerCase() == value.toLowerCase(),
-      orElse: () => CategoriesEnum.food,
+      orElse: () => CategoryEnum.food,
     );
   }
 }

@@ -2,18 +2,22 @@ import 'package:get_it/get_it.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:money_mate/core/network/api_client.dart';
 import 'package:money_mate/core/service/local_storage/app_storage.dart';
+import 'package:money_mate/core/service/socket/socket_service.dart';
 import 'package:money_mate/data/data_sources/local/local_data_source.dart';
 import 'package:money_mate/data/data_sources/remote/auth_remote_data_source.dart';
 import 'package:money_mate/data/data_sources/remote/categories_remote_data_source.dart';
 import 'package:money_mate/data/data_sources/remote/conversation_remote_data_source.dart';
+import 'package:money_mate/data/data_sources/remote/messages_remote_data_source.dart';
 import 'package:money_mate/data/data_sources/remote/users_remote_data_source.dart';
 import 'package:money_mate/data/repositories/auth_repository.dart';
 import 'package:money_mate/data/repositories/categories_repository.dart';
 import 'package:money_mate/data/repositories/conversation_repository.dart';
+import 'package:money_mate/data/repositories/messages_repository.dart';
 import 'package:money_mate/data/repositories/users_repository.dart';
 import 'package:money_mate/domain/repositories/auth_repository_impl.dart';
 import 'package:money_mate/domain/repositories/categories_repository_impl.dart';
 import 'package:money_mate/domain/repositories/conversation_repository_impl.dart';
+import 'package:money_mate/domain/repositories/messages_repository_impl.dart';
 import 'package:money_mate/domain/repositories/users_repository_impl.dart';
 
 final GetIt getIt = GetIt.instance;
@@ -32,6 +36,10 @@ Future<void> setupLocator() async {
   getIt.registerLazySingleton<OnboardLocalDataSource>(
     () => OnboardLocalDataSourceImpl(getIt<AppStorage>()),
   );
+
+  // SocketService
+  getIt.registerLazySingleton<SocketService>(
+      () => SocketService(getIt<OnboardLocalDataSource>()));
 
   // Register ApiClient
   getIt.registerLazySingleton<ApiClient>(
@@ -63,6 +71,10 @@ registerRemoteDataSources() {
   // ConversationRemoteDataSources
   getIt.registerLazySingleton<ConversationRemoteDataSource>(
       () => ConversationRemoteDataSourceImpl(getIt<ApiClient>()));
+
+  // MessagesRemoteDataSources
+  getIt.registerLazySingleton<MessagesRemoteDataSource>(
+      () => MessagesRemoteDataSourceImpl(getIt<ApiClient>()));
 }
 
 registerRepositories() {
@@ -84,4 +96,9 @@ registerRepositories() {
   // ConversationRepository
   getIt.registerLazySingleton<ConversationRepository>(
       () => ConversationRepositoryImpl(getIt<ConversationRemoteDataSource>()));
+
+  // MessagesRepository
+  getIt.registerLazySingleton<MessagesRepository>(
+    () => MessagesRepositoryImpl(getIt<MessagesRemoteDataSource>()),
+  );
 }
