@@ -53,7 +53,7 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
         messagesResult.fold(
           (failure) => emit(ChatState.error(failure.message)),
           (messages) => emit(ChatState.loaded(
-              ChatLoadedData(messages: messages, conversation: conversation))),
+              ChatLoadedData(messages: messages.reversed.toList(), conversation: conversation))),
         );
       }
     } catch (e) {
@@ -68,7 +68,7 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
     state.maybeMap(
       loaded: (data) {
         emit(ChatState.loaded(data.chatData
-            .copyWith(messages: [...data.chatData.messages, event.message])));
+            .copyWith(messages: [event.message, ...data.chatData.messages])));
       },
       orElse: () {},
     );

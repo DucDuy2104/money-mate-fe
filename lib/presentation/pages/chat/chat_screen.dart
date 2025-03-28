@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:money_mate/presentation/pages/chat/bloc/chat_bloc.dart';
 import 'package:money_mate/presentation/pages/chat/widgets/message_input.dart';
 import 'package:money_mate/presentation/pages/chat/widgets/message_item.dart';
+import 'package:money_mate/presentation/pages/chat/widgets/typing_indicator.dart';
 import 'package:money_mate/shared/components/app_toast.dart';
 import 'package:money_mate/shared/components/loading_scafford.dart';
 import 'package:money_mate/shared/constants/app_colors.dart';
@@ -65,18 +66,6 @@ class _ChatScreenState extends State<ChatScreen> {
     BlocProvider.of<ChatBloc>(context).add(const ChatEvent.disconnect());
   }
 
-  void _scrollToBottom() {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (_scrollController.hasClients) {
-        _scrollController.animateTo(
-          _scrollController.position.maxScrollExtent,
-          duration: Duration(milliseconds: 300),
-          curve: Curves.easeOut,
-        );
-      }
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<ChatBloc, ChatState>(
@@ -118,12 +107,17 @@ class _ChatScreenState extends State<ChatScreen> {
                       children: [
                         Expanded(
                           child: ListView.builder(
+                            reverse: true,
                             controller: _scrollController,
                             padding:
                                 const EdgeInsets.all(AppDimens.paddingSmall),
-                            itemCount: messages.length,
+                            itemCount: messages[0].isSentByMe ? messages.length + 1 : messages.length,
                             itemBuilder: (context, index) {
-                              final message = messages[index];
+                              if(index == 0 && messages[0].isSentByMe) {
+                                return const TypingIndicator();
+                              }
+                              final id =  messages[0].isSentByMe ? index - 1 : index;
+                              final message = messages[id];
                               return MessageItem(message: message);
                             },
                           ),
