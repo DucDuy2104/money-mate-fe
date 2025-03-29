@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:money_mate/domain/entities/message.dart';
-import 'package:money_mate/presentation/pages/chat/widgets/confirm_message.dart';
+import 'package:money_mate/presentation/pages/chat/widgets/transaction_message.dart';
 import 'package:money_mate/shared/constants/app_colors.dart';
 import 'package:money_mate/shared/constants/app_dimens.dart';
 import 'package:money_mate/shared/constants/app_theme.dart';
@@ -116,12 +116,11 @@ class _MessageItemState extends State<MessageItem>
                         widget.message.type == MessageType.transaction) ...[
                       AppDimens.spaceSmall,
                       TransactionInfoMessage(
-                        amount: 12000,
-                        category: "Ăn uống",
+                        transaction: widget.message.transaction!,
                         onCancel: () {
                           // Handle confirmation
                           print(
-                              "User confirmed adding expense to Ăn uống category");
+                              "User cancel adding expense to Ăn uống category");
                         },
                       )
                     ],
