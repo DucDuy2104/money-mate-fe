@@ -796,6 +796,7 @@ abstract class _Loaded implements HomeState {
 /// @nodoc
 mixin _$HomeData {
   List<Transaction> get transactions => throw _privateConstructorUsedError;
+  List<Category> get categories => throw _privateConstructorUsedError;
 
   /// Create a copy of HomeData
   /// with the given fields replaced by the non-null parameter values.
@@ -809,7 +810,7 @@ abstract class $HomeDataCopyWith<$Res> {
   factory $HomeDataCopyWith(HomeData value, $Res Function(HomeData) then) =
       _$HomeDataCopyWithImpl<$Res, HomeData>;
   @useResult
-  $Res call({List<Transaction> transactions});
+  $Res call({List<Transaction> transactions, List<Category> categories});
 }
 
 /// @nodoc
@@ -828,12 +829,17 @@ class _$HomeDataCopyWithImpl<$Res, $Val extends HomeData>
   @override
   $Res call({
     Object? transactions = null,
+    Object? categories = null,
   }) {
     return _then(_value.copyWith(
       transactions: null == transactions
           ? _value.transactions
           : transactions // ignore: cast_nullable_to_non_nullable
               as List<Transaction>,
+      categories: null == categories
+          ? _value.categories
+          : categories // ignore: cast_nullable_to_non_nullable
+              as List<Category>,
     ) as $Val);
   }
 }
@@ -846,7 +852,7 @@ abstract class _$$HomeDataImplCopyWith<$Res>
       __$$HomeDataImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<Transaction> transactions});
+  $Res call({List<Transaction> transactions, List<Category> categories});
 }
 
 /// @nodoc
@@ -863,12 +869,17 @@ class __$$HomeDataImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? transactions = null,
+    Object? categories = null,
   }) {
     return _then(_$HomeDataImpl(
       transactions: null == transactions
           ? _value._transactions
           : transactions // ignore: cast_nullable_to_non_nullable
               as List<Transaction>,
+      categories: null == categories
+          ? _value._categories
+          : categories // ignore: cast_nullable_to_non_nullable
+              as List<Category>,
     ));
   }
 }
@@ -876,8 +887,11 @@ class __$$HomeDataImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$HomeDataImpl implements _HomeData {
-  const _$HomeDataImpl({required final List<Transaction> transactions})
-      : _transactions = transactions;
+  const _$HomeDataImpl(
+      {required final List<Transaction> transactions,
+      required final List<Category> categories})
+      : _transactions = transactions,
+        _categories = categories;
 
   final List<Transaction> _transactions;
   @override
@@ -887,9 +901,17 @@ class _$HomeDataImpl implements _HomeData {
     return EqualUnmodifiableListView(_transactions);
   }
 
+  final List<Category> _categories;
+  @override
+  List<Category> get categories {
+    if (_categories is EqualUnmodifiableListView) return _categories;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_categories);
+  }
+
   @override
   String toString() {
-    return 'HomeData(transactions: $transactions)';
+    return 'HomeData(transactions: $transactions, categories: $categories)';
   }
 
   @override
@@ -898,12 +920,16 @@ class _$HomeDataImpl implements _HomeData {
         (other.runtimeType == runtimeType &&
             other is _$HomeDataImpl &&
             const DeepCollectionEquality()
-                .equals(other._transactions, _transactions));
+                .equals(other._transactions, _transactions) &&
+            const DeepCollectionEquality()
+                .equals(other._categories, _categories));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(_transactions));
+      runtimeType,
+      const DeepCollectionEquality().hash(_transactions),
+      const DeepCollectionEquality().hash(_categories));
 
   /// Create a copy of HomeData
   /// with the given fields replaced by the non-null parameter values.
@@ -915,11 +941,14 @@ class _$HomeDataImpl implements _HomeData {
 }
 
 abstract class _HomeData implements HomeData {
-  const factory _HomeData({required final List<Transaction> transactions}) =
-      _$HomeDataImpl;
+  const factory _HomeData(
+      {required final List<Transaction> transactions,
+      required final List<Category> categories}) = _$HomeDataImpl;
 
   @override
   List<Transaction> get transactions;
+  @override
+  List<Category> get categories;
 
   /// Create a copy of HomeData
   /// with the given fields replaced by the non-null parameter values.

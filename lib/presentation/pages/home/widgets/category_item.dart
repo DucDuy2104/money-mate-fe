@@ -1,22 +1,31 @@
 import 'package:flutter/material.dart';
-import 'package:money_mate/presentation/pages/home/models/category.dart';
+import 'package:money_mate/domain/entities/category.dart';
+import 'package:money_mate/shared/enums/category_type.dart';
 
 class CategoryItem extends StatelessWidget {
   final Category category;
   final VoidCallback? onTap;
 
   const CategoryItem({
-    super.key, 
+    super.key,
     required this.category,
     this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
-    double progress = (category.currentExpense / category.maxExpense).clamp(0.0, 1.0);
-    Color progressColor = _getProgressColor(progress);
-    bool isNearLimit = progress > 0.9;
-    
+    double percent = (category.currentBudget / category.budget) * 100;
+    double progress =
+        (category.currentBudget / category.budget).clamp(0.0, 1.0);
+
+    Color progressColor = _getProgressColor(progress, category.type);
+    bool isNearLimit = category.type == CategoriesType.expense
+        ? progress > 0.9
+        : progress < 0.1;
+    String limitMessage = category.type == CategoriesType.expense
+        ? 'Gần hết hạn mức'
+        : 'Chưa đạt mục tiêu';
+
     return GestureDetector(
       onTap: onTap,
       child: Container(
@@ -67,7 +76,7 @@ class CategoryItem extends StatelessWidget {
                       ],
                     ),
                     child: Icon(
-                      _getCategoryIcon(category.name),
+                      category.icon,
                       color: Colors.white,
                       size: 24,
                     ),
@@ -91,15 +100,23 @@ class CategoryItem extends StatelessWidget {
                             ),
                             if (isNearLimit)
                               Container(
-                                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 8, vertical: 4),
                                 decoration: BoxDecoration(
-                                  color: Colors.red.withOpacity(0.2),
+                                  color:
+                                      (category.type == CategoriesType.expense
+                                              ? Colors.red
+                                              : Colors.amber)
+                                          .withOpacity(0.2),
                                   borderRadius: BorderRadius.circular(12),
                                 ),
                                 child: Text(
-                                  'Gần hết hạn mức',
+                                  limitMessage,
                                   style: TextStyle(
-                                    color: Colors.red[300],
+                                    color:
+                                        category.type == CategoriesType.expense
+                                            ? Colors.red[300]
+                                            : Colors.amber[300],
                                     fontSize: 10,
                                     fontWeight: FontWeight.w500,
                                   ),
@@ -111,7 +128,7 @@ class CategoryItem extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              '${(progress * 100).toInt()}%',
+                              '${(percent).toInt()}%',
                               style: TextStyle(
                                 color: progressColor,
                                 fontSize: 16,
@@ -119,7 +136,7 @@ class CategoryItem extends StatelessWidget {
                               ),
                             ),
                             Text(
-                              '${formatMoney(category.currentExpense)} / ${formatMoney(category.maxExpense)}',
+                              '${formatMoney(category.currentBudget)} / ${formatMoney(category.budget)}',
                               style: TextStyle(
                                 color: Colors.white.withOpacity(0.7),
                                 fontSize: 14,
@@ -143,7 +160,7 @@ class CategoryItem extends StatelessWidget {
       ),
     );
   }
-  
+
   String formatMoney(double amount) {
     if (amount >= 1000000000) {
       return '${(amount / 1000000000).toStringAsFixed(amount % 1000000000 == 0 ? 0 : 1)}B';
@@ -155,37 +172,28 @@ class CategoryItem extends StatelessWidget {
       return amount.toStringAsFixed(amount % 1 == 0 ? 0 : 1);
     }
   }
-  
-  Color _getProgressColor(double progress) {
-    if (progress < 0.5) {
-      return const Color(0xFF4CAF79); // Green
-    } else if (progress < 0.8) {
-      return const Color(0xFFFF9800); // Orange
+
+  Color _getProgressColor(double progress, CategoriesType type) {
+    if (type == CategoriesType.income) {
+      // For income, higher progress is better
+      if (progress < 0.3) {
+        return const Color(0xFFF44336); // Red - far from income goal
+      } else if (progress < 0.7) {
+        return const Color(0xFFFF9800); // Orange - approaching income goal
+      } else {
+        return const Color(0xFF4CAF79); // Green - reached/exceeded income goal
+      }
     } else {
-      return const Color(0xFFF44336); // Red
-    }
-  }
-  
-  IconData _getCategoryIcon(String categoryName) {
-    switch (categoryName.toLowerCase()) {
-      case 'food':
-        return Icons.restaurant;
-      case 'transport':
-        return Icons.directions_car;
-      case 'shopping':
-        return Icons.shopping_bag;
-      case 'entertainment':
-        return Icons.movie;
-      case 'health':
-        return Icons.health_and_safety;
-      case 'bills':
-        return Icons.receipt;
-      case 'education':
-        return Icons.school;
-      case 'travel':
-        return Icons.flight;
-      default:
-        return Icons.category;
+      // For expense, lower progress is better
+      if (progress < 0.5) {
+        return const Color(
+            0xFF4CAF79); // Green - using little of expense budget
+      } else if (progress < 0.8) {
+        return const Color(
+            0xFFFF9800); // Orange - getting close to budget limit
+      } else {
+        return const Color(0xFFF44336); // Red - close to or at budget limit
+      }
     }
   }
 }
@@ -194,7 +202,8 @@ class CustomProgressBar extends StatelessWidget {
   final double progress;
   final Color progressColor;
 
-  const CustomProgressBar({super.key, 
+  const CustomProgressBar({
+    super.key,
     required this.progress,
     required this.progressColor,
   });

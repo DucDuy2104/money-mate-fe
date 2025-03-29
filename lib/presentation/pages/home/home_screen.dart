@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:money_mate/presentation/pages/home/bloc/home_bloc.dart';
-import 'package:money_mate/presentation/pages/home/models/category.dart';
 import 'package:money_mate/presentation/drawer_navigation/app_drawer.dart';
 import 'package:money_mate/presentation/pages/home/widgets/category_item.dart';
 import 'package:money_mate/presentation/pages/home/widgets/expense_chart.dart';
@@ -12,45 +11,6 @@ import 'package:money_mate/presentation/routes/route_name.dart';
 import 'package:money_mate/shared/components/loading_scafford.dart';
 import 'package:money_mate/shared/constants/app_dimens.dart';
 import 'package:money_mate/shared/constants/constants.dart';
-
-final List<Category> sampleCategories = [
-  const Category(
-    id: "food",
-    name: "Ăn uống",
-    maxExpense: 5000000,
-    currentExpense: 2500000,
-  ),
-  const Category(
-    id: "transport",
-    name: "Di chuyển",
-    maxExpense: 2000000,
-    currentExpense: 800000,
-  ),
-  const Category(
-    id: "entertainment",
-    name: "Giải trí",
-    maxExpense: 3000000,
-    currentExpense: 1200000,
-  ),
-  const Category(
-    id: "shopping",
-    name: "Mua sắm",
-    maxExpense: 4000000,
-    currentExpense: 3500000,
-  ),
-  const Category(
-    id: "health",
-    name: "Sức khỏe",
-    maxExpense: 1500000,
-    currentExpense: 500000,
-  ),
-  const Category(
-    id: "education",
-    name: "Giáo dục",
-    maxExpense: 5000000,
-    currentExpense: 2000000,
-  ),
-];
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -82,6 +42,7 @@ class _HomeScreenState extends State<HomeScreen> {
         return state.maybeMap(
             loaded: (state) {
               final transactions = state.data.transactions;
+              final categories = state.data.categories;
               return LoadingScaffold(
                 isLoading: false,
                 child: Scaffold(
@@ -123,9 +84,9 @@ class _HomeScreenState extends State<HomeScreen> {
                           height: 110,
                           child: ListView.separated(
                             scrollDirection: Axis.horizontal,
-                            itemCount: sampleCategories.length,
+                            itemCount: categories.length,
                             itemBuilder: (context, index) {
-                              final category = sampleCategories[index];
+                              final category = categories[index];
                               return CategoryItem(category: category);
                             },
                             separatorBuilder:

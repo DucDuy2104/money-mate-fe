@@ -26,6 +26,7 @@ mixin _$CategoryModel {
   @JsonKey(name: 'enum')
   String get data => throw _privateConstructorUsedError;
   double? get budget => throw _privateConstructorUsedError;
+  double? get currentBudget => throw _privateConstructorUsedError;
 
   /// Serializes this CategoryModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -48,7 +49,8 @@ abstract class $CategoryModelCopyWith<$Res> {
       String name,
       String type,
       @JsonKey(name: 'enum') String data,
-      double? budget});
+      double? budget,
+      double? currentBudget});
 }
 
 /// @nodoc
@@ -71,6 +73,7 @@ class _$CategoryModelCopyWithImpl<$Res, $Val extends CategoryModel>
     Object? type = null,
     Object? data = null,
     Object? budget = freezed,
+    Object? currentBudget = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -93,6 +96,10 @@ class _$CategoryModelCopyWithImpl<$Res, $Val extends CategoryModel>
           ? _value.budget
           : budget // ignore: cast_nullable_to_non_nullable
               as double?,
+      currentBudget: freezed == currentBudget
+          ? _value.currentBudget
+          : currentBudget // ignore: cast_nullable_to_non_nullable
+              as double?,
     ) as $Val);
   }
 }
@@ -110,7 +117,8 @@ abstract class _$$CategoryModelImplCopyWith<$Res>
       String name,
       String type,
       @JsonKey(name: 'enum') String data,
-      double? budget});
+      double? budget,
+      double? currentBudget});
 }
 
 /// @nodoc
@@ -131,6 +139,7 @@ class __$$CategoryModelImplCopyWithImpl<$Res>
     Object? type = null,
     Object? data = null,
     Object? budget = freezed,
+    Object? currentBudget = freezed,
   }) {
     return _then(_$CategoryModelImpl(
       id: null == id
@@ -153,6 +162,10 @@ class __$$CategoryModelImplCopyWithImpl<$Res>
           ? _value.budget
           : budget // ignore: cast_nullable_to_non_nullable
               as double?,
+      currentBudget: freezed == currentBudget
+          ? _value.currentBudget
+          : currentBudget // ignore: cast_nullable_to_non_nullable
+              as double?,
     ));
   }
 }
@@ -165,7 +178,8 @@ class _$CategoryModelImpl implements _CategoryModel {
       required this.name,
       required this.type,
       @JsonKey(name: 'enum') required this.data,
-      required this.budget});
+      required this.budget,
+      required this.currentBudget});
 
   factory _$CategoryModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$CategoryModelImplFromJson(json);
@@ -181,10 +195,12 @@ class _$CategoryModelImpl implements _CategoryModel {
   final String data;
   @override
   final double? budget;
+  @override
+  final double? currentBudget;
 
   @override
   String toString() {
-    return 'CategoryModel(id: $id, name: $name, type: $type, data: $data, budget: $budget)';
+    return 'CategoryModel(id: $id, name: $name, type: $type, data: $data, budget: $budget, currentBudget: $currentBudget)';
   }
 
   @override
@@ -196,12 +212,15 @@ class _$CategoryModelImpl implements _CategoryModel {
             (identical(other.name, name) || other.name == name) &&
             (identical(other.type, type) || other.type == type) &&
             (identical(other.data, data) || other.data == data) &&
-            (identical(other.budget, budget) || other.budget == budget));
+            (identical(other.budget, budget) || other.budget == budget) &&
+            (identical(other.currentBudget, currentBudget) ||
+                other.currentBudget == currentBudget));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, id, name, type, data, budget);
+  int get hashCode =>
+      Object.hash(runtimeType, id, name, type, data, budget, currentBudget);
 
   /// Create a copy of CategoryModel
   /// with the given fields replaced by the non-null parameter values.
@@ -225,7 +244,8 @@ abstract class _CategoryModel implements CategoryModel {
       required final String name,
       required final String type,
       @JsonKey(name: 'enum') required final String data,
-      required final double? budget}) = _$CategoryModelImpl;
+      required final double? budget,
+      required final double? currentBudget}) = _$CategoryModelImpl;
 
   factory _CategoryModel.fromJson(Map<String, dynamic> json) =
       _$CategoryModelImpl.fromJson;
@@ -241,6 +261,8 @@ abstract class _CategoryModel implements CategoryModel {
   String get data;
   @override
   double? get budget;
+  @override
+  double? get currentBudget;
 
   /// Create a copy of CategoryModel
   /// with the given fields replaced by the non-null parameter values.
