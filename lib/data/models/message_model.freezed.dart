@@ -23,6 +23,7 @@ mixin _$MessageModel {
   String get id => throw _privateConstructorUsedError;
   String get user => throw _privateConstructorUsedError;
   String get conversation => throw _privateConstructorUsedError;
+  TransactionModel? get transaction => throw _privateConstructorUsedError;
   String get type => throw _privateConstructorUsedError;
   String get content => throw _privateConstructorUsedError;
   bool get isSentByMe => throw _privateConstructorUsedError;
@@ -48,10 +49,13 @@ abstract class $MessageModelCopyWith<$Res> {
       {String id,
       String user,
       String conversation,
+      TransactionModel? transaction,
       String type,
       String content,
       bool isSentByMe,
       DateTime createdAt});
+
+  $TransactionModelCopyWith<$Res>? get transaction;
 }
 
 /// @nodoc
@@ -72,6 +76,7 @@ class _$MessageModelCopyWithImpl<$Res, $Val extends MessageModel>
     Object? id = null,
     Object? user = null,
     Object? conversation = null,
+    Object? transaction = freezed,
     Object? type = null,
     Object? content = null,
     Object? isSentByMe = null,
@@ -90,6 +95,10 @@ class _$MessageModelCopyWithImpl<$Res, $Val extends MessageModel>
           ? _value.conversation
           : conversation // ignore: cast_nullable_to_non_nullable
               as String,
+      transaction: freezed == transaction
+          ? _value.transaction
+          : transaction // ignore: cast_nullable_to_non_nullable
+              as TransactionModel?,
       type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
@@ -108,6 +117,20 @@ class _$MessageModelCopyWithImpl<$Res, $Val extends MessageModel>
               as DateTime,
     ) as $Val);
   }
+
+  /// Create a copy of MessageModel
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $TransactionModelCopyWith<$Res>? get transaction {
+    if (_value.transaction == null) {
+      return null;
+    }
+
+    return $TransactionModelCopyWith<$Res>(_value.transaction!, (value) {
+      return _then(_value.copyWith(transaction: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -122,10 +145,14 @@ abstract class _$$MessageModelImplCopyWith<$Res>
       {String id,
       String user,
       String conversation,
+      TransactionModel? transaction,
       String type,
       String content,
       bool isSentByMe,
       DateTime createdAt});
+
+  @override
+  $TransactionModelCopyWith<$Res>? get transaction;
 }
 
 /// @nodoc
@@ -144,6 +171,7 @@ class __$$MessageModelImplCopyWithImpl<$Res>
     Object? id = null,
     Object? user = null,
     Object? conversation = null,
+    Object? transaction = freezed,
     Object? type = null,
     Object? content = null,
     Object? isSentByMe = null,
@@ -162,6 +190,10 @@ class __$$MessageModelImplCopyWithImpl<$Res>
           ? _value.conversation
           : conversation // ignore: cast_nullable_to_non_nullable
               as String,
+      transaction: freezed == transaction
+          ? _value.transaction
+          : transaction // ignore: cast_nullable_to_non_nullable
+              as TransactionModel?,
       type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
@@ -189,6 +221,7 @@ class _$MessageModelImpl implements _MessageModel {
       {required this.id,
       required this.user,
       required this.conversation,
+      required this.transaction,
       required this.type,
       required this.content,
       required this.isSentByMe,
@@ -204,6 +237,8 @@ class _$MessageModelImpl implements _MessageModel {
   @override
   final String conversation;
   @override
+  final TransactionModel? transaction;
+  @override
   final String type;
   @override
   final String content;
@@ -214,7 +249,7 @@ class _$MessageModelImpl implements _MessageModel {
 
   @override
   String toString() {
-    return 'MessageModel(id: $id, user: $user, conversation: $conversation, type: $type, content: $content, isSentByMe: $isSentByMe, createdAt: $createdAt)';
+    return 'MessageModel(id: $id, user: $user, conversation: $conversation, transaction: $transaction, type: $type, content: $content, isSentByMe: $isSentByMe, createdAt: $createdAt)';
   }
 
   @override
@@ -226,6 +261,8 @@ class _$MessageModelImpl implements _MessageModel {
             (identical(other.user, user) || other.user == user) &&
             (identical(other.conversation, conversation) ||
                 other.conversation == conversation) &&
+            (identical(other.transaction, transaction) ||
+                other.transaction == transaction) &&
             (identical(other.type, type) || other.type == type) &&
             (identical(other.content, content) || other.content == content) &&
             (identical(other.isSentByMe, isSentByMe) ||
@@ -236,8 +273,8 @@ class _$MessageModelImpl implements _MessageModel {
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, id, user, conversation, type,
-      content, isSentByMe, createdAt);
+  int get hashCode => Object.hash(runtimeType, id, user, conversation,
+      transaction, type, content, isSentByMe, createdAt);
 
   /// Create a copy of MessageModel
   /// with the given fields replaced by the non-null parameter values.
@@ -260,6 +297,7 @@ abstract class _MessageModel implements MessageModel {
       {required final String id,
       required final String user,
       required final String conversation,
+      required final TransactionModel? transaction,
       required final String type,
       required final String content,
       required final bool isSentByMe,
@@ -274,6 +312,8 @@ abstract class _MessageModel implements MessageModel {
   String get user;
   @override
   String get conversation;
+  @override
+  TransactionModel? get transaction;
   @override
   String get type;
   @override

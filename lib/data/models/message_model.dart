@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:money_mate/data/models/transaction_model.dart';
 import 'package:money_mate/domain/entities/message.dart';
 import 'package:money_mate/shared/enums/message_type.dart';
 
@@ -11,6 +12,7 @@ class MessageModel with _$MessageModel {
     required String id,
     required String user,
     required String conversation,
+    required TransactionModel? transaction,
     required String type,
     required String content,
     required bool isSentByMe,
@@ -28,6 +30,7 @@ extension MessageModelX on MessageModel {
       id: id,
       user: user,
       conversation: conversation,
+      transaction: transaction?.toEntity(),
       type: MessageType.fromString(type),
       content: content,
       isSentByMe: isSentByMe,
