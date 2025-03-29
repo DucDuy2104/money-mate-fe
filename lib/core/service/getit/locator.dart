@@ -8,16 +8,19 @@ import 'package:money_mate/data/data_sources/remote/auth_remote_data_source.dart
 import 'package:money_mate/data/data_sources/remote/categories_remote_data_source.dart';
 import 'package:money_mate/data/data_sources/remote/conversation_remote_data_source.dart';
 import 'package:money_mate/data/data_sources/remote/messages_remote_data_source.dart';
+import 'package:money_mate/data/data_sources/remote/transactions_remote_data_source.dart';
 import 'package:money_mate/data/data_sources/remote/users_remote_data_source.dart';
 import 'package:money_mate/data/repositories/auth_repository.dart';
 import 'package:money_mate/data/repositories/categories_repository.dart';
 import 'package:money_mate/data/repositories/conversation_repository.dart';
 import 'package:money_mate/data/repositories/messages_repository.dart';
+import 'package:money_mate/data/repositories/transactions_repository.dart';
 import 'package:money_mate/data/repositories/users_repository.dart';
 import 'package:money_mate/domain/repositories/auth_repository_impl.dart';
 import 'package:money_mate/domain/repositories/categories_repository_impl.dart';
 import 'package:money_mate/domain/repositories/conversation_repository_impl.dart';
 import 'package:money_mate/domain/repositories/messages_repository_impl.dart';
+import 'package:money_mate/domain/repositories/transactions_repository_impl.dart';
 import 'package:money_mate/domain/repositories/users_repository_impl.dart';
 
 final GetIt getIt = GetIt.instance;
@@ -75,6 +78,10 @@ registerRemoteDataSources() {
   // MessagesRemoteDataSources
   getIt.registerLazySingleton<MessagesRemoteDataSource>(
       () => MessagesRemoteDataSourceImpl(getIt<ApiClient>()));
+
+  // TransactionsRemoteDataSources
+  getIt.registerLazySingleton<TransactionsRemoteDataSource>(
+      () => TransactionsRemoteDataSourceImpl(getIt<ApiClient>()));
 }
 
 registerRepositories() {
@@ -101,4 +108,8 @@ registerRepositories() {
   getIt.registerLazySingleton<MessagesRepository>(
     () => MessagesRepositoryImpl(getIt<MessagesRemoteDataSource>()),
   );
+
+  // TransactionsRepository
+  getIt.registerLazySingleton<TransactionsRepository>(
+      () => TransactionsRepositoryImpl(getIt<TransactionsRemoteDataSource>()));
 }

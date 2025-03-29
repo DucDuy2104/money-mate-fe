@@ -21,7 +21,8 @@ mixin _$Category {
   CategoriesType get type => throw _privateConstructorUsedError;
   IconData get icon => throw _privateConstructorUsedError;
   Color get color => throw _privateConstructorUsedError;
-  double? get budget => throw _privateConstructorUsedError;
+  double get budget => throw _privateConstructorUsedError;
+  double get currentBudget => throw _privateConstructorUsedError;
   bool get isSelected => throw _privateConstructorUsedError;
 
   /// Create a copy of Category
@@ -42,7 +43,8 @@ abstract class $CategoryCopyWith<$Res> {
       CategoriesType type,
       IconData icon,
       Color color,
-      double? budget,
+      double budget,
+      double currentBudget,
       bool isSelected});
 }
 
@@ -66,7 +68,8 @@ class _$CategoryCopyWithImpl<$Res, $Val extends Category>
     Object? type = null,
     Object? icon = null,
     Object? color = null,
-    Object? budget = freezed,
+    Object? budget = null,
+    Object? currentBudget = null,
     Object? isSelected = null,
   }) {
     return _then(_value.copyWith(
@@ -90,10 +93,14 @@ class _$CategoryCopyWithImpl<$Res, $Val extends Category>
           ? _value.color
           : color // ignore: cast_nullable_to_non_nullable
               as Color,
-      budget: freezed == budget
+      budget: null == budget
           ? _value.budget
           : budget // ignore: cast_nullable_to_non_nullable
-              as double?,
+              as double,
+      currentBudget: null == currentBudget
+          ? _value.currentBudget
+          : currentBudget // ignore: cast_nullable_to_non_nullable
+              as double,
       isSelected: null == isSelected
           ? _value.isSelected
           : isSelected // ignore: cast_nullable_to_non_nullable
@@ -116,7 +123,8 @@ abstract class _$$CategoryImplCopyWith<$Res>
       CategoriesType type,
       IconData icon,
       Color color,
-      double? budget,
+      double budget,
+      double currentBudget,
       bool isSelected});
 }
 
@@ -138,7 +146,8 @@ class __$$CategoryImplCopyWithImpl<$Res>
     Object? type = null,
     Object? icon = null,
     Object? color = null,
-    Object? budget = freezed,
+    Object? budget = null,
+    Object? currentBudget = null,
     Object? isSelected = null,
   }) {
     return _then(_$CategoryImpl(
@@ -162,10 +171,14 @@ class __$$CategoryImplCopyWithImpl<$Res>
           ? _value.color
           : color // ignore: cast_nullable_to_non_nullable
               as Color,
-      budget: freezed == budget
+      budget: null == budget
           ? _value.budget
           : budget // ignore: cast_nullable_to_non_nullable
-              as double?,
+              as double,
+      currentBudget: null == currentBudget
+          ? _value.currentBudget
+          : currentBudget // ignore: cast_nullable_to_non_nullable
+              as double,
       isSelected: null == isSelected
           ? _value.isSelected
           : isSelected // ignore: cast_nullable_to_non_nullable
@@ -184,6 +197,7 @@ class _$CategoryImpl implements _Category {
       required this.icon,
       required this.color,
       required this.budget,
+      required this.currentBudget,
       this.isSelected = false});
 
   @override
@@ -197,14 +211,16 @@ class _$CategoryImpl implements _Category {
   @override
   final Color color;
   @override
-  final double? budget;
+  final double budget;
+  @override
+  final double currentBudget;
   @override
   @JsonKey()
   final bool isSelected;
 
   @override
   String toString() {
-    return 'Category(id: $id, name: $name, type: $type, icon: $icon, color: $color, budget: $budget, isSelected: $isSelected)';
+    return 'Category(id: $id, name: $name, type: $type, icon: $icon, color: $color, budget: $budget, currentBudget: $currentBudget, isSelected: $isSelected)';
   }
 
   @override
@@ -218,13 +234,15 @@ class _$CategoryImpl implements _Category {
             (identical(other.icon, icon) || other.icon == icon) &&
             (identical(other.color, color) || other.color == color) &&
             (identical(other.budget, budget) || other.budget == budget) &&
+            (identical(other.currentBudget, currentBudget) ||
+                other.currentBudget == currentBudget) &&
             (identical(other.isSelected, isSelected) ||
                 other.isSelected == isSelected));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, id, name, type, icon, color, budget, isSelected);
+  int get hashCode => Object.hash(runtimeType, id, name, type, icon, color,
+      budget, currentBudget, isSelected);
 
   /// Create a copy of Category
   /// with the given fields replaced by the non-null parameter values.
@@ -242,7 +260,8 @@ abstract class _Category implements Category {
       required final CategoriesType type,
       required final IconData icon,
       required final Color color,
-      required final double? budget,
+      required final double budget,
+      required final double currentBudget,
       final bool isSelected}) = _$CategoryImpl;
 
   @override
@@ -256,7 +275,9 @@ abstract class _Category implements Category {
   @override
   Color get color;
   @override
-  double? get budget;
+  double get budget;
+  @override
+  double get currentBudget;
   @override
   bool get isSelected;
 

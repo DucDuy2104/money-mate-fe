@@ -58,7 +58,7 @@ class CategoriesBloc extends Bloc<CategoriesEvent, CategoriesState> {
       success: (state) {
         final updatedCategories = state.categories.map((category) {
           if (category.id == event.id) {
-            return category.copyWith(budget: event.budget);
+            return category.copyWith(budget: event.budget ?? 0);
           }
           return category;
         }).toList();

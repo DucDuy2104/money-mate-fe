@@ -7,6 +7,7 @@ import 'package:money_mate/shared/utils/typedefs.dart';
 abstract class CategoriesRemoteDataSource {
   ResultFuture<List<CategoryModel>> getCategories();
   ResultFuture<List<CategoryModel>> setupCategories(List<Category> categories);
+  ResultFuture<List<CategoryModel>> getOwnCategories();
 }
 
 class CategoriesRemoteDataSourceImpl extends CategoriesRemoteDataSource {
@@ -28,6 +29,16 @@ class CategoriesRemoteDataSourceImpl extends CategoriesRemoteDataSource {
         body: categories.map((e) => e.toLimitedJson()).toList());
 
     return _apiClient.post(
+        req: req,
+        parser: (data) =>
+            (data as List).map((e) => CategoryModel.fromJson((e))).toList());
+  }
+
+  @override
+  ResultFuture<List<CategoryModel>> getOwnCategories() {
+    final req = ApiRequest(url: '/categories/user');
+
+    return _apiClient.get(
         req: req,
         parser: (data) =>
             (data as List).map((e) => CategoryModel.fromJson((e))).toList());

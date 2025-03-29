@@ -12,7 +12,8 @@ class Category with _$Category {
     required CategoriesType type,
     required IconData icon,
     required Color color,
-    required double? budget,
+    required double budget,
+    required double currentBudget,
     @Default(false) bool isSelected,
   }) = _Category;
 }

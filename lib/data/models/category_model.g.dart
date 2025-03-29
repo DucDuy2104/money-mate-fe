@@ -13,6 +13,7 @@ _$CategoryModelImpl _$$CategoryModelImplFromJson(Map<String, dynamic> json) =>
       type: json['type'] as String,
       data: json['enum'] as String,
       budget: (json['budget'] as num?)?.toDouble(),
+      currentBudget: (json['currentBudget'] as num?)?.toDouble(),
     );
 
 Map<String, dynamic> _$$CategoryModelImplToJson(_$CategoryModelImpl instance) =>
@@ -22,4 +23,5 @@ Map<String, dynamic> _$$CategoryModelImplToJson(_$CategoryModelImpl instance) =>
       'type': instance.type,
       'enum': instance.data,
       'budget': instance.budget,
+      'currentBudget': instance.currentBudget,
     };
