@@ -1,9 +1,8 @@
-import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
-import 'package:money_mate/presentation/pages/home/models/transaction.dart';
+import 'package:money_mate/domain/entities/transaction.dart';
 import 'package:money_mate/shared/constants/app_colors.dart';
 import 'package:money_mate/shared/constants/app_theme.dart';
-import 'package:money_mate/shared/enums/transaction_types.dart';
+import 'package:money_mate/shared/enums/category_type.dart';
 import 'package:money_mate/shared/helper/currency_heler.dart';
 import 'package:money_mate/shared/helper/time_helper.dart';
 
@@ -15,30 +14,26 @@ class TransactionItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final formattedDate = TimeHelper.formatFriendlyDate(transaction.date);
+    final formattedDate = TimeHelper.formatFriendlyDate(transaction.createdAt);
     final formattedAmount = CurrencyHelper.formatCurrency(transaction.amount);
 
-    final Color amountColor = transaction.type == TransactionTypes.income
+    final Color amountColor = transaction.category.type == CategoriesType.income
         ? AppColors.upColor
         : AppColors.downColor;
-
-    final IconData transactionIcon = transaction.type == TransactionTypes.income
-        ? EvaIcons.arrowDownwardOutline
-        : EvaIcons.arrowUpwardOutline;
 
     return Card(
       elevation: 2,
       child: ListTile(
         onTap: onTap,
         leading: CircleAvatar(
-          backgroundColor: amountColor.withOpacity(0.2),
+          backgroundColor: transaction.category.color.withOpacity(0.2),
           child: Icon(
-            transactionIcon,
-            color: amountColor,
+            transaction.category.icon,
+            color: transaction.category.color,
           ),
         ),
         title: Text(
-          transaction.title,
+          transaction.category.name,
           style: context.textTheme.titleMedium,
         ),
         subtitle: Column(
@@ -57,9 +52,14 @@ class TransactionItem extends StatelessWidget {
             ),
           ],
         ),
-        trailing: Text(formattedAmount, style: context.textTheme.titleMedium?.copyWith(
-          color: amountColor
-        )),
+        trailing: Text(
+          transaction.category.type == CategoriesType.income 
+              ? "+$formattedAmount" 
+              : "-$formattedAmount",
+          style: context.textTheme.titleMedium?.copyWith(
+            color: amountColor
+          )
+        ),
       ),
     );
   }

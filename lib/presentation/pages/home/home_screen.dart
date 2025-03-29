@@ -1,59 +1,17 @@
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:money_mate/presentation/pages/home/bloc/home_bloc.dart';
 import 'package:money_mate/presentation/pages/home/models/category.dart';
-import 'package:money_mate/presentation/pages/home/models/transaction.dart';
 import 'package:money_mate/presentation/drawer_navigation/app_drawer.dart';
 import 'package:money_mate/presentation/pages/home/widgets/category_item.dart';
 import 'package:money_mate/presentation/pages/home/widgets/expense_chart.dart';
 import 'package:money_mate/presentation/pages/home/widgets/transaction_item.dart';
 import 'package:money_mate/presentation/routes/route_name.dart';
+import 'package:money_mate/shared/components/loading_scafford.dart';
 import 'package:money_mate/shared/constants/app_dimens.dart';
 import 'package:money_mate/shared/constants/constants.dart';
-import 'package:money_mate/shared/enums/transaction_types.dart';
-
-final List<Transaction> sampleTransactions = [
-  Transaction(
-    id: '1',
-    title: 'Mua cà phê',
-    description: 'Mua một ly cà phê tại Highlands',
-    amount: 45000,
-    date: DateTime.now().subtract(const Duration(days: 1)),
-    type: TransactionTypes.expense,
-  ),
-  Transaction(
-    id: '2',
-    title: 'Nhận lương',
-    description: 'Lương tháng 3',
-    amount: 15000000,
-    date: DateTime.now().subtract(const Duration(days: 5)),
-    type: TransactionTypes.income,
-  ),
-  Transaction(
-    id: '3',
-    title: 'Mua sách',
-    description: 'Mua sách lập trình Flutter',
-    amount: 200000,
-    date: DateTime.now().subtract(const Duration(days: 2)),
-    type: TransactionTypes.expense,
-  ),
-  Transaction(
-    id: '4',
-    title: 'Ăn trưa',
-    description: 'Ăn trưa tại quán cơm gà',
-    amount: 50000,
-    date: DateTime.now().subtract(const Duration(days: 3)),
-    type: TransactionTypes.expense,
-  ),
-  Transaction(
-    id: '5',
-    title: 'Tiền thưởng',
-    description: 'Thưởng hiệu suất công việc',
-    amount: 2000000,
-    date: DateTime.now().subtract(const Duration(days: 7)),
-    type: TransactionTypes.income,
-  ),
-];
 
 final List<Category> sampleCategories = [
   const Category(
@@ -94,75 +52,112 @@ final List<Category> sampleCategories = [
   ),
 ];
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        leading: Builder(
-          builder: (context) {
-            return IconButton(
-              icon: const Icon(EvaIcons.menu2Outline),
-              onPressed: () {
-                Scaffold.of(context).openDrawer();
-              },
-            );
-          },
-        ),
-        title: Text('👋Hôm nay bạn thế nào?'),
-      ),
-      drawer: const AppDrawer(currentRoute: RouteNames.home),
-      floatingActionButton: FloatingActionButton(
-          backgroundColor: Colors.white,
-          onPressed: () {
-            // TODO: go to chat screen
-            context.pushNamed(RouteNames.chatName);
-          },
-          child: Image.asset('assets/images/otter.png',
-              width: 100, height: 100, fit: BoxFit.cover)),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: AppDimens.paddingSmall),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const IncomeExpenseChart(),
-            const SizedBox(height: 20),
-            const Text("Danh mục tiêu dùng",
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-            const SizedBox(height: 10),
-            SizedBox(
-              height: 110,
-              child: ListView.separated(
-                scrollDirection: Axis.horizontal,
-                itemCount: sampleCategories.length,
-                itemBuilder: (context, index) {
-                  final category = sampleCategories[index];
-                  return CategoryItem(category: category);
-                },
-                separatorBuilder: (BuildContext context, int index) =>
-                    AppDimens.divider,
-              ),
-            ),
-            const SizedBox(height: 20),
-            const Text("Chi tiêu gần đây",
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-            const SizedBox(height: 10),
-            Expanded(
-              child: ListView.separated(
-                separatorBuilder: (context, index) => AppDimens.divider,
-                itemCount: sampleTransactions.length,
-                itemBuilder: (context, index) {
-                  final transaction = sampleTransactions[index];
+  State<HomeScreen> createState() => _HomeScreenState();
+}
 
-                  return TransactionItem(transaction: transaction);
-                },
-              ),
-            ),
-          ],
-        ),
-      ),
+class _HomeScreenState extends State<HomeScreen> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      getData();
+    });
+  }
+
+  void getData() {
+    BlocProvider.of<HomeBloc>(context).add(const HomeEvent.getData());
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocConsumer<HomeBloc, HomeState>(
+      listener: (context, state) {
+        // TODO: implement listener
+      },
+      builder: (context, state) {
+        return state.maybeMap(
+            loaded: (state) {
+              final transactions = state.data.transactions;
+              return LoadingScaffold(
+                isLoading: false,
+                child: Scaffold(
+                  appBar: AppBar(
+                    leading: Builder(
+                      builder: (context) {
+                        return IconButton(
+                          icon: const Icon(EvaIcons.menu2Outline),
+                          onPressed: () {
+                            Scaffold.of(context).openDrawer();
+                          },
+                        );
+                      },
+                    ),
+                    title: Text('👋Hôm nay bạn thế nào?'),
+                  ),
+                  drawer: const AppDrawer(currentRoute: RouteNames.home),
+                  floatingActionButton: FloatingActionButton(
+                      backgroundColor: Colors.white,
+                      onPressed: () {
+                        // TODO: go to chat screen
+                        context.pushNamed(RouteNames.chatName);
+                      },
+                      child: Image.asset('assets/images/otter.png',
+                          width: 100, height: 100, fit: BoxFit.cover)),
+                  body: Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: AppDimens.paddingSmall),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const IncomeExpenseChart(),
+                        const SizedBox(height: 20),
+                        const Text("Danh mục tiêu dùng",
+                            style: TextStyle(
+                                fontSize: 18, fontWeight: FontWeight.bold)),
+                        const SizedBox(height: 10),
+                        SizedBox(
+                          height: 110,
+                          child: ListView.separated(
+                            scrollDirection: Axis.horizontal,
+                            itemCount: sampleCategories.length,
+                            itemBuilder: (context, index) {
+                              final category = sampleCategories[index];
+                              return CategoryItem(category: category);
+                            },
+                            separatorBuilder:
+                                (BuildContext context, int index) =>
+                                    AppDimens.divider,
+                          ),
+                        ),
+                        const SizedBox(height: 20),
+                        const Text("Chi tiêu gần đây",
+                            style: TextStyle(
+                                fontSize: 18, fontWeight: FontWeight.bold)),
+                        const SizedBox(height: 10),
+                        Expanded(
+                          child: ListView.separated(
+                            separatorBuilder: (context, index) =>
+                                AppDimens.divider,
+                            itemCount: transactions.length,
+                            itemBuilder: (context, index) {
+                              final transaction = transactions[index];
+
+                              return TransactionItem(transaction: transaction);
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              );
+            },
+            orElse: () => LoadingScaffold(isLoading: true, child: Container()));
+      },
     );
   }
 }
