@@ -13,6 +13,8 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   final UsersRepository _usersRepository = getIt<UsersRepository>();
   ProfileBloc() : super(const ProfileState.initial()) {
     on<_GetProfile>(_onGetProfile);
+    on<_UpdateProfile>(_onUpdateProfile);
+    on<_ReloadProfile>(_onReloadProfile);
   }
 
   void _onGetProfile(_GetProfile event, Emitter<ProfileState> emit) async {
@@ -26,7 +28,52 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
         emit(ProfileState.loaded(profile));
       });
     } catch (e) {
-      emit(const ProfileState.error("Có lỗi khi lấy profile"));
+      emit(const ProfileState.error("Có lỗi khi lấy thông tin"));
+      debugPrint(e.toString());
+      return;
+    }
+  }
+
+  void _onUpdateProfile(
+      _UpdateProfile event, Emitter<ProfileState> emit) async {
+    state.maybeMap(
+        loaded: (state) {
+          emit(ProfileState.updating(state.profile));
+        },
+        orElse: () {});
+    await Future.delayed(const Duration(seconds: 2));
+    try {
+      final updatedProfile =
+          await _usersRepository.update({"name": event.name});
+      updatedProfile.fold((failure) {
+        emit(ProfileState.error(failure.message));
+      }, (updatedProfile) {
+        event.callback();
+      });
+    } catch (e) {
+      emit(const ProfileState.error("Có lỗi khi cập nhật"));
+      debugPrint(e.toString());
+      return;
+    }
+  }
+
+  void _onReloadProfile(
+      _ReloadProfile event, Emitter<ProfileState> emit) async {
+    state.maybeMap(
+        loaded: (state) {
+          emit(ProfileState.updating(state.profile));
+        },
+        orElse: () {});
+    await Future.delayed(const Duration(seconds: 2));
+    try {
+      final profile = await _usersRepository.getProfile();
+      profile.fold((failure) {
+        emit(ProfileState.error(failure.message));
+      }, (profile) {
+        emit(ProfileState.loaded(profile));
+      });
+    } catch (e) {
+      emit(const ProfileState.error("Có lỗi khi lấy thông tin"));
       debugPrint(e.toString());
       return;
     }

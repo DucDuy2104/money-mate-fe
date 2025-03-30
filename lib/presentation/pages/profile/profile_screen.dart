@@ -1,5 +1,6 @@
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:money_mate/presentation/drawer_navigation/app_drawer.dart';
 import 'package:money_mate/presentation/pages/profile/widgets/expense_pie_chart.dart';
 import 'package:money_mate/presentation/pages/profile/widgets/profile_card.dart';
@@ -38,7 +39,11 @@ class ProfileScreen extends StatelessWidget {
         drawer: const AppDrawer(currentRoute: RouteNames.profile),
         body: Column(
           children: [
-            const ProfileCard(),
+            GestureDetector(
+              onTap: () {
+                context.pushNamed(RouteNames.profileDetailsName);
+              },
+              child: const ProfileCard()),
             AppDimens.spaceSmall,
             const AppTab(
                 tab1Name: 'Hôm nay', tab2Name: 'Tháng này', controller: null),
