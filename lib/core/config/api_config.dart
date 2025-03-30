@@ -6,3 +6,4 @@ class ApiConfig {
 
   static const socketBaseUrl = 'http://192.168.241.24:3000/chat';
 }
+ 

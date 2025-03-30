@@ -19,32 +19,44 @@ mixin _$HomeEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() getData,
+    required TResult Function() reloadData,
+    required TResult Function() connect,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? getData,
+    TResult? Function()? reloadData,
+    TResult? Function()? connect,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? getData,
+    TResult Function()? reloadData,
+    TResult Function()? connect,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_GetData value) getData,
+    required TResult Function(_ReloadData value) reloadData,
+    required TResult Function(_Connect value) connect,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetData value)? getData,
+    TResult? Function(_ReloadData value)? reloadData,
+    TResult? Function(_Connect value)? connect,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetData value)? getData,
+    TResult Function(_ReloadData value)? reloadData,
+    TResult Function(_Connect value)? connect,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -112,6 +124,8 @@ class _$GetDataImpl implements _GetData {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() getData,
+    required TResult Function() reloadData,
+    required TResult Function() connect,
   }) {
     return getData();
   }
@@ -120,6 +134,8 @@ class _$GetDataImpl implements _GetData {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? getData,
+    TResult? Function()? reloadData,
+    TResult? Function()? connect,
   }) {
     return getData?.call();
   }
@@ -128,6 +144,8 @@ class _$GetDataImpl implements _GetData {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? getData,
+    TResult Function()? reloadData,
+    TResult Function()? connect,
     required TResult orElse(),
   }) {
     if (getData != null) {
@@ -140,6 +158,8 @@ class _$GetDataImpl implements _GetData {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_GetData value) getData,
+    required TResult Function(_ReloadData value) reloadData,
+    required TResult Function(_Connect value) connect,
   }) {
     return getData(this);
   }
@@ -148,6 +168,8 @@ class _$GetDataImpl implements _GetData {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetData value)? getData,
+    TResult? Function(_ReloadData value)? reloadData,
+    TResult? Function(_Connect value)? connect,
   }) {
     return getData?.call(this);
   }
@@ -156,6 +178,8 @@ class _$GetDataImpl implements _GetData {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetData value)? getData,
+    TResult Function(_ReloadData value)? reloadData,
+    TResult Function(_Connect value)? connect,
     required TResult orElse(),
   }) {
     if (getData != null) {
@@ -167,6 +191,228 @@ class _$GetDataImpl implements _GetData {
 
 abstract class _GetData implements HomeEvent {
   const factory _GetData() = _$GetDataImpl;
+}
+
+/// @nodoc
+abstract class _$$ReloadDataImplCopyWith<$Res> {
+  factory _$$ReloadDataImplCopyWith(
+          _$ReloadDataImpl value, $Res Function(_$ReloadDataImpl) then) =
+      __$$ReloadDataImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$ReloadDataImplCopyWithImpl<$Res>
+    extends _$HomeEventCopyWithImpl<$Res, _$ReloadDataImpl>
+    implements _$$ReloadDataImplCopyWith<$Res> {
+  __$$ReloadDataImplCopyWithImpl(
+      _$ReloadDataImpl _value, $Res Function(_$ReloadDataImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of HomeEvent
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$ReloadDataImpl implements _ReloadData {
+  const _$ReloadDataImpl();
+
+  @override
+  String toString() {
+    return 'HomeEvent.reloadData()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$ReloadDataImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() getData,
+    required TResult Function() reloadData,
+    required TResult Function() connect,
+  }) {
+    return reloadData();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? getData,
+    TResult? Function()? reloadData,
+    TResult? Function()? connect,
+  }) {
+    return reloadData?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? getData,
+    TResult Function()? reloadData,
+    TResult Function()? connect,
+    required TResult orElse(),
+  }) {
+    if (reloadData != null) {
+      return reloadData();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetData value) getData,
+    required TResult Function(_ReloadData value) reloadData,
+    required TResult Function(_Connect value) connect,
+  }) {
+    return reloadData(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetData value)? getData,
+    TResult? Function(_ReloadData value)? reloadData,
+    TResult? Function(_Connect value)? connect,
+  }) {
+    return reloadData?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetData value)? getData,
+    TResult Function(_ReloadData value)? reloadData,
+    TResult Function(_Connect value)? connect,
+    required TResult orElse(),
+  }) {
+    if (reloadData != null) {
+      return reloadData(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ReloadData implements HomeEvent {
+  const factory _ReloadData() = _$ReloadDataImpl;
+}
+
+/// @nodoc
+abstract class _$$ConnectImplCopyWith<$Res> {
+  factory _$$ConnectImplCopyWith(
+          _$ConnectImpl value, $Res Function(_$ConnectImpl) then) =
+      __$$ConnectImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$ConnectImplCopyWithImpl<$Res>
+    extends _$HomeEventCopyWithImpl<$Res, _$ConnectImpl>
+    implements _$$ConnectImplCopyWith<$Res> {
+  __$$ConnectImplCopyWithImpl(
+      _$ConnectImpl _value, $Res Function(_$ConnectImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of HomeEvent
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$ConnectImpl implements _Connect {
+  const _$ConnectImpl();
+
+  @override
+  String toString() {
+    return 'HomeEvent.connect()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$ConnectImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() getData,
+    required TResult Function() reloadData,
+    required TResult Function() connect,
+  }) {
+    return connect();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? getData,
+    TResult? Function()? reloadData,
+    TResult? Function()? connect,
+  }) {
+    return connect?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? getData,
+    TResult Function()? reloadData,
+    TResult Function()? connect,
+    required TResult orElse(),
+  }) {
+    if (connect != null) {
+      return connect();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetData value) getData,
+    required TResult Function(_ReloadData value) reloadData,
+    required TResult Function(_Connect value) connect,
+  }) {
+    return connect(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetData value)? getData,
+    TResult? Function(_ReloadData value)? reloadData,
+    TResult? Function(_Connect value)? connect,
+  }) {
+    return connect?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetData value)? getData,
+    TResult Function(_ReloadData value)? reloadData,
+    TResult Function(_Connect value)? connect,
+    required TResult orElse(),
+  }) {
+    if (connect != null) {
+      return connect(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Connect implements HomeEvent {
+  const factory _Connect() = _$ConnectImpl;
 }
 
 /// @nodoc
@@ -797,6 +1043,7 @@ abstract class _Loaded implements HomeState {
 mixin _$HomeData {
   List<Transaction> get transactions => throw _privateConstructorUsedError;
   List<Category> get categories => throw _privateConstructorUsedError;
+  FourMonthsStatistic get statistic => throw _privateConstructorUsedError;
 
   /// Create a copy of HomeData
   /// with the given fields replaced by the non-null parameter values.
@@ -810,7 +1057,12 @@ abstract class $HomeDataCopyWith<$Res> {
   factory $HomeDataCopyWith(HomeData value, $Res Function(HomeData) then) =
       _$HomeDataCopyWithImpl<$Res, HomeData>;
   @useResult
-  $Res call({List<Transaction> transactions, List<Category> categories});
+  $Res call(
+      {List<Transaction> transactions,
+      List<Category> categories,
+      FourMonthsStatistic statistic});
+
+  $FourMonthsStatisticCopyWith<$Res> get statistic;
 }
 
 /// @nodoc
@@ -830,6 +1082,7 @@ class _$HomeDataCopyWithImpl<$Res, $Val extends HomeData>
   $Res call({
     Object? transactions = null,
     Object? categories = null,
+    Object? statistic = null,
   }) {
     return _then(_value.copyWith(
       transactions: null == transactions
@@ -840,7 +1093,21 @@ class _$HomeDataCopyWithImpl<$Res, $Val extends HomeData>
           ? _value.categories
           : categories // ignore: cast_nullable_to_non_nullable
               as List<Category>,
+      statistic: null == statistic
+          ? _value.statistic
+          : statistic // ignore: cast_nullable_to_non_nullable
+              as FourMonthsStatistic,
     ) as $Val);
+  }
+
+  /// Create a copy of HomeData
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $FourMonthsStatisticCopyWith<$Res> get statistic {
+    return $FourMonthsStatisticCopyWith<$Res>(_value.statistic, (value) {
+      return _then(_value.copyWith(statistic: value) as $Val);
+    });
   }
 }
 
@@ -852,7 +1119,13 @@ abstract class _$$HomeDataImplCopyWith<$Res>
       __$$HomeDataImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<Transaction> transactions, List<Category> categories});
+  $Res call(
+      {List<Transaction> transactions,
+      List<Category> categories,
+      FourMonthsStatistic statistic});
+
+  @override
+  $FourMonthsStatisticCopyWith<$Res> get statistic;
 }
 
 /// @nodoc
@@ -870,6 +1143,7 @@ class __$$HomeDataImplCopyWithImpl<$Res>
   $Res call({
     Object? transactions = null,
     Object? categories = null,
+    Object? statistic = null,
   }) {
     return _then(_$HomeDataImpl(
       transactions: null == transactions
@@ -880,6 +1154,10 @@ class __$$HomeDataImplCopyWithImpl<$Res>
           ? _value._categories
           : categories // ignore: cast_nullable_to_non_nullable
               as List<Category>,
+      statistic: null == statistic
+          ? _value.statistic
+          : statistic // ignore: cast_nullable_to_non_nullable
+              as FourMonthsStatistic,
     ));
   }
 }
@@ -889,7 +1167,8 @@ class __$$HomeDataImplCopyWithImpl<$Res>
 class _$HomeDataImpl implements _HomeData {
   const _$HomeDataImpl(
       {required final List<Transaction> transactions,
-      required final List<Category> categories})
+      required final List<Category> categories,
+      required this.statistic})
       : _transactions = transactions,
         _categories = categories;
 
@@ -910,8 +1189,11 @@ class _$HomeDataImpl implements _HomeData {
   }
 
   @override
+  final FourMonthsStatistic statistic;
+
+  @override
   String toString() {
-    return 'HomeData(transactions: $transactions, categories: $categories)';
+    return 'HomeData(transactions: $transactions, categories: $categories, statistic: $statistic)';
   }
 
   @override
@@ -922,14 +1204,17 @@ class _$HomeDataImpl implements _HomeData {
             const DeepCollectionEquality()
                 .equals(other._transactions, _transactions) &&
             const DeepCollectionEquality()
-                .equals(other._categories, _categories));
+                .equals(other._categories, _categories) &&
+            (identical(other.statistic, statistic) ||
+                other.statistic == statistic));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(_transactions),
-      const DeepCollectionEquality().hash(_categories));
+      const DeepCollectionEquality().hash(_categories),
+      statistic);
 
   /// Create a copy of HomeData
   /// with the given fields replaced by the non-null parameter values.
@@ -943,12 +1228,15 @@ class _$HomeDataImpl implements _HomeData {
 abstract class _HomeData implements HomeData {
   const factory _HomeData(
       {required final List<Transaction> transactions,
-      required final List<Category> categories}) = _$HomeDataImpl;
+      required final List<Category> categories,
+      required final FourMonthsStatistic statistic}) = _$HomeDataImpl;
 
   @override
   List<Transaction> get transactions;
   @override
   List<Category> get categories;
+  @override
+  FourMonthsStatistic get statistic;
 
   /// Create a copy of HomeData
   /// with the given fields replaced by the non-null parameter values.

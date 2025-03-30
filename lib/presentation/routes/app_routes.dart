@@ -59,10 +59,7 @@ final List<GoRoute> appRoutes = [
   GoRoute(
     path: RouteNames.home,
     name: RouteNames.homeName,
-    builder: (context, state) => BlocProvider(
-      create: (context) => HomeBloc(),
-      child: const HomeScreen(),
-    ),
+    builder: (context, state) => const HomeScreen(),
   ),
   GoRoute(
     path: RouteNames.settings,

@@ -14,9 +14,12 @@ class CategoryItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double percent = (category.currentBudget / category.budget) * 100;
-    double progress =
-        (category.currentBudget / category.budget).clamp(0.0, 1.0);
+    double percent = category.budget == 0
+        ? 100
+        : (category.currentBudget / category.budget) * 100;
+    double progress = category.budget == 0
+        ? 1
+        : (category.currentBudget / category.budget).clamp(0.0, 1.0);
 
     Color progressColor = _getProgressColor(progress, category.type);
     bool isNearLimit = category.type == CategoriesType.expense

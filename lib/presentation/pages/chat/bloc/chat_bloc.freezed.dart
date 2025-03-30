@@ -21,7 +21,7 @@ mixin _$ChatEvent {
     required TResult Function() getChatData,
     required TResult Function() connect,
     required TResult Function(Message message) updateMessages,
-    required TResult Function() disconnect,
+    required TResult Function() leaveRoom,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -29,7 +29,7 @@ mixin _$ChatEvent {
     TResult? Function()? getChatData,
     TResult? Function()? connect,
     TResult? Function(Message message)? updateMessages,
-    TResult? Function()? disconnect,
+    TResult? Function()? leaveRoom,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -37,7 +37,7 @@ mixin _$ChatEvent {
     TResult Function()? getChatData,
     TResult Function()? connect,
     TResult Function(Message message)? updateMessages,
-    TResult Function()? disconnect,
+    TResult Function()? leaveRoom,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -46,7 +46,7 @@ mixin _$ChatEvent {
     required TResult Function(_GetChatData value) getChatData,
     required TResult Function(_Connect value) connect,
     required TResult Function(_UpdateMessages value) updateMessages,
-    required TResult Function(_Disconnect value) disconnect,
+    required TResult Function(_LeaveRoom value) leaveRoom,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -54,7 +54,7 @@ mixin _$ChatEvent {
     TResult? Function(_GetChatData value)? getChatData,
     TResult? Function(_Connect value)? connect,
     TResult? Function(_UpdateMessages value)? updateMessages,
-    TResult? Function(_Disconnect value)? disconnect,
+    TResult? Function(_LeaveRoom value)? leaveRoom,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -62,7 +62,7 @@ mixin _$ChatEvent {
     TResult Function(_GetChatData value)? getChatData,
     TResult Function(_Connect value)? connect,
     TResult Function(_UpdateMessages value)? updateMessages,
-    TResult Function(_Disconnect value)? disconnect,
+    TResult Function(_LeaveRoom value)? leaveRoom,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -132,7 +132,7 @@ class _$GetChatDataImpl implements _GetChatData {
     required TResult Function() getChatData,
     required TResult Function() connect,
     required TResult Function(Message message) updateMessages,
-    required TResult Function() disconnect,
+    required TResult Function() leaveRoom,
   }) {
     return getChatData();
   }
@@ -143,7 +143,7 @@ class _$GetChatDataImpl implements _GetChatData {
     TResult? Function()? getChatData,
     TResult? Function()? connect,
     TResult? Function(Message message)? updateMessages,
-    TResult? Function()? disconnect,
+    TResult? Function()? leaveRoom,
   }) {
     return getChatData?.call();
   }
@@ -154,7 +154,7 @@ class _$GetChatDataImpl implements _GetChatData {
     TResult Function()? getChatData,
     TResult Function()? connect,
     TResult Function(Message message)? updateMessages,
-    TResult Function()? disconnect,
+    TResult Function()? leaveRoom,
     required TResult orElse(),
   }) {
     if (getChatData != null) {
@@ -169,7 +169,7 @@ class _$GetChatDataImpl implements _GetChatData {
     required TResult Function(_GetChatData value) getChatData,
     required TResult Function(_Connect value) connect,
     required TResult Function(_UpdateMessages value) updateMessages,
-    required TResult Function(_Disconnect value) disconnect,
+    required TResult Function(_LeaveRoom value) leaveRoom,
   }) {
     return getChatData(this);
   }
@@ -180,7 +180,7 @@ class _$GetChatDataImpl implements _GetChatData {
     TResult? Function(_GetChatData value)? getChatData,
     TResult? Function(_Connect value)? connect,
     TResult? Function(_UpdateMessages value)? updateMessages,
-    TResult? Function(_Disconnect value)? disconnect,
+    TResult? Function(_LeaveRoom value)? leaveRoom,
   }) {
     return getChatData?.call(this);
   }
@@ -191,7 +191,7 @@ class _$GetChatDataImpl implements _GetChatData {
     TResult Function(_GetChatData value)? getChatData,
     TResult Function(_Connect value)? connect,
     TResult Function(_UpdateMessages value)? updateMessages,
-    TResult Function(_Disconnect value)? disconnect,
+    TResult Function(_LeaveRoom value)? leaveRoom,
     required TResult orElse(),
   }) {
     if (getChatData != null) {
@@ -249,7 +249,7 @@ class _$ConnectImpl implements _Connect {
     required TResult Function() getChatData,
     required TResult Function() connect,
     required TResult Function(Message message) updateMessages,
-    required TResult Function() disconnect,
+    required TResult Function() leaveRoom,
   }) {
     return connect();
   }
@@ -260,7 +260,7 @@ class _$ConnectImpl implements _Connect {
     TResult? Function()? getChatData,
     TResult? Function()? connect,
     TResult? Function(Message message)? updateMessages,
-    TResult? Function()? disconnect,
+    TResult? Function()? leaveRoom,
   }) {
     return connect?.call();
   }
@@ -271,7 +271,7 @@ class _$ConnectImpl implements _Connect {
     TResult Function()? getChatData,
     TResult Function()? connect,
     TResult Function(Message message)? updateMessages,
-    TResult Function()? disconnect,
+    TResult Function()? leaveRoom,
     required TResult orElse(),
   }) {
     if (connect != null) {
@@ -286,7 +286,7 @@ class _$ConnectImpl implements _Connect {
     required TResult Function(_GetChatData value) getChatData,
     required TResult Function(_Connect value) connect,
     required TResult Function(_UpdateMessages value) updateMessages,
-    required TResult Function(_Disconnect value) disconnect,
+    required TResult Function(_LeaveRoom value) leaveRoom,
   }) {
     return connect(this);
   }
@@ -297,7 +297,7 @@ class _$ConnectImpl implements _Connect {
     TResult? Function(_GetChatData value)? getChatData,
     TResult? Function(_Connect value)? connect,
     TResult? Function(_UpdateMessages value)? updateMessages,
-    TResult? Function(_Disconnect value)? disconnect,
+    TResult? Function(_LeaveRoom value)? leaveRoom,
   }) {
     return connect?.call(this);
   }
@@ -308,7 +308,7 @@ class _$ConnectImpl implements _Connect {
     TResult Function(_GetChatData value)? getChatData,
     TResult Function(_Connect value)? connect,
     TResult Function(_UpdateMessages value)? updateMessages,
-    TResult Function(_Disconnect value)? disconnect,
+    TResult Function(_LeaveRoom value)? leaveRoom,
     required TResult orElse(),
   }) {
     if (connect != null) {
@@ -406,7 +406,7 @@ class _$UpdateMessagesImpl implements _UpdateMessages {
     required TResult Function() getChatData,
     required TResult Function() connect,
     required TResult Function(Message message) updateMessages,
-    required TResult Function() disconnect,
+    required TResult Function() leaveRoom,
   }) {
     return updateMessages(message);
   }
@@ -417,7 +417,7 @@ class _$UpdateMessagesImpl implements _UpdateMessages {
     TResult? Function()? getChatData,
     TResult? Function()? connect,
     TResult? Function(Message message)? updateMessages,
-    TResult? Function()? disconnect,
+    TResult? Function()? leaveRoom,
   }) {
     return updateMessages?.call(message);
   }
@@ -428,7 +428,7 @@ class _$UpdateMessagesImpl implements _UpdateMessages {
     TResult Function()? getChatData,
     TResult Function()? connect,
     TResult Function(Message message)? updateMessages,
-    TResult Function()? disconnect,
+    TResult Function()? leaveRoom,
     required TResult orElse(),
   }) {
     if (updateMessages != null) {
@@ -443,7 +443,7 @@ class _$UpdateMessagesImpl implements _UpdateMessages {
     required TResult Function(_GetChatData value) getChatData,
     required TResult Function(_Connect value) connect,
     required TResult Function(_UpdateMessages value) updateMessages,
-    required TResult Function(_Disconnect value) disconnect,
+    required TResult Function(_LeaveRoom value) leaveRoom,
   }) {
     return updateMessages(this);
   }
@@ -454,7 +454,7 @@ class _$UpdateMessagesImpl implements _UpdateMessages {
     TResult? Function(_GetChatData value)? getChatData,
     TResult? Function(_Connect value)? connect,
     TResult? Function(_UpdateMessages value)? updateMessages,
-    TResult? Function(_Disconnect value)? disconnect,
+    TResult? Function(_LeaveRoom value)? leaveRoom,
   }) {
     return updateMessages?.call(this);
   }
@@ -465,7 +465,7 @@ class _$UpdateMessagesImpl implements _UpdateMessages {
     TResult Function(_GetChatData value)? getChatData,
     TResult Function(_Connect value)? connect,
     TResult Function(_UpdateMessages value)? updateMessages,
-    TResult Function(_Disconnect value)? disconnect,
+    TResult Function(_LeaveRoom value)? leaveRoom,
     required TResult orElse(),
   }) {
     if (updateMessages != null) {
@@ -488,18 +488,18 @@ abstract class _UpdateMessages implements ChatEvent {
 }
 
 /// @nodoc
-abstract class _$$DisconnectImplCopyWith<$Res> {
-  factory _$$DisconnectImplCopyWith(
-          _$DisconnectImpl value, $Res Function(_$DisconnectImpl) then) =
-      __$$DisconnectImplCopyWithImpl<$Res>;
+abstract class _$$LeaveRoomImplCopyWith<$Res> {
+  factory _$$LeaveRoomImplCopyWith(
+          _$LeaveRoomImpl value, $Res Function(_$LeaveRoomImpl) then) =
+      __$$LeaveRoomImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$DisconnectImplCopyWithImpl<$Res>
-    extends _$ChatEventCopyWithImpl<$Res, _$DisconnectImpl>
-    implements _$$DisconnectImplCopyWith<$Res> {
-  __$$DisconnectImplCopyWithImpl(
-      _$DisconnectImpl _value, $Res Function(_$DisconnectImpl) _then)
+class __$$LeaveRoomImplCopyWithImpl<$Res>
+    extends _$ChatEventCopyWithImpl<$Res, _$LeaveRoomImpl>
+    implements _$$LeaveRoomImplCopyWith<$Res> {
+  __$$LeaveRoomImplCopyWithImpl(
+      _$LeaveRoomImpl _value, $Res Function(_$LeaveRoomImpl) _then)
       : super(_value, _then);
 
   /// Create a copy of ChatEvent
@@ -508,18 +508,18 @@ class __$$DisconnectImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$DisconnectImpl implements _Disconnect {
-  const _$DisconnectImpl();
+class _$LeaveRoomImpl implements _LeaveRoom {
+  const _$LeaveRoomImpl();
 
   @override
   String toString() {
-    return 'ChatEvent.disconnect()';
+    return 'ChatEvent.leaveRoom()';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$DisconnectImpl);
+        (other.runtimeType == runtimeType && other is _$LeaveRoomImpl);
   }
 
   @override
@@ -531,9 +531,9 @@ class _$DisconnectImpl implements _Disconnect {
     required TResult Function() getChatData,
     required TResult Function() connect,
     required TResult Function(Message message) updateMessages,
-    required TResult Function() disconnect,
+    required TResult Function() leaveRoom,
   }) {
-    return disconnect();
+    return leaveRoom();
   }
 
   @override
@@ -542,9 +542,9 @@ class _$DisconnectImpl implements _Disconnect {
     TResult? Function()? getChatData,
     TResult? Function()? connect,
     TResult? Function(Message message)? updateMessages,
-    TResult? Function()? disconnect,
+    TResult? Function()? leaveRoom,
   }) {
-    return disconnect?.call();
+    return leaveRoom?.call();
   }
 
   @override
@@ -553,11 +553,11 @@ class _$DisconnectImpl implements _Disconnect {
     TResult Function()? getChatData,
     TResult Function()? connect,
     TResult Function(Message message)? updateMessages,
-    TResult Function()? disconnect,
+    TResult Function()? leaveRoom,
     required TResult orElse(),
   }) {
-    if (disconnect != null) {
-      return disconnect();
+    if (leaveRoom != null) {
+      return leaveRoom();
     }
     return orElse();
   }
@@ -568,9 +568,9 @@ class _$DisconnectImpl implements _Disconnect {
     required TResult Function(_GetChatData value) getChatData,
     required TResult Function(_Connect value) connect,
     required TResult Function(_UpdateMessages value) updateMessages,
-    required TResult Function(_Disconnect value) disconnect,
+    required TResult Function(_LeaveRoom value) leaveRoom,
   }) {
-    return disconnect(this);
+    return leaveRoom(this);
   }
 
   @override
@@ -579,9 +579,9 @@ class _$DisconnectImpl implements _Disconnect {
     TResult? Function(_GetChatData value)? getChatData,
     TResult? Function(_Connect value)? connect,
     TResult? Function(_UpdateMessages value)? updateMessages,
-    TResult? Function(_Disconnect value)? disconnect,
+    TResult? Function(_LeaveRoom value)? leaveRoom,
   }) {
-    return disconnect?.call(this);
+    return leaveRoom?.call(this);
   }
 
   @override
@@ -590,18 +590,18 @@ class _$DisconnectImpl implements _Disconnect {
     TResult Function(_GetChatData value)? getChatData,
     TResult Function(_Connect value)? connect,
     TResult Function(_UpdateMessages value)? updateMessages,
-    TResult Function(_Disconnect value)? disconnect,
+    TResult Function(_LeaveRoom value)? leaveRoom,
     required TResult orElse(),
   }) {
-    if (disconnect != null) {
-      return disconnect(this);
+    if (leaveRoom != null) {
+      return leaveRoom(this);
     }
     return orElse();
   }
 }
 
-abstract class _Disconnect implements ChatEvent {
-  const factory _Disconnect() = _$DisconnectImpl;
+abstract class _LeaveRoom implements ChatEvent {
+  const factory _LeaveRoom() = _$LeaveRoomImpl;
 }
 
 /// @nodoc

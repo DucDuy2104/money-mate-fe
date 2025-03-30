@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:money_mate/core/service/getit/locator.dart' as ls;
-import 'package:money_mate/presentation/pages/register/bloc/register_bloc.dart';
+import 'package:money_mate/presentation/pages/home/bloc/home_bloc.dart';
 import 'package:money_mate/presentation/pages/splash/splash_screen.dart';
 import 'package:money_mate/shared/constants/app_theme.dart';
 
@@ -44,6 +44,7 @@ class AppStartupWidget extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => AppStartupCubit()..initializeApp()),
+        BlocProvider(create: (context) => HomeBloc())
       ],
       child: ScreenUtilInit(
         designSize: const Size(375, 812),
@@ -55,7 +56,8 @@ class AppStartupWidget extends StatelessWidget {
               } else if (state is AppStartupError) {
                 return AppStartupErrorWidget(
                   message: state.message,
-                  onRetry: () => context.read<AppStartupCubit>().initializeApp(),
+                  onRetry: () =>
+                      context.read<AppStartupCubit>().initializeApp(),
                 );
               }
               return MaterialApp(
@@ -71,7 +73,6 @@ class AppStartupWidget extends StatelessWidget {
     );
   }
 }
-
 
 class AppStartupErrorWidget extends StatelessWidget {
   const AppStartupErrorWidget({
