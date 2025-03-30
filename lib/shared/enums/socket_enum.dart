@@ -2,5 +2,7 @@ enum SocketEnum {
   sendMessage,
   newMessage,
   joinRoom,
-  leaveRoom
+  leaveRoom,
+  newTransaction,
+  initSocket
 }

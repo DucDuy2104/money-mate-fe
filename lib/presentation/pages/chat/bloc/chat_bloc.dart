@@ -22,8 +22,8 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
   ChatBloc() : super(const ChatState.initial()) {
     on<_GetChatData>(_onGetChatData);
     on<_Connect>(_onConnect);
-    on<_Disconnect>(_onDisconnect);
     on<_UpdateMessages>(_onUpdateMessages);
+    on<_LeaveRoom>(_leaveConversation);
   }
 
   Future<void> _onGetChatData(
@@ -52,8 +52,9 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
       if (!emit.isDone) {
         messagesResult.fold(
           (failure) => emit(ChatState.error(failure.message)),
-          (messages) => emit(ChatState.loaded(
-              ChatLoadedData(messages: messages.reversed.toList(), conversation: conversation))),
+          (messages) => emit(ChatState.loaded(ChatLoadedData(
+              messages: messages.reversed.toList(),
+              conversation: conversation))),
         );
       }
     } catch (e) {
@@ -80,8 +81,11 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
   }
 
   // Leave conversation
-  void leaveConversation(String conversationId) {
-    _socketService.emit(SocketEnum.leaveRoom.name, {"room": conversationId});
+  void _leaveConversation(_LeaveRoom event, Emitter<ChatState> emit) {
+    state.maybeMap(
+        loaded: (data) => _socketService.emit(
+            SocketEnum.leaveRoom.name, {"room": data.chatData.conversation.id}),
+        orElse: () {});
   }
 
   // Send message
@@ -95,10 +99,6 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
           });
         },
         orElse: () {});
-  }
-
-  void _onDisconnect(_Disconnect event, Emitter<ChatState> emit) {
-    _socketService.disconnect();
   }
 
   void _onConnect(_Connect event, Emitter<ChatState> emit) {

@@ -1,11 +1,23 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:money_mate/domain/entities/statistic.dart';
+import 'package:money_mate/shared/utils/datetime_utils.dart';
+import 'package:intl/intl.dart';
 
 class IncomeExpenseChart extends StatelessWidget {
-  const IncomeExpenseChart({super.key});
+  final FourMonthsStatistic statistic;
+  const IncomeExpenseChart({super.key, required this.statistic});
+
+  String _formatNumber(double value) {
+    final formatter = NumberFormat.compact();
+    return formatter.format(value);
+  }
 
   @override
   Widget build(BuildContext context) {
+    final incomes = statistic.incomes;
+    final expenses = statistic.expenses;
+    final maxY = [...incomes, ...expenses].reduce((a, b) => a > b ? a : b) * 2;
     return ClipRRect(
       borderRadius: BorderRadius.circular(16),
       child: Container(
@@ -20,7 +32,7 @@ class IncomeExpenseChart extends StatelessWidget {
             end: Alignment.bottomRight,
           ),
         ),
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 32),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -43,10 +55,11 @@ class IncomeExpenseChart extends StatelessWidget {
                             fontWeight: FontWeight.bold,
                             color: Colors.white70,
                           );
-    
-                          const months = ['Jan', 'Apr', 'Jul', 'Oct'];
-    
-                          if (value.toInt() >= 0 && value.toInt() < months.length) {
+
+                          final months = DatetimeUtils.getLastFourMonths();
+
+                          if (value.toInt() >= 0 &&
+                              value.toInt() < months.length) {
                             return Padding(
                               padding: const EdgeInsets.only(top: 8.0),
                               child: Text(months[value.toInt()], style: style),
@@ -67,17 +80,60 @@ class IncomeExpenseChart extends StatelessWidget {
                   minX: 0,
                   maxX: 3,
                   minY: 0,
-                  maxY: 1300,
+                  maxY: maxY,
                   gridData: const FlGridData(show: false),
+                  lineTouchData: LineTouchData(
+                    touchTooltipData: LineTouchTooltipData(
+                      tooltipPadding: const EdgeInsets.symmetric(vertical: 2, horizontal: 8),
+                      getTooltipItems: (List<LineBarSpot> touchedBarSpots) {
+                        return touchedBarSpots.map((barSpot) {
+                          final value = barSpot.y;
+                          final index = barSpot.barIndex;
+                          final formattedValue = _formatNumber(value);
+
+                          return LineTooltipItem(
+                            formattedValue,
+                            TextStyle(
+                              color: index == 0
+                                  ? Colors.pinkAccent
+                                  : Colors.cyanAccent,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          );
+                        }).toList();
+                      },
+                    ),
+                    handleBuiltInTouches: true,
+                    getTouchedSpotIndicator:
+                        (LineChartBarData barData, List<int> spotIndexes) {
+                      return spotIndexes.map((spotIndex) {
+                        return TouchedSpotIndicatorData(
+                          const FlLine(color: Colors.white, strokeWidth: 2),
+                          FlDotData(
+                            getDotPainter: (spot, percent, barData, index) {
+                              return FlDotCirclePainter(
+                                radius: 5,
+                                color: barData.gradient?.colors.first ??
+                                    Colors.white,
+                                strokeWidth: 2,
+                                strokeColor: Colors.white,
+                              );
+                            },
+                          ),
+                        );
+                      }).toList();
+                    },
+                  ),
                   lineBarsData: [
                     LineChartBarData(
-                      spots: const [
-                        FlSpot(0, 400),
-                        FlSpot(1, 700),
-                        FlSpot(2, 750),
-                        FlSpot(3, 1200),
+                      spots: [
+                        FlSpot(0, expenses[0]),
+                        FlSpot(1, expenses[1]),
+                        FlSpot(2, expenses[2]),
+                        FlSpot(3, expenses[3]),
                       ],
                       isCurved: true,
+                      curveSmoothness: 0.1,
                       gradient: const LinearGradient(
                         colors: [Colors.redAccent, Colors.pinkAccent],
                       ),
@@ -87,11 +143,11 @@ class IncomeExpenseChart extends StatelessWidget {
                       belowBarData: BarAreaData(show: false),
                     ),
                     LineChartBarData(
-                      spots: const [
-                        FlSpot(0, 300),
-                        FlSpot(1, 600),
-                        FlSpot(2, 700),
-                        FlSpot(3, 1100),
+                      spots: [
+                        FlSpot(0, incomes[0]),
+                        FlSpot(1, incomes[1]),
+                        FlSpot(2, incomes[2]),
+                        FlSpot(3, incomes[3]),
                       ],
                       isCurved: true,
                       gradient: const LinearGradient(

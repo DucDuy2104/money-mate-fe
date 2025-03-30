@@ -8,18 +8,21 @@ import 'package:money_mate/data/data_sources/remote/auth_remote_data_source.dart
 import 'package:money_mate/data/data_sources/remote/categories_remote_data_source.dart';
 import 'package:money_mate/data/data_sources/remote/conversation_remote_data_source.dart';
 import 'package:money_mate/data/data_sources/remote/messages_remote_data_source.dart';
+import 'package:money_mate/data/data_sources/remote/statistic_remote_data_source.dart';
 import 'package:money_mate/data/data_sources/remote/transactions_remote_data_source.dart';
 import 'package:money_mate/data/data_sources/remote/users_remote_data_source.dart';
 import 'package:money_mate/data/repositories/auth_repository.dart';
 import 'package:money_mate/data/repositories/categories_repository.dart';
 import 'package:money_mate/data/repositories/conversation_repository.dart';
 import 'package:money_mate/data/repositories/messages_repository.dart';
+import 'package:money_mate/data/repositories/statistic_repository.dart';
 import 'package:money_mate/data/repositories/transactions_repository.dart';
 import 'package:money_mate/data/repositories/users_repository.dart';
 import 'package:money_mate/domain/repositories/auth_repository_impl.dart';
 import 'package:money_mate/domain/repositories/categories_repository_impl.dart';
 import 'package:money_mate/domain/repositories/conversation_repository_impl.dart';
 import 'package:money_mate/domain/repositories/messages_repository_impl.dart';
+import 'package:money_mate/domain/repositories/statistic_repository_impl.dart';
 import 'package:money_mate/domain/repositories/transactions_repository_impl.dart';
 import 'package:money_mate/domain/repositories/users_repository_impl.dart';
 
@@ -82,6 +85,10 @@ registerRemoteDataSources() {
   // TransactionsRemoteDataSources
   getIt.registerLazySingleton<TransactionsRemoteDataSource>(
       () => TransactionsRemoteDataSourceImpl(getIt<ApiClient>()));
+
+  // StatisticRemoteDataSources
+  getIt.registerLazySingleton<StatisticRemoteDataSource>(
+      () => StatisticRemoteDataSourceImpl(getIt<ApiClient>()));
 }
 
 registerRepositories() {
@@ -112,4 +119,8 @@ registerRepositories() {
   // TransactionsRepository
   getIt.registerLazySingleton<TransactionsRepository>(
       () => TransactionsRepositoryImpl(getIt<TransactionsRemoteDataSource>()));
+
+  // StatisticRepository
+  getIt.registerLazySingleton<StatisticRepository>(
+      () => StatisticRepositoryImpl(getIt<StatisticRemoteDataSource>()));
 }

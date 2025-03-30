@@ -13,5 +13,6 @@ class HomeData with _$HomeData {
   const factory HomeData({
     required List<Transaction> transactions,
     required List<Category> categories,
+    required FourMonthsStatistic statistic,
   }) = _HomeData;
 }

@@ -34,9 +34,9 @@ class _ChatScreenState extends State<ChatScreen> {
 
   @override
   void dispose() {
-    super.dispose();
-    disconnectSocket();
+    leaveRoom();
     _textController.dispose();
+    super.dispose();
   }
 
   void getBotConversation() {
@@ -62,8 +62,8 @@ class _ChatScreenState extends State<ChatScreen> {
     BlocProvider.of<ChatBloc>(context).add(const ChatEvent.connect());
   }
 
-  void disconnectSocket() {
-    BlocProvider.of<ChatBloc>(context).add(const ChatEvent.disconnect());
+  void leaveRoom() {
+    BlocProvider.of<ChatBloc>(context).add(const ChatEvent.leaveRoom());
   }
 
   @override
@@ -111,12 +111,15 @@ class _ChatScreenState extends State<ChatScreen> {
                             controller: _scrollController,
                             padding:
                                 const EdgeInsets.all(AppDimens.paddingSmall),
-                            itemCount: messages[0].isSentByMe ? messages.length + 1 : messages.length,
+                            itemCount: messages[0].isSentByMe
+                                ? messages.length + 1
+                                : messages.length,
                             itemBuilder: (context, index) {
-                              if(index == 0 && messages[0].isSentByMe) {
+                              if (index == 0 && messages[0].isSentByMe) {
                                 return const TypingIndicator();
                               }
-                              final id =  messages[0].isSentByMe ? index - 1 : index;
+                              final id =
+                                  messages[0].isSentByMe ? index - 1 : index;
                               final message = messages[id];
                               return MessageItem(message: message);
                             },

@@ -29,7 +29,12 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void getData() {
-    BlocProvider.of<HomeBloc>(context).add(const HomeEvent.getData());
+    final homeBloc = BlocProvider.of<HomeBloc>(context);
+    homeBloc.state.maybeMap(
+        loaded: (state) {},
+        orElse: () {
+          homeBloc.add(const HomeEvent.getData());
+        });
   }
 
   @override
@@ -43,6 +48,7 @@ class _HomeScreenState extends State<HomeScreen> {
             loaded: (state) {
               final transactions = state.data.transactions;
               final categories = state.data.categories;
+              final statistic = state.data.statistic;
               return LoadingScaffold(
                 isLoading: false,
                 child: Scaffold(
@@ -74,7 +80,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const IncomeExpenseChart(),
+                        IncomeExpenseChart(statistic: statistic),
                         const SizedBox(height: 20),
                         const Text("Danh mục tiêu dùng",
                             style: TextStyle(
