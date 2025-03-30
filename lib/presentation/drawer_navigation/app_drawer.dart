@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:money_mate/presentation/drawer_navigation/drawer_item.dart';
 import 'package:money_mate/presentation/drawer_navigation/drawer_service.dart';
+import 'package:money_mate/presentation/drawer_navigation/widgets/header_skeleton.dart';
+import 'package:money_mate/presentation/pages/profile/bloc/profile_bloc.dart';
 import 'package:money_mate/shared/constants/app_constants.dart';
 
 class AppDrawer extends StatefulWidget {
   final String currentRoute;
 
   const AppDrawer({
-    Key? key,
+    super.key,
     required this.currentRoute,
-  }) : super(key: key);
+  });
 
   @override
   State<AppDrawer> createState() => _AppDrawerState();
@@ -30,8 +33,16 @@ class _AppDrawerState extends State<AppDrawer> {
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: isDarkMode
-                ? [const Color(0xFF1E1E1E), const Color(0xFF343A40), const Color(0xFF495057)]
-                : [const Color(0xFF007AFF), const Color(0xFF32CD32), const Color(0xFFFFD700)],
+                ? [
+                    const Color(0xFF1E1E1E),
+                    const Color(0xFF343A40),
+                    const Color(0xFF495057)
+                  ]
+                : [
+                    const Color(0xFF007AFF),
+                    const Color(0xFF32CD32),
+                    const Color(0xFFFFD700)
+                  ],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
@@ -93,7 +104,7 @@ class _AppDrawerState extends State<AppDrawer> {
         onPressed: () {
           // Close the drawer
           Navigator.pop(context);
-          
+
           // Show confirmation dialog
           showDialog(
             context: context,
@@ -127,111 +138,121 @@ class _AppDrawerState extends State<AppDrawer> {
   }
 
   Widget _buildModernHeader(BuildContext context, bool isDarkMode) {
-    return Container(
-      padding: const EdgeInsets.fromLTRB(16, 48, 16, 16),
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: isDarkMode
-              ? [const Color(0xFF232526), const Color(0xFF414345)]
-              : [const Color(0xFF2193b0), const Color(0xFF6dd5ed)],
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-        ),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.2),
-            blurRadius: 8,
-            offset: const Offset(0, 2),
-          ),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              Container(
-                width: 70,
-                height: 70,
+    return BlocBuilder<ProfileBloc, ProfileState>(
+      builder: (context, state) {
+        return state.maybeMap(
+            loaded: (state) {
+              final profile = state.profile;
+              return Container(
+                padding: const EdgeInsets.fromLTRB(16, 48, 16, 16),
                 decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  border: Border.all(color: Colors.white, width: 2),
+                  gradient: LinearGradient(
+                    colors: isDarkMode
+                        ? [const Color(0xFF232526), const Color(0xFF414345)]
+                        : [const Color(0xFF2193b0), const Color(0xFF6dd5ed)],
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                  ),
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.black.withOpacity(0.3),
+                      color: Colors.black.withOpacity(0.2),
                       blurRadius: 8,
-                      offset: const Offset(0, 3),
+                      offset: const Offset(0, 2),
                     ),
                   ],
                 ),
-                child: CircleAvatar(
-                  radius: 35,
-                  backgroundImage: const NetworkImage(AppConstants.tempImage),
-                  backgroundColor: Colors.grey[200],
-                ),
-              ),
-              const SizedBox(width: 16),
-              const Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
-                      'Cao Vũ Đức Duy',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        letterSpacing: 0.5,
-                      ),
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    const SizedBox(height: 4),
                     Row(
                       children: [
-                        const Icon(
-                          Icons.email_outlined,
-                          color: Colors.white70,
-                          size: 14,
+                        Container(
+                          width: 70,
+                          height: 70,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            border: Border.all(color: Colors.white, width: 2),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black.withOpacity(0.3),
+                                blurRadius: 8,
+                                offset: const Offset(0, 3),
+                              ),
+                            ],
+                          ),
+                          child: CircleAvatar(
+                            radius: 35,
+                            backgroundImage: NetworkImage(
+                                profile.avatarUrl ?? AppConstants.tempImage),
+                            backgroundColor: Colors.grey[200],
+                          ),
                         ),
-                        const SizedBox(width: 4),
-                        const Expanded(
-                          child: Text(
-                            'cvducduy@gmail.com',
-                            style: TextStyle(
-                              color: Colors.white70,
-                              fontSize: 14,
-                            ),
-                            overflow: TextOverflow.ellipsis,
+                        const SizedBox(width: 16),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                profile.name!,
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                  letterSpacing: 0.5,
+                                ),
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                              const SizedBox(height: 4),
+                              Row(
+                                children: [
+                                  const Icon(
+                                    Icons.email_outlined,
+                                    color: Colors.white70,
+                                    size: 14,
+                                  ),
+                                  const SizedBox(width: 4),
+                                  Expanded(
+                                    child: Text(
+                                      profile.email,
+                                      style: const TextStyle(
+                                        color: Colors.white70,
+                                        fontSize: 14,
+                                      ),
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
                           ),
                         ),
                       ],
                     ),
+                    const SizedBox(height: 16),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        _buildStatItem('43', 'Transactions'),
+                        Container(
+                          height: 24,
+                          width: 1,
+                          color: Colors.white24,
+                        ),
+                        _buildStatItem('3', 'Categories'),
+                        Container(
+                          height: 24,
+                          width: 1,
+                          color: Colors.white24,
+                        ),
+                        _buildStatItem('15', 'Reports'),
+                      ],
+                    ),
                   ],
                 ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 16),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              _buildStatItem('43', 'Transactions'),
-              Container(
-                height: 24,
-                width: 1,
-                color: Colors.white24,
-              ),
-              _buildStatItem('3', 'Categories'),
-              Container(
-                height: 24,
-                width: 1,
-                color: Colors.white24,
-              ),
-              _buildStatItem('15', 'Reports'),
-            ],
-          ),
-        ],
-      ),
+              );
+            },
+            orElse: () => const HeaderSkeleton());
+      },
     );
   }
 
@@ -261,8 +282,8 @@ class _AppDrawerState extends State<AppDrawer> {
   }
 
   Widget _buildDrawerItem(BuildContext context, DrawerItem item) {
-    final isSelected = widget.currentRoute == item.route || 
-                        widget.currentRoute.startsWith('${item.route}/');
+    final isSelected = widget.currentRoute == item.route ||
+        widget.currentRoute.startsWith('${item.route}/');
     final hasChildren = item.children.isNotEmpty;
     final isExpanded = _expandedItems.contains(item.route);
     final hasSelectedChild = hasChildren &&
@@ -273,8 +294,8 @@ class _AppDrawerState extends State<AppDrawer> {
         ListTile(
           leading: Icon(
             item.icon,
-            color: (isSelected || hasSelectedChild) 
-                ? Colors.white 
+            color: (isSelected || hasSelectedChild)
+                ? Colors.white
                 : Colors.white70,
           ),
           title: Text(
@@ -285,7 +306,7 @@ class _AppDrawerState extends State<AppDrawer> {
             ),
           ),
           selected: isSelected,
-          trailing: hasChildren 
+          trailing: hasChildren
               ? Icon(
                   isExpanded ? Icons.expand_less : Icons.expand_more,
                   color: Colors.white70,
@@ -294,7 +315,9 @@ class _AppDrawerState extends State<AppDrawer> {
           onTap: () {
             if (hasChildren) {
               setState(() {
-                isExpanded ? _expandedItems.remove(item.route) : _expandedItems.add(item.route);
+                isExpanded
+                    ? _expandedItems.remove(item.route)
+                    : _expandedItems.add(item.route);
               });
               if (!isSelected) context.go(item.route);
             } else {
@@ -303,7 +326,6 @@ class _AppDrawerState extends State<AppDrawer> {
             }
           },
         ),
-
         if (hasChildren && isExpanded)
           Padding(
             padding: const EdgeInsets.only(left: 16.0),
@@ -320,7 +342,8 @@ class _AppDrawerState extends State<AppDrawer> {
                   title: Text(
                     child.title,
                     style: TextStyle(
-                      fontWeight: isChildSelected ? FontWeight.bold : FontWeight.normal,
+                      fontWeight:
+                          isChildSelected ? FontWeight.bold : FontWeight.normal,
                       color: isChildSelected ? Colors.white : Colors.white70,
                     ),
                   ),

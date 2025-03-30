@@ -14,4 +14,11 @@ class UsersRepositoryImpl extends UsersRepository {
     return result.fold(
         (failure) => Left(failure), (userModel) => Right(userModel.toEntity()));
   }
+
+  @override
+  ResultFuture<User> getProfile() async {
+    final result = await _usersRemoteDataSource.getProfile();
+    return result.fold(
+        (failure) => Left(failure), (userModel) => Right(userModel.toEntity()));
+  }
 }
