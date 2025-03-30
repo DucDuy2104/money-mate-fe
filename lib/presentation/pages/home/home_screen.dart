@@ -7,6 +7,7 @@ import 'package:money_mate/presentation/drawer_navigation/app_drawer.dart';
 import 'package:money_mate/presentation/pages/home/widgets/category_item.dart';
 import 'package:money_mate/presentation/pages/home/widgets/expense_chart.dart';
 import 'package:money_mate/presentation/pages/home/widgets/transaction_item.dart';
+import 'package:money_mate/presentation/pages/profile/bloc/profile_bloc.dart';
 import 'package:money_mate/presentation/routes/route_name.dart';
 import 'package:money_mate/shared/components/loading_scafford.dart';
 import 'package:money_mate/shared/constants/app_dimens.dart';
@@ -34,6 +35,8 @@ class _HomeScreenState extends State<HomeScreen> {
         loaded: (state) {},
         orElse: () {
           homeBloc.add(const HomeEvent.getData());
+          BlocProvider.of<ProfileBloc>(context)
+              .add(const ProfileEvent.getProfile());
         });
   }
 

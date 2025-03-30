@@ -6,7 +6,6 @@ import 'package:money_mate/presentation/pages/cateogries_first_set/bloc/categori
 import 'package:money_mate/presentation/pages/cateogries_first_set/categories_setup_screen.dart.dart';
 import 'package:money_mate/presentation/pages/chat/bloc/chat_bloc.dart';
 import 'package:money_mate/presentation/pages/chat/chat_screen.dart';
-import 'package:money_mate/presentation/pages/home/bloc/home_bloc.dart';
 import 'package:money_mate/presentation/pages/login/bloc/login_bloc.dart';
 import 'package:money_mate/presentation/pages/login/login_screen.dart';
 import 'package:money_mate/presentation/pages/home/home_screen.dart';
@@ -14,6 +13,7 @@ import 'package:money_mate/presentation/pages/notifications/notifications_screen
 import 'package:money_mate/presentation/pages/opt_verify/bloc/verification_bloc.dart';
 import 'package:money_mate/presentation/pages/opt_verify/otp_verify_screen.dart';
 import 'package:money_mate/presentation/pages/profile/profile_screen.dart';
+import 'package:money_mate/presentation/pages/profile_detail/profile_detail_screen.dart';
 import 'package:money_mate/presentation/pages/register/bloc/register_bloc.dart';
 import 'package:money_mate/presentation/pages/register/register_screen.dart';
 import 'package:money_mate/presentation/pages/setting/setting_screen.dart';
@@ -71,7 +71,7 @@ final List<GoRoute> appRoutes = [
       name: RouteNames.chatName,
       builder: (context, state) => BlocProvider(
             create: (context) => ChatBloc(),
-            child: ChatScreen(),
+            child: const ChatScreen(),
           )),
   GoRoute(
       path: RouteNames.category,
@@ -92,4 +92,8 @@ final List<GoRoute> appRoutes = [
       path: RouteNames.notifications,
       name: RouteNames.notificationsName,
       builder: (context, state) => const NotificationsScreen()),
+  GoRoute(
+      path: RouteNames.profileDetails,
+      name: RouteNames.profileDetailsName,
+      builder: (context, state) => const ProfileDetailScreen())
 ];
