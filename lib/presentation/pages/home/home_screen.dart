@@ -36,7 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
         orElse: () {
           homeBloc.add(const HomeEvent.getData());
           BlocProvider.of<ProfileBloc>(context)
-              .add(const ProfileEvent.getProfile());
+              .add(const ProfileEvent.getData());
         });
   }
 

@@ -15,7 +15,7 @@ class ProfileCard extends StatelessWidget {
       builder: (context, state) {
         return state.maybeMap(
             loaded: (state) {
-              final profile = state.profile;
+              final profile = state.data.profile;
               return Container(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 16, vertical: 14),

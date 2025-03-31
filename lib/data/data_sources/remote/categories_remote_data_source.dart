@@ -2,12 +2,13 @@ import 'package:money_mate/core/network/api_client.dart';
 import 'package:money_mate/core/network/models/api_request.dart';
 import 'package:money_mate/data/models/category_model.dart';
 import 'package:money_mate/domain/entities/category.dart';
+import 'package:money_mate/shared/enums/category_format.dart';
 import 'package:money_mate/shared/utils/typedefs.dart';
 
 abstract class CategoriesRemoteDataSource {
   ResultFuture<List<CategoryModel>> getCategories();
   ResultFuture<List<CategoryModel>> setupCategories(List<Category> categories);
-  ResultFuture<List<CategoryModel>> getOwnCategories();
+  ResultFuture<List<CategoryModel>> getOwnCategories(CategoryFormat format);
 }
 
 class CategoriesRemoteDataSourceImpl extends CategoriesRemoteDataSource {
@@ -35,8 +36,8 @@ class CategoriesRemoteDataSourceImpl extends CategoriesRemoteDataSource {
   }
 
   @override
-  ResultFuture<List<CategoryModel>> getOwnCategories() {
-    final req = ApiRequest(url: '/categories/user');
+  ResultFuture<List<CategoryModel>> getOwnCategories(CategoryFormat format) {
+    final req = ApiRequest(url: '/categories/user/${format.name}');
 
     return _apiClient.get(
         req: req,

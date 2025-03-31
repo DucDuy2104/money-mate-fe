@@ -1,0 +1,1 @@
+enum CategoryFormat { daily, monthly }

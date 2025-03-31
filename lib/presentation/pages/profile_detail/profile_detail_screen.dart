@@ -13,11 +13,11 @@ class ProfileDetailScreen extends StatelessWidget {
       builder: (context, state) {
         return state.maybeMap(
           loaded: (state) {
-            final user = state.profile;
+            final user = state.data.profile;
             return ProfileDataWidget(user, false);
           },
           updating: (state) {
-            final user = state.user;
+            final user = state.data.profile;
             return ProfileDataWidget(user, true);
           },
           orElse: () => const LoadingScaffold(
