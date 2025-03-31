@@ -6,7 +6,7 @@ import 'package:money_mate/shared/enums/category_format.dart';
 import 'package:money_mate/shared/utils/typedefs.dart';
 
 abstract class CategoriesRemoteDataSource {
-  ResultFuture<List<CategoryModel>> getCategories();
+  ResultFuture<List<CategoryModel>> getCategories({String? userId});
   ResultFuture<List<CategoryModel>> setupCategories(List<Category> categories);
   ResultFuture<List<CategoryModel>> getOwnCategories(CategoryFormat format);
 }
@@ -15,8 +15,8 @@ class CategoriesRemoteDataSourceImpl extends CategoriesRemoteDataSource {
   final ApiClient _apiClient;
   CategoriesRemoteDataSourceImpl(this._apiClient);
   @override
-  ResultFuture<List<CategoryModel>> getCategories() {
-    final req = ApiRequest(url: '/categories');
+  ResultFuture<List<CategoryModel>> getCategories({String? userId}) {
+    final req = ApiRequest(url: '/categories', query: {"userId": userId});
     return _apiClient.get(
         req: req,
         parser: (data) =>

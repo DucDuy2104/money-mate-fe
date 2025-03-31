@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:money_mate/domain/entities/category.dart';
-import 'package:money_mate/presentation/pages/cateogries_first_set/bloc/categories_bloc.dart';
+import 'package:money_mate/presentation/pages/cateogries_first_set/bloc/setup_categories_bloc.dart';
 import 'package:money_mate/presentation/pages/cateogries_first_set/funcs/add_category_dialog.dart';
 import 'package:money_mate/presentation/pages/cateogries_first_set/funcs/limit_dialog.dart';
 import 'package:money_mate/presentation/pages/cateogries_first_set/widgets/categories_grid.dart';
@@ -55,21 +55,21 @@ class _CategoriesSetupScreenState extends State<CategoriesSetupScreen>
 
   void removeCategory(Category category) {
     if (!category.isSelected) return;
-    BlocProvider.of<CategoriesBloc>(context)
-        .add(CategoriesEvent.toggleCategory(category.id));
+    BlocProvider.of<SetupCategoriesBloc>(context)
+        .add(SetupCategoriesEvent.toggleCategory(category.id));
     updateLimit(category, null);
   }
 
   void addCategory(Category category, double? budget) {
     if (category.isSelected) return;
-    BlocProvider.of<CategoriesBloc>(context)
-        .add(CategoriesEvent.toggleCategory(category.id));
+    BlocProvider.of<SetupCategoriesBloc>(context)
+        .add(SetupCategoriesEvent.toggleCategory(category.id));
     updateLimit(category, budget);
   }
 
   void updateLimit(Category category, double? budget) {
-    BlocProvider.of<CategoriesBloc>(context)
-        .add(CategoriesEvent.updateCategoryBudget(category.id, budget));
+    BlocProvider.of<SetupCategoriesBloc>(context)
+        .add(SetupCategoriesEvent.updateCategoryBudget(category.id, budget));
   }
 
   void toggleCategory(Category category) {
@@ -77,7 +77,7 @@ class _CategoriesSetupScreenState extends State<CategoriesSetupScreen>
       showLimitDialog(context, category, removeCategory, updateLimit);
     } else {
       final selectedCategories =
-          BlocProvider.of<CategoriesBloc>(context).getSelectedCategories();
+          BlocProvider.of<SetupCategoriesBloc>(context).getSelectedCategories();
       if (selectedCategories.length < 10) {
         showAddCategoryDialog(context, category, addCategory);
       } else {
@@ -89,8 +89,8 @@ class _CategoriesSetupScreenState extends State<CategoriesSetupScreen>
 
   void getCategories() {
     try {
-      BlocProvider.of<CategoriesBloc>(context)
-          .add(CategoriesEvent.getCategories());
+      BlocProvider.of<SetupCategoriesBloc>(context)
+          .add(SetupCategoriesEvent.getCategories());
     } catch (e) {
       AppToast.error(context, 'Lỗi khi tải danh mục, vui lòng thử lại');
       debugPrint(e.toString());
@@ -99,7 +99,7 @@ class _CategoriesSetupScreenState extends State<CategoriesSetupScreen>
 
   void onSetupCategories() {
     try {
-      final bloc = BlocProvider.of<CategoriesBloc>(context);
+      final bloc = BlocProvider.of<SetupCategoriesBloc>(context);
       if (bloc.countSelectedExpenseCategories() < 3) {
         AppToast.error(context, 'Vui lòng chọn ít nhất 3 danh mục chi tiêu');
         return;
@@ -111,7 +111,7 @@ class _CategoriesSetupScreenState extends State<CategoriesSetupScreen>
       }
 
       final selectedCategories = bloc.getSelectedCategories();
-      bloc.add(CategoriesEvent.setupCategories(selectedCategories));
+      bloc.add(SetupCategoriesEvent.setupCategories(selectedCategories));
     } catch (e) {
       AppToast.error(context, 'Lỗi khi cài đặt danh mục, vui lòng thử lại');
       debugPrint(e.toString());
@@ -120,7 +120,7 @@ class _CategoriesSetupScreenState extends State<CategoriesSetupScreen>
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<CategoriesBloc, CategoriesState>(
+    return BlocConsumer<SetupCategoriesBloc, SetupCategoriesState>(
       listener: (context, state) {
         state.maybeMap(
           setupSuccess: (state) {
@@ -133,7 +133,7 @@ class _CategoriesSetupScreenState extends State<CategoriesSetupScreen>
         );
       },
       builder: (context, state) {
-        final bloc = BlocProvider.of<CategoriesBloc>(context);
+        final bloc = BlocProvider.of<SetupCategoriesBloc>(context);
         final List<Category> systemExpenseCategories =
             bloc.getExpensesCategories();
 
@@ -183,7 +183,7 @@ class _CategoriesSetupScreenState extends State<CategoriesSetupScreen>
                         builder: (context) {
                           bool isExpenseTab = _tabController.index == 0;
                           int selectedCount =
-                              BlocProvider.of<CategoriesBloc>(context)
+                              BlocProvider.of<SetupCategoriesBloc>(context)
                                   .getSelectedCategories()
                                   .length;
 

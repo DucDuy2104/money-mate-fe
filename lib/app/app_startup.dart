@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:money_mate/core/service/getit/locator.dart' as ls;
+import 'package:money_mate/presentation/pages/category/bloc/categories_bloc.dart';
 import 'package:money_mate/presentation/pages/home/bloc/home_bloc.dart';
 import 'package:money_mate/presentation/pages/profile/bloc/profile_bloc.dart';
 import 'package:money_mate/presentation/pages/splash/splash_screen.dart';
@@ -46,7 +47,8 @@ class AppStartupWidget extends StatelessWidget {
       providers: [
         BlocProvider(create: (context) => AppStartupCubit()..initializeApp()),
         BlocProvider(create: (context) => HomeBloc()),
-        BlocProvider(create: (context) => ProfileBloc())
+        BlocProvider(create: (context) => ProfileBloc()),
+        BlocProvider(create: (context) => CategoriesBloc())
       ],
       child: ScreenUtilInit(
         designSize: const Size(375, 812),

@@ -1,8 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:money_mate/domain/entities/user.dart';
-import 'package:money_mate/presentation/pages/category/category_screen.dart';
-import 'package:money_mate/presentation/pages/cateogries_first_set/bloc/categories_bloc.dart';
+import 'package:money_mate/presentation/pages/category/categories_screen.dart';
+import 'package:money_mate/presentation/pages/cateogries_first_set/bloc/setup_categories_bloc.dart';
 import 'package:money_mate/presentation/pages/cateogries_first_set/categories_setup_screen.dart.dart';
 import 'package:money_mate/presentation/pages/chat/bloc/chat_bloc.dart';
 import 'package:money_mate/presentation/pages/chat/chat_screen.dart';
@@ -76,12 +76,12 @@ final List<GoRoute> appRoutes = [
   GoRoute(
       path: RouteNames.category,
       name: RouteNames.categoryName,
-      builder: (context, state) => const CategoryScreen()),
+      builder: (context, state) => const CategoriesScreen()),
   GoRoute(
       path: RouteNames.categoryRegister,
       name: RouteNames.categoryRegisterName,
       builder: (context, state) => BlocProvider(
-            create: (context) => CategoriesBloc(),
+            create: (context) => SetupCategoriesBloc(),
             child: const CategoriesSetupScreen(),
           )),
   GoRoute(
