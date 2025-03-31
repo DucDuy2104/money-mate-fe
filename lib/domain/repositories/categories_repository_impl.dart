@@ -38,4 +38,21 @@ class CategoriesRepositoryImpl extends CategoriesRepository {
         (categoryModels) =>
             Right(categoryModels.map((e) => e.toEntity()).toList()));
   }
+
+  @override
+  ResultFuture<Category> disableCategory(String categoryId) async {
+    final result =
+        await _categoriesRemoteDataSource.disableCategory(categoryId);
+    return result.fold((failure) => Left(failure),
+        (categoryModel) => Right(categoryModel.toEntity()));
+  }
+
+  @override
+  ResultFuture<Category> enableCategory(
+      String categoryId, double budget) async {
+    final result =
+        await _categoriesRemoteDataSource.enableCategory(categoryId, budget);
+    return result.fold((failure) => Left(failure),
+        (categoryModel) => Right(categoryModel.toEntity()));
+  }
 }

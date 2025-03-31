@@ -6,6 +6,7 @@ import 'package:money_mate/presentation/drawer_navigation/app_drawer.dart';
 import 'package:money_mate/presentation/pages/category/bloc/categories_bloc.dart';
 import 'package:money_mate/presentation/pages/category/widgets/category_dialogs.dart';
 import 'package:money_mate/presentation/pages/cateogries_first_set/widgets/categories_grid.dart';
+import 'package:money_mate/presentation/pages/home/bloc/home_bloc.dart';
 import 'package:money_mate/presentation/pages/profile/bloc/profile_bloc.dart';
 import 'package:money_mate/presentation/routes/route_name.dart';
 import 'package:money_mate/shared/components/app_tab.dart';
@@ -59,10 +60,50 @@ class _CategoriesScreenState extends State<CategoriesScreen>
         .add(CategoriesEvent.getCategories(userId));
   }
 
+  void disableCategories(Category category) {
+    final categoriesBloc = BlocProvider.of<CategoriesBloc>(context);
+    final user = BlocProvider.of<ProfileBloc>(context).getProfile();
+    categoriesBloc.add(CategoriesEvent.disableCategory(category.id, () {
+      categoriesBloc.add(CategoriesEvent.reload(user!.id));
+    }));
+  }
+
+  void enableCategories(Category category, double budget) {
+    final categoriesBloc = BlocProvider.of<CategoriesBloc>(context);
+    final user = BlocProvider.of<ProfileBloc>(context).getProfile();
+    final homeBloc = BlocProvider.of<HomeBloc>(context);
+
+    BlocProvider.of<CategoriesBloc>(context)
+        .add(CategoriesEvent.enableCategory(category.id, budget, () {
+      categoriesBloc.add(CategoriesEvent.reload(user!.id));
+      homeBloc.add(const HomeEvent.reloadData());
+    }));
+  }
+
   void toggleCategory(Category category) {
+    final categoriesBloc = BlocProvider.of<CategoriesBloc>(context);
     if (category.isSelected) {
-      CategoryDialogs.showUpdateCategoryDialog(
-          context, category, (budget) {}, () {});
+      CategoryDialogs.showUpdateCategoryDialog(context, category, (budget) {
+        enableCategories(category, budget);
+      }, () {
+        final countSelectedExpenseCategories = categoriesBloc
+            .countSelectedCategoriesByType(CategoriesType.expense);
+        if (category.type == CategoriesType.expense &&
+            countSelectedExpenseCategories <= 3) {
+          AppToast.warning(
+              context, "Bạn phải chọn ít nhất 3 danh mục chi tiêu");
+          return;
+        }
+        final countSelectedIncomeCategories =
+            categoriesBloc.countSelectedCategoriesByType(CategoriesType.income);
+        if (category.type == CategoriesType.income &&
+            countSelectedIncomeCategories <= 1) {
+          AppToast.warning(
+              context, "Bạn phải chọn ít nhất 1 danh mục thu nhập");
+          return;
+        }
+        disableCategories(category);
+      });
       return;
     }
     final countSelectedCategories =
@@ -70,8 +111,9 @@ class _CategoriesScreenState extends State<CategoriesScreen>
     if (countSelectedCategories == 10) {
       AppToast.warning(context, "Bạn đã chọn quá 10 danh mục");
     } else {
-      CategoryDialogs.showAddCategoryDialog(
-          context, category, (budget) {}, () {});
+      CategoryDialogs.showAddCategoryDialog(context, category, (budget) {
+        enableCategories(category, budget);
+      }, () {});
     }
   }
 
@@ -86,7 +128,10 @@ class _CategoriesScreenState extends State<CategoriesScreen>
         final List<Category> systemIncomeCategories =
             bloc.getCategoriesByType(CategoriesType.income);
         return LoadingScaffold(
-          isLoading: false,
+          isLoading: state.maybeMap(
+              loading: (state) => true,
+              reloading: (state) => true,
+              orElse: () => false),
           child: Scaffold(
             appBar: AppBar(
               title: const Text('Danh mục'),

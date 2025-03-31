@@ -9,6 +9,8 @@ abstract class CategoriesRemoteDataSource {
   ResultFuture<List<CategoryModel>> getCategories({String? userId});
   ResultFuture<List<CategoryModel>> setupCategories(List<Category> categories);
   ResultFuture<List<CategoryModel>> getOwnCategories(CategoryFormat format);
+  ResultFuture<CategoryModel> enableCategory(String categoryId, double? budget);
+  ResultFuture<CategoryModel> disableCategory(String categoryId);
 }
 
 class CategoriesRemoteDataSourceImpl extends CategoriesRemoteDataSource {
@@ -43,5 +45,23 @@ class CategoriesRemoteDataSourceImpl extends CategoriesRemoteDataSource {
         req: req,
         parser: (data) =>
             (data as List).map((e) => CategoryModel.fromJson((e))).toList());
+  }
+
+  @override
+  ResultFuture<CategoryModel> disableCategory(String categoryId) {
+    final req =
+        ApiRequest(url: '/categories/disable', body: {"category": categoryId});
+    return _apiClient.put(
+        req: req, parser: (data) => CategoryModel.fromJson((data)));
+  }
+
+  @override
+  ResultFuture<CategoryModel> enableCategory(
+      String categoryId, double? budget) {
+    final req = ApiRequest(
+        url: '/categories/enable',
+        body: {"category": categoryId, "budget": budget});
+    return _apiClient.put(
+        req: req, parser: (data) => CategoryModel.fromJson((data)));
   }
 }

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:money_mate/domain/entities/category.dart';
+import 'package:money_mate/presentation/pages/category/bloc/categories_bloc.dart';
 import 'package:money_mate/shared/enums/category_type.dart';
 
 class CategoryDialogs {
@@ -132,7 +134,10 @@ class CategoryDialogs {
                     const SizedBox(width: 16),
                     Expanded(
                       child: ElevatedButton(
-                        onPressed: onDeselect,
+                        onPressed: () {
+                          onDeselect();
+                          Navigator.of(context).pop();
+                        },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.redAccent,
                           foregroundColor: Colors.white,

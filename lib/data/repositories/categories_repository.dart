@@ -6,4 +6,6 @@ abstract class CategoriesRepository {
   ResultFuture<List<Category>> getCategories({String? userId});
   ResultFuture<List<Category>> setupCategories(List<Category> categories);
   ResultFuture<List<Category>> getOwnCategories(CategoryFormat format);
+  ResultFuture<Category> enableCategory(String categoryId, double budget);
+  ResultFuture<Category> disableCategory(String categoryId);
 }
