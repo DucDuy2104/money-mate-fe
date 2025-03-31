@@ -27,6 +27,7 @@ mixin _$CategoryModel {
   String get data => throw _privateConstructorUsedError;
   double? get budget => throw _privateConstructorUsedError;
   double? get currentBudget => throw _privateConstructorUsedError;
+  bool? get isSelected => throw _privateConstructorUsedError;
 
   /// Serializes this CategoryModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -50,7 +51,8 @@ abstract class $CategoryModelCopyWith<$Res> {
       String type,
       @JsonKey(name: 'enum') String data,
       double? budget,
-      double? currentBudget});
+      double? currentBudget,
+      bool? isSelected});
 }
 
 /// @nodoc
@@ -74,6 +76,7 @@ class _$CategoryModelCopyWithImpl<$Res, $Val extends CategoryModel>
     Object? data = null,
     Object? budget = freezed,
     Object? currentBudget = freezed,
+    Object? isSelected = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -100,6 +103,10 @@ class _$CategoryModelCopyWithImpl<$Res, $Val extends CategoryModel>
           ? _value.currentBudget
           : currentBudget // ignore: cast_nullable_to_non_nullable
               as double?,
+      isSelected: freezed == isSelected
+          ? _value.isSelected
+          : isSelected // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ) as $Val);
   }
 }
@@ -118,7 +125,8 @@ abstract class _$$CategoryModelImplCopyWith<$Res>
       String type,
       @JsonKey(name: 'enum') String data,
       double? budget,
-      double? currentBudget});
+      double? currentBudget,
+      bool? isSelected});
 }
 
 /// @nodoc
@@ -140,6 +148,7 @@ class __$$CategoryModelImplCopyWithImpl<$Res>
     Object? data = null,
     Object? budget = freezed,
     Object? currentBudget = freezed,
+    Object? isSelected = freezed,
   }) {
     return _then(_$CategoryModelImpl(
       id: null == id
@@ -166,6 +175,10 @@ class __$$CategoryModelImplCopyWithImpl<$Res>
           ? _value.currentBudget
           : currentBudget // ignore: cast_nullable_to_non_nullable
               as double?,
+      isSelected: freezed == isSelected
+          ? _value.isSelected
+          : isSelected // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ));
   }
 }
@@ -179,7 +192,8 @@ class _$CategoryModelImpl implements _CategoryModel {
       required this.type,
       @JsonKey(name: 'enum') required this.data,
       required this.budget,
-      required this.currentBudget});
+      required this.currentBudget,
+      required this.isSelected});
 
   factory _$CategoryModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$CategoryModelImplFromJson(json);
@@ -197,10 +211,12 @@ class _$CategoryModelImpl implements _CategoryModel {
   final double? budget;
   @override
   final double? currentBudget;
+  @override
+  final bool? isSelected;
 
   @override
   String toString() {
-    return 'CategoryModel(id: $id, name: $name, type: $type, data: $data, budget: $budget, currentBudget: $currentBudget)';
+    return 'CategoryModel(id: $id, name: $name, type: $type, data: $data, budget: $budget, currentBudget: $currentBudget, isSelected: $isSelected)';
   }
 
   @override
@@ -214,13 +230,15 @@ class _$CategoryModelImpl implements _CategoryModel {
             (identical(other.data, data) || other.data == data) &&
             (identical(other.budget, budget) || other.budget == budget) &&
             (identical(other.currentBudget, currentBudget) ||
-                other.currentBudget == currentBudget));
+                other.currentBudget == currentBudget) &&
+            (identical(other.isSelected, isSelected) ||
+                other.isSelected == isSelected));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, id, name, type, data, budget, currentBudget);
+  int get hashCode => Object.hash(
+      runtimeType, id, name, type, data, budget, currentBudget, isSelected);
 
   /// Create a copy of CategoryModel
   /// with the given fields replaced by the non-null parameter values.
@@ -245,7 +263,8 @@ abstract class _CategoryModel implements CategoryModel {
       required final String type,
       @JsonKey(name: 'enum') required final String data,
       required final double? budget,
-      required final double? currentBudget}) = _$CategoryModelImpl;
+      required final double? currentBudget,
+      required final bool? isSelected}) = _$CategoryModelImpl;
 
   factory _CategoryModel.fromJson(Map<String, dynamic> json) =
       _$CategoryModelImpl.fromJson;
@@ -263,6 +282,8 @@ abstract class _CategoryModel implements CategoryModel {
   double? get budget;
   @override
   double? get currentBudget;
+  @override
+  bool? get isSelected;
 
   /// Create a copy of CategoryModel
   /// with the given fields replaced by the non-null parameter values.

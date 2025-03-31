@@ -6,17 +6,19 @@ import 'package:money_mate/shared/enums/category_format.dart';
 import 'package:money_mate/shared/utils/typedefs.dart';
 
 abstract class CategoriesRemoteDataSource {
-  ResultFuture<List<CategoryModel>> getCategories();
+  ResultFuture<List<CategoryModel>> getCategories({String? userId});
   ResultFuture<List<CategoryModel>> setupCategories(List<Category> categories);
   ResultFuture<List<CategoryModel>> getOwnCategories(CategoryFormat format);
+  ResultFuture<CategoryModel> enableCategory(String categoryId, double? budget);
+  ResultFuture<CategoryModel> disableCategory(String categoryId);
 }
 
 class CategoriesRemoteDataSourceImpl extends CategoriesRemoteDataSource {
   final ApiClient _apiClient;
   CategoriesRemoteDataSourceImpl(this._apiClient);
   @override
-  ResultFuture<List<CategoryModel>> getCategories() {
-    final req = ApiRequest(url: '/categories');
+  ResultFuture<List<CategoryModel>> getCategories({String? userId}) {
+    final req = ApiRequest(url: '/categories', query: {"userId": userId});
     return _apiClient.get(
         req: req,
         parser: (data) =>
@@ -43,5 +45,23 @@ class CategoriesRemoteDataSourceImpl extends CategoriesRemoteDataSource {
         req: req,
         parser: (data) =>
             (data as List).map((e) => CategoryModel.fromJson((e))).toList());
+  }
+
+  @override
+  ResultFuture<CategoryModel> disableCategory(String categoryId) {
+    final req =
+        ApiRequest(url: '/categories/disable', body: {"category": categoryId});
+    return _apiClient.put(
+        req: req, parser: (data) => CategoryModel.fromJson((data)));
+  }
+
+  @override
+  ResultFuture<CategoryModel> enableCategory(
+      String categoryId, double? budget) {
+    final req = ApiRequest(
+        url: '/categories/enable',
+        body: {"category": categoryId, "budget": budget});
+    return _apiClient.put(
+        req: req, parser: (data) => CategoryModel.fromJson((data)));
   }
 }

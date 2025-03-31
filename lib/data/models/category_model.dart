@@ -14,7 +14,8 @@ class CategoryModel with _$CategoryModel {
       required String type,
       @JsonKey(name: 'enum') required String data,
       required double? budget,
-      required double? currentBudget}) = _CategoryModel;
+      required double? currentBudget,
+      required bool? isSelected}) = _CategoryModel;
 
   factory CategoryModel.fromJson(Map<String, dynamic> json) =>
       _$CategoryModelFromJson(json);
@@ -31,6 +32,7 @@ extension CategoryModelX on CategoryModel {
         icon: catEnum.icon,
         color: catEnum.color,
         budget: budget ?? 0,
+        isSelected: isSelected ?? false,
         currentBudget: currentBudget ?? 0);
   }
 }

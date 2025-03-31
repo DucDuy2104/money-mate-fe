@@ -10,7 +10,6 @@ import 'package:money_mate/shared/enums/category_format.dart';
 import 'package:money_mate/shared/enums/socket_enum.dart';
 import 'package:money_mate/domain/entities/category.dart';
 
-
 part 'profile_event.dart';
 part 'profile_state.dart';
 part 'profile_bloc.freezed.dart';
@@ -124,6 +123,13 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       debugPrint(e.toString());
       return;
     }
+  }
+
+  User? getProfile() {
+    return state.maybeMap(
+        updating: (state) => state.data.profile,
+        loaded: (state) => state.data.profile,
+        orElse: () => null);
   }
 
   void _onConnect() {

@@ -6,14 +6,14 @@ import 'package:money_mate/data/repositories/categories_repository.dart';
 import 'package:money_mate/domain/entities/category.dart';
 import 'package:money_mate/shared/enums/category_type.dart';
 
-part 'categories_event.dart';
-part 'categories_state.dart';
-part 'categories_bloc.freezed.dart';
+part 'setup_categories_event.dart';
+part 'setup_categories_state.dart';
+part 'setup_categories_bloc.freezed.dart';
 
-class CategoriesBloc extends Bloc<CategoriesEvent, CategoriesState> {
+class SetupCategoriesBloc extends Bloc<SetupCategoriesEvent, SetupCategoriesState> {
   final CategoriesRepository _categoriesRepository =
       getIt<CategoriesRepository>();
-  CategoriesBloc() : super(const CategoriesState.initial()) {
+  SetupCategoriesBloc() : super(const SetupCategoriesState.initial()) {
     on<_GetCategories>(_onGetCategories);
     on<_ToggleCategory>(_onToggleCategory);
     on<_UpdateCategoryBudget>(_onUpdateCategoryBudget);
@@ -21,22 +21,22 @@ class CategoriesBloc extends Bloc<CategoriesEvent, CategoriesState> {
   }
 
   void _onGetCategories(
-      _GetCategories event, Emitter<CategoriesState> emit) async {
+      _GetCategories event, Emitter<SetupCategoriesState> emit) async {
     try {
       await Future.delayed(const Duration(seconds: 2));
       final result = await _categoriesRepository.getCategories();
       result.fold((failure) {
-        emit(CategoriesState.error(failure.message));
+        emit(SetupCategoriesState.error(failure.message));
       }, (categories) {
-        emit(CategoriesState.success(categories));
+        emit(SetupCategoriesState.success(categories));
       });
     } on Exception catch (e) {
-      emit(CategoriesState.error(e.toString()));
+      emit(SetupCategoriesState.error(e.toString()));
       debugPrint(e.toString());
     }
   }
 
-  void _onToggleCategory(_ToggleCategory event, Emitter<CategoriesState> emit) {
+  void _onToggleCategory(_ToggleCategory event, Emitter<SetupCategoriesState> emit) {
     state.maybeMap(
       success: (state) {
         final updatedCategories = state.categories.map((category) {
@@ -46,14 +46,14 @@ class CategoriesBloc extends Bloc<CategoriesEvent, CategoriesState> {
           return category;
         }).toList();
 
-        emit(CategoriesState.success(updatedCategories));
+        emit(SetupCategoriesState.success(updatedCategories));
       },
       orElse: () {},
     );
   }
 
   void _onUpdateCategoryBudget(
-      _UpdateCategoryBudget event, Emitter<CategoriesState> emit) {
+      _UpdateCategoryBudget event, Emitter<SetupCategoriesState> emit) {
     state.maybeMap(
       success: (state) {
         final updatedCategories = state.categories.map((category) {
@@ -63,29 +63,29 @@ class CategoriesBloc extends Bloc<CategoriesEvent, CategoriesState> {
           return category;
         }).toList();
 
-        emit(CategoriesState.success(updatedCategories));
+        emit(SetupCategoriesState.success(updatedCategories));
       },
       orElse: () {},
     );
   }
 
   void _onSetupCategories(
-      _SetupCategories event, Emitter<CategoriesState> emit) async {
+      _SetupCategories event, Emitter<SetupCategoriesState> emit) async {
     try {
       final temptCategories = state.maybeMap(
           success: (value) => value.categories,
           orElse: () => [] as List<Category>);
-      emit(CategoriesState.loading(temptCategories));
+      emit(SetupCategoriesState.loading(temptCategories));
       await Future.delayed(const Duration(seconds: 2));
       final result =
           await _categoriesRepository.setupCategories(event.categories);
       result.fold((failure) {
-        emit(CategoriesState.error(failure.message));
+        emit(SetupCategoriesState.error(failure.message));
       }, (categories) {
-        emit(CategoriesState.setupSuccess(categories));
+        emit(SetupCategoriesState.setupSuccess(categories));
       });
     } catch (e) {
-      emit(CategoriesState.error(e.toString()));
+      emit(SetupCategoriesState.error(e.toString()));
       debugPrint(e.toString());
     }
   }

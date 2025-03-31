@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'categories_bloc.dart';
+part of 'setup_categories_bloc.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,7 +15,7 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
-mixin _$CategoriesEvent {
+mixin _$SetupCategoriesEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() getCategories,
@@ -69,23 +69,24 @@ mixin _$CategoriesEvent {
 }
 
 /// @nodoc
-abstract class $CategoriesEventCopyWith<$Res> {
-  factory $CategoriesEventCopyWith(
-          CategoriesEvent value, $Res Function(CategoriesEvent) then) =
-      _$CategoriesEventCopyWithImpl<$Res, CategoriesEvent>;
+abstract class $SetupCategoriesEventCopyWith<$Res> {
+  factory $SetupCategoriesEventCopyWith(SetupCategoriesEvent value,
+          $Res Function(SetupCategoriesEvent) then) =
+      _$SetupCategoriesEventCopyWithImpl<$Res, SetupCategoriesEvent>;
 }
 
 /// @nodoc
-class _$CategoriesEventCopyWithImpl<$Res, $Val extends CategoriesEvent>
-    implements $CategoriesEventCopyWith<$Res> {
-  _$CategoriesEventCopyWithImpl(this._value, this._then);
+class _$SetupCategoriesEventCopyWithImpl<$Res,
+        $Val extends SetupCategoriesEvent>
+    implements $SetupCategoriesEventCopyWith<$Res> {
+  _$SetupCategoriesEventCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of CategoriesEvent
+  /// Create a copy of SetupCategoriesEvent
   /// with the given fields replaced by the non-null parameter values.
 }
 
@@ -98,13 +99,13 @@ abstract class _$$GetCategoriesImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$GetCategoriesImplCopyWithImpl<$Res>
-    extends _$CategoriesEventCopyWithImpl<$Res, _$GetCategoriesImpl>
+    extends _$SetupCategoriesEventCopyWithImpl<$Res, _$GetCategoriesImpl>
     implements _$$GetCategoriesImplCopyWith<$Res> {
   __$$GetCategoriesImplCopyWithImpl(
       _$GetCategoriesImpl _value, $Res Function(_$GetCategoriesImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of CategoriesEvent
+  /// Create a copy of SetupCategoriesEvent
   /// with the given fields replaced by the non-null parameter values.
 }
 
@@ -115,7 +116,7 @@ class _$GetCategoriesImpl implements _GetCategories {
 
   @override
   String toString() {
-    return 'CategoriesEvent.getCategories()';
+    return 'SetupCategoriesEvent.getCategories()';
   }
 
   @override
@@ -202,7 +203,7 @@ class _$GetCategoriesImpl implements _GetCategories {
   }
 }
 
-abstract class _GetCategories implements CategoriesEvent {
+abstract class _GetCategories implements SetupCategoriesEvent {
   factory _GetCategories() = _$GetCategoriesImpl;
 }
 
@@ -217,13 +218,13 @@ abstract class _$$ToggleCategoryImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$ToggleCategoryImplCopyWithImpl<$Res>
-    extends _$CategoriesEventCopyWithImpl<$Res, _$ToggleCategoryImpl>
+    extends _$SetupCategoriesEventCopyWithImpl<$Res, _$ToggleCategoryImpl>
     implements _$$ToggleCategoryImplCopyWith<$Res> {
   __$$ToggleCategoryImplCopyWithImpl(
       _$ToggleCategoryImpl _value, $Res Function(_$ToggleCategoryImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of CategoriesEvent
+  /// Create a copy of SetupCategoriesEvent
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -249,7 +250,7 @@ class _$ToggleCategoryImpl implements _ToggleCategory {
 
   @override
   String toString() {
-    return 'CategoriesEvent.toggleCategory(id: $id)';
+    return 'SetupCategoriesEvent.toggleCategory(id: $id)';
   }
 
   @override
@@ -263,7 +264,7 @@ class _$ToggleCategoryImpl implements _ToggleCategory {
   @override
   int get hashCode => Object.hash(runtimeType, id);
 
-  /// Create a copy of CategoriesEvent
+  /// Create a copy of SetupCategoriesEvent
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
@@ -347,12 +348,12 @@ class _$ToggleCategoryImpl implements _ToggleCategory {
   }
 }
 
-abstract class _ToggleCategory implements CategoriesEvent {
+abstract class _ToggleCategory implements SetupCategoriesEvent {
   const factory _ToggleCategory(final String id) = _$ToggleCategoryImpl;
 
   String get id;
 
-  /// Create a copy of CategoriesEvent
+  /// Create a copy of SetupCategoriesEvent
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ToggleCategoryImplCopyWith<_$ToggleCategoryImpl> get copyWith =>
@@ -370,13 +371,13 @@ abstract class _$$UpdateCategoryBudgetImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$UpdateCategoryBudgetImplCopyWithImpl<$Res>
-    extends _$CategoriesEventCopyWithImpl<$Res, _$UpdateCategoryBudgetImpl>
+    extends _$SetupCategoriesEventCopyWithImpl<$Res, _$UpdateCategoryBudgetImpl>
     implements _$$UpdateCategoryBudgetImplCopyWith<$Res> {
   __$$UpdateCategoryBudgetImplCopyWithImpl(_$UpdateCategoryBudgetImpl _value,
       $Res Function(_$UpdateCategoryBudgetImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of CategoriesEvent
+  /// Create a copy of SetupCategoriesEvent
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -409,7 +410,7 @@ class _$UpdateCategoryBudgetImpl implements _UpdateCategoryBudget {
 
   @override
   String toString() {
-    return 'CategoriesEvent.updateCategoryBudget(id: $id, budget: $budget)';
+    return 'SetupCategoriesEvent.updateCategoryBudget(id: $id, budget: $budget)';
   }
 
   @override
@@ -424,7 +425,7 @@ class _$UpdateCategoryBudgetImpl implements _UpdateCategoryBudget {
   @override
   int get hashCode => Object.hash(runtimeType, id, budget);
 
-  /// Create a copy of CategoriesEvent
+  /// Create a copy of SetupCategoriesEvent
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
@@ -509,14 +510,14 @@ class _$UpdateCategoryBudgetImpl implements _UpdateCategoryBudget {
   }
 }
 
-abstract class _UpdateCategoryBudget implements CategoriesEvent {
+abstract class _UpdateCategoryBudget implements SetupCategoriesEvent {
   const factory _UpdateCategoryBudget(final String id, final double? budget) =
       _$UpdateCategoryBudgetImpl;
 
   String get id;
   double? get budget;
 
-  /// Create a copy of CategoriesEvent
+  /// Create a copy of SetupCategoriesEvent
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$UpdateCategoryBudgetImplCopyWith<_$UpdateCategoryBudgetImpl>
@@ -534,13 +535,13 @@ abstract class _$$SetupCategoriesImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$SetupCategoriesImplCopyWithImpl<$Res>
-    extends _$CategoriesEventCopyWithImpl<$Res, _$SetupCategoriesImpl>
+    extends _$SetupCategoriesEventCopyWithImpl<$Res, _$SetupCategoriesImpl>
     implements _$$SetupCategoriesImplCopyWith<$Res> {
   __$$SetupCategoriesImplCopyWithImpl(
       _$SetupCategoriesImpl _value, $Res Function(_$SetupCategoriesImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of CategoriesEvent
+  /// Create a copy of SetupCategoriesEvent
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -572,7 +573,7 @@ class _$SetupCategoriesImpl implements _SetupCategories {
 
   @override
   String toString() {
-    return 'CategoriesEvent.setupCategories(categories: $categories)';
+    return 'SetupCategoriesEvent.setupCategories(categories: $categories)';
   }
 
   @override
@@ -588,7 +589,7 @@ class _$SetupCategoriesImpl implements _SetupCategories {
   int get hashCode => Object.hash(
       runtimeType, const DeepCollectionEquality().hash(_categories));
 
-  /// Create a copy of CategoriesEvent
+  /// Create a copy of SetupCategoriesEvent
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
@@ -672,13 +673,13 @@ class _$SetupCategoriesImpl implements _SetupCategories {
   }
 }
 
-abstract class _SetupCategories implements CategoriesEvent {
+abstract class _SetupCategories implements SetupCategoriesEvent {
   const factory _SetupCategories(final List<Category> categories) =
       _$SetupCategoriesImpl;
 
   List<Category> get categories;
 
-  /// Create a copy of CategoriesEvent
+  /// Create a copy of SetupCategoriesEvent
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SetupCategoriesImplCopyWith<_$SetupCategoriesImpl> get copyWith =>
@@ -686,7 +687,7 @@ abstract class _SetupCategories implements CategoriesEvent {
 }
 
 /// @nodoc
-mixin _$CategoriesState {
+mixin _$SetupCategoriesState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
@@ -746,23 +747,24 @@ mixin _$CategoriesState {
 }
 
 /// @nodoc
-abstract class $CategoriesStateCopyWith<$Res> {
-  factory $CategoriesStateCopyWith(
-          CategoriesState value, $Res Function(CategoriesState) then) =
-      _$CategoriesStateCopyWithImpl<$Res, CategoriesState>;
+abstract class $SetupCategoriesStateCopyWith<$Res> {
+  factory $SetupCategoriesStateCopyWith(SetupCategoriesState value,
+          $Res Function(SetupCategoriesState) then) =
+      _$SetupCategoriesStateCopyWithImpl<$Res, SetupCategoriesState>;
 }
 
 /// @nodoc
-class _$CategoriesStateCopyWithImpl<$Res, $Val extends CategoriesState>
-    implements $CategoriesStateCopyWith<$Res> {
-  _$CategoriesStateCopyWithImpl(this._value, this._then);
+class _$SetupCategoriesStateCopyWithImpl<$Res,
+        $Val extends SetupCategoriesState>
+    implements $SetupCategoriesStateCopyWith<$Res> {
+  _$SetupCategoriesStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of CategoriesState
+  /// Create a copy of SetupCategoriesState
   /// with the given fields replaced by the non-null parameter values.
 }
 
@@ -775,13 +777,13 @@ abstract class _$$InitialImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$InitialImplCopyWithImpl<$Res>
-    extends _$CategoriesStateCopyWithImpl<$Res, _$InitialImpl>
+    extends _$SetupCategoriesStateCopyWithImpl<$Res, _$InitialImpl>
     implements _$$InitialImplCopyWith<$Res> {
   __$$InitialImplCopyWithImpl(
       _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of CategoriesState
+  /// Create a copy of SetupCategoriesState
   /// with the given fields replaced by the non-null parameter values.
 }
 
@@ -792,7 +794,7 @@ class _$InitialImpl implements _Initial {
 
   @override
   String toString() {
-    return 'CategoriesState.initial()';
+    return 'SetupCategoriesState.initial()';
   }
 
   @override
@@ -885,7 +887,7 @@ class _$InitialImpl implements _Initial {
   }
 }
 
-abstract class _Initial implements CategoriesState {
+abstract class _Initial implements SetupCategoriesState {
   const factory _Initial() = _$InitialImpl;
 }
 
@@ -900,13 +902,13 @@ abstract class _$$SuccessImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$SuccessImplCopyWithImpl<$Res>
-    extends _$CategoriesStateCopyWithImpl<$Res, _$SuccessImpl>
+    extends _$SetupCategoriesStateCopyWithImpl<$Res, _$SuccessImpl>
     implements _$$SuccessImplCopyWith<$Res> {
   __$$SuccessImplCopyWithImpl(
       _$SuccessImpl _value, $Res Function(_$SuccessImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of CategoriesState
+  /// Create a copy of SetupCategoriesState
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -938,7 +940,7 @@ class _$SuccessImpl implements _Success {
 
   @override
   String toString() {
-    return 'CategoriesState.success(categories: $categories)';
+    return 'SetupCategoriesState.success(categories: $categories)';
   }
 
   @override
@@ -954,7 +956,7 @@ class _$SuccessImpl implements _Success {
   int get hashCode => Object.hash(
       runtimeType, const DeepCollectionEquality().hash(_categories));
 
-  /// Create a copy of CategoriesState
+  /// Create a copy of SetupCategoriesState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
@@ -1043,12 +1045,12 @@ class _$SuccessImpl implements _Success {
   }
 }
 
-abstract class _Success implements CategoriesState {
+abstract class _Success implements SetupCategoriesState {
   const factory _Success(final List<Category> categories) = _$SuccessImpl;
 
   List<Category> get categories;
 
-  /// Create a copy of CategoriesState
+  /// Create a copy of SetupCategoriesState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SuccessImplCopyWith<_$SuccessImpl> get copyWith =>
@@ -1066,13 +1068,13 @@ abstract class _$$ErrorImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$ErrorImplCopyWithImpl<$Res>
-    extends _$CategoriesStateCopyWithImpl<$Res, _$ErrorImpl>
+    extends _$SetupCategoriesStateCopyWithImpl<$Res, _$ErrorImpl>
     implements _$$ErrorImplCopyWith<$Res> {
   __$$ErrorImplCopyWithImpl(
       _$ErrorImpl _value, $Res Function(_$ErrorImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of CategoriesState
+  /// Create a copy of SetupCategoriesState
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -1098,7 +1100,7 @@ class _$ErrorImpl implements _Error {
 
   @override
   String toString() {
-    return 'CategoriesState.error(message: $message)';
+    return 'SetupCategoriesState.error(message: $message)';
   }
 
   @override
@@ -1112,7 +1114,7 @@ class _$ErrorImpl implements _Error {
   @override
   int get hashCode => Object.hash(runtimeType, message);
 
-  /// Create a copy of CategoriesState
+  /// Create a copy of SetupCategoriesState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
@@ -1201,12 +1203,12 @@ class _$ErrorImpl implements _Error {
   }
 }
 
-abstract class _Error implements CategoriesState {
+abstract class _Error implements SetupCategoriesState {
   const factory _Error(final String message) = _$ErrorImpl;
 
   String get message;
 
-  /// Create a copy of CategoriesState
+  /// Create a copy of SetupCategoriesState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ErrorImplCopyWith<_$ErrorImpl> get copyWith =>
@@ -1224,13 +1226,13 @@ abstract class _$$LoadingImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$LoadingImplCopyWithImpl<$Res>
-    extends _$CategoriesStateCopyWithImpl<$Res, _$LoadingImpl>
+    extends _$SetupCategoriesStateCopyWithImpl<$Res, _$LoadingImpl>
     implements _$$LoadingImplCopyWith<$Res> {
   __$$LoadingImplCopyWithImpl(
       _$LoadingImpl _value, $Res Function(_$LoadingImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of CategoriesState
+  /// Create a copy of SetupCategoriesState
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -1262,7 +1264,7 @@ class _$LoadingImpl implements _Loading {
 
   @override
   String toString() {
-    return 'CategoriesState.loading(categories: $categories)';
+    return 'SetupCategoriesState.loading(categories: $categories)';
   }
 
   @override
@@ -1278,7 +1280,7 @@ class _$LoadingImpl implements _Loading {
   int get hashCode => Object.hash(
       runtimeType, const DeepCollectionEquality().hash(_categories));
 
-  /// Create a copy of CategoriesState
+  /// Create a copy of SetupCategoriesState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
@@ -1367,12 +1369,12 @@ class _$LoadingImpl implements _Loading {
   }
 }
 
-abstract class _Loading implements CategoriesState {
+abstract class _Loading implements SetupCategoriesState {
   const factory _Loading(final List<Category> categories) = _$LoadingImpl;
 
   List<Category> get categories;
 
-  /// Create a copy of CategoriesState
+  /// Create a copy of SetupCategoriesState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$LoadingImplCopyWith<_$LoadingImpl> get copyWith =>
@@ -1390,13 +1392,13 @@ abstract class _$$SetupSuccessImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$SetupSuccessImplCopyWithImpl<$Res>
-    extends _$CategoriesStateCopyWithImpl<$Res, _$SetupSuccessImpl>
+    extends _$SetupCategoriesStateCopyWithImpl<$Res, _$SetupSuccessImpl>
     implements _$$SetupSuccessImplCopyWith<$Res> {
   __$$SetupSuccessImplCopyWithImpl(
       _$SetupSuccessImpl _value, $Res Function(_$SetupSuccessImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of CategoriesState
+  /// Create a copy of SetupCategoriesState
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -1428,7 +1430,7 @@ class _$SetupSuccessImpl implements _SetupSuccess {
 
   @override
   String toString() {
-    return 'CategoriesState.setupSuccess(categories: $categories)';
+    return 'SetupCategoriesState.setupSuccess(categories: $categories)';
   }
 
   @override
@@ -1444,7 +1446,7 @@ class _$SetupSuccessImpl implements _SetupSuccess {
   int get hashCode => Object.hash(
       runtimeType, const DeepCollectionEquality().hash(_categories));
 
-  /// Create a copy of CategoriesState
+  /// Create a copy of SetupCategoriesState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
@@ -1533,13 +1535,13 @@ class _$SetupSuccessImpl implements _SetupSuccess {
   }
 }
 
-abstract class _SetupSuccess implements CategoriesState {
+abstract class _SetupSuccess implements SetupCategoriesState {
   const factory _SetupSuccess(final List<Category> categories) =
       _$SetupSuccessImpl;
 
   List<Category> get categories;
 
-  /// Create a copy of CategoriesState
+  /// Create a copy of SetupCategoriesState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SetupSuccessImplCopyWith<_$SetupSuccessImpl> get copyWith =>

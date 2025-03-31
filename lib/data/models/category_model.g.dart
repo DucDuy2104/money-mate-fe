@@ -14,6 +14,7 @@ _$CategoryModelImpl _$$CategoryModelImplFromJson(Map<String, dynamic> json) =>
       data: json['enum'] as String,
       budget: (json['budget'] as num?)?.toDouble(),
       currentBudget: (json['currentBudget'] as num?)?.toDouble(),
+      isSelected: json['isSelected'] as bool?,
     );
 
 Map<String, dynamic> _$$CategoryModelImplToJson(_$CategoryModelImpl instance) =>
@@ -24,4 +25,5 @@ Map<String, dynamic> _$$CategoryModelImplToJson(_$CategoryModelImpl instance) =>
       'enum': instance.data,
       'budget': instance.budget,
       'currentBudget': instance.currentBudget,
+      'isSelected': instance.isSelected,
     };
