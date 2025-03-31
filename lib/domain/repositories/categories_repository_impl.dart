@@ -1,8 +1,10 @@
 import 'package:dartz/dartz.dart';
+import 'package:flutter/material.dart';
 import 'package:money_mate/data/data_sources/remote/categories_remote_data_source.dart';
 import 'package:money_mate/data/models/category_model.dart';
 import 'package:money_mate/data/repositories/categories_repository.dart';
 import 'package:money_mate/domain/entities/category.dart';
+import 'package:money_mate/shared/enums/category_format.dart';
 import 'package:money_mate/shared/utils/typedefs.dart';
 
 class CategoriesRepositoryImpl extends CategoriesRepository {
@@ -27,10 +29,10 @@ class CategoriesRepositoryImpl extends CategoriesRepository {
         (categoryModels) =>
             Right(categoryModels.map((e) => e.toEntity()).toList()));
   }
-  
+
   @override
-  ResultFuture<List<Category>> getOwnCategories() async {
-    final result = await _categoriesRemoteDataSource.getOwnCategories();
+  ResultFuture<List<Category>> getOwnCategories(CategoryFormat format) async {
+    final result = await _categoriesRemoteDataSource.getOwnCategories(format);
     return result.fold(
         (failure) => Left(failure),
         (categoryModels) =>

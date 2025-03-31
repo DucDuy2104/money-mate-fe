@@ -142,7 +142,7 @@ class _AppDrawerState extends State<AppDrawer> {
       builder: (context, state) {
         return state.maybeMap(
             loaded: (state) {
-              final profile = state.profile;
+              final profile = state.data.profile;
               return Container(
                 padding: const EdgeInsets.fromLTRB(16, 48, 16, 16),
                 decoration: BoxDecoration(

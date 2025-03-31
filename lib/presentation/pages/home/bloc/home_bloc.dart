@@ -9,6 +9,7 @@ import 'package:money_mate/data/repositories/transactions_repository.dart';
 import 'package:money_mate/domain/entities/statistic.dart';
 import 'package:money_mate/domain/entities/transaction.dart';
 import 'package:money_mate/domain/entities/category.dart';
+import 'package:money_mate/shared/enums/category_format.dart';
 import 'package:money_mate/shared/enums/socket_enum.dart';
 
 part 'home_event.dart';
@@ -47,7 +48,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         (data) => transactions = data,
       );
 
-      final categoryResult = await _categoriesRepository.getOwnCategories();
+      final categoryResult =
+          await _categoriesRepository.getOwnCategories(CategoryFormat.monthly);
       categoryResult.fold(
         (failure) {
           emit(HomeState.error(failure.message));
@@ -95,7 +97,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         (data) => transactions = data,
       );
 
-      final categoryResult = await _categoriesRepository.getOwnCategories();
+      final categoryResult =
+          await _categoriesRepository.getOwnCategories(CategoryFormat.monthly);
       categoryResult.fold(
         (failure) {
           emit(HomeState.error(failure.message));
