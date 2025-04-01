@@ -27,6 +27,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   HomeBloc() : super(const HomeState.initial()) {
     on<_GetData>(_onGetData);
     on<_ReloadData>(_onReloadData);
+    on<_ReloadCategories>(_onReloadCategories);
   }
 
   void _onGetData(_GetData event, Emitter<HomeState> emit) async {
@@ -127,12 +128,39 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     }
   }
 
+  void _onReloadCategories(
+      _ReloadCategories event, Emitter<HomeState> emit) async {
+    try {
+      final categoriesResult =
+          await _categoriesRepository.getOwnCategories(CategoryFormat.monthly);
+      categoriesResult.fold((failure) {
+        emit(HomeState.error(failure.message));
+        return;
+      }, (categories) {
+        state.maybeMap(
+            loaded: (state) {
+              emit(HomeState.loaded(
+                  state.data.copyWith(categories: categories)));
+            },
+            orElse: () {});
+      });
+    } catch (e) {
+      emit(const HomeState.error("Có lỗii xảy ra!"));
+      debugPrint(e.toString());
+    }
+  }
+
   void _onConnect() {
     _socketService.initSocket();
 
     // Recieve new message
     _socketService.listen(SocketEnum.newTransaction.name, (data) {
       add(const HomeEvent.reloadData());
+    });
+
+    // Update category
+    _socketService.listen(SocketEnum.updateCategory.name, (data) {
+      add(const HomeEvent.reloadCategories());
     });
   }
 

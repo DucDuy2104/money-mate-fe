@@ -20,6 +20,7 @@ mixin _$Message {
   String get user => throw _privateConstructorUsedError;
   String get conversation => throw _privateConstructorUsedError;
   Transaction? get transaction => throw _privateConstructorUsedError;
+  Category? get category => throw _privateConstructorUsedError;
   MessageType get type => throw _privateConstructorUsedError;
   String get content => throw _privateConstructorUsedError;
   bool get isSentByMe => throw _privateConstructorUsedError;
@@ -41,12 +42,14 @@ abstract class $MessageCopyWith<$Res> {
       String user,
       String conversation,
       Transaction? transaction,
+      Category? category,
       MessageType type,
       String content,
       bool isSentByMe,
       DateTime createdAt});
 
   $TransactionCopyWith<$Res>? get transaction;
+  $CategoryCopyWith<$Res>? get category;
 }
 
 /// @nodoc
@@ -68,6 +71,7 @@ class _$MessageCopyWithImpl<$Res, $Val extends Message>
     Object? user = null,
     Object? conversation = null,
     Object? transaction = freezed,
+    Object? category = freezed,
     Object? type = null,
     Object? content = null,
     Object? isSentByMe = null,
@@ -90,6 +94,10 @@ class _$MessageCopyWithImpl<$Res, $Val extends Message>
           ? _value.transaction
           : transaction // ignore: cast_nullable_to_non_nullable
               as Transaction?,
+      category: freezed == category
+          ? _value.category
+          : category // ignore: cast_nullable_to_non_nullable
+              as Category?,
       type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
@@ -122,6 +130,20 @@ class _$MessageCopyWithImpl<$Res, $Val extends Message>
       return _then(_value.copyWith(transaction: value) as $Val);
     });
   }
+
+  /// Create a copy of Message
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $CategoryCopyWith<$Res>? get category {
+    if (_value.category == null) {
+      return null;
+    }
+
+    return $CategoryCopyWith<$Res>(_value.category!, (value) {
+      return _then(_value.copyWith(category: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -136,6 +158,7 @@ abstract class _$$MessageImplCopyWith<$Res> implements $MessageCopyWith<$Res> {
       String user,
       String conversation,
       Transaction? transaction,
+      Category? category,
       MessageType type,
       String content,
       bool isSentByMe,
@@ -143,6 +166,8 @@ abstract class _$$MessageImplCopyWith<$Res> implements $MessageCopyWith<$Res> {
 
   @override
   $TransactionCopyWith<$Res>? get transaction;
+  @override
+  $CategoryCopyWith<$Res>? get category;
 }
 
 /// @nodoc
@@ -162,6 +187,7 @@ class __$$MessageImplCopyWithImpl<$Res>
     Object? user = null,
     Object? conversation = null,
     Object? transaction = freezed,
+    Object? category = freezed,
     Object? type = null,
     Object? content = null,
     Object? isSentByMe = null,
@@ -184,6 +210,10 @@ class __$$MessageImplCopyWithImpl<$Res>
           ? _value.transaction
           : transaction // ignore: cast_nullable_to_non_nullable
               as Transaction?,
+      category: freezed == category
+          ? _value.category
+          : category // ignore: cast_nullable_to_non_nullable
+              as Category?,
       type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
@@ -212,6 +242,7 @@ class _$MessageImpl implements _Message {
       required this.user,
       required this.conversation,
       required this.transaction,
+      required this.category,
       required this.type,
       required this.content,
       required this.isSentByMe,
@@ -226,6 +257,8 @@ class _$MessageImpl implements _Message {
   @override
   final Transaction? transaction;
   @override
+  final Category? category;
+  @override
   final MessageType type;
   @override
   final String content;
@@ -236,7 +269,7 @@ class _$MessageImpl implements _Message {
 
   @override
   String toString() {
-    return 'Message(id: $id, user: $user, conversation: $conversation, transaction: $transaction, type: $type, content: $content, isSentByMe: $isSentByMe, createdAt: $createdAt)';
+    return 'Message(id: $id, user: $user, conversation: $conversation, transaction: $transaction, category: $category, type: $type, content: $content, isSentByMe: $isSentByMe, createdAt: $createdAt)';
   }
 
   @override
@@ -250,6 +283,8 @@ class _$MessageImpl implements _Message {
                 other.conversation == conversation) &&
             (identical(other.transaction, transaction) ||
                 other.transaction == transaction) &&
+            (identical(other.category, category) ||
+                other.category == category) &&
             (identical(other.type, type) || other.type == type) &&
             (identical(other.content, content) || other.content == content) &&
             (identical(other.isSentByMe, isSentByMe) ||
@@ -260,7 +295,7 @@ class _$MessageImpl implements _Message {
 
   @override
   int get hashCode => Object.hash(runtimeType, id, user, conversation,
-      transaction, type, content, isSentByMe, createdAt);
+      transaction, category, type, content, isSentByMe, createdAt);
 
   /// Create a copy of Message
   /// with the given fields replaced by the non-null parameter values.
@@ -277,6 +312,7 @@ abstract class _Message implements Message {
       required final String user,
       required final String conversation,
       required final Transaction? transaction,
+      required final Category? category,
       required final MessageType type,
       required final String content,
       required final bool isSentByMe,
@@ -290,6 +326,8 @@ abstract class _Message implements Message {
   String get conversation;
   @override
   Transaction? get transaction;
+  @override
+  Category? get category;
   @override
   MessageType get type;
   @override

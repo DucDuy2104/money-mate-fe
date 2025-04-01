@@ -1,6 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:money_mate/data/models/category_model.dart';
 import 'package:money_mate/domain/entities/transaction.dart';
+import 'package:money_mate/shared/extensions/datetime_ext.dart';
 
 part 'transaction_model.freezed.dart';
 part 'transaction_model.g.dart';
@@ -26,6 +27,6 @@ extension TransactionModelX on TransactionModel {
         category: category.toEntity(),
         amount: amount,
         description: description,
-        createdAt: createdAt);
+        createdAt: createdAt.toUtcPlus7());
   }
 }

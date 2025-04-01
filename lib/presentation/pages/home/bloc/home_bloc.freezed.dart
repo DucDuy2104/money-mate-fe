@@ -21,6 +21,7 @@ mixin _$HomeEvent {
     required TResult Function() getData,
     required TResult Function() reloadData,
     required TResult Function() connect,
+    required TResult Function() reloadCategories,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -28,6 +29,7 @@ mixin _$HomeEvent {
     TResult? Function()? getData,
     TResult? Function()? reloadData,
     TResult? Function()? connect,
+    TResult? Function()? reloadCategories,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -35,6 +37,7 @@ mixin _$HomeEvent {
     TResult Function()? getData,
     TResult Function()? reloadData,
     TResult Function()? connect,
+    TResult Function()? reloadCategories,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -43,6 +46,7 @@ mixin _$HomeEvent {
     required TResult Function(_GetData value) getData,
     required TResult Function(_ReloadData value) reloadData,
     required TResult Function(_Connect value) connect,
+    required TResult Function(_ReloadCategories value) reloadCategories,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -50,6 +54,7 @@ mixin _$HomeEvent {
     TResult? Function(_GetData value)? getData,
     TResult? Function(_ReloadData value)? reloadData,
     TResult? Function(_Connect value)? connect,
+    TResult? Function(_ReloadCategories value)? reloadCategories,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -57,6 +62,7 @@ mixin _$HomeEvent {
     TResult Function(_GetData value)? getData,
     TResult Function(_ReloadData value)? reloadData,
     TResult Function(_Connect value)? connect,
+    TResult Function(_ReloadCategories value)? reloadCategories,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -126,6 +132,7 @@ class _$GetDataImpl implements _GetData {
     required TResult Function() getData,
     required TResult Function() reloadData,
     required TResult Function() connect,
+    required TResult Function() reloadCategories,
   }) {
     return getData();
   }
@@ -136,6 +143,7 @@ class _$GetDataImpl implements _GetData {
     TResult? Function()? getData,
     TResult? Function()? reloadData,
     TResult? Function()? connect,
+    TResult? Function()? reloadCategories,
   }) {
     return getData?.call();
   }
@@ -146,6 +154,7 @@ class _$GetDataImpl implements _GetData {
     TResult Function()? getData,
     TResult Function()? reloadData,
     TResult Function()? connect,
+    TResult Function()? reloadCategories,
     required TResult orElse(),
   }) {
     if (getData != null) {
@@ -160,6 +169,7 @@ class _$GetDataImpl implements _GetData {
     required TResult Function(_GetData value) getData,
     required TResult Function(_ReloadData value) reloadData,
     required TResult Function(_Connect value) connect,
+    required TResult Function(_ReloadCategories value) reloadCategories,
   }) {
     return getData(this);
   }
@@ -170,6 +180,7 @@ class _$GetDataImpl implements _GetData {
     TResult? Function(_GetData value)? getData,
     TResult? Function(_ReloadData value)? reloadData,
     TResult? Function(_Connect value)? connect,
+    TResult? Function(_ReloadCategories value)? reloadCategories,
   }) {
     return getData?.call(this);
   }
@@ -180,6 +191,7 @@ class _$GetDataImpl implements _GetData {
     TResult Function(_GetData value)? getData,
     TResult Function(_ReloadData value)? reloadData,
     TResult Function(_Connect value)? connect,
+    TResult Function(_ReloadCategories value)? reloadCategories,
     required TResult orElse(),
   }) {
     if (getData != null) {
@@ -237,6 +249,7 @@ class _$ReloadDataImpl implements _ReloadData {
     required TResult Function() getData,
     required TResult Function() reloadData,
     required TResult Function() connect,
+    required TResult Function() reloadCategories,
   }) {
     return reloadData();
   }
@@ -247,6 +260,7 @@ class _$ReloadDataImpl implements _ReloadData {
     TResult? Function()? getData,
     TResult? Function()? reloadData,
     TResult? Function()? connect,
+    TResult? Function()? reloadCategories,
   }) {
     return reloadData?.call();
   }
@@ -257,6 +271,7 @@ class _$ReloadDataImpl implements _ReloadData {
     TResult Function()? getData,
     TResult Function()? reloadData,
     TResult Function()? connect,
+    TResult Function()? reloadCategories,
     required TResult orElse(),
   }) {
     if (reloadData != null) {
@@ -271,6 +286,7 @@ class _$ReloadDataImpl implements _ReloadData {
     required TResult Function(_GetData value) getData,
     required TResult Function(_ReloadData value) reloadData,
     required TResult Function(_Connect value) connect,
+    required TResult Function(_ReloadCategories value) reloadCategories,
   }) {
     return reloadData(this);
   }
@@ -281,6 +297,7 @@ class _$ReloadDataImpl implements _ReloadData {
     TResult? Function(_GetData value)? getData,
     TResult? Function(_ReloadData value)? reloadData,
     TResult? Function(_Connect value)? connect,
+    TResult? Function(_ReloadCategories value)? reloadCategories,
   }) {
     return reloadData?.call(this);
   }
@@ -291,6 +308,7 @@ class _$ReloadDataImpl implements _ReloadData {
     TResult Function(_GetData value)? getData,
     TResult Function(_ReloadData value)? reloadData,
     TResult Function(_Connect value)? connect,
+    TResult Function(_ReloadCategories value)? reloadCategories,
     required TResult orElse(),
   }) {
     if (reloadData != null) {
@@ -348,6 +366,7 @@ class _$ConnectImpl implements _Connect {
     required TResult Function() getData,
     required TResult Function() reloadData,
     required TResult Function() connect,
+    required TResult Function() reloadCategories,
   }) {
     return connect();
   }
@@ -358,6 +377,7 @@ class _$ConnectImpl implements _Connect {
     TResult? Function()? getData,
     TResult? Function()? reloadData,
     TResult? Function()? connect,
+    TResult? Function()? reloadCategories,
   }) {
     return connect?.call();
   }
@@ -368,6 +388,7 @@ class _$ConnectImpl implements _Connect {
     TResult Function()? getData,
     TResult Function()? reloadData,
     TResult Function()? connect,
+    TResult Function()? reloadCategories,
     required TResult orElse(),
   }) {
     if (connect != null) {
@@ -382,6 +403,7 @@ class _$ConnectImpl implements _Connect {
     required TResult Function(_GetData value) getData,
     required TResult Function(_ReloadData value) reloadData,
     required TResult Function(_Connect value) connect,
+    required TResult Function(_ReloadCategories value) reloadCategories,
   }) {
     return connect(this);
   }
@@ -392,6 +414,7 @@ class _$ConnectImpl implements _Connect {
     TResult? Function(_GetData value)? getData,
     TResult? Function(_ReloadData value)? reloadData,
     TResult? Function(_Connect value)? connect,
+    TResult? Function(_ReloadCategories value)? reloadCategories,
   }) {
     return connect?.call(this);
   }
@@ -402,6 +425,7 @@ class _$ConnectImpl implements _Connect {
     TResult Function(_GetData value)? getData,
     TResult Function(_ReloadData value)? reloadData,
     TResult Function(_Connect value)? connect,
+    TResult Function(_ReloadCategories value)? reloadCategories,
     required TResult orElse(),
   }) {
     if (connect != null) {
@@ -413,6 +437,123 @@ class _$ConnectImpl implements _Connect {
 
 abstract class _Connect implements HomeEvent {
   const factory _Connect() = _$ConnectImpl;
+}
+
+/// @nodoc
+abstract class _$$ReloadCategoriesImplCopyWith<$Res> {
+  factory _$$ReloadCategoriesImplCopyWith(_$ReloadCategoriesImpl value,
+          $Res Function(_$ReloadCategoriesImpl) then) =
+      __$$ReloadCategoriesImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$ReloadCategoriesImplCopyWithImpl<$Res>
+    extends _$HomeEventCopyWithImpl<$Res, _$ReloadCategoriesImpl>
+    implements _$$ReloadCategoriesImplCopyWith<$Res> {
+  __$$ReloadCategoriesImplCopyWithImpl(_$ReloadCategoriesImpl _value,
+      $Res Function(_$ReloadCategoriesImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of HomeEvent
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$ReloadCategoriesImpl implements _ReloadCategories {
+  const _$ReloadCategoriesImpl();
+
+  @override
+  String toString() {
+    return 'HomeEvent.reloadCategories()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$ReloadCategoriesImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() getData,
+    required TResult Function() reloadData,
+    required TResult Function() connect,
+    required TResult Function() reloadCategories,
+  }) {
+    return reloadCategories();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? getData,
+    TResult? Function()? reloadData,
+    TResult? Function()? connect,
+    TResult? Function()? reloadCategories,
+  }) {
+    return reloadCategories?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? getData,
+    TResult Function()? reloadData,
+    TResult Function()? connect,
+    TResult Function()? reloadCategories,
+    required TResult orElse(),
+  }) {
+    if (reloadCategories != null) {
+      return reloadCategories();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetData value) getData,
+    required TResult Function(_ReloadData value) reloadData,
+    required TResult Function(_Connect value) connect,
+    required TResult Function(_ReloadCategories value) reloadCategories,
+  }) {
+    return reloadCategories(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetData value)? getData,
+    TResult? Function(_ReloadData value)? reloadData,
+    TResult? Function(_Connect value)? connect,
+    TResult? Function(_ReloadCategories value)? reloadCategories,
+  }) {
+    return reloadCategories?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetData value)? getData,
+    TResult Function(_ReloadData value)? reloadData,
+    TResult Function(_Connect value)? connect,
+    TResult Function(_ReloadCategories value)? reloadCategories,
+    required TResult orElse(),
+  }) {
+    if (reloadCategories != null) {
+      return reloadCategories(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ReloadCategories implements HomeEvent {
+  const factory _ReloadCategories() = _$ReloadCategoriesImpl;
 }
 
 /// @nodoc

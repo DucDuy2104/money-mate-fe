@@ -4,5 +4,6 @@ enum SocketEnum {
   joinRoom,
   leaveRoom,
   newTransaction,
-  initSocket
+  initSocket,
+  updateCategory
 }

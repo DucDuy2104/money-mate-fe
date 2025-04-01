@@ -24,6 +24,7 @@ mixin _$MessageModel {
   String get user => throw _privateConstructorUsedError;
   String get conversation => throw _privateConstructorUsedError;
   TransactionModel? get transaction => throw _privateConstructorUsedError;
+  CategoryModel? get category => throw _privateConstructorUsedError;
   String get type => throw _privateConstructorUsedError;
   String get content => throw _privateConstructorUsedError;
   bool get isSentByMe => throw _privateConstructorUsedError;
@@ -50,12 +51,14 @@ abstract class $MessageModelCopyWith<$Res> {
       String user,
       String conversation,
       TransactionModel? transaction,
+      CategoryModel? category,
       String type,
       String content,
       bool isSentByMe,
       DateTime createdAt});
 
   $TransactionModelCopyWith<$Res>? get transaction;
+  $CategoryModelCopyWith<$Res>? get category;
 }
 
 /// @nodoc
@@ -77,6 +80,7 @@ class _$MessageModelCopyWithImpl<$Res, $Val extends MessageModel>
     Object? user = null,
     Object? conversation = null,
     Object? transaction = freezed,
+    Object? category = freezed,
     Object? type = null,
     Object? content = null,
     Object? isSentByMe = null,
@@ -99,6 +103,10 @@ class _$MessageModelCopyWithImpl<$Res, $Val extends MessageModel>
           ? _value.transaction
           : transaction // ignore: cast_nullable_to_non_nullable
               as TransactionModel?,
+      category: freezed == category
+          ? _value.category
+          : category // ignore: cast_nullable_to_non_nullable
+              as CategoryModel?,
       type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
@@ -131,6 +139,20 @@ class _$MessageModelCopyWithImpl<$Res, $Val extends MessageModel>
       return _then(_value.copyWith(transaction: value) as $Val);
     });
   }
+
+  /// Create a copy of MessageModel
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $CategoryModelCopyWith<$Res>? get category {
+    if (_value.category == null) {
+      return null;
+    }
+
+    return $CategoryModelCopyWith<$Res>(_value.category!, (value) {
+      return _then(_value.copyWith(category: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -146,6 +168,7 @@ abstract class _$$MessageModelImplCopyWith<$Res>
       String user,
       String conversation,
       TransactionModel? transaction,
+      CategoryModel? category,
       String type,
       String content,
       bool isSentByMe,
@@ -153,6 +176,8 @@ abstract class _$$MessageModelImplCopyWith<$Res>
 
   @override
   $TransactionModelCopyWith<$Res>? get transaction;
+  @override
+  $CategoryModelCopyWith<$Res>? get category;
 }
 
 /// @nodoc
@@ -172,6 +197,7 @@ class __$$MessageModelImplCopyWithImpl<$Res>
     Object? user = null,
     Object? conversation = null,
     Object? transaction = freezed,
+    Object? category = freezed,
     Object? type = null,
     Object? content = null,
     Object? isSentByMe = null,
@@ -194,6 +220,10 @@ class __$$MessageModelImplCopyWithImpl<$Res>
           ? _value.transaction
           : transaction // ignore: cast_nullable_to_non_nullable
               as TransactionModel?,
+      category: freezed == category
+          ? _value.category
+          : category // ignore: cast_nullable_to_non_nullable
+              as CategoryModel?,
       type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
@@ -222,6 +252,7 @@ class _$MessageModelImpl implements _MessageModel {
       required this.user,
       required this.conversation,
       required this.transaction,
+      required this.category,
       required this.type,
       required this.content,
       required this.isSentByMe,
@@ -239,6 +270,8 @@ class _$MessageModelImpl implements _MessageModel {
   @override
   final TransactionModel? transaction;
   @override
+  final CategoryModel? category;
+  @override
   final String type;
   @override
   final String content;
@@ -249,7 +282,7 @@ class _$MessageModelImpl implements _MessageModel {
 
   @override
   String toString() {
-    return 'MessageModel(id: $id, user: $user, conversation: $conversation, transaction: $transaction, type: $type, content: $content, isSentByMe: $isSentByMe, createdAt: $createdAt)';
+    return 'MessageModel(id: $id, user: $user, conversation: $conversation, transaction: $transaction, category: $category, type: $type, content: $content, isSentByMe: $isSentByMe, createdAt: $createdAt)';
   }
 
   @override
@@ -263,6 +296,8 @@ class _$MessageModelImpl implements _MessageModel {
                 other.conversation == conversation) &&
             (identical(other.transaction, transaction) ||
                 other.transaction == transaction) &&
+            (identical(other.category, category) ||
+                other.category == category) &&
             (identical(other.type, type) || other.type == type) &&
             (identical(other.content, content) || other.content == content) &&
             (identical(other.isSentByMe, isSentByMe) ||
@@ -274,7 +309,7 @@ class _$MessageModelImpl implements _MessageModel {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, user, conversation,
-      transaction, type, content, isSentByMe, createdAt);
+      transaction, category, type, content, isSentByMe, createdAt);
 
   /// Create a copy of MessageModel
   /// with the given fields replaced by the non-null parameter values.
@@ -298,6 +333,7 @@ abstract class _MessageModel implements MessageModel {
       required final String user,
       required final String conversation,
       required final TransactionModel? transaction,
+      required final CategoryModel? category,
       required final String type,
       required final String content,
       required final bool isSentByMe,
@@ -314,6 +350,8 @@ abstract class _MessageModel implements MessageModel {
   String get conversation;
   @override
   TransactionModel? get transaction;
+  @override
+  CategoryModel? get category;
   @override
   String get type;
   @override

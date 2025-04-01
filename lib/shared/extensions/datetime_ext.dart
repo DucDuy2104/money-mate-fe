@@ -21,4 +21,8 @@ extension DatetimeExt on DateTime {
 
     return '$dayOfWeek, $day/$month/$year';
   }
+
+  DateTime toUtcPlus7() {
+    return toUtc().add(const Duration(hours: 7));
+  }
 }

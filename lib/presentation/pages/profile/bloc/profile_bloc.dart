@@ -136,5 +136,9 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     _socketService.listen(SocketEnum.newTransaction.name, (data) {
       add(const _ReloadCateogries());
     });
+
+    _socketService.listen(SocketEnum.updateCategory.name, (data) {
+      add(const _ReloadCateogries());
+    });
   }
 }
