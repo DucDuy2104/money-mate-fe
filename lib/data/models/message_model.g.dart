@@ -15,6 +15,9 @@ _$MessageModelImpl _$$MessageModelImplFromJson(Map<String, dynamic> json) =>
           ? null
           : TransactionModel.fromJson(
               json['transaction'] as Map<String, dynamic>),
+      category: json['category'] == null
+          ? null
+          : CategoryModel.fromJson(json['category'] as Map<String, dynamic>),
       type: json['type'] as String,
       content: json['content'] as String,
       isSentByMe: json['isSentByMe'] as bool,
@@ -27,6 +30,7 @@ Map<String, dynamic> _$$MessageModelImplToJson(_$MessageModelImpl instance) =>
       'user': instance.user,
       'conversation': instance.conversation,
       'transaction': instance.transaction,
+      'category': instance.category,
       'type': instance.type,
       'content': instance.content,
       'isSentByMe': instance.isSentByMe,

@@ -1,5 +1,8 @@
 enum MessageType {
   text,
+  add,
+  delete,
+  recommend,
   transaction;
 
   static MessageType fromString(String value) {

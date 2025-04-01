@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:money_mate/domain/entities/category.dart';
 import 'package:money_mate/domain/entities/transaction.dart';
 import 'package:money_mate/shared/enums/message_type.dart';
 
@@ -11,6 +12,7 @@ class Message with _$Message {
     required String user,
     required String conversation,
     required Transaction? transaction,
+    required Category? category,
     required MessageType type,
     required String content,
     required bool isSentByMe,
