@@ -18,12 +18,17 @@ class RegisterScreen extends StatelessWidget {
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _confirmPasswordController =
       TextEditingController();
+  final FocusNode _emailFocusNode = FocusNode();
+  final FocusNode _passwordFocusNode = FocusNode();
+  final FocusNode _confirmPasswordFocusNode = FocusNode();
 
   void _onRegister(BuildContext context) {
     final email = _emailController.text;
     final password = _passwordController.text;
     final confirmPassword = _confirmPasswordController.text;
-
+    _emailFocusNode.unfocus();
+    _passwordFocusNode.unfocus();
+    _confirmPasswordFocusNode.unfocus();
     if (email.isEmpty || password.isEmpty || confirmPassword.isEmpty) {
       AppToast.warning(context, 'Vui lòng điền đầy đủ thông tin');
       return;
@@ -68,6 +73,10 @@ class RegisterScreen extends StatelessWidget {
                   AppDimens.spaceLarge,
                   TextField(
                     controller: _emailController,
+                    focusNode: _emailFocusNode,
+                    onSubmitted: (value) {
+                      _passwordFocusNode.requestFocus();
+                    },
                     decoration: InputDecoration(
                       labelText: 'Email',
                       border: OutlineInputBorder(
@@ -78,6 +87,10 @@ class RegisterScreen extends StatelessWidget {
                   AppDimens.spaceLarge,
                   TextField(
                     controller: _passwordController,
+                    focusNode: _passwordFocusNode,
+                    onSubmitted: (value) {
+                      _confirmPasswordFocusNode.requestFocus();
+                    },
                     obscureText: true,
                     decoration: InputDecoration(
                       labelText: 'Mật khẩu',
@@ -89,6 +102,10 @@ class RegisterScreen extends StatelessWidget {
                   AppDimens.spaceLarge,
                   TextField(
                     controller: _confirmPasswordController,
+                    focusNode: _confirmPasswordFocusNode,
+                    onSubmitted: (value) {
+                      _onRegister(context);
+                    },
                     obscureText: true,
                     decoration: InputDecoration(
                       labelText: 'Nhập lại mật khẩu',

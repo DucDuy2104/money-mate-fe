@@ -16,11 +16,15 @@ class LoginScreen extends StatelessWidget {
 
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final FocusNode _passwordFocusNode = FocusNode();
+  final FocusNode _emailFocusNode = FocusNode();
 
   void _onLogin(BuildContext context) {
     try {
       final email = _emailController.text;
       final password = _passwordController.text;
+      _emailFocusNode.unfocus();
+      _passwordFocusNode.unfocus();
       if (email.isEmpty || password.isEmpty) {
         AppToast.error(context, 'Vui lòng nhập đủ thông tin');
         return;
@@ -41,11 +45,11 @@ class LoginScreen extends StatelessWidget {
         state.maybeMap(
             success: (value) {
               final user = value.data.user;
-              if(!user.isActive) {
+              if (!user.isActive) {
                 context.goNamed(RouteNames.otpVerificationName, extra: user);
                 return;
               }
-              if(!user.isSetup) {
+              if (!user.isSetup) {
                 context.goNamed(RouteNames.setupName);
                 return;
               }
@@ -73,6 +77,10 @@ class LoginScreen extends StatelessWidget {
                   AppDimens.spaceLarge,
                   TextField(
                     controller: _emailController,
+                    focusNode: _emailFocusNode,
+                    onSubmitted: (value) {
+                      _passwordFocusNode.requestFocus();
+                    },
                     decoration: InputDecoration(
                       labelText: 'Email',
                       border: OutlineInputBorder(
@@ -82,6 +90,10 @@ class LoginScreen extends StatelessWidget {
                   AppDimens.spaceLarge,
                   TextField(
                     controller: _passwordController,
+                    focusNode: _passwordFocusNode,
+                    onSubmitted: (value) {
+                      _onLogin(context);
+                    },
                     obscureText: true,
                     decoration: InputDecoration(
                       labelText: 'Mật khẩu',

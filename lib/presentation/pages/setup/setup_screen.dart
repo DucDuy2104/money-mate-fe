@@ -14,11 +14,16 @@ class SetupScreen extends StatelessWidget {
 
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _budgetController = TextEditingController();
+  final FocusNode _nameFocusNode = FocusNode();
+  final FocusNode _budgetFocusNode = FocusNode();
 
   _onUpdate(BuildContext context) {
     try {
       final name = _nameController.text;
       final budget = _budgetController.text;
+
+      _nameFocusNode.unfocus();
+      _budgetFocusNode.unfocus();
 
       if (name.isEmpty || budget.isEmpty) {
         AppToast.error(context, 'Vui lòng nhập đủ thông tin');
@@ -72,6 +77,10 @@ class SetupScreen extends StatelessWidget {
                   AppDimens.spaceLarge,
                   TextField(
                     controller: _nameController,
+                    focusNode: _nameFocusNode,
+                    onSubmitted: (value) {
+                      _budgetFocusNode.requestFocus();
+                    },
                     decoration: InputDecoration(
                       labelText: 'Tên của bạn',
                       border: OutlineInputBorder(
@@ -81,6 +90,10 @@ class SetupScreen extends StatelessWidget {
                   AppDimens.spaceLarge,
                   TextField(
                     controller: _budgetController,
+                    focusNode: _budgetFocusNode,
+                    onSubmitted: (value) {
+                      _onUpdate(context);
+                    },
                     keyboardType: TextInputType.number,
                     decoration: InputDecoration(
                       labelText: 'Ngân sách hiện tại (VND)',

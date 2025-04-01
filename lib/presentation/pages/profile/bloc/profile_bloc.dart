@@ -46,6 +46,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
         _onConnect();
         emit(ProfileState.loaded(
             ProfileData(categories: categories, profile: profile)));
+        event.callback();
       });
     } catch (e) {
       emit(const ProfileState.error("Có lỗi khi lấy thông tin"));

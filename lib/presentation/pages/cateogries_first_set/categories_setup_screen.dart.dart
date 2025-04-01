@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:money_mate/domain/entities/category.dart';
+import 'package:money_mate/presentation/pages/category/widgets/category_dialogs.dart';
 import 'package:money_mate/presentation/pages/cateogries_first_set/bloc/setup_categories_bloc.dart';
-import 'package:money_mate/presentation/pages/cateogries_first_set/funcs/add_category_dialog.dart';
-import 'package:money_mate/presentation/pages/cateogries_first_set/funcs/limit_dialog.dart';
 import 'package:money_mate/presentation/pages/cateogries_first_set/widgets/categories_grid.dart';
 import 'package:money_mate/presentation/routes/route_name.dart';
 import 'package:money_mate/shared/components/app_tab.dart';
@@ -74,16 +72,15 @@ class _CategoriesSetupScreenState extends State<CategoriesSetupScreen>
 
   void toggleCategory(Category category) {
     if (category.isSelected) {
-      showLimitDialog(context, category, removeCategory, updateLimit);
+      CategoryDialogs.showUpdateCategoryDialog(context, category, (budget) {
+        updateLimit(category, budget);
+      }, () {
+        removeCategory(category);
+      });
     } else {
-      final selectedCategories =
-          BlocProvider.of<SetupCategoriesBloc>(context).getSelectedCategories();
-      if (selectedCategories.length < 10) {
-        showAddCategoryDialog(context, category, addCategory);
-      } else {
-        AppToast.error(context, 'Không thể chọn quá 10 danh mục');
-        HapticFeedback.heavyImpact();
-      }
+      CategoryDialogs.showAddCategoryDialog(context, category, (budget) {
+        addCategory(category, budget);
+      }, () {});
     }
   }
 
@@ -221,7 +218,7 @@ class _CategoriesSetupScreenState extends State<CategoriesSetupScreen>
                                 const SizedBox(width: 12),
                                 Expanded(
                                   child: Text(
-                                    'Đã chọn $selectedCount/10 danh mục. Nhấn vào danh mục để thêm hoặc cập nhật hạn mức.',
+                                    'Đã chọn $selectedCount danh mục. Nhấn vào danh mục để thêm hoặc cập nhật hạn mức.',
                                     style: TextStyle(
                                       color: Colors.grey[300],
                                       fontSize: 14,

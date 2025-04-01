@@ -2,6 +2,7 @@ import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:money_mate/presentation/pages/category/bloc/categories_bloc.dart';
 import 'package:money_mate/presentation/pages/home/bloc/home_bloc.dart';
 import 'package:money_mate/presentation/drawer_navigation/app_drawer.dart';
 import 'package:money_mate/presentation/pages/home/widgets/category_item.dart';
@@ -29,14 +30,22 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
+  void getCategories() {
+    final userId = BlocProvider.of<ProfileBloc>(context).getProfile()?.id;
+    if (userId == null) return;
+    BlocProvider.of<CategoriesBloc>(context)
+        .add(CategoriesEvent.getCategories(userId));
+  }
+
   void getData() {
     final homeBloc = BlocProvider.of<HomeBloc>(context);
     homeBloc.state.maybeMap(
         loaded: (state) {},
         orElse: () {
           homeBloc.add(const HomeEvent.getData());
-          BlocProvider.of<ProfileBloc>(context)
-              .add(const ProfileEvent.getData());
+          BlocProvider.of<ProfileBloc>(context).add(ProfileEvent.getData(() {
+            getCategories();
+          }));
         });
   }
 

@@ -111,7 +111,7 @@ class _ChatScreenState extends State<ChatScreen> {
                             controller: _scrollController,
                             padding:
                                 const EdgeInsets.all(AppDimens.paddingSmall),
-                            itemCount: messages[0].isSentByMe
+                            itemCount: messages.isNotEmpty && messages[0].isSentByMe
                                 ? messages.length + 1
                                 : messages.length,
                             itemBuilder: (context, index) {
