@@ -24,7 +24,7 @@ class SuggestCategoryItem extends StatelessWidget {
     final typeColor = isIncome ? AppColors.upColor : AppColors.downColor;
     final typeText = isIncome ? "Thu nhập" : "Chi tiêu";
 
-    final isEnable =
+    final isSelected =
         BlocProvider.of<CategoriesBloc>(context).checkCategory(category.id);
 
     return SizedBox(
@@ -49,7 +49,7 @@ class SuggestCategoryItem extends StatelessWidget {
                 style: context.textTheme.bodySmall?.copyWith(color: typeColor),
               ),
               trailing: ElevatedButton(
-                onPressed: isEnable ? onApprove : null,
+                onPressed: isSelected ? null : onApprove,
                 style: ElevatedButton.styleFrom(
                   backgroundColor: category.color,
                   foregroundColor: Colors.white,

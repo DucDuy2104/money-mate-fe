@@ -45,19 +45,6 @@ class _CategoriesScreenState extends State<CategoriesScreen>
     );
     _animationController.forward();
 
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (BlocProvider.of<CategoriesBloc>(context).countSelectedCategories() ==
-          0) {
-        getCategories();
-      }
-    });
-  }
-
-  void getCategories() {
-    final userId = BlocProvider.of<ProfileBloc>(context).getProfile()?.id;
-    if (userId == null) return;
-    BlocProvider.of<CategoriesBloc>(context)
-        .add(CategoriesEvent.getCategories(userId));
   }
 
   void disableCategories(Category category) {

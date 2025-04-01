@@ -18,7 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$ProfileEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() getData,
+    required TResult Function(VoidCallback callback) getData,
     required TResult Function() reloadProfile,
     required TResult Function(String name, VoidCallback callback) updateProfile,
     required TResult Function() reloadCateogries,
@@ -26,7 +26,7 @@ mixin _$ProfileEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? getData,
+    TResult? Function(VoidCallback callback)? getData,
     TResult? Function()? reloadProfile,
     TResult? Function(String name, VoidCallback callback)? updateProfile,
     TResult? Function()? reloadCateogries,
@@ -34,7 +34,7 @@ mixin _$ProfileEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? getData,
+    TResult Function(VoidCallback callback)? getData,
     TResult Function()? reloadProfile,
     TResult Function(String name, VoidCallback callback)? updateProfile,
     TResult Function()? reloadCateogries,
@@ -94,6 +94,8 @@ abstract class _$$GetDataImplCopyWith<$Res> {
   factory _$$GetDataImplCopyWith(
           _$GetDataImpl value, $Res Function(_$GetDataImpl) then) =
       __$$GetDataImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({VoidCallback callback});
 }
 
 /// @nodoc
@@ -106,60 +108,86 @@ class __$$GetDataImplCopyWithImpl<$Res>
 
   /// Create a copy of ProfileEvent
   /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? callback = null,
+  }) {
+    return _then(_$GetDataImpl(
+      null == callback
+          ? _value.callback
+          : callback // ignore: cast_nullable_to_non_nullable
+              as VoidCallback,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$GetDataImpl implements _GetData {
-  const _$GetDataImpl();
+  const _$GetDataImpl(this.callback);
+
+  @override
+  final VoidCallback callback;
 
   @override
   String toString() {
-    return 'ProfileEvent.getData()';
+    return 'ProfileEvent.getData(callback: $callback)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$GetDataImpl);
+        (other.runtimeType == runtimeType &&
+            other is _$GetDataImpl &&
+            (identical(other.callback, callback) ||
+                other.callback == callback));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, callback);
+
+  /// Create a copy of ProfileEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$GetDataImplCopyWith<_$GetDataImpl> get copyWith =>
+      __$$GetDataImplCopyWithImpl<_$GetDataImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() getData,
+    required TResult Function(VoidCallback callback) getData,
     required TResult Function() reloadProfile,
     required TResult Function(String name, VoidCallback callback) updateProfile,
     required TResult Function() reloadCateogries,
   }) {
-    return getData();
+    return getData(callback);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? getData,
+    TResult? Function(VoidCallback callback)? getData,
     TResult? Function()? reloadProfile,
     TResult? Function(String name, VoidCallback callback)? updateProfile,
     TResult? Function()? reloadCateogries,
   }) {
-    return getData?.call();
+    return getData?.call(callback);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? getData,
+    TResult Function(VoidCallback callback)? getData,
     TResult Function()? reloadProfile,
     TResult Function(String name, VoidCallback callback)? updateProfile,
     TResult Function()? reloadCateogries,
     required TResult orElse(),
   }) {
     if (getData != null) {
-      return getData();
+      return getData(callback);
     }
     return orElse();
   }
@@ -203,7 +231,15 @@ class _$GetDataImpl implements _GetData {
 }
 
 abstract class _GetData implements ProfileEvent {
-  const factory _GetData() = _$GetDataImpl;
+  const factory _GetData(final VoidCallback callback) = _$GetDataImpl;
+
+  VoidCallback get callback;
+
+  /// Create a copy of ProfileEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$GetDataImplCopyWith<_$GetDataImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -247,7 +283,7 @@ class _$ReloadProfileImpl implements _ReloadProfile {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() getData,
+    required TResult Function(VoidCallback callback) getData,
     required TResult Function() reloadProfile,
     required TResult Function(String name, VoidCallback callback) updateProfile,
     required TResult Function() reloadCateogries,
@@ -258,7 +294,7 @@ class _$ReloadProfileImpl implements _ReloadProfile {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? getData,
+    TResult? Function(VoidCallback callback)? getData,
     TResult? Function()? reloadProfile,
     TResult? Function(String name, VoidCallback callback)? updateProfile,
     TResult? Function()? reloadCateogries,
@@ -269,7 +305,7 @@ class _$ReloadProfileImpl implements _ReloadProfile {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? getData,
+    TResult Function(VoidCallback callback)? getData,
     TResult Function()? reloadProfile,
     TResult Function(String name, VoidCallback callback)? updateProfile,
     TResult Function()? reloadCateogries,
@@ -400,7 +436,7 @@ class _$UpdateProfileImpl implements _UpdateProfile {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() getData,
+    required TResult Function(VoidCallback callback) getData,
     required TResult Function() reloadProfile,
     required TResult Function(String name, VoidCallback callback) updateProfile,
     required TResult Function() reloadCateogries,
@@ -411,7 +447,7 @@ class _$UpdateProfileImpl implements _UpdateProfile {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? getData,
+    TResult? Function(VoidCallback callback)? getData,
     TResult? Function()? reloadProfile,
     TResult? Function(String name, VoidCallback callback)? updateProfile,
     TResult? Function()? reloadCateogries,
@@ -422,7 +458,7 @@ class _$UpdateProfileImpl implements _UpdateProfile {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? getData,
+    TResult Function(VoidCallback callback)? getData,
     TResult Function()? reloadProfile,
     TResult Function(String name, VoidCallback callback)? updateProfile,
     TResult Function()? reloadCateogries,
@@ -527,7 +563,7 @@ class _$ReloadCateogriesImpl implements _ReloadCateogries {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() getData,
+    required TResult Function(VoidCallback callback) getData,
     required TResult Function() reloadProfile,
     required TResult Function(String name, VoidCallback callback) updateProfile,
     required TResult Function() reloadCateogries,
@@ -538,7 +574,7 @@ class _$ReloadCateogriesImpl implements _ReloadCateogries {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? getData,
+    TResult? Function(VoidCallback callback)? getData,
     TResult? Function()? reloadProfile,
     TResult? Function(String name, VoidCallback callback)? updateProfile,
     TResult? Function()? reloadCateogries,
@@ -549,7 +585,7 @@ class _$ReloadCateogriesImpl implements _ReloadCateogries {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? getData,
+    TResult Function(VoidCallback callback)? getData,
     TResult Function()? reloadProfile,
     TResult Function(String name, VoidCallback callback)? updateProfile,
     TResult Function()? reloadCateogries,
