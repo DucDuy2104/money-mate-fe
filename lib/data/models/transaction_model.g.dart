@@ -15,6 +15,7 @@ _$TransactionModelImpl _$$TransactionModelImplFromJson(
       amount: (json['amount'] as num).toDouble(),
       description: json['description'] as String,
       createdAt: DateTime.parse(json['createdAt'] as String),
+      isCancel: json['isCancel'] as bool,
     );
 
 Map<String, dynamic> _$$TransactionModelImplToJson(
@@ -25,4 +26,5 @@ Map<String, dynamic> _$$TransactionModelImplToJson(
       'amount': instance.amount,
       'description': instance.description,
       'createdAt': instance.createdAt.toIso8601String(),
+      'isCancel': instance.isCancel,
     };

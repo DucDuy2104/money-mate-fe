@@ -9,6 +9,8 @@ class Transaction with _$Transaction {
     required String id,
     required Category category,
     required double amount,
+    required bool isCancel,
+    @Default(false) bool isLoading,
     required String description,
     required DateTime createdAt
   }) = _Transaction;

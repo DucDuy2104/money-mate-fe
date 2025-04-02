@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:money_mate/domain/entities/message.dart';
-import 'package:money_mate/presentation/pages/category/bloc/categories_bloc.dart';
 import 'package:money_mate/presentation/pages/category/widgets/category_dialogs.dart';
 import 'package:money_mate/presentation/pages/chat/bloc/chat_bloc.dart';
 import 'package:money_mate/presentation/pages/chat/widgets/suggest_category.dart';
+import 'package:money_mate/presentation/pages/chat/widgets/transaction_dialogs.dart';
 import 'package:money_mate/presentation/pages/chat/widgets/transaction_message.dart';
 import 'package:money_mate/presentation/pages/chat/widgets/switch_category_item.dart';
 import 'package:money_mate/presentation/pages/home/bloc/home_bloc.dart';
@@ -99,7 +99,9 @@ class _MessageItemState extends State<MessageItem>
                       decoration: BoxDecoration(
                           color: widget.message.isSentByMe
                               ? AppColors.darkCardColor
-                              : Colors.grey[200],
+                              : (widget.message.type == MessageType.error
+                                  ? Colors.pinkAccent
+                                  : Colors.grey[200]),
                           borderRadius: BorderRadius.only(
                             topLeft: Radius.circular(
                                 widget.message.isSentByMe ? 20 : 4),
@@ -126,9 +128,16 @@ class _MessageItemState extends State<MessageItem>
                       TransactionInfoMessage(
                         transaction: widget.message.transaction!,
                         onCancel: () {
-                          // Handle confirmation
-                          print(
-                              "User cancel adding expense to Ăn uống category");
+                          TransactionDialogs.showCancelTransactionDialog(
+                              context,
+                              widget.message.transaction!,
+                              onCancelTransaction);
+                        },
+                        onEnable: () {
+                          TransactionDialogs.showEnableTransactionDialog(
+                              context,
+                              widget.message.transaction!,
+                              onEnableTransaction);
                         },
                       )
                     ],
@@ -167,5 +176,23 @@ class _MessageItemState extends State<MessageItem>
         ),
       ),
     );
+  }
+
+  void onCancelTransaction() {
+    BlocProvider.of<ChatBloc>(context)
+        .add(ChatEvent.cancelTransaction(widget.message, context, reloadData));
+  }
+
+  void onEnableTransaction() {
+    BlocProvider.of<ChatBloc>(context)
+        .add(ChatEvent.enableTransaction(widget.message, context, reloadData));
+  }
+
+  void reloadData() {
+    final homeBloc = BlocProvider.of<HomeBloc>(context);
+    final profileBloc = BlocProvider.of<ProfileBloc>(context);
+
+    homeBloc.add(const HomeEvent.reloadData());
+    profileBloc.add(const ProfileEvent.reloadCateogries());
   }
 }

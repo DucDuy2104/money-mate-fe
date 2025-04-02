@@ -22,6 +22,15 @@ mixin _$ChatEvent {
     required TResult Function() connect,
     required TResult Function(Message message) updateMessages,
     required TResult Function() leaveRoom,
+    required TResult Function(
+            Message message, BuildContext context, VoidCallback onSuccess)
+        cancelTransaction,
+    required TResult Function(
+            Message message, BuildContext context, VoidCallback onSuccess)
+        enableTransaction,
+    required TResult Function(String id, bool isLoading) setMessageLoading,
+    required TResult Function(String id) setMessageCancel,
+    required TResult Function(String id) setMessageEnable,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -30,6 +39,15 @@ mixin _$ChatEvent {
     TResult? Function()? connect,
     TResult? Function(Message message)? updateMessages,
     TResult? Function()? leaveRoom,
+    TResult? Function(
+            Message message, BuildContext context, VoidCallback onSuccess)?
+        cancelTransaction,
+    TResult? Function(
+            Message message, BuildContext context, VoidCallback onSuccess)?
+        enableTransaction,
+    TResult? Function(String id, bool isLoading)? setMessageLoading,
+    TResult? Function(String id)? setMessageCancel,
+    TResult? Function(String id)? setMessageEnable,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -38,6 +56,15 @@ mixin _$ChatEvent {
     TResult Function()? connect,
     TResult Function(Message message)? updateMessages,
     TResult Function()? leaveRoom,
+    TResult Function(
+            Message message, BuildContext context, VoidCallback onSuccess)?
+        cancelTransaction,
+    TResult Function(
+            Message message, BuildContext context, VoidCallback onSuccess)?
+        enableTransaction,
+    TResult Function(String id, bool isLoading)? setMessageLoading,
+    TResult Function(String id)? setMessageCancel,
+    TResult Function(String id)? setMessageEnable,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -47,6 +74,11 @@ mixin _$ChatEvent {
     required TResult Function(_Connect value) connect,
     required TResult Function(_UpdateMessages value) updateMessages,
     required TResult Function(_LeaveRoom value) leaveRoom,
+    required TResult Function(_CancelTransaction value) cancelTransaction,
+    required TResult Function(_EnableTransaction value) enableTransaction,
+    required TResult Function(_SetMessageLoading value) setMessageLoading,
+    required TResult Function(_SetMessageCancel value) setMessageCancel,
+    required TResult Function(_SetMessageEnable value) setMessageEnable,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -55,6 +87,11 @@ mixin _$ChatEvent {
     TResult? Function(_Connect value)? connect,
     TResult? Function(_UpdateMessages value)? updateMessages,
     TResult? Function(_LeaveRoom value)? leaveRoom,
+    TResult? Function(_CancelTransaction value)? cancelTransaction,
+    TResult? Function(_EnableTransaction value)? enableTransaction,
+    TResult? Function(_SetMessageLoading value)? setMessageLoading,
+    TResult? Function(_SetMessageCancel value)? setMessageCancel,
+    TResult? Function(_SetMessageEnable value)? setMessageEnable,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -63,6 +100,11 @@ mixin _$ChatEvent {
     TResult Function(_Connect value)? connect,
     TResult Function(_UpdateMessages value)? updateMessages,
     TResult Function(_LeaveRoom value)? leaveRoom,
+    TResult Function(_CancelTransaction value)? cancelTransaction,
+    TResult Function(_EnableTransaction value)? enableTransaction,
+    TResult Function(_SetMessageLoading value)? setMessageLoading,
+    TResult Function(_SetMessageCancel value)? setMessageCancel,
+    TResult Function(_SetMessageEnable value)? setMessageEnable,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -133,6 +175,15 @@ class _$GetChatDataImpl implements _GetChatData {
     required TResult Function() connect,
     required TResult Function(Message message) updateMessages,
     required TResult Function() leaveRoom,
+    required TResult Function(
+            Message message, BuildContext context, VoidCallback onSuccess)
+        cancelTransaction,
+    required TResult Function(
+            Message message, BuildContext context, VoidCallback onSuccess)
+        enableTransaction,
+    required TResult Function(String id, bool isLoading) setMessageLoading,
+    required TResult Function(String id) setMessageCancel,
+    required TResult Function(String id) setMessageEnable,
   }) {
     return getChatData();
   }
@@ -144,6 +195,15 @@ class _$GetChatDataImpl implements _GetChatData {
     TResult? Function()? connect,
     TResult? Function(Message message)? updateMessages,
     TResult? Function()? leaveRoom,
+    TResult? Function(
+            Message message, BuildContext context, VoidCallback onSuccess)?
+        cancelTransaction,
+    TResult? Function(
+            Message message, BuildContext context, VoidCallback onSuccess)?
+        enableTransaction,
+    TResult? Function(String id, bool isLoading)? setMessageLoading,
+    TResult? Function(String id)? setMessageCancel,
+    TResult? Function(String id)? setMessageEnable,
   }) {
     return getChatData?.call();
   }
@@ -155,6 +215,15 @@ class _$GetChatDataImpl implements _GetChatData {
     TResult Function()? connect,
     TResult Function(Message message)? updateMessages,
     TResult Function()? leaveRoom,
+    TResult Function(
+            Message message, BuildContext context, VoidCallback onSuccess)?
+        cancelTransaction,
+    TResult Function(
+            Message message, BuildContext context, VoidCallback onSuccess)?
+        enableTransaction,
+    TResult Function(String id, bool isLoading)? setMessageLoading,
+    TResult Function(String id)? setMessageCancel,
+    TResult Function(String id)? setMessageEnable,
     required TResult orElse(),
   }) {
     if (getChatData != null) {
@@ -170,6 +239,11 @@ class _$GetChatDataImpl implements _GetChatData {
     required TResult Function(_Connect value) connect,
     required TResult Function(_UpdateMessages value) updateMessages,
     required TResult Function(_LeaveRoom value) leaveRoom,
+    required TResult Function(_CancelTransaction value) cancelTransaction,
+    required TResult Function(_EnableTransaction value) enableTransaction,
+    required TResult Function(_SetMessageLoading value) setMessageLoading,
+    required TResult Function(_SetMessageCancel value) setMessageCancel,
+    required TResult Function(_SetMessageEnable value) setMessageEnable,
   }) {
     return getChatData(this);
   }
@@ -181,6 +255,11 @@ class _$GetChatDataImpl implements _GetChatData {
     TResult? Function(_Connect value)? connect,
     TResult? Function(_UpdateMessages value)? updateMessages,
     TResult? Function(_LeaveRoom value)? leaveRoom,
+    TResult? Function(_CancelTransaction value)? cancelTransaction,
+    TResult? Function(_EnableTransaction value)? enableTransaction,
+    TResult? Function(_SetMessageLoading value)? setMessageLoading,
+    TResult? Function(_SetMessageCancel value)? setMessageCancel,
+    TResult? Function(_SetMessageEnable value)? setMessageEnable,
   }) {
     return getChatData?.call(this);
   }
@@ -192,6 +271,11 @@ class _$GetChatDataImpl implements _GetChatData {
     TResult Function(_Connect value)? connect,
     TResult Function(_UpdateMessages value)? updateMessages,
     TResult Function(_LeaveRoom value)? leaveRoom,
+    TResult Function(_CancelTransaction value)? cancelTransaction,
+    TResult Function(_EnableTransaction value)? enableTransaction,
+    TResult Function(_SetMessageLoading value)? setMessageLoading,
+    TResult Function(_SetMessageCancel value)? setMessageCancel,
+    TResult Function(_SetMessageEnable value)? setMessageEnable,
     required TResult orElse(),
   }) {
     if (getChatData != null) {
@@ -250,6 +334,15 @@ class _$ConnectImpl implements _Connect {
     required TResult Function() connect,
     required TResult Function(Message message) updateMessages,
     required TResult Function() leaveRoom,
+    required TResult Function(
+            Message message, BuildContext context, VoidCallback onSuccess)
+        cancelTransaction,
+    required TResult Function(
+            Message message, BuildContext context, VoidCallback onSuccess)
+        enableTransaction,
+    required TResult Function(String id, bool isLoading) setMessageLoading,
+    required TResult Function(String id) setMessageCancel,
+    required TResult Function(String id) setMessageEnable,
   }) {
     return connect();
   }
@@ -261,6 +354,15 @@ class _$ConnectImpl implements _Connect {
     TResult? Function()? connect,
     TResult? Function(Message message)? updateMessages,
     TResult? Function()? leaveRoom,
+    TResult? Function(
+            Message message, BuildContext context, VoidCallback onSuccess)?
+        cancelTransaction,
+    TResult? Function(
+            Message message, BuildContext context, VoidCallback onSuccess)?
+        enableTransaction,
+    TResult? Function(String id, bool isLoading)? setMessageLoading,
+    TResult? Function(String id)? setMessageCancel,
+    TResult? Function(String id)? setMessageEnable,
   }) {
     return connect?.call();
   }
@@ -272,6 +374,15 @@ class _$ConnectImpl implements _Connect {
     TResult Function()? connect,
     TResult Function(Message message)? updateMessages,
     TResult Function()? leaveRoom,
+    TResult Function(
+            Message message, BuildContext context, VoidCallback onSuccess)?
+        cancelTransaction,
+    TResult Function(
+            Message message, BuildContext context, VoidCallback onSuccess)?
+        enableTransaction,
+    TResult Function(String id, bool isLoading)? setMessageLoading,
+    TResult Function(String id)? setMessageCancel,
+    TResult Function(String id)? setMessageEnable,
     required TResult orElse(),
   }) {
     if (connect != null) {
@@ -287,6 +398,11 @@ class _$ConnectImpl implements _Connect {
     required TResult Function(_Connect value) connect,
     required TResult Function(_UpdateMessages value) updateMessages,
     required TResult Function(_LeaveRoom value) leaveRoom,
+    required TResult Function(_CancelTransaction value) cancelTransaction,
+    required TResult Function(_EnableTransaction value) enableTransaction,
+    required TResult Function(_SetMessageLoading value) setMessageLoading,
+    required TResult Function(_SetMessageCancel value) setMessageCancel,
+    required TResult Function(_SetMessageEnable value) setMessageEnable,
   }) {
     return connect(this);
   }
@@ -298,6 +414,11 @@ class _$ConnectImpl implements _Connect {
     TResult? Function(_Connect value)? connect,
     TResult? Function(_UpdateMessages value)? updateMessages,
     TResult? Function(_LeaveRoom value)? leaveRoom,
+    TResult? Function(_CancelTransaction value)? cancelTransaction,
+    TResult? Function(_EnableTransaction value)? enableTransaction,
+    TResult? Function(_SetMessageLoading value)? setMessageLoading,
+    TResult? Function(_SetMessageCancel value)? setMessageCancel,
+    TResult? Function(_SetMessageEnable value)? setMessageEnable,
   }) {
     return connect?.call(this);
   }
@@ -309,6 +430,11 @@ class _$ConnectImpl implements _Connect {
     TResult Function(_Connect value)? connect,
     TResult Function(_UpdateMessages value)? updateMessages,
     TResult Function(_LeaveRoom value)? leaveRoom,
+    TResult Function(_CancelTransaction value)? cancelTransaction,
+    TResult Function(_EnableTransaction value)? enableTransaction,
+    TResult Function(_SetMessageLoading value)? setMessageLoading,
+    TResult Function(_SetMessageCancel value)? setMessageCancel,
+    TResult Function(_SetMessageEnable value)? setMessageEnable,
     required TResult orElse(),
   }) {
     if (connect != null) {
@@ -407,6 +533,15 @@ class _$UpdateMessagesImpl implements _UpdateMessages {
     required TResult Function() connect,
     required TResult Function(Message message) updateMessages,
     required TResult Function() leaveRoom,
+    required TResult Function(
+            Message message, BuildContext context, VoidCallback onSuccess)
+        cancelTransaction,
+    required TResult Function(
+            Message message, BuildContext context, VoidCallback onSuccess)
+        enableTransaction,
+    required TResult Function(String id, bool isLoading) setMessageLoading,
+    required TResult Function(String id) setMessageCancel,
+    required TResult Function(String id) setMessageEnable,
   }) {
     return updateMessages(message);
   }
@@ -418,6 +553,15 @@ class _$UpdateMessagesImpl implements _UpdateMessages {
     TResult? Function()? connect,
     TResult? Function(Message message)? updateMessages,
     TResult? Function()? leaveRoom,
+    TResult? Function(
+            Message message, BuildContext context, VoidCallback onSuccess)?
+        cancelTransaction,
+    TResult? Function(
+            Message message, BuildContext context, VoidCallback onSuccess)?
+        enableTransaction,
+    TResult? Function(String id, bool isLoading)? setMessageLoading,
+    TResult? Function(String id)? setMessageCancel,
+    TResult? Function(String id)? setMessageEnable,
   }) {
     return updateMessages?.call(message);
   }
@@ -429,6 +573,15 @@ class _$UpdateMessagesImpl implements _UpdateMessages {
     TResult Function()? connect,
     TResult Function(Message message)? updateMessages,
     TResult Function()? leaveRoom,
+    TResult Function(
+            Message message, BuildContext context, VoidCallback onSuccess)?
+        cancelTransaction,
+    TResult Function(
+            Message message, BuildContext context, VoidCallback onSuccess)?
+        enableTransaction,
+    TResult Function(String id, bool isLoading)? setMessageLoading,
+    TResult Function(String id)? setMessageCancel,
+    TResult Function(String id)? setMessageEnable,
     required TResult orElse(),
   }) {
     if (updateMessages != null) {
@@ -444,6 +597,11 @@ class _$UpdateMessagesImpl implements _UpdateMessages {
     required TResult Function(_Connect value) connect,
     required TResult Function(_UpdateMessages value) updateMessages,
     required TResult Function(_LeaveRoom value) leaveRoom,
+    required TResult Function(_CancelTransaction value) cancelTransaction,
+    required TResult Function(_EnableTransaction value) enableTransaction,
+    required TResult Function(_SetMessageLoading value) setMessageLoading,
+    required TResult Function(_SetMessageCancel value) setMessageCancel,
+    required TResult Function(_SetMessageEnable value) setMessageEnable,
   }) {
     return updateMessages(this);
   }
@@ -455,6 +613,11 @@ class _$UpdateMessagesImpl implements _UpdateMessages {
     TResult? Function(_Connect value)? connect,
     TResult? Function(_UpdateMessages value)? updateMessages,
     TResult? Function(_LeaveRoom value)? leaveRoom,
+    TResult? Function(_CancelTransaction value)? cancelTransaction,
+    TResult? Function(_EnableTransaction value)? enableTransaction,
+    TResult? Function(_SetMessageLoading value)? setMessageLoading,
+    TResult? Function(_SetMessageCancel value)? setMessageCancel,
+    TResult? Function(_SetMessageEnable value)? setMessageEnable,
   }) {
     return updateMessages?.call(this);
   }
@@ -466,6 +629,11 @@ class _$UpdateMessagesImpl implements _UpdateMessages {
     TResult Function(_Connect value)? connect,
     TResult Function(_UpdateMessages value)? updateMessages,
     TResult Function(_LeaveRoom value)? leaveRoom,
+    TResult Function(_CancelTransaction value)? cancelTransaction,
+    TResult Function(_EnableTransaction value)? enableTransaction,
+    TResult Function(_SetMessageLoading value)? setMessageLoading,
+    TResult Function(_SetMessageCancel value)? setMessageCancel,
+    TResult Function(_SetMessageEnable value)? setMessageEnable,
     required TResult orElse(),
   }) {
     if (updateMessages != null) {
@@ -532,6 +700,15 @@ class _$LeaveRoomImpl implements _LeaveRoom {
     required TResult Function() connect,
     required TResult Function(Message message) updateMessages,
     required TResult Function() leaveRoom,
+    required TResult Function(
+            Message message, BuildContext context, VoidCallback onSuccess)
+        cancelTransaction,
+    required TResult Function(
+            Message message, BuildContext context, VoidCallback onSuccess)
+        enableTransaction,
+    required TResult Function(String id, bool isLoading) setMessageLoading,
+    required TResult Function(String id) setMessageCancel,
+    required TResult Function(String id) setMessageEnable,
   }) {
     return leaveRoom();
   }
@@ -543,6 +720,15 @@ class _$LeaveRoomImpl implements _LeaveRoom {
     TResult? Function()? connect,
     TResult? Function(Message message)? updateMessages,
     TResult? Function()? leaveRoom,
+    TResult? Function(
+            Message message, BuildContext context, VoidCallback onSuccess)?
+        cancelTransaction,
+    TResult? Function(
+            Message message, BuildContext context, VoidCallback onSuccess)?
+        enableTransaction,
+    TResult? Function(String id, bool isLoading)? setMessageLoading,
+    TResult? Function(String id)? setMessageCancel,
+    TResult? Function(String id)? setMessageEnable,
   }) {
     return leaveRoom?.call();
   }
@@ -554,6 +740,15 @@ class _$LeaveRoomImpl implements _LeaveRoom {
     TResult Function()? connect,
     TResult Function(Message message)? updateMessages,
     TResult Function()? leaveRoom,
+    TResult Function(
+            Message message, BuildContext context, VoidCallback onSuccess)?
+        cancelTransaction,
+    TResult Function(
+            Message message, BuildContext context, VoidCallback onSuccess)?
+        enableTransaction,
+    TResult Function(String id, bool isLoading)? setMessageLoading,
+    TResult Function(String id)? setMessageCancel,
+    TResult Function(String id)? setMessageEnable,
     required TResult orElse(),
   }) {
     if (leaveRoom != null) {
@@ -569,6 +764,11 @@ class _$LeaveRoomImpl implements _LeaveRoom {
     required TResult Function(_Connect value) connect,
     required TResult Function(_UpdateMessages value) updateMessages,
     required TResult Function(_LeaveRoom value) leaveRoom,
+    required TResult Function(_CancelTransaction value) cancelTransaction,
+    required TResult Function(_EnableTransaction value) enableTransaction,
+    required TResult Function(_SetMessageLoading value) setMessageLoading,
+    required TResult Function(_SetMessageCancel value) setMessageCancel,
+    required TResult Function(_SetMessageEnable value) setMessageEnable,
   }) {
     return leaveRoom(this);
   }
@@ -580,6 +780,11 @@ class _$LeaveRoomImpl implements _LeaveRoom {
     TResult? Function(_Connect value)? connect,
     TResult? Function(_UpdateMessages value)? updateMessages,
     TResult? Function(_LeaveRoom value)? leaveRoom,
+    TResult? Function(_CancelTransaction value)? cancelTransaction,
+    TResult? Function(_EnableTransaction value)? enableTransaction,
+    TResult? Function(_SetMessageLoading value)? setMessageLoading,
+    TResult? Function(_SetMessageCancel value)? setMessageCancel,
+    TResult? Function(_SetMessageEnable value)? setMessageEnable,
   }) {
     return leaveRoom?.call(this);
   }
@@ -591,6 +796,11 @@ class _$LeaveRoomImpl implements _LeaveRoom {
     TResult Function(_Connect value)? connect,
     TResult Function(_UpdateMessages value)? updateMessages,
     TResult Function(_LeaveRoom value)? leaveRoom,
+    TResult Function(_CancelTransaction value)? cancelTransaction,
+    TResult Function(_EnableTransaction value)? enableTransaction,
+    TResult Function(_SetMessageLoading value)? setMessageLoading,
+    TResult Function(_SetMessageCancel value)? setMessageCancel,
+    TResult Function(_SetMessageEnable value)? setMessageEnable,
     required TResult orElse(),
   }) {
     if (leaveRoom != null) {
@@ -602,6 +812,1060 @@ class _$LeaveRoomImpl implements _LeaveRoom {
 
 abstract class _LeaveRoom implements ChatEvent {
   const factory _LeaveRoom() = _$LeaveRoomImpl;
+}
+
+/// @nodoc
+abstract class _$$CancelTransactionImplCopyWith<$Res> {
+  factory _$$CancelTransactionImplCopyWith(_$CancelTransactionImpl value,
+          $Res Function(_$CancelTransactionImpl) then) =
+      __$$CancelTransactionImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({Message message, BuildContext context, VoidCallback onSuccess});
+
+  $MessageCopyWith<$Res> get message;
+}
+
+/// @nodoc
+class __$$CancelTransactionImplCopyWithImpl<$Res>
+    extends _$ChatEventCopyWithImpl<$Res, _$CancelTransactionImpl>
+    implements _$$CancelTransactionImplCopyWith<$Res> {
+  __$$CancelTransactionImplCopyWithImpl(_$CancelTransactionImpl _value,
+      $Res Function(_$CancelTransactionImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of ChatEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? message = null,
+    Object? context = null,
+    Object? onSuccess = null,
+  }) {
+    return _then(_$CancelTransactionImpl(
+      null == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as Message,
+      null == context
+          ? _value.context
+          : context // ignore: cast_nullable_to_non_nullable
+              as BuildContext,
+      null == onSuccess
+          ? _value.onSuccess
+          : onSuccess // ignore: cast_nullable_to_non_nullable
+              as VoidCallback,
+    ));
+  }
+
+  /// Create a copy of ChatEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $MessageCopyWith<$Res> get message {
+    return $MessageCopyWith<$Res>(_value.message, (value) {
+      return _then(_value.copyWith(message: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$CancelTransactionImpl implements _CancelTransaction {
+  const _$CancelTransactionImpl(this.message, this.context, this.onSuccess);
+
+  @override
+  final Message message;
+  @override
+  final BuildContext context;
+  @override
+  final VoidCallback onSuccess;
+
+  @override
+  String toString() {
+    return 'ChatEvent.cancelTransaction(message: $message, context: $context, onSuccess: $onSuccess)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$CancelTransactionImpl &&
+            (identical(other.message, message) || other.message == message) &&
+            (identical(other.context, context) || other.context == context) &&
+            (identical(other.onSuccess, onSuccess) ||
+                other.onSuccess == onSuccess));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, message, context, onSuccess);
+
+  /// Create a copy of ChatEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$CancelTransactionImplCopyWith<_$CancelTransactionImpl> get copyWith =>
+      __$$CancelTransactionImplCopyWithImpl<_$CancelTransactionImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() getChatData,
+    required TResult Function() connect,
+    required TResult Function(Message message) updateMessages,
+    required TResult Function() leaveRoom,
+    required TResult Function(
+            Message message, BuildContext context, VoidCallback onSuccess)
+        cancelTransaction,
+    required TResult Function(
+            Message message, BuildContext context, VoidCallback onSuccess)
+        enableTransaction,
+    required TResult Function(String id, bool isLoading) setMessageLoading,
+    required TResult Function(String id) setMessageCancel,
+    required TResult Function(String id) setMessageEnable,
+  }) {
+    return cancelTransaction(message, context, onSuccess);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? getChatData,
+    TResult? Function()? connect,
+    TResult? Function(Message message)? updateMessages,
+    TResult? Function()? leaveRoom,
+    TResult? Function(
+            Message message, BuildContext context, VoidCallback onSuccess)?
+        cancelTransaction,
+    TResult? Function(
+            Message message, BuildContext context, VoidCallback onSuccess)?
+        enableTransaction,
+    TResult? Function(String id, bool isLoading)? setMessageLoading,
+    TResult? Function(String id)? setMessageCancel,
+    TResult? Function(String id)? setMessageEnable,
+  }) {
+    return cancelTransaction?.call(message, context, onSuccess);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? getChatData,
+    TResult Function()? connect,
+    TResult Function(Message message)? updateMessages,
+    TResult Function()? leaveRoom,
+    TResult Function(
+            Message message, BuildContext context, VoidCallback onSuccess)?
+        cancelTransaction,
+    TResult Function(
+            Message message, BuildContext context, VoidCallback onSuccess)?
+        enableTransaction,
+    TResult Function(String id, bool isLoading)? setMessageLoading,
+    TResult Function(String id)? setMessageCancel,
+    TResult Function(String id)? setMessageEnable,
+    required TResult orElse(),
+  }) {
+    if (cancelTransaction != null) {
+      return cancelTransaction(message, context, onSuccess);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetChatData value) getChatData,
+    required TResult Function(_Connect value) connect,
+    required TResult Function(_UpdateMessages value) updateMessages,
+    required TResult Function(_LeaveRoom value) leaveRoom,
+    required TResult Function(_CancelTransaction value) cancelTransaction,
+    required TResult Function(_EnableTransaction value) enableTransaction,
+    required TResult Function(_SetMessageLoading value) setMessageLoading,
+    required TResult Function(_SetMessageCancel value) setMessageCancel,
+    required TResult Function(_SetMessageEnable value) setMessageEnable,
+  }) {
+    return cancelTransaction(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetChatData value)? getChatData,
+    TResult? Function(_Connect value)? connect,
+    TResult? Function(_UpdateMessages value)? updateMessages,
+    TResult? Function(_LeaveRoom value)? leaveRoom,
+    TResult? Function(_CancelTransaction value)? cancelTransaction,
+    TResult? Function(_EnableTransaction value)? enableTransaction,
+    TResult? Function(_SetMessageLoading value)? setMessageLoading,
+    TResult? Function(_SetMessageCancel value)? setMessageCancel,
+    TResult? Function(_SetMessageEnable value)? setMessageEnable,
+  }) {
+    return cancelTransaction?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetChatData value)? getChatData,
+    TResult Function(_Connect value)? connect,
+    TResult Function(_UpdateMessages value)? updateMessages,
+    TResult Function(_LeaveRoom value)? leaveRoom,
+    TResult Function(_CancelTransaction value)? cancelTransaction,
+    TResult Function(_EnableTransaction value)? enableTransaction,
+    TResult Function(_SetMessageLoading value)? setMessageLoading,
+    TResult Function(_SetMessageCancel value)? setMessageCancel,
+    TResult Function(_SetMessageEnable value)? setMessageEnable,
+    required TResult orElse(),
+  }) {
+    if (cancelTransaction != null) {
+      return cancelTransaction(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _CancelTransaction implements ChatEvent {
+  const factory _CancelTransaction(
+      final Message message,
+      final BuildContext context,
+      final VoidCallback onSuccess) = _$CancelTransactionImpl;
+
+  Message get message;
+  BuildContext get context;
+  VoidCallback get onSuccess;
+
+  /// Create a copy of ChatEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$CancelTransactionImplCopyWith<_$CancelTransactionImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$EnableTransactionImplCopyWith<$Res> {
+  factory _$$EnableTransactionImplCopyWith(_$EnableTransactionImpl value,
+          $Res Function(_$EnableTransactionImpl) then) =
+      __$$EnableTransactionImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({Message message, BuildContext context, VoidCallback onSuccess});
+
+  $MessageCopyWith<$Res> get message;
+}
+
+/// @nodoc
+class __$$EnableTransactionImplCopyWithImpl<$Res>
+    extends _$ChatEventCopyWithImpl<$Res, _$EnableTransactionImpl>
+    implements _$$EnableTransactionImplCopyWith<$Res> {
+  __$$EnableTransactionImplCopyWithImpl(_$EnableTransactionImpl _value,
+      $Res Function(_$EnableTransactionImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of ChatEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? message = null,
+    Object? context = null,
+    Object? onSuccess = null,
+  }) {
+    return _then(_$EnableTransactionImpl(
+      null == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as Message,
+      null == context
+          ? _value.context
+          : context // ignore: cast_nullable_to_non_nullable
+              as BuildContext,
+      null == onSuccess
+          ? _value.onSuccess
+          : onSuccess // ignore: cast_nullable_to_non_nullable
+              as VoidCallback,
+    ));
+  }
+
+  /// Create a copy of ChatEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $MessageCopyWith<$Res> get message {
+    return $MessageCopyWith<$Res>(_value.message, (value) {
+      return _then(_value.copyWith(message: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$EnableTransactionImpl implements _EnableTransaction {
+  const _$EnableTransactionImpl(this.message, this.context, this.onSuccess);
+
+  @override
+  final Message message;
+  @override
+  final BuildContext context;
+  @override
+  final VoidCallback onSuccess;
+
+  @override
+  String toString() {
+    return 'ChatEvent.enableTransaction(message: $message, context: $context, onSuccess: $onSuccess)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$EnableTransactionImpl &&
+            (identical(other.message, message) || other.message == message) &&
+            (identical(other.context, context) || other.context == context) &&
+            (identical(other.onSuccess, onSuccess) ||
+                other.onSuccess == onSuccess));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, message, context, onSuccess);
+
+  /// Create a copy of ChatEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$EnableTransactionImplCopyWith<_$EnableTransactionImpl> get copyWith =>
+      __$$EnableTransactionImplCopyWithImpl<_$EnableTransactionImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() getChatData,
+    required TResult Function() connect,
+    required TResult Function(Message message) updateMessages,
+    required TResult Function() leaveRoom,
+    required TResult Function(
+            Message message, BuildContext context, VoidCallback onSuccess)
+        cancelTransaction,
+    required TResult Function(
+            Message message, BuildContext context, VoidCallback onSuccess)
+        enableTransaction,
+    required TResult Function(String id, bool isLoading) setMessageLoading,
+    required TResult Function(String id) setMessageCancel,
+    required TResult Function(String id) setMessageEnable,
+  }) {
+    return enableTransaction(message, context, onSuccess);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? getChatData,
+    TResult? Function()? connect,
+    TResult? Function(Message message)? updateMessages,
+    TResult? Function()? leaveRoom,
+    TResult? Function(
+            Message message, BuildContext context, VoidCallback onSuccess)?
+        cancelTransaction,
+    TResult? Function(
+            Message message, BuildContext context, VoidCallback onSuccess)?
+        enableTransaction,
+    TResult? Function(String id, bool isLoading)? setMessageLoading,
+    TResult? Function(String id)? setMessageCancel,
+    TResult? Function(String id)? setMessageEnable,
+  }) {
+    return enableTransaction?.call(message, context, onSuccess);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? getChatData,
+    TResult Function()? connect,
+    TResult Function(Message message)? updateMessages,
+    TResult Function()? leaveRoom,
+    TResult Function(
+            Message message, BuildContext context, VoidCallback onSuccess)?
+        cancelTransaction,
+    TResult Function(
+            Message message, BuildContext context, VoidCallback onSuccess)?
+        enableTransaction,
+    TResult Function(String id, bool isLoading)? setMessageLoading,
+    TResult Function(String id)? setMessageCancel,
+    TResult Function(String id)? setMessageEnable,
+    required TResult orElse(),
+  }) {
+    if (enableTransaction != null) {
+      return enableTransaction(message, context, onSuccess);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetChatData value) getChatData,
+    required TResult Function(_Connect value) connect,
+    required TResult Function(_UpdateMessages value) updateMessages,
+    required TResult Function(_LeaveRoom value) leaveRoom,
+    required TResult Function(_CancelTransaction value) cancelTransaction,
+    required TResult Function(_EnableTransaction value) enableTransaction,
+    required TResult Function(_SetMessageLoading value) setMessageLoading,
+    required TResult Function(_SetMessageCancel value) setMessageCancel,
+    required TResult Function(_SetMessageEnable value) setMessageEnable,
+  }) {
+    return enableTransaction(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetChatData value)? getChatData,
+    TResult? Function(_Connect value)? connect,
+    TResult? Function(_UpdateMessages value)? updateMessages,
+    TResult? Function(_LeaveRoom value)? leaveRoom,
+    TResult? Function(_CancelTransaction value)? cancelTransaction,
+    TResult? Function(_EnableTransaction value)? enableTransaction,
+    TResult? Function(_SetMessageLoading value)? setMessageLoading,
+    TResult? Function(_SetMessageCancel value)? setMessageCancel,
+    TResult? Function(_SetMessageEnable value)? setMessageEnable,
+  }) {
+    return enableTransaction?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetChatData value)? getChatData,
+    TResult Function(_Connect value)? connect,
+    TResult Function(_UpdateMessages value)? updateMessages,
+    TResult Function(_LeaveRoom value)? leaveRoom,
+    TResult Function(_CancelTransaction value)? cancelTransaction,
+    TResult Function(_EnableTransaction value)? enableTransaction,
+    TResult Function(_SetMessageLoading value)? setMessageLoading,
+    TResult Function(_SetMessageCancel value)? setMessageCancel,
+    TResult Function(_SetMessageEnable value)? setMessageEnable,
+    required TResult orElse(),
+  }) {
+    if (enableTransaction != null) {
+      return enableTransaction(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _EnableTransaction implements ChatEvent {
+  const factory _EnableTransaction(
+      final Message message,
+      final BuildContext context,
+      final VoidCallback onSuccess) = _$EnableTransactionImpl;
+
+  Message get message;
+  BuildContext get context;
+  VoidCallback get onSuccess;
+
+  /// Create a copy of ChatEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$EnableTransactionImplCopyWith<_$EnableTransactionImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$SetMessageLoadingImplCopyWith<$Res> {
+  factory _$$SetMessageLoadingImplCopyWith(_$SetMessageLoadingImpl value,
+          $Res Function(_$SetMessageLoadingImpl) then) =
+      __$$SetMessageLoadingImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String id, bool isLoading});
+}
+
+/// @nodoc
+class __$$SetMessageLoadingImplCopyWithImpl<$Res>
+    extends _$ChatEventCopyWithImpl<$Res, _$SetMessageLoadingImpl>
+    implements _$$SetMessageLoadingImplCopyWith<$Res> {
+  __$$SetMessageLoadingImplCopyWithImpl(_$SetMessageLoadingImpl _value,
+      $Res Function(_$SetMessageLoadingImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of ChatEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+    Object? isLoading = null,
+  }) {
+    return _then(_$SetMessageLoadingImpl(
+      null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      null == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$SetMessageLoadingImpl implements _SetMessageLoading {
+  const _$SetMessageLoadingImpl(this.id, this.isLoading);
+
+  @override
+  final String id;
+  @override
+  final bool isLoading;
+
+  @override
+  String toString() {
+    return 'ChatEvent.setMessageLoading(id: $id, isLoading: $isLoading)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$SetMessageLoadingImpl &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.isLoading, isLoading) ||
+                other.isLoading == isLoading));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, id, isLoading);
+
+  /// Create a copy of ChatEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$SetMessageLoadingImplCopyWith<_$SetMessageLoadingImpl> get copyWith =>
+      __$$SetMessageLoadingImplCopyWithImpl<_$SetMessageLoadingImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() getChatData,
+    required TResult Function() connect,
+    required TResult Function(Message message) updateMessages,
+    required TResult Function() leaveRoom,
+    required TResult Function(
+            Message message, BuildContext context, VoidCallback onSuccess)
+        cancelTransaction,
+    required TResult Function(
+            Message message, BuildContext context, VoidCallback onSuccess)
+        enableTransaction,
+    required TResult Function(String id, bool isLoading) setMessageLoading,
+    required TResult Function(String id) setMessageCancel,
+    required TResult Function(String id) setMessageEnable,
+  }) {
+    return setMessageLoading(id, isLoading);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? getChatData,
+    TResult? Function()? connect,
+    TResult? Function(Message message)? updateMessages,
+    TResult? Function()? leaveRoom,
+    TResult? Function(
+            Message message, BuildContext context, VoidCallback onSuccess)?
+        cancelTransaction,
+    TResult? Function(
+            Message message, BuildContext context, VoidCallback onSuccess)?
+        enableTransaction,
+    TResult? Function(String id, bool isLoading)? setMessageLoading,
+    TResult? Function(String id)? setMessageCancel,
+    TResult? Function(String id)? setMessageEnable,
+  }) {
+    return setMessageLoading?.call(id, isLoading);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? getChatData,
+    TResult Function()? connect,
+    TResult Function(Message message)? updateMessages,
+    TResult Function()? leaveRoom,
+    TResult Function(
+            Message message, BuildContext context, VoidCallback onSuccess)?
+        cancelTransaction,
+    TResult Function(
+            Message message, BuildContext context, VoidCallback onSuccess)?
+        enableTransaction,
+    TResult Function(String id, bool isLoading)? setMessageLoading,
+    TResult Function(String id)? setMessageCancel,
+    TResult Function(String id)? setMessageEnable,
+    required TResult orElse(),
+  }) {
+    if (setMessageLoading != null) {
+      return setMessageLoading(id, isLoading);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetChatData value) getChatData,
+    required TResult Function(_Connect value) connect,
+    required TResult Function(_UpdateMessages value) updateMessages,
+    required TResult Function(_LeaveRoom value) leaveRoom,
+    required TResult Function(_CancelTransaction value) cancelTransaction,
+    required TResult Function(_EnableTransaction value) enableTransaction,
+    required TResult Function(_SetMessageLoading value) setMessageLoading,
+    required TResult Function(_SetMessageCancel value) setMessageCancel,
+    required TResult Function(_SetMessageEnable value) setMessageEnable,
+  }) {
+    return setMessageLoading(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetChatData value)? getChatData,
+    TResult? Function(_Connect value)? connect,
+    TResult? Function(_UpdateMessages value)? updateMessages,
+    TResult? Function(_LeaveRoom value)? leaveRoom,
+    TResult? Function(_CancelTransaction value)? cancelTransaction,
+    TResult? Function(_EnableTransaction value)? enableTransaction,
+    TResult? Function(_SetMessageLoading value)? setMessageLoading,
+    TResult? Function(_SetMessageCancel value)? setMessageCancel,
+    TResult? Function(_SetMessageEnable value)? setMessageEnable,
+  }) {
+    return setMessageLoading?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetChatData value)? getChatData,
+    TResult Function(_Connect value)? connect,
+    TResult Function(_UpdateMessages value)? updateMessages,
+    TResult Function(_LeaveRoom value)? leaveRoom,
+    TResult Function(_CancelTransaction value)? cancelTransaction,
+    TResult Function(_EnableTransaction value)? enableTransaction,
+    TResult Function(_SetMessageLoading value)? setMessageLoading,
+    TResult Function(_SetMessageCancel value)? setMessageCancel,
+    TResult Function(_SetMessageEnable value)? setMessageEnable,
+    required TResult orElse(),
+  }) {
+    if (setMessageLoading != null) {
+      return setMessageLoading(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _SetMessageLoading implements ChatEvent {
+  const factory _SetMessageLoading(final String id, final bool isLoading) =
+      _$SetMessageLoadingImpl;
+
+  String get id;
+  bool get isLoading;
+
+  /// Create a copy of ChatEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$SetMessageLoadingImplCopyWith<_$SetMessageLoadingImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$SetMessageCancelImplCopyWith<$Res> {
+  factory _$$SetMessageCancelImplCopyWith(_$SetMessageCancelImpl value,
+          $Res Function(_$SetMessageCancelImpl) then) =
+      __$$SetMessageCancelImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String id});
+}
+
+/// @nodoc
+class __$$SetMessageCancelImplCopyWithImpl<$Res>
+    extends _$ChatEventCopyWithImpl<$Res, _$SetMessageCancelImpl>
+    implements _$$SetMessageCancelImplCopyWith<$Res> {
+  __$$SetMessageCancelImplCopyWithImpl(_$SetMessageCancelImpl _value,
+      $Res Function(_$SetMessageCancelImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of ChatEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+  }) {
+    return _then(_$SetMessageCancelImpl(
+      null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$SetMessageCancelImpl implements _SetMessageCancel {
+  const _$SetMessageCancelImpl(this.id);
+
+  @override
+  final String id;
+
+  @override
+  String toString() {
+    return 'ChatEvent.setMessageCancel(id: $id)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$SetMessageCancelImpl &&
+            (identical(other.id, id) || other.id == id));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, id);
+
+  /// Create a copy of ChatEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$SetMessageCancelImplCopyWith<_$SetMessageCancelImpl> get copyWith =>
+      __$$SetMessageCancelImplCopyWithImpl<_$SetMessageCancelImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() getChatData,
+    required TResult Function() connect,
+    required TResult Function(Message message) updateMessages,
+    required TResult Function() leaveRoom,
+    required TResult Function(
+            Message message, BuildContext context, VoidCallback onSuccess)
+        cancelTransaction,
+    required TResult Function(
+            Message message, BuildContext context, VoidCallback onSuccess)
+        enableTransaction,
+    required TResult Function(String id, bool isLoading) setMessageLoading,
+    required TResult Function(String id) setMessageCancel,
+    required TResult Function(String id) setMessageEnable,
+  }) {
+    return setMessageCancel(id);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? getChatData,
+    TResult? Function()? connect,
+    TResult? Function(Message message)? updateMessages,
+    TResult? Function()? leaveRoom,
+    TResult? Function(
+            Message message, BuildContext context, VoidCallback onSuccess)?
+        cancelTransaction,
+    TResult? Function(
+            Message message, BuildContext context, VoidCallback onSuccess)?
+        enableTransaction,
+    TResult? Function(String id, bool isLoading)? setMessageLoading,
+    TResult? Function(String id)? setMessageCancel,
+    TResult? Function(String id)? setMessageEnable,
+  }) {
+    return setMessageCancel?.call(id);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? getChatData,
+    TResult Function()? connect,
+    TResult Function(Message message)? updateMessages,
+    TResult Function()? leaveRoom,
+    TResult Function(
+            Message message, BuildContext context, VoidCallback onSuccess)?
+        cancelTransaction,
+    TResult Function(
+            Message message, BuildContext context, VoidCallback onSuccess)?
+        enableTransaction,
+    TResult Function(String id, bool isLoading)? setMessageLoading,
+    TResult Function(String id)? setMessageCancel,
+    TResult Function(String id)? setMessageEnable,
+    required TResult orElse(),
+  }) {
+    if (setMessageCancel != null) {
+      return setMessageCancel(id);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetChatData value) getChatData,
+    required TResult Function(_Connect value) connect,
+    required TResult Function(_UpdateMessages value) updateMessages,
+    required TResult Function(_LeaveRoom value) leaveRoom,
+    required TResult Function(_CancelTransaction value) cancelTransaction,
+    required TResult Function(_EnableTransaction value) enableTransaction,
+    required TResult Function(_SetMessageLoading value) setMessageLoading,
+    required TResult Function(_SetMessageCancel value) setMessageCancel,
+    required TResult Function(_SetMessageEnable value) setMessageEnable,
+  }) {
+    return setMessageCancel(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetChatData value)? getChatData,
+    TResult? Function(_Connect value)? connect,
+    TResult? Function(_UpdateMessages value)? updateMessages,
+    TResult? Function(_LeaveRoom value)? leaveRoom,
+    TResult? Function(_CancelTransaction value)? cancelTransaction,
+    TResult? Function(_EnableTransaction value)? enableTransaction,
+    TResult? Function(_SetMessageLoading value)? setMessageLoading,
+    TResult? Function(_SetMessageCancel value)? setMessageCancel,
+    TResult? Function(_SetMessageEnable value)? setMessageEnable,
+  }) {
+    return setMessageCancel?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetChatData value)? getChatData,
+    TResult Function(_Connect value)? connect,
+    TResult Function(_UpdateMessages value)? updateMessages,
+    TResult Function(_LeaveRoom value)? leaveRoom,
+    TResult Function(_CancelTransaction value)? cancelTransaction,
+    TResult Function(_EnableTransaction value)? enableTransaction,
+    TResult Function(_SetMessageLoading value)? setMessageLoading,
+    TResult Function(_SetMessageCancel value)? setMessageCancel,
+    TResult Function(_SetMessageEnable value)? setMessageEnable,
+    required TResult orElse(),
+  }) {
+    if (setMessageCancel != null) {
+      return setMessageCancel(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _SetMessageCancel implements ChatEvent {
+  const factory _SetMessageCancel(final String id) = _$SetMessageCancelImpl;
+
+  String get id;
+
+  /// Create a copy of ChatEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$SetMessageCancelImplCopyWith<_$SetMessageCancelImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$SetMessageEnableImplCopyWith<$Res> {
+  factory _$$SetMessageEnableImplCopyWith(_$SetMessageEnableImpl value,
+          $Res Function(_$SetMessageEnableImpl) then) =
+      __$$SetMessageEnableImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String id});
+}
+
+/// @nodoc
+class __$$SetMessageEnableImplCopyWithImpl<$Res>
+    extends _$ChatEventCopyWithImpl<$Res, _$SetMessageEnableImpl>
+    implements _$$SetMessageEnableImplCopyWith<$Res> {
+  __$$SetMessageEnableImplCopyWithImpl(_$SetMessageEnableImpl _value,
+      $Res Function(_$SetMessageEnableImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of ChatEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+  }) {
+    return _then(_$SetMessageEnableImpl(
+      null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$SetMessageEnableImpl implements _SetMessageEnable {
+  const _$SetMessageEnableImpl(this.id);
+
+  @override
+  final String id;
+
+  @override
+  String toString() {
+    return 'ChatEvent.setMessageEnable(id: $id)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$SetMessageEnableImpl &&
+            (identical(other.id, id) || other.id == id));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, id);
+
+  /// Create a copy of ChatEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$SetMessageEnableImplCopyWith<_$SetMessageEnableImpl> get copyWith =>
+      __$$SetMessageEnableImplCopyWithImpl<_$SetMessageEnableImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() getChatData,
+    required TResult Function() connect,
+    required TResult Function(Message message) updateMessages,
+    required TResult Function() leaveRoom,
+    required TResult Function(
+            Message message, BuildContext context, VoidCallback onSuccess)
+        cancelTransaction,
+    required TResult Function(
+            Message message, BuildContext context, VoidCallback onSuccess)
+        enableTransaction,
+    required TResult Function(String id, bool isLoading) setMessageLoading,
+    required TResult Function(String id) setMessageCancel,
+    required TResult Function(String id) setMessageEnable,
+  }) {
+    return setMessageEnable(id);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? getChatData,
+    TResult? Function()? connect,
+    TResult? Function(Message message)? updateMessages,
+    TResult? Function()? leaveRoom,
+    TResult? Function(
+            Message message, BuildContext context, VoidCallback onSuccess)?
+        cancelTransaction,
+    TResult? Function(
+            Message message, BuildContext context, VoidCallback onSuccess)?
+        enableTransaction,
+    TResult? Function(String id, bool isLoading)? setMessageLoading,
+    TResult? Function(String id)? setMessageCancel,
+    TResult? Function(String id)? setMessageEnable,
+  }) {
+    return setMessageEnable?.call(id);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? getChatData,
+    TResult Function()? connect,
+    TResult Function(Message message)? updateMessages,
+    TResult Function()? leaveRoom,
+    TResult Function(
+            Message message, BuildContext context, VoidCallback onSuccess)?
+        cancelTransaction,
+    TResult Function(
+            Message message, BuildContext context, VoidCallback onSuccess)?
+        enableTransaction,
+    TResult Function(String id, bool isLoading)? setMessageLoading,
+    TResult Function(String id)? setMessageCancel,
+    TResult Function(String id)? setMessageEnable,
+    required TResult orElse(),
+  }) {
+    if (setMessageEnable != null) {
+      return setMessageEnable(id);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetChatData value) getChatData,
+    required TResult Function(_Connect value) connect,
+    required TResult Function(_UpdateMessages value) updateMessages,
+    required TResult Function(_LeaveRoom value) leaveRoom,
+    required TResult Function(_CancelTransaction value) cancelTransaction,
+    required TResult Function(_EnableTransaction value) enableTransaction,
+    required TResult Function(_SetMessageLoading value) setMessageLoading,
+    required TResult Function(_SetMessageCancel value) setMessageCancel,
+    required TResult Function(_SetMessageEnable value) setMessageEnable,
+  }) {
+    return setMessageEnable(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetChatData value)? getChatData,
+    TResult? Function(_Connect value)? connect,
+    TResult? Function(_UpdateMessages value)? updateMessages,
+    TResult? Function(_LeaveRoom value)? leaveRoom,
+    TResult? Function(_CancelTransaction value)? cancelTransaction,
+    TResult? Function(_EnableTransaction value)? enableTransaction,
+    TResult? Function(_SetMessageLoading value)? setMessageLoading,
+    TResult? Function(_SetMessageCancel value)? setMessageCancel,
+    TResult? Function(_SetMessageEnable value)? setMessageEnable,
+  }) {
+    return setMessageEnable?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetChatData value)? getChatData,
+    TResult Function(_Connect value)? connect,
+    TResult Function(_UpdateMessages value)? updateMessages,
+    TResult Function(_LeaveRoom value)? leaveRoom,
+    TResult Function(_CancelTransaction value)? cancelTransaction,
+    TResult Function(_EnableTransaction value)? enableTransaction,
+    TResult Function(_SetMessageLoading value)? setMessageLoading,
+    TResult Function(_SetMessageCancel value)? setMessageCancel,
+    TResult Function(_SetMessageEnable value)? setMessageEnable,
+    required TResult orElse(),
+  }) {
+    if (setMessageEnable != null) {
+      return setMessageEnable(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _SetMessageEnable implements ChatEvent {
+  const factory _SetMessageEnable(final String id) = _$SetMessageEnableImpl;
+
+  String get id;
+
+  /// Create a copy of ChatEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$SetMessageEnableImplCopyWith<_$SetMessageEnableImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc

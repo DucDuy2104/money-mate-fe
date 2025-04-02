@@ -6,4 +6,9 @@ class ChatEvent with _$ChatEvent {
   const factory ChatEvent.connect() = _Connect;
   const factory ChatEvent.updateMessages(Message message) = _UpdateMessages;
   const factory ChatEvent.leaveRoom() = _LeaveRoom;
+  const factory ChatEvent.cancelTransaction(Message message, BuildContext context, VoidCallback onSuccess) = _CancelTransaction;
+  const factory ChatEvent.enableTransaction(Message message, BuildContext context, VoidCallback onSuccess) = _EnableTransaction;
+  const factory ChatEvent.setMessageLoading(String id, bool isLoading) = _SetMessageLoading;
+  const factory ChatEvent.setMessageCancel(String id) = _SetMessageCancel;
+  const factory ChatEvent.setMessageEnable(String id) = _SetMessageEnable;
 }

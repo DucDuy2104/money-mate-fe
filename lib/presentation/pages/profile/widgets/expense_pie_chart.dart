@@ -108,7 +108,7 @@ class ExpensePieChart extends StatelessWidget {
 Map<String, double> getExpenseData(List<Category> categories) {
   return {
     for (var category in categories)
-      if (category.type == CategoriesType.expense)
+      if (category.type == CategoriesType.expense && category.currentBudget > 0)
         category.name: category.currentBudget
   };
 }
