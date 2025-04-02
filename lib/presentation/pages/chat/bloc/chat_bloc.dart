@@ -6,8 +6,11 @@ import 'package:money_mate/core/service/socket/socket_service.dart';
 import 'package:money_mate/data/models/message_model.dart';
 import 'package:money_mate/data/repositories/conversation_repository.dart';
 import 'package:money_mate/data/repositories/messages_repository.dart';
+import 'package:money_mate/data/repositories/transactions_repository.dart';
 import 'package:money_mate/domain/entities/conversation.dart';
 import 'package:money_mate/domain/entities/message.dart';
+import 'package:money_mate/domain/entities/transaction.dart';
+import 'package:money_mate/shared/components/app_toast.dart';
 import 'package:money_mate/shared/enums/socket_enum.dart';
 
 part 'chat_event.dart';
@@ -18,12 +21,19 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
   final ConversationRepository _conversationRepository =
       getIt<ConversationRepository>();
   final MessagesRepository _messagesRepository = getIt<MessagesRepository>();
+  final TransactionsRepository _transactionsRepository =
+      getIt<TransactionsRepository>();
   final SocketService _socketService = getIt<SocketService>();
   ChatBloc() : super(const ChatState.initial()) {
     on<_GetChatData>(_onGetChatData);
     on<_Connect>(_onConnect);
     on<_UpdateMessages>(_onUpdateMessages);
     on<_LeaveRoom>(_leaveConversation);
+    on<_CancelTransaction>(_onCancelTransaction);
+    on<_EnableTransaction>(_onEnableTransaction);
+    on<_SetMessageLoading>(_onSetMessageLoading);
+    on<_SetMessageCancel>(_onSetMessageCancel);
+    on<_SetMessageEnable>(_onSetMessageEnable);
   }
 
   Future<void> _onGetChatData(
@@ -62,6 +72,107 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
         emit(ChatState.error(e.toString()));
       }
     }
+  }
+
+  // Call Api to cancel transaction
+  void _onCancelTransaction(
+      _CancelTransaction event, Emitter<ChatState> emit) async {
+    add(_SetMessageLoading(event.message.id, true));
+    await Future.delayed(const Duration(seconds: 2));
+    try {
+      final transactionResult = await _transactionsRepository
+          .cancelTransaction(event.message.transaction!.id);
+      transactionResult.fold((failure) {
+        AppToast.error(event.context, 'Không thể huỷ giao dịch');
+      }, (transaction) {
+        add(_SetMessageCancel(event.message.id));
+        event.onSuccess();
+      });
+    } catch (e) {
+      debugPrint('Bug: ${e.toString()}');
+    }
+  }
+
+  // Call Api to enable transaction
+  void _onEnableTransaction(
+      _EnableTransaction event, Emitter<ChatState> emit) async {
+    add(_SetMessageLoading(event.message.id, true));
+    await Future.delayed(const Duration(seconds: 2));
+    try {
+      final transactionResult = await _transactionsRepository
+          .enableTransaction(event.message.transaction!.id);
+      transactionResult.fold((failure) {
+        AppToast.error(event.context, 'Không thể kích hoạt giao dịch');
+      }, (transaction) {
+        add(_SetMessageEnable(event.message.id));
+        event.onSuccess();
+      });
+    } catch (e) {
+      debugPrint('Bug: ${e.toString()}');
+    }
+  }
+
+  // Set transaction state to canceled
+  void _onSetMessageCancel(
+      _SetMessageCancel event, Emitter<ChatState> emit) async {
+    state.maybeMap(
+      loaded: (data) => emit(
+        ChatState.loaded(data.chatData.copyWith(
+            messages: _updateTransactionInMessageList(
+                data.chatData.messages,
+                event.id,
+                (transaction) =>
+                    transaction.copyWith(isCancel: true, isLoading: false)))),
+      ),
+      orElse: () {},
+    );
+  }
+
+  // Set transaction state to enabled
+  void _onSetMessageEnable(
+      _SetMessageEnable event, Emitter<ChatState> emit) async {
+    state.maybeMap(
+      loaded: (data) => emit(
+        ChatState.loaded(data.chatData.copyWith(
+            messages: _updateTransactionInMessageList(
+                data.chatData.messages,
+                event.id,
+                (transaction) =>
+                    transaction.copyWith(isCancel: false, isLoading: false)))),
+      ),
+      orElse: () {},
+    );
+  }
+
+  // Set transaction state to loading
+  void _onSetMessageLoading(
+      _SetMessageLoading event, Emitter<ChatState> emit) async {
+    state.maybeMap(
+      loaded: (data) => emit(
+        ChatState.loaded(data.chatData.copyWith(
+            messages: _updateTransactionInMessageList(
+                data.chatData.messages,
+                event.id,
+                (transaction) => transaction.copyWith(isLoading: true)))),
+      ),
+      orElse: () {},
+    );
+  }
+
+  // Helper function to update a transaction inside a message in the list
+  List<Message> _updateTransactionInMessageList(
+    List<Message> messages,
+    String messageId,
+    Transaction Function(Transaction) updateFunction,
+  ) {
+    return messages.map((message) {
+      if (message.id == messageId && message.transaction != null) {
+        return message.copyWith(
+          transaction: updateFunction(message.transaction!),
+        );
+      }
+      return message;
+    }).toList();
   }
 
 // Add new Message

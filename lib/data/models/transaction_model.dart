@@ -14,6 +14,7 @@ class TransactionModel with _$TransactionModel {
     required double amount,
     required String description,
     required DateTime createdAt,
+    required bool isCancel
   }) = _TransactionModel;
 
   factory TransactionModel.fromJson(Map<String, dynamic> json) =>
@@ -27,6 +28,7 @@ extension TransactionModelX on TransactionModel {
         category: category.toEntity(),
         amount: amount,
         description: description,
+        isCancel: isCancel,
         createdAt: createdAt.toUtcPlus7());
   }
 }

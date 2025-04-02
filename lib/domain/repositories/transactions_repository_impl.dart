@@ -17,4 +17,18 @@ class TransactionsRepositoryImpl extends TransactionsRepository {
         (transactionModels) =>
             Right(transactionModels.map((e) => e.toEntity()).toList()));
   }
+
+  @override
+  ResultFuture<Transaction> enableTransaction(String id) async {
+    final result = await _remoteDataSource.enableTransaction(id);
+    return result.fold((failure) => Left(failure),
+        (transactionModel) => Right(transactionModel.toEntity()));
+  }
+
+  @override
+  ResultFuture<Transaction> cancelTransaction(String id) async {
+    final result = await _remoteDataSource.cancelTransaction(id);
+    return result.fold((failure) => Left(failure),
+        (transactionModel) => Right(transactionModel.toEntity()));
+  }
 }

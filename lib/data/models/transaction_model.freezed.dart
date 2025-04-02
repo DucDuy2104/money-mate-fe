@@ -25,6 +25,7 @@ mixin _$TransactionModel {
   double get amount => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
   DateTime get createdAt => throw _privateConstructorUsedError;
+  bool get isCancel => throw _privateConstructorUsedError;
 
   /// Serializes this TransactionModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -47,7 +48,8 @@ abstract class $TransactionModelCopyWith<$Res> {
       CategoryModel category,
       double amount,
       String description,
-      DateTime createdAt});
+      DateTime createdAt,
+      bool isCancel});
 
   $CategoryModelCopyWith<$Res> get category;
 }
@@ -72,6 +74,7 @@ class _$TransactionModelCopyWithImpl<$Res, $Val extends TransactionModel>
     Object? amount = null,
     Object? description = null,
     Object? createdAt = null,
+    Object? isCancel = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -94,6 +97,10 @@ class _$TransactionModelCopyWithImpl<$Res, $Val extends TransactionModel>
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      isCancel: null == isCancel
+          ? _value.isCancel
+          : isCancel // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 
@@ -121,7 +128,8 @@ abstract class _$$TransactionModelImplCopyWith<$Res>
       CategoryModel category,
       double amount,
       String description,
-      DateTime createdAt});
+      DateTime createdAt,
+      bool isCancel});
 
   @override
   $CategoryModelCopyWith<$Res> get category;
@@ -145,6 +153,7 @@ class __$$TransactionModelImplCopyWithImpl<$Res>
     Object? amount = null,
     Object? description = null,
     Object? createdAt = null,
+    Object? isCancel = null,
   }) {
     return _then(_$TransactionModelImpl(
       id: null == id
@@ -167,6 +176,10 @@ class __$$TransactionModelImplCopyWithImpl<$Res>
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      isCancel: null == isCancel
+          ? _value.isCancel
+          : isCancel // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -179,7 +192,8 @@ class _$TransactionModelImpl implements _TransactionModel {
       required this.category,
       required this.amount,
       required this.description,
-      required this.createdAt});
+      required this.createdAt,
+      required this.isCancel});
 
   factory _$TransactionModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$TransactionModelImplFromJson(json);
@@ -194,10 +208,12 @@ class _$TransactionModelImpl implements _TransactionModel {
   final String description;
   @override
   final DateTime createdAt;
+  @override
+  final bool isCancel;
 
   @override
   String toString() {
-    return 'TransactionModel(id: $id, category: $category, amount: $amount, description: $description, createdAt: $createdAt)';
+    return 'TransactionModel(id: $id, category: $category, amount: $amount, description: $description, createdAt: $createdAt, isCancel: $isCancel)';
   }
 
   @override
@@ -212,13 +228,15 @@ class _$TransactionModelImpl implements _TransactionModel {
             (identical(other.description, description) ||
                 other.description == description) &&
             (identical(other.createdAt, createdAt) ||
-                other.createdAt == createdAt));
+                other.createdAt == createdAt) &&
+            (identical(other.isCancel, isCancel) ||
+                other.isCancel == isCancel));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, id, category, amount, description, createdAt);
+  int get hashCode => Object.hash(
+      runtimeType, id, category, amount, description, createdAt, isCancel);
 
   /// Create a copy of TransactionModel
   /// with the given fields replaced by the non-null parameter values.
@@ -243,7 +261,8 @@ abstract class _TransactionModel implements TransactionModel {
       required final CategoryModel category,
       required final double amount,
       required final String description,
-      required final DateTime createdAt}) = _$TransactionModelImpl;
+      required final DateTime createdAt,
+      required final bool isCancel}) = _$TransactionModelImpl;
 
   factory _TransactionModel.fromJson(Map<String, dynamic> json) =
       _$TransactionModelImpl.fromJson;
@@ -258,6 +277,8 @@ abstract class _TransactionModel implements TransactionModel {
   String get description;
   @override
   DateTime get createdAt;
+  @override
+  bool get isCancel;
 
   /// Create a copy of TransactionModel
   /// with the given fields replaced by the non-null parameter values.

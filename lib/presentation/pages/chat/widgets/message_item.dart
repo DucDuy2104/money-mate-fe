@@ -4,8 +4,11 @@ import 'package:money_mate/domain/entities/message.dart';
 import 'package:money_mate/presentation/pages/category/widgets/category_dialogs.dart';
 import 'package:money_mate/presentation/pages/chat/bloc/chat_bloc.dart';
 import 'package:money_mate/presentation/pages/chat/widgets/suggest_category.dart';
+import 'package:money_mate/presentation/pages/chat/widgets/transaction_dialogs.dart';
 import 'package:money_mate/presentation/pages/chat/widgets/transaction_message.dart';
 import 'package:money_mate/presentation/pages/chat/widgets/switch_category_item.dart';
+import 'package:money_mate/presentation/pages/home/bloc/home_bloc.dart';
+import 'package:money_mate/presentation/pages/profile/bloc/profile_bloc.dart';
 import 'package:money_mate/shared/constants/app_colors.dart';
 import 'package:money_mate/shared/constants/app_dimens.dart';
 import 'package:money_mate/shared/constants/app_theme.dart';
@@ -125,9 +128,16 @@ class _MessageItemState extends State<MessageItem>
                       TransactionInfoMessage(
                         transaction: widget.message.transaction!,
                         onCancel: () {
-                          // Handle confirmation
-                          print(
-                              "User cancel adding expense to Ăn uống category");
+                          TransactionDialogs.showCancelTransactionDialog(
+                              context,
+                              widget.message.transaction!,
+                              onCancelTransaction);
+                        },
+                        onEnable: () {
+                          TransactionDialogs.showEnableTransactionDialog(
+                              context,
+                              widget.message.transaction!,
+                              onEnableTransaction);
                         },
                       )
                     ],
@@ -166,5 +176,23 @@ class _MessageItemState extends State<MessageItem>
         ),
       ),
     );
+  }
+
+  void onCancelTransaction() {
+    BlocProvider.of<ChatBloc>(context)
+        .add(ChatEvent.cancelTransaction(widget.message, context, reloadData));
+  }
+
+  void onEnableTransaction() {
+    BlocProvider.of<ChatBloc>(context)
+        .add(ChatEvent.enableTransaction(widget.message, context, reloadData));
+  }
+
+  void reloadData() {
+    final homeBloc = BlocProvider.of<HomeBloc>(context);
+    final profileBloc = BlocProvider.of<ProfileBloc>(context);
+
+    homeBloc.add(const HomeEvent.reloadData());
+    profileBloc.add(const ProfileEvent.reloadCateogries());
   }
 }

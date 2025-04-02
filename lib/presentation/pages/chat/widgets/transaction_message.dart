@@ -5,11 +5,13 @@ import 'package:money_mate/shared/helper/currency_heler.dart';
 class TransactionInfoMessage extends StatelessWidget {
   final Transaction transaction;
   final VoidCallback onCancel;
+  final VoidCallback onEnable;
 
   const TransactionInfoMessage({
     super.key,
     required this.transaction,
     required this.onCancel,
+    required this.onEnable,
   });
 
   @override
@@ -83,14 +85,7 @@ class TransactionInfoMessage extends StatelessWidget {
                   ],
                 ),
               ),
-              GestureDetector(
-                onTap: onCancel,
-                child: Icon(
-                  Icons.close,
-                  color: Colors.grey[600],
-                  size: 16,
-                ),
-              ),
+              _buildActionButton(),
             ],
           ),
           const SizedBox(height: 8),
@@ -149,6 +144,37 @@ class TransactionInfoMessage extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  Widget _buildActionButton() {
+    if (transaction.isLoading) {
+      return SizedBox(
+        width: 16,
+        height: 16,
+        child: CircularProgressIndicator(
+          strokeWidth: 2,
+          valueColor: AlwaysStoppedAnimation<Color>(Colors.grey[600]!),
+        ),
+      );
+    } else if (transaction.isCancel) {
+      return GestureDetector(
+        onTap: onEnable,
+        child: Icon(
+          Icons.refresh,
+          color: Colors.grey[600],
+          size: 16,
+        ),
+      );
+    } else {
+      return GestureDetector(
+        onTap: onCancel,
+        child: Icon(
+          Icons.close,
+          color: Colors.grey[600],
+          size: 16,
+        ),
+      );
+    }
   }
 
   String _formatDate(DateTime dateTime) {
