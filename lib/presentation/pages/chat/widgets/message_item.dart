@@ -99,7 +99,9 @@ class _MessageItemState extends State<MessageItem>
                       decoration: BoxDecoration(
                           color: widget.message.isSentByMe
                               ? AppColors.darkCardColor
-                              : Colors.grey[200],
+                              : (widget.message.type == MessageType.error
+                                  ? Colors.pinkAccent
+                                  : Colors.grey[200]),
                           borderRadius: BorderRadius.only(
                             topLeft: Radius.circular(
                                 widget.message.isSentByMe ? 20 : 4),

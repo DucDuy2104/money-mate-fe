@@ -3,6 +3,7 @@ enum MessageType {
   add,
   delete,
   recommend,
+  error,
   transaction;
 
   static MessageType fromString(String value) {
