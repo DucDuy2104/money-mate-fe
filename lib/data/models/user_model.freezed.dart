@@ -29,6 +29,9 @@ mixin _$UserModel {
   double get budget => throw _privateConstructorUsedError;
   String? get avatarUrl => throw _privateConstructorUsedError;
   String get role => throw _privateConstructorUsedError;
+  int get categoriesCount => throw _privateConstructorUsedError;
+  int get transactionsCount => throw _privateConstructorUsedError;
+  int get reportsCount => throw _privateConstructorUsedError;
   String? get refreshToken => throw _privateConstructorUsedError;
   String? get verificationCode => throw _privateConstructorUsedError;
   DateTime? get verificationCodeExpire => throw _privateConstructorUsedError;
@@ -60,6 +63,9 @@ abstract class $UserModelCopyWith<$Res> {
       double budget,
       String? avatarUrl,
       String role,
+      int categoriesCount,
+      int transactionsCount,
+      int reportsCount,
       String? refreshToken,
       String? verificationCode,
       DateTime? verificationCodeExpire,
@@ -91,6 +97,9 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
     Object? budget = null,
     Object? avatarUrl = freezed,
     Object? role = null,
+    Object? categoriesCount = null,
+    Object? transactionsCount = null,
+    Object? reportsCount = null,
     Object? refreshToken = freezed,
     Object? verificationCode = freezed,
     Object? verificationCodeExpire = freezed,
@@ -134,6 +143,18 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
           ? _value.role
           : role // ignore: cast_nullable_to_non_nullable
               as String,
+      categoriesCount: null == categoriesCount
+          ? _value.categoriesCount
+          : categoriesCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      transactionsCount: null == transactionsCount
+          ? _value.transactionsCount
+          : transactionsCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      reportsCount: null == reportsCount
+          ? _value.reportsCount
+          : reportsCount // ignore: cast_nullable_to_non_nullable
+              as int,
       refreshToken: freezed == refreshToken
           ? _value.refreshToken
           : refreshToken // ignore: cast_nullable_to_non_nullable
@@ -176,6 +197,9 @@ abstract class _$$UserModelImplCopyWith<$Res>
       double budget,
       String? avatarUrl,
       String role,
+      int categoriesCount,
+      int transactionsCount,
+      int reportsCount,
       String? refreshToken,
       String? verificationCode,
       DateTime? verificationCodeExpire,
@@ -205,6 +229,9 @@ class __$$UserModelImplCopyWithImpl<$Res>
     Object? budget = null,
     Object? avatarUrl = freezed,
     Object? role = null,
+    Object? categoriesCount = null,
+    Object? transactionsCount = null,
+    Object? reportsCount = null,
     Object? refreshToken = freezed,
     Object? verificationCode = freezed,
     Object? verificationCodeExpire = freezed,
@@ -248,6 +275,18 @@ class __$$UserModelImplCopyWithImpl<$Res>
           ? _value.role
           : role // ignore: cast_nullable_to_non_nullable
               as String,
+      categoriesCount: null == categoriesCount
+          ? _value.categoriesCount
+          : categoriesCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      transactionsCount: null == transactionsCount
+          ? _value.transactionsCount
+          : transactionsCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      reportsCount: null == reportsCount
+          ? _value.reportsCount
+          : reportsCount // ignore: cast_nullable_to_non_nullable
+              as int,
       refreshToken: freezed == refreshToken
           ? _value.refreshToken
           : refreshToken // ignore: cast_nullable_to_non_nullable
@@ -285,6 +324,9 @@ class _$UserModelImpl implements _UserModel {
       this.budget = 0.0,
       this.avatarUrl,
       this.role = 'user',
+      this.categoriesCount = 0,
+      this.transactionsCount = 0,
+      this.reportsCount = 0,
       this.refreshToken,
       this.verificationCode,
       this.verificationCodeExpire,
@@ -317,6 +359,15 @@ class _$UserModelImpl implements _UserModel {
   @JsonKey()
   final String role;
   @override
+  @JsonKey()
+  final int categoriesCount;
+  @override
+  @JsonKey()
+  final int transactionsCount;
+  @override
+  @JsonKey()
+  final int reportsCount;
+  @override
   final String? refreshToken;
   @override
   final String? verificationCode;
@@ -329,7 +380,7 @@ class _$UserModelImpl implements _UserModel {
 
   @override
   String toString() {
-    return 'UserModel(id: $id, name: $name, email: $email, phoneNumber: $phoneNumber, isActive: $isActive, isSetup: $isSetup, budget: $budget, avatarUrl: $avatarUrl, role: $role, refreshToken: $refreshToken, verificationCode: $verificationCode, verificationCodeExpire: $verificationCodeExpire, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'UserModel(id: $id, name: $name, email: $email, phoneNumber: $phoneNumber, isActive: $isActive, isSetup: $isSetup, budget: $budget, avatarUrl: $avatarUrl, role: $role, categoriesCount: $categoriesCount, transactionsCount: $transactionsCount, reportsCount: $reportsCount, refreshToken: $refreshToken, verificationCode: $verificationCode, verificationCodeExpire: $verificationCodeExpire, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
@@ -349,6 +400,12 @@ class _$UserModelImpl implements _UserModel {
             (identical(other.avatarUrl, avatarUrl) ||
                 other.avatarUrl == avatarUrl) &&
             (identical(other.role, role) || other.role == role) &&
+            (identical(other.categoriesCount, categoriesCount) ||
+                other.categoriesCount == categoriesCount) &&
+            (identical(other.transactionsCount, transactionsCount) ||
+                other.transactionsCount == transactionsCount) &&
+            (identical(other.reportsCount, reportsCount) ||
+                other.reportsCount == reportsCount) &&
             (identical(other.refreshToken, refreshToken) ||
                 other.refreshToken == refreshToken) &&
             (identical(other.verificationCode, verificationCode) ||
@@ -374,6 +431,9 @@ class _$UserModelImpl implements _UserModel {
       budget,
       avatarUrl,
       role,
+      categoriesCount,
+      transactionsCount,
+      reportsCount,
       refreshToken,
       verificationCode,
       verificationCodeExpire,
@@ -407,6 +467,9 @@ abstract class _UserModel implements UserModel {
       final double budget,
       final String? avatarUrl,
       final String role,
+      final int categoriesCount,
+      final int transactionsCount,
+      final int reportsCount,
       final String? refreshToken,
       final String? verificationCode,
       final DateTime? verificationCodeExpire,
@@ -434,6 +497,12 @@ abstract class _UserModel implements UserModel {
   String? get avatarUrl;
   @override
   String get role;
+  @override
+  int get categoriesCount;
+  @override
+  int get transactionsCount;
+  @override
+  int get reportsCount;
   @override
   String? get refreshToken;
   @override

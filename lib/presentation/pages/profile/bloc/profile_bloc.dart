@@ -20,13 +20,14 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       getIt<CategoriesRepository>();
   final SocketService _socketService = getIt<SocketService>();
   ProfileBloc() : super(const ProfileState.initial()) {
-    on<_GetData>(_onGetProfile);
+    on<_GetData>(_onGetData);
     on<_UpdateProfile>(_onUpdateProfile);
     on<_ReloadProfile>(_onReloadProfile);
     on<_ReloadCateogries>(_onReloadCateogries);
+    on<_ReloadData>(_onReloadData);
   }
 
-  void _onGetProfile(_GetData event, Emitter<ProfileState> emit) async {
+  void _onGetData(_GetData event, Emitter<ProfileState> emit) async {
     emit(const ProfileState.loading());
     await Future.delayed(const Duration(seconds: 4));
     try {
@@ -47,6 +48,32 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
         emit(ProfileState.loaded(
             ProfileData(categories: categories, profile: profile)));
         event.callback();
+      });
+    } catch (e) {
+      emit(const ProfileState.error("Có lỗi khi lấy thông tin"));
+      debugPrint(e.toString());
+      return;
+    }
+  }
+
+  void _onReloadData(_ReloadData event, Emitter<ProfileState> emit) async {
+    try {
+      List<Category> categories = [];
+      final categoriesResult =
+          await _categoriesRepository.getOwnCategories(CategoryFormat.daily);
+      categoriesResult.fold((failure) {
+        emit(ProfileState.error(failure.message));
+      }, (result) {
+        categories = result;
+      });
+      debugPrint('categories: ${categories.length}');
+      final profileResult = await _usersRepository.getProfile();
+      profileResult.fold((failure) {
+        emit(ProfileState.error(failure.message));
+      }, (profile) {
+        _onConnect();
+        emit(ProfileState.loaded(
+            ProfileData(categories: categories, profile: profile)));
       });
     } catch (e) {
       emit(const ProfileState.error("Có lỗi khi lấy thông tin"));
@@ -135,11 +162,11 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
 
   void _onConnect() {
     _socketService.listen(SocketEnum.newTransaction.name, (data) {
-      add(const _ReloadCateogries());
+      add(const _ReloadData());
     });
 
     _socketService.listen(SocketEnum.updateCategory.name, (data) {
-      add(const _ReloadCateogries());
+      add(const _ReloadProfile());
     });
   }
 }

@@ -232,19 +232,21 @@ class _AppDrawerState extends State<AppDrawer> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        _buildStatItem('43', 'Transactions'),
+                        _buildStatItem(
+                            '${profile.transactionsCount}', 'Transactions'),
                         Container(
                           height: 24,
                           width: 1,
                           color: Colors.white24,
                         ),
-                        _buildStatItem('3', 'Categories'),
+                        _buildStatItem(
+                            '${profile.categoriesCount}', 'Categories'),
                         Container(
                           height: 24,
                           width: 1,
                           color: Colors.white24,
                         ),
-                        _buildStatItem('15', 'Reports'),
+                        _buildStatItem('${profile.reportsCount}', 'Reports'),
                       ],
                     ),
                   ],

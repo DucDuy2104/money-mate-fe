@@ -4,19 +4,6 @@ import 'package:money_mate/domain/entities/category.dart';
 import 'package:money_mate/shared/constants/app_dimens.dart';
 import 'package:money_mate/shared/enums/category_type.dart';
 
-final List<Color> colors = [
-  const Color(0xFF6258E8), // Purple
-  const Color(0xFFFF6B8B), // Pink
-  const Color(0xFF5FBCFF), // Blue
-  const Color(0xFF38CFBB), // Teal
-  const Color(0xFFFFB86C), // Orange
-  const Color(0xFFCB8EF9), // Lavender
-  const Color(0xFFFF8C42), // Bright Orange
-  const Color(0xFF2EC4B6), // Cyan
-  const Color(0xFF5C6BC0), // Indigo
-  const Color(0xFFFFC857), // Yellow
-];
-
 class ExpensePieChart extends StatelessWidget {
   final List<Category> categories;
 
@@ -57,7 +44,7 @@ class ExpensePieChart extends StatelessWidget {
               children: [
                 PieChart(
                   PieChartData(
-                    sections: _generatePieSections(data),
+                    sections: _generatePieSections(data, categories),
                     borderData: FlBorderData(show: false),
                     sectionsSpace: 0,
                     centerSpaceRadius: 50,
@@ -88,7 +75,7 @@ class ExpensePieChart extends StatelessWidget {
             ),
           ),
           AppDimens.spaceLarge,
-          _buildEnhancedLegend(data),
+          _buildEnhancedLegend(data, categories),
         ],
       ),
     );
@@ -113,14 +100,16 @@ Map<String, double> getExpenseData(List<Category> categories) {
   };
 }
 
-List<PieChartSectionData> _generatePieSections(Map<String, double> data) {
+List<PieChartSectionData> _generatePieSections(
+    Map<String, double> data, List<Category> categories) {
   return data.entries.map((entry) {
-    final index = data.keys.toList().indexOf(entry.key);
+    // Find the corresponding category object to get its color
+    final category = categories.firstWhere((cat) => cat.name == entry.key);
     final percentage =
         (entry.value / data.values.reduce((a, b) => a + b) * 100);
 
     return PieChartSectionData(
-      color: colors[index % colors.length],
+      color: category.color, // Use the category's color
       value: entry.value,
       title: '',
       radius: 100,
@@ -133,7 +122,8 @@ List<PieChartSectionData> _generatePieSections(Map<String, double> data) {
   }).toList();
 }
 
-Widget _buildEnhancedLegend(Map<String, double> data) {
+Widget _buildEnhancedLegend(
+    Map<String, double> data, List<Category> categories) {
   final Map<String, double> percentages = {};
   final double total = data.values.reduce((a, b) => a + b);
   data.forEach((key, value) {
@@ -148,14 +138,16 @@ Widget _buildEnhancedLegend(Map<String, double> data) {
     runSpacing: 12,
     alignment: WrapAlignment.center,
     children: sortedEntries.map((entry) {
-      final index = data.keys.toList().indexOf(entry.key);
+      // Find the corresponding category object to get its color
+      final category = categories.firstWhere((cat) => cat.name == entry.key);
+
       return Container(
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
         decoration: BoxDecoration(
           color: const Color(0xFF242438),
           borderRadius: BorderRadius.circular(30),
           border: Border.all(
-            color: colors[index % colors.length].withOpacity(0.5),
+            color: category.color.withOpacity(0.5),
             width: 1,
           ),
         ),
@@ -166,7 +158,7 @@ Widget _buildEnhancedLegend(Map<String, double> data) {
               width: 12,
               height: 12,
               decoration: BoxDecoration(
-                color: colors[index % colors.length],
+                color: category.color,
                 shape: BoxShape.circle,
               ),
             ),

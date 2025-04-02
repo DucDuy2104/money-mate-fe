@@ -22,6 +22,7 @@ mixin _$ProfileEvent {
     required TResult Function() reloadProfile,
     required TResult Function(String name, VoidCallback callback) updateProfile,
     required TResult Function() reloadCateogries,
+    required TResult Function() reloadData,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -30,6 +31,7 @@ mixin _$ProfileEvent {
     TResult? Function()? reloadProfile,
     TResult? Function(String name, VoidCallback callback)? updateProfile,
     TResult? Function()? reloadCateogries,
+    TResult? Function()? reloadData,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -38,6 +40,7 @@ mixin _$ProfileEvent {
     TResult Function()? reloadProfile,
     TResult Function(String name, VoidCallback callback)? updateProfile,
     TResult Function()? reloadCateogries,
+    TResult Function()? reloadData,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -47,6 +50,7 @@ mixin _$ProfileEvent {
     required TResult Function(_ReloadProfile value) reloadProfile,
     required TResult Function(_UpdateProfile value) updateProfile,
     required TResult Function(_ReloadCateogries value) reloadCateogries,
+    required TResult Function(_ReloadData value) reloadData,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -55,6 +59,7 @@ mixin _$ProfileEvent {
     TResult? Function(_ReloadProfile value)? reloadProfile,
     TResult? Function(_UpdateProfile value)? updateProfile,
     TResult? Function(_ReloadCateogries value)? reloadCateogries,
+    TResult? Function(_ReloadData value)? reloadData,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -63,6 +68,7 @@ mixin _$ProfileEvent {
     TResult Function(_ReloadProfile value)? reloadProfile,
     TResult Function(_UpdateProfile value)? updateProfile,
     TResult Function(_ReloadCateogries value)? reloadCateogries,
+    TResult Function(_ReloadData value)? reloadData,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -162,6 +168,7 @@ class _$GetDataImpl implements _GetData {
     required TResult Function() reloadProfile,
     required TResult Function(String name, VoidCallback callback) updateProfile,
     required TResult Function() reloadCateogries,
+    required TResult Function() reloadData,
   }) {
     return getData(callback);
   }
@@ -173,6 +180,7 @@ class _$GetDataImpl implements _GetData {
     TResult? Function()? reloadProfile,
     TResult? Function(String name, VoidCallback callback)? updateProfile,
     TResult? Function()? reloadCateogries,
+    TResult? Function()? reloadData,
   }) {
     return getData?.call(callback);
   }
@@ -184,6 +192,7 @@ class _$GetDataImpl implements _GetData {
     TResult Function()? reloadProfile,
     TResult Function(String name, VoidCallback callback)? updateProfile,
     TResult Function()? reloadCateogries,
+    TResult Function()? reloadData,
     required TResult orElse(),
   }) {
     if (getData != null) {
@@ -199,6 +208,7 @@ class _$GetDataImpl implements _GetData {
     required TResult Function(_ReloadProfile value) reloadProfile,
     required TResult Function(_UpdateProfile value) updateProfile,
     required TResult Function(_ReloadCateogries value) reloadCateogries,
+    required TResult Function(_ReloadData value) reloadData,
   }) {
     return getData(this);
   }
@@ -210,6 +220,7 @@ class _$GetDataImpl implements _GetData {
     TResult? Function(_ReloadProfile value)? reloadProfile,
     TResult? Function(_UpdateProfile value)? updateProfile,
     TResult? Function(_ReloadCateogries value)? reloadCateogries,
+    TResult? Function(_ReloadData value)? reloadData,
   }) {
     return getData?.call(this);
   }
@@ -221,6 +232,7 @@ class _$GetDataImpl implements _GetData {
     TResult Function(_ReloadProfile value)? reloadProfile,
     TResult Function(_UpdateProfile value)? updateProfile,
     TResult Function(_ReloadCateogries value)? reloadCateogries,
+    TResult Function(_ReloadData value)? reloadData,
     required TResult orElse(),
   }) {
     if (getData != null) {
@@ -287,6 +299,7 @@ class _$ReloadProfileImpl implements _ReloadProfile {
     required TResult Function() reloadProfile,
     required TResult Function(String name, VoidCallback callback) updateProfile,
     required TResult Function() reloadCateogries,
+    required TResult Function() reloadData,
   }) {
     return reloadProfile();
   }
@@ -298,6 +311,7 @@ class _$ReloadProfileImpl implements _ReloadProfile {
     TResult? Function()? reloadProfile,
     TResult? Function(String name, VoidCallback callback)? updateProfile,
     TResult? Function()? reloadCateogries,
+    TResult? Function()? reloadData,
   }) {
     return reloadProfile?.call();
   }
@@ -309,6 +323,7 @@ class _$ReloadProfileImpl implements _ReloadProfile {
     TResult Function()? reloadProfile,
     TResult Function(String name, VoidCallback callback)? updateProfile,
     TResult Function()? reloadCateogries,
+    TResult Function()? reloadData,
     required TResult orElse(),
   }) {
     if (reloadProfile != null) {
@@ -324,6 +339,7 @@ class _$ReloadProfileImpl implements _ReloadProfile {
     required TResult Function(_ReloadProfile value) reloadProfile,
     required TResult Function(_UpdateProfile value) updateProfile,
     required TResult Function(_ReloadCateogries value) reloadCateogries,
+    required TResult Function(_ReloadData value) reloadData,
   }) {
     return reloadProfile(this);
   }
@@ -335,6 +351,7 @@ class _$ReloadProfileImpl implements _ReloadProfile {
     TResult? Function(_ReloadProfile value)? reloadProfile,
     TResult? Function(_UpdateProfile value)? updateProfile,
     TResult? Function(_ReloadCateogries value)? reloadCateogries,
+    TResult? Function(_ReloadData value)? reloadData,
   }) {
     return reloadProfile?.call(this);
   }
@@ -346,6 +363,7 @@ class _$ReloadProfileImpl implements _ReloadProfile {
     TResult Function(_ReloadProfile value)? reloadProfile,
     TResult Function(_UpdateProfile value)? updateProfile,
     TResult Function(_ReloadCateogries value)? reloadCateogries,
+    TResult Function(_ReloadData value)? reloadData,
     required TResult orElse(),
   }) {
     if (reloadProfile != null) {
@@ -440,6 +458,7 @@ class _$UpdateProfileImpl implements _UpdateProfile {
     required TResult Function() reloadProfile,
     required TResult Function(String name, VoidCallback callback) updateProfile,
     required TResult Function() reloadCateogries,
+    required TResult Function() reloadData,
   }) {
     return updateProfile(name, callback);
   }
@@ -451,6 +470,7 @@ class _$UpdateProfileImpl implements _UpdateProfile {
     TResult? Function()? reloadProfile,
     TResult? Function(String name, VoidCallback callback)? updateProfile,
     TResult? Function()? reloadCateogries,
+    TResult? Function()? reloadData,
   }) {
     return updateProfile?.call(name, callback);
   }
@@ -462,6 +482,7 @@ class _$UpdateProfileImpl implements _UpdateProfile {
     TResult Function()? reloadProfile,
     TResult Function(String name, VoidCallback callback)? updateProfile,
     TResult Function()? reloadCateogries,
+    TResult Function()? reloadData,
     required TResult orElse(),
   }) {
     if (updateProfile != null) {
@@ -477,6 +498,7 @@ class _$UpdateProfileImpl implements _UpdateProfile {
     required TResult Function(_ReloadProfile value) reloadProfile,
     required TResult Function(_UpdateProfile value) updateProfile,
     required TResult Function(_ReloadCateogries value) reloadCateogries,
+    required TResult Function(_ReloadData value) reloadData,
   }) {
     return updateProfile(this);
   }
@@ -488,6 +510,7 @@ class _$UpdateProfileImpl implements _UpdateProfile {
     TResult? Function(_ReloadProfile value)? reloadProfile,
     TResult? Function(_UpdateProfile value)? updateProfile,
     TResult? Function(_ReloadCateogries value)? reloadCateogries,
+    TResult? Function(_ReloadData value)? reloadData,
   }) {
     return updateProfile?.call(this);
   }
@@ -499,6 +522,7 @@ class _$UpdateProfileImpl implements _UpdateProfile {
     TResult Function(_ReloadProfile value)? reloadProfile,
     TResult Function(_UpdateProfile value)? updateProfile,
     TResult Function(_ReloadCateogries value)? reloadCateogries,
+    TResult Function(_ReloadData value)? reloadData,
     required TResult orElse(),
   }) {
     if (updateProfile != null) {
@@ -567,6 +591,7 @@ class _$ReloadCateogriesImpl implements _ReloadCateogries {
     required TResult Function() reloadProfile,
     required TResult Function(String name, VoidCallback callback) updateProfile,
     required TResult Function() reloadCateogries,
+    required TResult Function() reloadData,
   }) {
     return reloadCateogries();
   }
@@ -578,6 +603,7 @@ class _$ReloadCateogriesImpl implements _ReloadCateogries {
     TResult? Function()? reloadProfile,
     TResult? Function(String name, VoidCallback callback)? updateProfile,
     TResult? Function()? reloadCateogries,
+    TResult? Function()? reloadData,
   }) {
     return reloadCateogries?.call();
   }
@@ -589,6 +615,7 @@ class _$ReloadCateogriesImpl implements _ReloadCateogries {
     TResult Function()? reloadProfile,
     TResult Function(String name, VoidCallback callback)? updateProfile,
     TResult Function()? reloadCateogries,
+    TResult Function()? reloadData,
     required TResult orElse(),
   }) {
     if (reloadCateogries != null) {
@@ -604,6 +631,7 @@ class _$ReloadCateogriesImpl implements _ReloadCateogries {
     required TResult Function(_ReloadProfile value) reloadProfile,
     required TResult Function(_UpdateProfile value) updateProfile,
     required TResult Function(_ReloadCateogries value) reloadCateogries,
+    required TResult Function(_ReloadData value) reloadData,
   }) {
     return reloadCateogries(this);
   }
@@ -615,6 +643,7 @@ class _$ReloadCateogriesImpl implements _ReloadCateogries {
     TResult? Function(_ReloadProfile value)? reloadProfile,
     TResult? Function(_UpdateProfile value)? updateProfile,
     TResult? Function(_ReloadCateogries value)? reloadCateogries,
+    TResult? Function(_ReloadData value)? reloadData,
   }) {
     return reloadCateogries?.call(this);
   }
@@ -626,6 +655,7 @@ class _$ReloadCateogriesImpl implements _ReloadCateogries {
     TResult Function(_ReloadProfile value)? reloadProfile,
     TResult Function(_UpdateProfile value)? updateProfile,
     TResult Function(_ReloadCateogries value)? reloadCateogries,
+    TResult Function(_ReloadData value)? reloadData,
     required TResult orElse(),
   }) {
     if (reloadCateogries != null) {
@@ -637,6 +667,129 @@ class _$ReloadCateogriesImpl implements _ReloadCateogries {
 
 abstract class _ReloadCateogries implements ProfileEvent {
   const factory _ReloadCateogries() = _$ReloadCateogriesImpl;
+}
+
+/// @nodoc
+abstract class _$$ReloadDataImplCopyWith<$Res> {
+  factory _$$ReloadDataImplCopyWith(
+          _$ReloadDataImpl value, $Res Function(_$ReloadDataImpl) then) =
+      __$$ReloadDataImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$ReloadDataImplCopyWithImpl<$Res>
+    extends _$ProfileEventCopyWithImpl<$Res, _$ReloadDataImpl>
+    implements _$$ReloadDataImplCopyWith<$Res> {
+  __$$ReloadDataImplCopyWithImpl(
+      _$ReloadDataImpl _value, $Res Function(_$ReloadDataImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of ProfileEvent
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$ReloadDataImpl implements _ReloadData {
+  const _$ReloadDataImpl();
+
+  @override
+  String toString() {
+    return 'ProfileEvent.reloadData()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$ReloadDataImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(VoidCallback callback) getData,
+    required TResult Function() reloadProfile,
+    required TResult Function(String name, VoidCallback callback) updateProfile,
+    required TResult Function() reloadCateogries,
+    required TResult Function() reloadData,
+  }) {
+    return reloadData();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(VoidCallback callback)? getData,
+    TResult? Function()? reloadProfile,
+    TResult? Function(String name, VoidCallback callback)? updateProfile,
+    TResult? Function()? reloadCateogries,
+    TResult? Function()? reloadData,
+  }) {
+    return reloadData?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(VoidCallback callback)? getData,
+    TResult Function()? reloadProfile,
+    TResult Function(String name, VoidCallback callback)? updateProfile,
+    TResult Function()? reloadCateogries,
+    TResult Function()? reloadData,
+    required TResult orElse(),
+  }) {
+    if (reloadData != null) {
+      return reloadData();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetData value) getData,
+    required TResult Function(_ReloadProfile value) reloadProfile,
+    required TResult Function(_UpdateProfile value) updateProfile,
+    required TResult Function(_ReloadCateogries value) reloadCateogries,
+    required TResult Function(_ReloadData value) reloadData,
+  }) {
+    return reloadData(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetData value)? getData,
+    TResult? Function(_ReloadProfile value)? reloadProfile,
+    TResult? Function(_UpdateProfile value)? updateProfile,
+    TResult? Function(_ReloadCateogries value)? reloadCateogries,
+    TResult? Function(_ReloadData value)? reloadData,
+  }) {
+    return reloadData?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetData value)? getData,
+    TResult Function(_ReloadProfile value)? reloadProfile,
+    TResult Function(_UpdateProfile value)? updateProfile,
+    TResult Function(_ReloadCateogries value)? reloadCateogries,
+    TResult Function(_ReloadData value)? reloadData,
+    required TResult orElse(),
+  }) {
+    if (reloadData != null) {
+      return reloadData(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ReloadData implements ProfileEvent {
+  const factory _ReloadData() = _$ReloadDataImpl;
 }
 
 /// @nodoc

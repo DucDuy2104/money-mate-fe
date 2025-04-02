@@ -25,6 +25,9 @@ mixin _$User {
   double get budget => throw _privateConstructorUsedError;
   String? get avatarUrl => throw _privateConstructorUsedError;
   String get role => throw _privateConstructorUsedError;
+  int get categoriesCount => throw _privateConstructorUsedError;
+  int get transactionsCount => throw _privateConstructorUsedError;
+  int get reportsCount => throw _privateConstructorUsedError;
   DateTime get createdAt => throw _privateConstructorUsedError;
   DateTime get updatedAt => throw _privateConstructorUsedError;
 
@@ -49,6 +52,9 @@ abstract class $UserCopyWith<$Res> {
       double budget,
       String? avatarUrl,
       String role,
+      int categoriesCount,
+      int transactionsCount,
+      int reportsCount,
       DateTime createdAt,
       DateTime updatedAt});
 }
@@ -77,6 +83,9 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? budget = null,
     Object? avatarUrl = freezed,
     Object? role = null,
+    Object? categoriesCount = null,
+    Object? transactionsCount = null,
+    Object? reportsCount = null,
     Object? createdAt = null,
     Object? updatedAt = null,
   }) {
@@ -117,6 +126,18 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.role
           : role // ignore: cast_nullable_to_non_nullable
               as String,
+      categoriesCount: null == categoriesCount
+          ? _value.categoriesCount
+          : categoriesCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      transactionsCount: null == transactionsCount
+          ? _value.transactionsCount
+          : transactionsCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      reportsCount: null == reportsCount
+          ? _value.reportsCount
+          : reportsCount // ignore: cast_nullable_to_non_nullable
+              as int,
       createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -146,6 +167,9 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
       double budget,
       String? avatarUrl,
       String role,
+      int categoriesCount,
+      int transactionsCount,
+      int reportsCount,
       DateTime createdAt,
       DateTime updatedAt});
 }
@@ -171,6 +195,9 @@ class __$$UserImplCopyWithImpl<$Res>
     Object? budget = null,
     Object? avatarUrl = freezed,
     Object? role = null,
+    Object? categoriesCount = null,
+    Object? transactionsCount = null,
+    Object? reportsCount = null,
     Object? createdAt = null,
     Object? updatedAt = null,
   }) {
@@ -211,6 +238,18 @@ class __$$UserImplCopyWithImpl<$Res>
           ? _value.role
           : role // ignore: cast_nullable_to_non_nullable
               as String,
+      categoriesCount: null == categoriesCount
+          ? _value.categoriesCount
+          : categoriesCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      transactionsCount: null == transactionsCount
+          ? _value.transactionsCount
+          : transactionsCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      reportsCount: null == reportsCount
+          ? _value.reportsCount
+          : reportsCount // ignore: cast_nullable_to_non_nullable
+              as int,
       createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -236,6 +275,9 @@ class _$UserImpl implements _User {
       required this.budget,
       this.avatarUrl,
       required this.role,
+      required this.categoriesCount,
+      required this.transactionsCount,
+      required this.reportsCount,
       required this.createdAt,
       required this.updatedAt});
 
@@ -258,13 +300,19 @@ class _$UserImpl implements _User {
   @override
   final String role;
   @override
+  final int categoriesCount;
+  @override
+  final int transactionsCount;
+  @override
+  final int reportsCount;
+  @override
   final DateTime createdAt;
   @override
   final DateTime updatedAt;
 
   @override
   String toString() {
-    return 'User(id: $id, name: $name, email: $email, phoneNumber: $phoneNumber, isActive: $isActive, isSetup: $isSetup, budget: $budget, avatarUrl: $avatarUrl, role: $role, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'User(id: $id, name: $name, email: $email, phoneNumber: $phoneNumber, isActive: $isActive, isSetup: $isSetup, budget: $budget, avatarUrl: $avatarUrl, role: $role, categoriesCount: $categoriesCount, transactionsCount: $transactionsCount, reportsCount: $reportsCount, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
@@ -284,6 +332,12 @@ class _$UserImpl implements _User {
             (identical(other.avatarUrl, avatarUrl) ||
                 other.avatarUrl == avatarUrl) &&
             (identical(other.role, role) || other.role == role) &&
+            (identical(other.categoriesCount, categoriesCount) ||
+                other.categoriesCount == categoriesCount) &&
+            (identical(other.transactionsCount, transactionsCount) ||
+                other.transactionsCount == transactionsCount) &&
+            (identical(other.reportsCount, reportsCount) ||
+                other.reportsCount == reportsCount) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
             (identical(other.updatedAt, updatedAt) ||
@@ -291,8 +345,22 @@ class _$UserImpl implements _User {
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, id, name, email, phoneNumber,
-      isActive, isSetup, budget, avatarUrl, role, createdAt, updatedAt);
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      name,
+      email,
+      phoneNumber,
+      isActive,
+      isSetup,
+      budget,
+      avatarUrl,
+      role,
+      categoriesCount,
+      transactionsCount,
+      reportsCount,
+      createdAt,
+      updatedAt);
 
   /// Create a copy of User
   /// with the given fields replaced by the non-null parameter values.
@@ -314,6 +382,9 @@ abstract class _User implements User {
       required final double budget,
       final String? avatarUrl,
       required final String role,
+      required final int categoriesCount,
+      required final int transactionsCount,
+      required final int reportsCount,
       required final DateTime createdAt,
       required final DateTime updatedAt}) = _$UserImpl;
 
@@ -335,6 +406,12 @@ abstract class _User implements User {
   String? get avatarUrl;
   @override
   String get role;
+  @override
+  int get categoriesCount;
+  @override
+  int get transactionsCount;
+  @override
+  int get reportsCount;
   @override
   DateTime get createdAt;
   @override
