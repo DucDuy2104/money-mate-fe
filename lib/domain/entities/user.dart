@@ -14,6 +14,9 @@ class User with _$User {
     required double budget,
     String? avatarUrl,
     required String role,
+    required int categoriesCount,
+    required int transactionsCount,
+    required int reportsCount,
     required DateTime createdAt,
     required DateTime updatedAt,
   }) = _User;

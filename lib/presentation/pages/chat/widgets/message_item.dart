@@ -194,5 +194,6 @@ class _MessageItemState extends State<MessageItem>
 
     homeBloc.add(const HomeEvent.reloadData());
     profileBloc.add(const ProfileEvent.reloadCateogries());
+    profileBloc.add(const ProfileEvent.reloadProfile());
   }
 }

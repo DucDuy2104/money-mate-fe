@@ -17,6 +17,9 @@ _$UserModelImpl _$$UserModelImplFromJson(Map<String, dynamic> json) =>
       budget: (json['budget'] as num?)?.toDouble() ?? 0.0,
       avatarUrl: json['avatarUrl'] as String?,
       role: json['role'] as String? ?? 'user',
+      categoriesCount: (json['categoriesCount'] as num?)?.toInt() ?? 0,
+      transactionsCount: (json['transactionsCount'] as num?)?.toInt() ?? 0,
+      reportsCount: (json['reportsCount'] as num?)?.toInt() ?? 0,
       refreshToken: json['refreshToken'] as String?,
       verificationCode: json['verificationCode'] as String?,
       verificationCodeExpire: json['verificationCodeExpire'] == null
@@ -37,6 +40,9 @@ Map<String, dynamic> _$$UserModelImplToJson(_$UserModelImpl instance) =>
       'budget': instance.budget,
       'avatarUrl': instance.avatarUrl,
       'role': instance.role,
+      'categoriesCount': instance.categoriesCount,
+      'transactionsCount': instance.transactionsCount,
+      'reportsCount': instance.reportsCount,
       'refreshToken': instance.refreshToken,
       'verificationCode': instance.verificationCode,
       'verificationCodeExpire':

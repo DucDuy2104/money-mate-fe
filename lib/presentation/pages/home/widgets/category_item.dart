@@ -29,137 +29,175 @@ class CategoryItem extends StatelessWidget {
         ? 'Gần hết hạn mức'
         : 'Chưa đạt mục tiêu';
 
+    List<Color> gradientColors = category.isSelected
+        ? [
+            const Color(0xFF2D2D3A),
+            const Color(0xFF1E1E2A),
+          ]
+        : [
+            const Color(0xFF1E1E2A),
+            const Color(0xFF2D2D3A),
+          ];
+
     return GestureDetector(
       onTap: onTap,
-      child: Container(
-        width: 300,
-        decoration: BoxDecoration(
-          gradient: const LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: [
-              Color(0xFF2D2D3A),
-              Color(0xFF1E1E2A),
-            ],
-          ),
-          borderRadius: BorderRadius.circular(20),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.3),
-              blurRadius: 12,
-              offset: const Offset(0, 4),
+      child: Stack(
+        children: [
+          Container(
+            width: 300,
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: gradientColors,
+              ),
+              borderRadius: BorderRadius.circular(20),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.3),
+                  blurRadius: 12,
+                  offset: const Offset(0, 4),
+                ),
+              ],
             ),
-          ],
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(16),
-          child: Column(
-            children: [
-              Row(
+            child: Padding(
+              padding: const EdgeInsets.all(16),
+              child: Column(
                 children: [
-                  Container(
-                    width: 50,
-                    height: 50,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      gradient: LinearGradient(
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                        colors: [
-                          progressColor.withOpacity(0.7),
-                          progressColor,
-                        ],
-                      ),
-                      boxShadow: [
-                        BoxShadow(
-                          color: progressColor.withOpacity(0.3),
-                          blurRadius: 8,
-                          spreadRadius: 1,
-                        ),
-                      ],
-                    ),
-                    child: Icon(
-                      category.icon,
-                      color: Colors.white,
-                      size: 24,
-                    ),
-                  ),
-                  const SizedBox(width: 16),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              category.name,
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 18,
-                                fontWeight: FontWeight.w600,
-                                letterSpacing: 0.5,
-                              ),
+                  Row(
+                    children: [
+                      Container(
+                        width: 50,
+                        height: 50,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          gradient: LinearGradient(
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                            colors: [
+                              progressColor.withOpacity(0.7),
+                              progressColor,
+                            ],
+                          ),
+                          boxShadow: [
+                            BoxShadow(
+                              color: progressColor.withOpacity(0.3),
+                              blurRadius: 8,
+                              spreadRadius: 1,
                             ),
-                            if (isNearLimit)
-                              Container(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 8, vertical: 4),
-                                decoration: BoxDecoration(
-                                  color:
-                                      (category.type == CategoriesType.expense
+                          ],
+                        ),
+                        child: Icon(
+                          category.icon,
+                          color: Colors.white,
+                          size: 24,
+                        ),
+                      ),
+                      const SizedBox(width: 16),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  category.name,
+                                  style: TextStyle(
+                                    color: category.isSelected
+                                        ? Colors.white
+                                        : Colors.white.withOpacity(0.6),
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w600,
+                                    letterSpacing: 0.5,
+                                  ),
+                                ),
+                                if (isNearLimit && category.isSelected)
+                                  Container(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 8, vertical: 4),
+                                    decoration: BoxDecoration(
+                                      color: (category.type ==
+                                                  CategoriesType.expense
                                               ? Colors.red
                                               : Colors.amber)
                                           .withOpacity(0.2),
-                                  borderRadius: BorderRadius.circular(12),
-                                ),
-                                child: Text(
-                                  limitMessage,
-                                  style: TextStyle(
-                                    color:
-                                        category.type == CategoriesType.expense
+                                      borderRadius: BorderRadius.circular(12),
+                                    ),
+                                    child: Text(
+                                      limitMessage,
+                                      style: TextStyle(
+                                        color: category.type ==
+                                                CategoriesType.expense
                                             ? Colors.red[300]
                                             : Colors.amber[300],
-                                    fontSize: 10,
-                                    fontWeight: FontWeight.w500,
+                                        fontSize: 10,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    ),
+                                  ),
+                              ],
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  '${(percent).toInt()}%',
+                                  style: TextStyle(
+                                    color: category.isSelected
+                                        ? progressColor
+                                        : progressColor.withOpacity(0.6),
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
                                   ),
                                 ),
-                              ),
-                          ],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              '${(percent).toInt()}%',
-                              style: TextStyle(
-                                color: progressColor,
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                              ),
+                                Text(
+                                  '${formatMoney(category.currentBudget)} / ${formatMoney(category.budget)}',
+                                  style: TextStyle(
+                                    color: Colors.white.withOpacity(
+                                        category.isSelected ? 0.7 : 0.5),
+                                    fontSize: 14,
+                                  ),
+                                ),
+                              ],
                             ),
-                            Text(
-                              '${formatMoney(category.currentBudget)} / ${formatMoney(category.budget)}',
-                              style: TextStyle(
-                                color: Colors.white.withOpacity(0.7),
-                                fontSize: 14,
-                              ),
+                            const SizedBox(height: 8),
+                            CustomProgressBar(
+                              progress: progress,
+                              progressColor: progressColor,
+                              isSelected: category.isSelected,
                             ),
                           ],
                         ),
-                        const SizedBox(height: 8),
-                        CustomProgressBar(
-                          progress: progress,
-                          progressColor: progressColor,
-                        ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ],
               ),
-            ],
+            ),
           ),
-        ),
+          // Thêm dấu hiệu disable (chỉ hiện khi !isSelected)
+          if (!category.isSelected)
+            Positioned(
+              top: 12,
+              right: 12,
+              child: Container(
+                width: 24,
+                height: 24,
+                decoration: const BoxDecoration(
+                  color: Color(0xFF1E1E2A),
+                  shape: BoxShape.circle,
+                ),
+                child: const Center(
+                  child: Icon(
+                    Icons.block,
+                    color: Colors.grey,
+                    size: 16,
+                  ),
+                ),
+              ),
+            ),
+        ],
       ),
     );
   }
@@ -204,11 +242,13 @@ class CategoryItem extends StatelessWidget {
 class CustomProgressBar extends StatelessWidget {
   final double progress;
   final Color progressColor;
+  final bool isSelected;
 
   const CustomProgressBar({
     super.key,
     required this.progress,
     required this.progressColor,
+    this.isSelected = true,
   });
 
   @override
@@ -231,13 +271,13 @@ class CustomProgressBar extends StatelessWidget {
                     begin: Alignment.centerLeft,
                     end: Alignment.centerRight,
                     colors: [
-                      progressColor.withOpacity(0.7),
-                      progressColor,
+                      progressColor.withOpacity(isSelected ? 0.7 : 0.4),
+                      progressColor.withOpacity(isSelected ? 1.0 : 0.6),
                     ],
                   ),
                   boxShadow: [
                     BoxShadow(
-                      color: progressColor.withOpacity(0.3),
+                      color: progressColor.withOpacity(isSelected ? 0.3 : 0.1),
                       blurRadius: 5,
                       offset: const Offset(0, 1),
                     ),
@@ -265,7 +305,7 @@ class CustomProgressBar extends StatelessWidget {
                       begin: Alignment.topCenter,
                       end: Alignment.bottomCenter,
                       colors: [
-                        Colors.white.withOpacity(0.3),
+                        Colors.white.withOpacity(isSelected ? 0.3 : 0.15),
                         Colors.white.withOpacity(0),
                       ],
                     ),

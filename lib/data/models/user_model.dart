@@ -16,6 +16,9 @@ class UserModel with _$UserModel {
     @Default(0.0) double budget,
     String? avatarUrl,
     @Default('user') String role,
+    @Default(0) int categoriesCount,
+    @Default(0) int transactionsCount,
+    @Default(0) int reportsCount,
     String? refreshToken,
     String? verificationCode,
     DateTime? verificationCodeExpire,
@@ -40,6 +43,9 @@ extension UserModelX on UserModel {
         role: role,
         phoneNumber: phoneNumber,
         createdAt: createdAt,
-        updatedAt: updatedAt);
+        updatedAt: updatedAt,
+        categoriesCount: categoriesCount,
+        transactionsCount: transactionsCount,
+        reportsCount: reportsCount);
   }
 }
