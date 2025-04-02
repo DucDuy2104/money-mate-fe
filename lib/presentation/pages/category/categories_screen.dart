@@ -191,7 +191,7 @@ class _CategoriesScreenState extends State<CategoriesScreen>
                                     const SizedBox(width: 12),
                                     Expanded(
                                       child: Text(
-                                        'Đã chọn $selectedCount/10 danh mục. Nhấn vào danh mục để thêm hoặc cập nhật hạn mức.',
+                                        'Đã chọn $selectedCount danh mục. Nhấn vào danh mục để thêm hoặc cập nhật hạn mức.',
                                         style: TextStyle(
                                           color: Colors.grey[300],
                                           fontSize: 14,

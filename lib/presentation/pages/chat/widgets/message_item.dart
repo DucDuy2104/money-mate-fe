@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:money_mate/domain/entities/message.dart';
-import 'package:money_mate/presentation/pages/category/bloc/categories_bloc.dart';
 import 'package:money_mate/presentation/pages/category/widgets/category_dialogs.dart';
 import 'package:money_mate/presentation/pages/chat/bloc/chat_bloc.dart';
 import 'package:money_mate/presentation/pages/chat/widgets/suggest_category.dart';
 import 'package:money_mate/presentation/pages/chat/widgets/transaction_message.dart';
 import 'package:money_mate/presentation/pages/chat/widgets/switch_category_item.dart';
-import 'package:money_mate/presentation/pages/home/bloc/home_bloc.dart';
-import 'package:money_mate/presentation/pages/profile/bloc/profile_bloc.dart';
 import 'package:money_mate/shared/constants/app_colors.dart';
 import 'package:money_mate/shared/constants/app_dimens.dart';
 import 'package:money_mate/shared/constants/app_theme.dart';
