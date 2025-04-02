@@ -193,7 +193,6 @@ class _MessageItemState extends State<MessageItem>
     final profileBloc = BlocProvider.of<ProfileBloc>(context);
 
     homeBloc.add(const HomeEvent.reloadData());
-    profileBloc.add(const ProfileEvent.reloadCateogries());
-    profileBloc.add(const ProfileEvent.reloadProfile());
+    profileBloc.add(const ProfileEvent.reloadData());
   }
 }
