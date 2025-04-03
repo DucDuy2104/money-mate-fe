@@ -18,7 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$HomeEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() getData,
+    required TResult Function(VoidCallback callback) getData,
     required TResult Function() reloadData,
     required TResult Function() connect,
     required TResult Function() reloadCategories,
@@ -26,7 +26,7 @@ mixin _$HomeEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? getData,
+    TResult? Function(VoidCallback callback)? getData,
     TResult? Function()? reloadData,
     TResult? Function()? connect,
     TResult? Function()? reloadCategories,
@@ -34,7 +34,7 @@ mixin _$HomeEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? getData,
+    TResult Function(VoidCallback callback)? getData,
     TResult Function()? reloadData,
     TResult Function()? connect,
     TResult Function()? reloadCategories,
@@ -93,6 +93,8 @@ abstract class _$$GetDataImplCopyWith<$Res> {
   factory _$$GetDataImplCopyWith(
           _$GetDataImpl value, $Res Function(_$GetDataImpl) then) =
       __$$GetDataImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({VoidCallback callback});
 }
 
 /// @nodoc
@@ -105,60 +107,86 @@ class __$$GetDataImplCopyWithImpl<$Res>
 
   /// Create a copy of HomeEvent
   /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? callback = null,
+  }) {
+    return _then(_$GetDataImpl(
+      null == callback
+          ? _value.callback
+          : callback // ignore: cast_nullable_to_non_nullable
+              as VoidCallback,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$GetDataImpl implements _GetData {
-  const _$GetDataImpl();
+  const _$GetDataImpl(this.callback);
+
+  @override
+  final VoidCallback callback;
 
   @override
   String toString() {
-    return 'HomeEvent.getData()';
+    return 'HomeEvent.getData(callback: $callback)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$GetDataImpl);
+        (other.runtimeType == runtimeType &&
+            other is _$GetDataImpl &&
+            (identical(other.callback, callback) ||
+                other.callback == callback));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, callback);
+
+  /// Create a copy of HomeEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$GetDataImplCopyWith<_$GetDataImpl> get copyWith =>
+      __$$GetDataImplCopyWithImpl<_$GetDataImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() getData,
+    required TResult Function(VoidCallback callback) getData,
     required TResult Function() reloadData,
     required TResult Function() connect,
     required TResult Function() reloadCategories,
   }) {
-    return getData();
+    return getData(callback);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? getData,
+    TResult? Function(VoidCallback callback)? getData,
     TResult? Function()? reloadData,
     TResult? Function()? connect,
     TResult? Function()? reloadCategories,
   }) {
-    return getData?.call();
+    return getData?.call(callback);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? getData,
+    TResult Function(VoidCallback callback)? getData,
     TResult Function()? reloadData,
     TResult Function()? connect,
     TResult Function()? reloadCategories,
     required TResult orElse(),
   }) {
     if (getData != null) {
-      return getData();
+      return getData(callback);
     }
     return orElse();
   }
@@ -202,7 +230,15 @@ class _$GetDataImpl implements _GetData {
 }
 
 abstract class _GetData implements HomeEvent {
-  const factory _GetData() = _$GetDataImpl;
+  const factory _GetData(final VoidCallback callback) = _$GetDataImpl;
+
+  VoidCallback get callback;
+
+  /// Create a copy of HomeEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$GetDataImplCopyWith<_$GetDataImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -246,7 +282,7 @@ class _$ReloadDataImpl implements _ReloadData {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() getData,
+    required TResult Function(VoidCallback callback) getData,
     required TResult Function() reloadData,
     required TResult Function() connect,
     required TResult Function() reloadCategories,
@@ -257,7 +293,7 @@ class _$ReloadDataImpl implements _ReloadData {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? getData,
+    TResult? Function(VoidCallback callback)? getData,
     TResult? Function()? reloadData,
     TResult? Function()? connect,
     TResult? Function()? reloadCategories,
@@ -268,7 +304,7 @@ class _$ReloadDataImpl implements _ReloadData {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? getData,
+    TResult Function(VoidCallback callback)? getData,
     TResult Function()? reloadData,
     TResult Function()? connect,
     TResult Function()? reloadCategories,
@@ -363,7 +399,7 @@ class _$ConnectImpl implements _Connect {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() getData,
+    required TResult Function(VoidCallback callback) getData,
     required TResult Function() reloadData,
     required TResult Function() connect,
     required TResult Function() reloadCategories,
@@ -374,7 +410,7 @@ class _$ConnectImpl implements _Connect {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? getData,
+    TResult? Function(VoidCallback callback)? getData,
     TResult? Function()? reloadData,
     TResult? Function()? connect,
     TResult? Function()? reloadCategories,
@@ -385,7 +421,7 @@ class _$ConnectImpl implements _Connect {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? getData,
+    TResult Function(VoidCallback callback)? getData,
     TResult Function()? reloadData,
     TResult Function()? connect,
     TResult Function()? reloadCategories,
@@ -480,7 +516,7 @@ class _$ReloadCategoriesImpl implements _ReloadCategories {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() getData,
+    required TResult Function(VoidCallback callback) getData,
     required TResult Function() reloadData,
     required TResult Function() connect,
     required TResult Function() reloadCategories,
@@ -491,7 +527,7 @@ class _$ReloadCategoriesImpl implements _ReloadCategories {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? getData,
+    TResult? Function(VoidCallback callback)? getData,
     TResult? Function()? reloadData,
     TResult? Function()? connect,
     TResult? Function()? reloadCategories,
@@ -502,7 +538,7 @@ class _$ReloadCategoriesImpl implements _ReloadCategories {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? getData,
+    TResult Function(VoidCallback callback)? getData,
     TResult Function()? reloadData,
     TResult Function()? connect,
     TResult Function()? reloadCategories,

@@ -20,7 +20,6 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   void _onLogin(_Login event, Emitter<LoginState> emit) async {
     try {
       emit(const LoginState.loading());
-      await Future.delayed(const Duration(seconds: 2));
       final result = await _authRepository.login(event.email, event.password);
       result.fold((failure) {
         emit(LoginState.error(failure.message));
