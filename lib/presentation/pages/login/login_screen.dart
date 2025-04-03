@@ -54,8 +54,8 @@ class LoginScreen extends StatelessWidget {
                 context.goNamed(RouteNames.setupName);
                 return;
               }
-              BlocProvider.of<RoutesBloc>(context)
-                  .add(const RoutesEvent.setAuth());
+              BlocProvider.of<RoutesBloc>(context).add(const RoutesEvent.setAuth());
+              context.goNamed(RouteNames.homeName);
             },
             error: (value) {
               AppToast.error(context, value.errorMessage);

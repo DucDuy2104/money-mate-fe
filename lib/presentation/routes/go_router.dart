@@ -9,8 +9,7 @@ class AppRouter {
       initialLocation: RouteNames.splash,
       routes: appRoutes,
       redirect: (context, state) {
-        if (!(state.matchedLocation == RouteNames.splash ||
-            state.matchedLocation == RouteNames.login)) {
+        if (!(state.matchedLocation == RouteNames.splash)) {
           return null;
         }
         final routesBloc = context.watch<RoutesBloc>();
@@ -23,8 +22,7 @@ class AppRouter {
               return null;
             },
             auth: (authState) {
-              if (state.matchedLocation == RouteNames.splash ||
-                  state.matchedLocation == RouteNames.login) {
+              if (state.matchedLocation == RouteNames.splash) {
                 return RouteNames.home;
               }
               return null;
