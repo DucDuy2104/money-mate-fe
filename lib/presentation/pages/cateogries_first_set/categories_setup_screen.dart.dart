@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:money_mate/domain/entities/category.dart';
 import 'package:money_mate/presentation/pages/category/widgets/category_dialogs.dart';
 import 'package:money_mate/presentation/pages/cateogries_first_set/bloc/setup_categories_bloc.dart';
 import 'package:money_mate/presentation/pages/cateogries_first_set/widgets/categories_grid.dart';
 import 'package:money_mate/presentation/routes/bloc/routes_bloc.dart';
+import 'package:money_mate/presentation/routes/route_name.dart';
 import 'package:money_mate/shared/components/app_tab.dart';
 import 'package:money_mate/shared/components/app_toast.dart';
 import 'package:money_mate/shared/components/loading_scafford.dart';
@@ -122,6 +124,7 @@ class _CategoriesSetupScreenState extends State<CategoriesSetupScreen>
           setupSuccess: (state) {
             BlocProvider.of<RoutesBloc>(context)
                 .add(const RoutesEvent.setAuth());
+            context.goNamed(RouteNames.homeName);
           },
           error: (state) {
             AppToast.error(context, state.message);
