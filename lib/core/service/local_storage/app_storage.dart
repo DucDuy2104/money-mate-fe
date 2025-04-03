@@ -39,8 +39,7 @@ class AppStorage {
 
   /// Removes accessToken and refreshToken from the box (logout).
   Future<void> logout() async {
-    await remove('accessToken');
-    await remove('refreshToken');
+    await clearAllData();
   }
 
   /// Clears all data in the box.

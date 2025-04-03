@@ -19,9 +19,14 @@ import 'package:money_mate/presentation/pages/register/register_screen.dart';
 import 'package:money_mate/presentation/pages/setting/setting_screen.dart';
 import 'package:money_mate/presentation/pages/setup/bloc/setup_bloc.dart';
 import 'package:money_mate/presentation/pages/setup/setup_screen.dart';
+import 'package:money_mate/presentation/pages/splash/splash_screen.dart';
 import 'package:money_mate/presentation/routes/route_name.dart';
 
 final List<GoRoute> appRoutes = [
+  GoRoute(
+      path: RouteNames.splash,
+      name: RouteNames.splashName,
+      builder: (context, state) => const SplashScreen()),
   GoRoute(
     path: RouteNames.login,
     name: RouteNames.loginName,

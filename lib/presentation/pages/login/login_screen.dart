@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:money_mate/presentation/pages/login/bloc/login_bloc.dart';
+import 'package:money_mate/presentation/routes/bloc/routes_bloc.dart';
 import 'package:money_mate/presentation/routes/route_name.dart';
 import 'package:money_mate/shared/components/app_toast.dart';
 import 'package:money_mate/shared/components/google_button.dart';
@@ -53,8 +54,8 @@ class LoginScreen extends StatelessWidget {
                 context.goNamed(RouteNames.setupName);
                 return;
               }
-
-              context.goNamed(RouteNames.homeName);
+              BlocProvider.of<RoutesBloc>(context)
+                  .add(const RoutesEvent.setAuth());
             },
             error: (value) {
               AppToast.error(context, value.errorMessage);
