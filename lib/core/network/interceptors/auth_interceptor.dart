@@ -1,20 +1,28 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/widgets.dart';
+import 'package:money_mate/core/service/getit/locator.dart';
 import 'package:money_mate/data/data_sources/local/local_data_source.dart';
+import 'package:money_mate/data/repositories/auth_repository.dart';
 
 class AuthInterceptor extends Interceptor {
   final Dio _dio;
   final OnboardLocalDataSource _localDataSource;
-  static const String _refreshEndpoint = '/auth/refresh';
+  late AuthRepository _authRepository;
+  static const String _refreshEndpoint = '/auth/refresh-token';
 
   AuthInterceptor(this._dio, this._localDataSource);
 
   @override
-  void onRequest(RequestOptions options, RequestInterceptorHandler handler) async {
+  void onRequest(
+      RequestOptions options, RequestInterceptorHandler handler) async {
     if (options.path != _refreshEndpoint) {
       final accessToken = _localDataSource.getAccessToken();
       if (accessToken != null) {
         options.headers['Authorization'] = 'Bearer $accessToken';
       }
+    } else {
+      options.headers['Authorization'] =
+          'Bearer ${_localDataSource.getRefreshToken()}';
     }
     handler.next(options);
   }
@@ -28,12 +36,28 @@ class AuthInterceptor extends Interceptor {
   void onError(DioException err, ErrorInterceptorHandler handler) async {
     if ((err.response?.statusCode == 401 || err.response?.statusCode == 417) &&
         err.requestOptions.path != _refreshEndpoint) {
-      // final refreshed = await _localDataSource.refreshToken();
-      // if (refreshed) {
-      //   return handler.resolve(await _retry(err.requestOptions));
-      // }
+      try {
+        _authRepository = getIt<AuthRepository>();
+        final refreshResult = await _authRepository.refreshToken();
+        await refreshResult.fold(
+          (failure) {
+            debugPrint('Token refresh failed: $failure');
+            handler.next(err);
+          },
+          (data) async {
+            await _localDataSource.saveAccessToken(data.accessToken);
+            await _localDataSource.saveRefreshToken(data.refreshToken);
+            final response = await _retry(err.requestOptions);
+            handler.resolve(response);
+          },
+        );
+      } catch (e) {
+        debugPrint('Error during token refresh: $e');
+        handler.next(err);
+      }
+    } else {
+      handler.next(err);
     }
-    handler.next(err);
   }
 
   Future<Response<dynamic>> _retry(RequestOptions requestOptions) async {

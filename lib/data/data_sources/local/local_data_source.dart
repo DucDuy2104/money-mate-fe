@@ -5,6 +5,8 @@ abstract class OnboardLocalDataSource {
   Future<void> saveFirstTime();
   Future<void> saveEulaAccepted();
   bool isEulaAccepted();
+  Future<void> setAuthenticated();
+  bool isAuthenticated();
 
   /// Save and retrieve authentication tokens
   Future<void> saveAccessToken(String token);
@@ -64,5 +66,15 @@ class OnboardLocalDataSourceImpl implements OnboardLocalDataSource {
   @override
   Future<void> logout() async {
     await _appStorage.logout();
+  }
+
+  @override
+  bool isAuthenticated() {
+    return _appStorage.getBool('isAuthenticated') ?? false;
+  }
+
+  @override
+  Future<void> setAuthenticated() async {
+    await _appStorage.putBool(key: 'isAuthenticated', value: true);
   }
 }

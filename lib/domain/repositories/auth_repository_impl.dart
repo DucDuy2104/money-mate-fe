@@ -37,4 +37,11 @@ class AuthRepositoryImpl extends AuthRepository {
     return result.fold((failure) => Left(failure),
         (loginDataModel) => Right(loginDataModel.toEntity()));
   }
+  
+  @override
+  ResultFuture<LoginData> refreshToken() async {
+    final result = await _authRemoteDataSource.refreshToken();
+    return result.fold((failure) => Left(failure),
+        (loginDataModel) => Right(loginDataModel.toEntity()));
+  }
 }

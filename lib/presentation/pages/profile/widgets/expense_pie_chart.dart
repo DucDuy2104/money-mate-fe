@@ -12,6 +12,43 @@ class ExpensePieChart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final data = getExpenseData(categories);
+    if (data.isEmpty) {
+      return Container(
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: const Color(0xFF1E1E2E),
+          borderRadius: BorderRadius.circular(16),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.2),
+              blurRadius: 10,
+              offset: const Offset(0, 4),
+            ),
+          ],
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset(
+              'assets/images/story_set_empty.png',
+              height: 180,
+              fit: BoxFit.contain,
+            ),
+            AppDimens.spaceMedium,
+            const Text(
+              "Bạn chưa có dữ liệu chi tiêu",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: Color(0xFF8D8D9A),
+                fontSize: 16,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+          ],
+        ),
+      );
+    }
+
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
