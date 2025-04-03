@@ -39,8 +39,6 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
   Future<void> _onGetChatData(
       _GetChatData event, Emitter<ChatState> emit) async {
     emit(const ChatState.loading());
-    await Future.delayed(const Duration(seconds: 2));
-
     try {
       final conversationResult =
           await _conversationRepository.getBotConversation();
@@ -78,7 +76,6 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
   void _onCancelTransaction(
       _CancelTransaction event, Emitter<ChatState> emit) async {
     add(_SetMessageLoading(event.message.id, true));
-    await Future.delayed(const Duration(seconds: 2));
     try {
       final transactionResult = await _transactionsRepository
           .cancelTransaction(event.message.transaction!.id);
@@ -97,7 +94,6 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
   void _onEnableTransaction(
       _EnableTransaction event, Emitter<ChatState> emit) async {
     add(_SetMessageLoading(event.message.id, true));
-    await Future.delayed(const Duration(seconds: 2));
     try {
       final transactionResult = await _transactionsRepository
           .enableTransaction(event.message.transaction!.id);

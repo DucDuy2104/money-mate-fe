@@ -42,9 +42,10 @@ class _HomeScreenState extends State<HomeScreen> {
     homeBloc.state.maybeMap(
         loaded: (state) {},
         orElse: () {
-          homeBloc.add(const HomeEvent.getData());
-          BlocProvider.of<ProfileBloc>(context).add(ProfileEvent.getData(() {
-            getCategories();
+          homeBloc.add(HomeEvent.getData(() {
+            BlocProvider.of<ProfileBloc>(context).add(ProfileEvent.getData(() {
+              getCategories();
+            }));
           }));
         });
   }

@@ -23,7 +23,6 @@ class SetupCategoriesBloc extends Bloc<SetupCategoriesEvent, SetupCategoriesStat
   void _onGetCategories(
       _GetCategories event, Emitter<SetupCategoriesState> emit) async {
     try {
-      await Future.delayed(const Duration(seconds: 2));
       final result = await _categoriesRepository.getCategories();
       result.fold((failure) {
         emit(SetupCategoriesState.error(failure.message));
@@ -76,7 +75,6 @@ class SetupCategoriesBloc extends Bloc<SetupCategoriesEvent, SetupCategoriesStat
           success: (value) => value.categories,
           orElse: () => [] as List<Category>);
       emit(SetupCategoriesState.loading(temptCategories));
-      await Future.delayed(const Duration(seconds: 2));
       final result =
           await _categoriesRepository.setupCategories(event.categories);
       result.fold((failure) {

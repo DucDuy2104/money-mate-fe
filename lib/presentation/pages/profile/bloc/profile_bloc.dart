@@ -29,7 +29,6 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
 
   void _onGetData(_GetData event, Emitter<ProfileState> emit) async {
     emit(const ProfileState.loading());
-    await Future.delayed(const Duration(seconds: 4));
     try {
       List<Category> categories = [];
       final categoriesResult =
@@ -39,14 +38,13 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       }, (result) {
         categories = result;
       });
-      debugPrint('categories: ${categories.length}');
       final profileResult = await _usersRepository.getProfile();
       profileResult.fold((failure) {
         emit(ProfileState.error(failure.message));
       }, (profile) {
-        _onConnect();
         emit(ProfileState.loaded(
             ProfileData(categories: categories, profile: profile)));
+        _onConnect();
         event.callback();
       });
     } catch (e) {
@@ -89,7 +87,6 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
           emit(ProfileState.updating(state.data));
         },
         orElse: () {});
-    await Future.delayed(const Duration(seconds: 2));
     try {
       final updatedProfile =
           await _usersRepository.update({"name": event.name});
@@ -112,7 +109,6 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
           emit(ProfileState.updating(state.data));
         },
         orElse: () {});
-    await Future.delayed(const Duration(seconds: 2));
     try {
       final profile = await _usersRepository.getProfile();
       profile.fold((failure) {
