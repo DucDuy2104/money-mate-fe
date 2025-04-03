@@ -1,0 +1,1 @@
+/Users/mac/Desktop/ducduy/dev/money-mate/money-mate-fe/build/app/intermediates/cxx/RelWithDebInfo/1a3h3p3r/obj/armeabi-v7a
