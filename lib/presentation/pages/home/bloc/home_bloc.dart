@@ -32,7 +32,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
   void _onGetData(_GetData event, Emitter<HomeState> emit) async {
     emit(const HomeState.loading());
-    await Future.delayed(const Duration(seconds: 2));
 
     try {
       List<Category> categories = [];

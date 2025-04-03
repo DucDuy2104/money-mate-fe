@@ -46,7 +46,6 @@ class CategoriesBloc extends Bloc<CategoriesEvent, CategoriesState> {
           emit(CategoriesState.reloading(state.categories));
         },
         orElse: () {});
-    await Future.delayed(const Duration(seconds: 2));
     try {
       final result =
           await _categoriesRepository.getCategories(userId: event.userId);
@@ -73,8 +72,6 @@ class CategoriesBloc extends Bloc<CategoriesEvent, CategoriesState> {
           emit(CategoriesState.reloading(state.categories));
         },
         orElse: () {});
-    await Future.delayed(const Duration(seconds: 2));
-
     try {
       final enableResult = await _categoriesRepository.enableCategory(
           event.categoryId, event.budget);
@@ -96,7 +93,6 @@ class CategoriesBloc extends Bloc<CategoriesEvent, CategoriesState> {
           emit(CategoriesState.reloading(state.categories));
         },
         orElse: () {});
-    await Future.delayed(const Duration(seconds: 2));
 
     try {
       final disableResult =

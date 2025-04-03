@@ -18,7 +18,6 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
   void _register(_Register event, Emitter<RegisterState> emit) async {
     try {
       emit(const RegisterState.loading());
-      await Future.delayed(const Duration(seconds: 2));
       final result =
           await _authRepositoryImpl.register(event.email, event.password);
       result.fold((failure) {
