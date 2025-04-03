@@ -48,14 +48,20 @@ class SuggestCategoryItem extends StatelessWidget {
                 typeText,
                 style: context.textTheme.bodySmall?.copyWith(color: typeColor),
               ),
-              trailing: ElevatedButton(
-                onPressed: isSelected ? null : onApprove,
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: category.color,
-                  foregroundColor: Colors.white,
-                  minimumSize: const Size(60, 36),
-                ),
-                child: const Text("Thêm"),
+              trailing: BlocBuilder<CategoriesBloc, CategoriesState>(
+                builder: (context, state) {
+                  final isSelected = BlocProvider.of<CategoriesBloc>(context)
+                      .checkCategory(category.id);
+                  return ElevatedButton(
+                    onPressed: isSelected ? null : onApprove,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: category.color,
+                      foregroundColor: Colors.white,
+                      minimumSize: const Size(60, 36),
+                    ),
+                    child: const Text("Thêm"),
+                  );
+                },
               ),
             ),
           ],
