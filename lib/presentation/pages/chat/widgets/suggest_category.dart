@@ -24,31 +24,58 @@ class SuggestCategoryItem extends StatelessWidget {
     final typeColor = isIncome ? AppColors.upColor : AppColors.downColor;
     final typeText = isIncome ? "Thu nhập" : "Chi tiêu";
 
-    final isSelected =
-        BlocProvider.of<CategoriesBloc>(context).checkCategory(category.id);
-
-    return SizedBox(
+    return Container(
       width: MediaQuery.of(context).size.width * 0.7,
-      child: Card(
-        elevation: 2,
+      decoration: BoxDecoration(
         color: Colors.grey[200],
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            ListTile(
-              onTap: onTap,
-              leading: CircleAvatar(
+        borderRadius: BorderRadius.circular(8),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.1),
+            blurRadius: 4,
+            spreadRadius: 0,
+            offset: const Offset(0, 1),
+          ),
+        ],
+      ),
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(8),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+          child: Row(
+            children: [
+              CircleAvatar(
+                radius: 20,
                 backgroundColor: category.color.withOpacity(0.2),
-                child: Icon(category.icon, color: category.color),
+                child: Icon(category.icon, color: category.color, size: 20),
               ),
-              title: Text(category.name,
-                  style: context.textTheme.titleMedium
-                      ?.copyWith(color: Colors.black)),
-              subtitle: Text(
-                typeText,
-                style: context.textTheme.bodySmall?.copyWith(color: typeColor),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      category.name,
+                      style: context.textTheme.titleMedium?.copyWith(
+                        color: Colors.black,
+                      ),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    Text(
+                      typeText,
+                      style: context.textTheme.bodySmall?.copyWith(
+                        color: typeColor,
+                      ),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ],
+                ),
               ),
-              trailing: BlocBuilder<CategoriesBloc, CategoriesState>(
+              BlocBuilder<CategoriesBloc, CategoriesState>(
                 builder: (context, state) {
                   final isSelected = BlocProvider.of<CategoriesBloc>(context)
                       .checkCategory(category.id);
@@ -57,14 +84,23 @@ class SuggestCategoryItem extends StatelessWidget {
                     style: ElevatedButton.styleFrom(
                       backgroundColor: category.color,
                       foregroundColor: Colors.white,
-                      minimumSize: const Size(60, 36),
+                      padding: const EdgeInsets.symmetric(horizontal: 8),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(6),
+                      ),
+                      elevation: 0,
                     ),
-                    child: const Text("Thêm"),
+                    child: const Text(
+                      "Thêm",
+                      style: TextStyle(fontSize: 12),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
                   );
                 },
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

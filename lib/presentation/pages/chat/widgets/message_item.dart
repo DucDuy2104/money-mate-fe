@@ -144,6 +144,7 @@ class _MessageItemState extends State<MessageItem>
                     if (!widget.message.isSentByMe &&
                             widget.message.type == MessageType.add ||
                         widget.message.type == MessageType.delete) ...[
+                      AppDimens.spaceSmall,
                       SwitchCategoryItem(
                         category: widget.message.category!,
                         type: widget.message.type,
@@ -151,6 +152,7 @@ class _MessageItemState extends State<MessageItem>
                     ],
                     if (!widget.message.isSentByMe &&
                         widget.message.type == MessageType.recommend) ...[
+                      AppDimens.spaceSmall,
                       SuggestCategoryItem(
                         category: widget.message.category!,
                         onApprove: () {

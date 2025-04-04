@@ -44,31 +44,33 @@ class CategoryItem extends StatelessWidget {
       child: Stack(
         children: [
           Container(
-            width: 300,
+            width: 250, // Reduced from 300
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
                 colors: gradientColors,
               ),
-              borderRadius: BorderRadius.circular(20),
+              borderRadius: BorderRadius.circular(16), // Reduced from 20
               boxShadow: [
                 BoxShadow(
                   color: Colors.black.withOpacity(0.3),
-                  blurRadius: 12,
-                  offset: const Offset(0, 4),
+                  blurRadius: 8, // Reduced from 12
+                  offset: const Offset(0, 3), // Reduced from 4
                 ),
               ],
             ),
             child: Padding(
-              padding: const EdgeInsets.all(16),
+              padding: const EdgeInsets.all(12), // Reduced from 16
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.center, // Center vertically
                 children: [
                   Row(
+                    crossAxisAlignment: CrossAxisAlignment.center, // Center vertically
                     children: [
                       Container(
-                        width: 50,
-                        height: 50,
+                        width: 40, // Reduced from 50
+                        height: 40, // Reduced from 50
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           gradient: LinearGradient(
@@ -82,21 +84,22 @@ class CategoryItem extends StatelessWidget {
                           boxShadow: [
                             BoxShadow(
                               color: progressColor.withOpacity(0.3),
-                              blurRadius: 8,
-                              spreadRadius: 1,
+                              blurRadius: 6, // Reduced from 8
+                              spreadRadius: 0.5, // Reduced from 1
                             ),
                           ],
                         ),
                         child: Icon(
                           category.icon,
                           color: Colors.white,
-                          size: 24,
+                          size: 20, // Reduced from 24
                         ),
                       ),
-                      const SizedBox(width: 16),
+                      const SizedBox(width: 12), // Reduced from 16
                       Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.center, // Center vertically
                           children: [
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -107,7 +110,7 @@ class CategoryItem extends StatelessWidget {
                                     color: category.isSelected
                                         ? Colors.white
                                         : Colors.white.withOpacity(0.6),
-                                    fontSize: 18,
+                                    fontSize: 16, // Reduced from 18
                                     fontWeight: FontWeight.w600,
                                     letterSpacing: 0.5,
                                   ),
@@ -115,14 +118,14 @@ class CategoryItem extends StatelessWidget {
                                 if (isNearLimit && category.isSelected)
                                   Container(
                                     padding: const EdgeInsets.symmetric(
-                                        horizontal: 8, vertical: 4),
+                                        horizontal: 6, vertical: 3), // Reduced from 8, 4
                                     decoration: BoxDecoration(
                                       color: (category.type ==
                                                   CategoriesType.expense
                                               ? Colors.red
                                               : Colors.amber)
                                           .withOpacity(0.2),
-                                      borderRadius: BorderRadius.circular(12),
+                                      borderRadius: BorderRadius.circular(10), // Reduced from 12
                                     ),
                                     child: Text(
                                       limitMessage,
@@ -131,13 +134,14 @@ class CategoryItem extends StatelessWidget {
                                                 CategoriesType.expense
                                             ? Colors.red[300]
                                             : Colors.amber[300],
-                                        fontSize: 10,
+                                        fontSize: 9, // Reduced from 10
                                         fontWeight: FontWeight.w500,
                                       ),
                                     ),
                                   ),
                               ],
                             ),
+                            const SizedBox(height: 2), // Added small vertical spacing
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
@@ -147,7 +151,7 @@ class CategoryItem extends StatelessWidget {
                                     color: category.isSelected
                                         ? progressColor
                                         : progressColor.withOpacity(0.6),
-                                    fontSize: 16,
+                                    fontSize: 14, // Reduced from 16
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
@@ -156,12 +160,12 @@ class CategoryItem extends StatelessWidget {
                                   style: TextStyle(
                                     color: Colors.white.withOpacity(
                                         category.isSelected ? 0.7 : 0.5),
-                                    fontSize: 14,
+                                    fontSize: 12, // Reduced from 14
                                   ),
                                 ),
                               ],
                             ),
-                            const SizedBox(height: 8),
+                            const SizedBox(height: 6), // Reduced from 8
                             CustomProgressBar(
                               progress: progress,
                               progressColor: progressColor,
@@ -176,14 +180,14 @@ class CategoryItem extends StatelessWidget {
               ),
             ),
           ),
-          // Thêm dấu hiệu disable (chỉ hiện khi !isSelected)
+          // Disabled indicator (only shows when !isSelected)
           if (!category.isSelected)
             Positioned(
-              top: 12,
-              right: 12,
+              top: 8, // Reduced from 12
+              right: 8, // Reduced from 12
               child: Container(
-                width: 24,
-                height: 24,
+                width: 18, // Reduced from 24
+                height: 18, // Reduced from 24
                 decoration: const BoxDecoration(
                   color: Color(0xFF1E1E2A),
                   shape: BoxShape.circle,
@@ -192,7 +196,7 @@ class CategoryItem extends StatelessWidget {
                   child: Icon(
                     Icons.block,
                     color: Colors.grey,
-                    size: 16,
+                    size: 12, // Reduced from 16
                   ),
                 ),
               ),
@@ -254,9 +258,9 @@ class CustomProgressBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 12,
+      height: 8, // Reduced from 12
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(8), // Reduced from 10
         color: Colors.white.withOpacity(0.08),
       ),
       child: Stack(
@@ -266,7 +270,7 @@ class CustomProgressBar extends StatelessWidget {
               return Container(
                 width: constraints.maxWidth * progress,
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
+                  borderRadius: BorderRadius.circular(8), // Reduced from 10
                   gradient: LinearGradient(
                     begin: Alignment.centerLeft,
                     end: Alignment.centerRight,
@@ -278,7 +282,7 @@ class CustomProgressBar extends StatelessWidget {
                   boxShadow: [
                     BoxShadow(
                       color: progressColor.withOpacity(isSelected ? 0.3 : 0.1),
-                      blurRadius: 5,
+                      blurRadius: 4, // Reduced from 5
                       offset: const Offset(0, 1),
                     ),
                   ],
@@ -291,15 +295,15 @@ class CustomProgressBar extends StatelessWidget {
             top: 0,
             left: 0,
             right: 0,
-            height: 5,
+            height: 3, // Reduced from 5
             child: LayoutBuilder(
               builder: (context, constraints) {
                 return Container(
                   width: constraints.maxWidth * progress,
                   decoration: BoxDecoration(
                     borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(10),
-                      topRight: Radius.circular(10),
+                      topLeft: Radius.circular(8), // Reduced from 10
+                      topRight: Radius.circular(8), // Reduced from 10
                     ),
                     gradient: LinearGradient(
                       begin: Alignment.topCenter,

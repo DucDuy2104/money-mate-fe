@@ -8,6 +8,7 @@ import 'package:money_mate/presentation/drawer_navigation/app_drawer.dart';
 import 'package:money_mate/presentation/pages/home/widgets/category_item.dart';
 import 'package:money_mate/presentation/pages/home/widgets/expense_chart.dart';
 import 'package:money_mate/presentation/pages/home/widgets/transaction_item.dart';
+import 'package:money_mate/presentation/pages/home/widgets/wallet_widget.dart';
 import 'package:money_mate/presentation/pages/profile/bloc/profile_bloc.dart';
 import 'package:money_mate/presentation/routes/route_name.dart';
 import 'package:money_mate/shared/components/loading_scafford.dart';
@@ -75,7 +76,13 @@ class _HomeScreenState extends State<HomeScreen> {
                         );
                       },
                     ),
-                    title: Text('👋Hôm nay bạn thế nào?'),
+                    title: BlocBuilder<ProfileBloc, ProfileState>(
+                      builder: (context, state) {
+                        final budget = BlocProvider.of<ProfileBloc>(context).getProfile()?.budget;
+
+                        return SimpleWalletWidget(balance: budget ?? 0);
+                      },
+                    ),
                   ),
                   drawer: const AppDrawer(currentRoute: RouteNames.home),
                   floatingActionButton: FloatingActionButton(
@@ -99,7 +106,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 fontSize: 18, fontWeight: FontWeight.bold)),
                         const SizedBox(height: 10),
                         SizedBox(
-                          height: 110,
+                          height: 85,
                           child: ListView.separated(
                             scrollDirection: Axis.horizontal,
                             itemCount: categories.length,

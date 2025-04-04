@@ -29,7 +29,7 @@ class _SplashScreenState extends State<SplashScreen>
     _scaleAnimation = Tween<double>(begin: 0.5, end: 1.0).animate(
       CurvedAnimation(
         parent: _controller,
-        curve: Curves.elasticOut,
+        curve: Curves.easeOutBack,
       ),
     );
 
@@ -43,7 +43,6 @@ class _SplashScreenState extends State<SplashScreen>
 
     // Start the animation
     _controller.forward();
-
   }
 
   @override
@@ -56,13 +55,13 @@ class _SplashScreenState extends State<SplashScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
             colors: [
-              Colors.blue.shade200,
-              Colors.blue.shade600,
+              Color(0xFF121212),
+              Color(0xFF1E1E2C),
             ],
           ),
         ),
@@ -77,30 +76,30 @@ class _SplashScreenState extends State<SplashScreen>
                   ZoomIn(
                     child: Image.asset(
                       'assets/images/app_logo.png',
-                      width: 250,
-                      height: 250,
+                      width: 200,
+                      height: 200,
                       fit: BoxFit.contain,
                     ),
                   ),
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 24),
                   FadeInUp(
-                      child:
-                          Text(
-                    'MoneyMate',
-                    style: TextStyle(
-                      fontSize: 42,
-                      fontWeight: FontWeight.w900,
-                      foreground: Paint()
-                        ..shader = LinearGradient(
-                          colors: [
-                            Colors.white,
-                            Colors.blue.shade200,
-                            const Color.fromARGB(255, 13, 93, 134)
-                          ],
-                        ).createShader(const Rect.fromLTWH(0.0, 0.0, 200.0, 70.0)),
-                      letterSpacing: 1.5,
+                    child: Text(
+                      'MoneyMate',
+                      style: TextStyle(
+                        fontSize: 36,
+                        fontWeight: FontWeight.w700,
+                        foreground: Paint()
+                          ..shader = const LinearGradient(
+                            colors: [
+                              Color(0xFF64FFDA),
+                              Color(0xFF1DE9B6),
+                              Color(0xFF00BFA5),
+                            ],
+                          ).createShader(const Rect.fromLTWH(0.0, 0.0, 200.0, 70.0)),
+                        letterSpacing: 1.2,
+                      ),
                     ),
-                  )),
+                  ),
                 ],
               ),
             ),

@@ -21,44 +21,100 @@ class TransactionItem extends StatelessWidget {
         ? AppColors.upColor
         : AppColors.downColor;
 
-    return Card(
-      elevation: 2,
-      child: ListTile(
-        onTap: onTap,
-        leading: CircleAvatar(
-          backgroundColor: transaction.category.color.withOpacity(0.2),
-          child: Icon(
-            transaction.category.icon,
-            color: transaction.category.color,
-          ),
-        ),
-        title: Text(
-          transaction.category.name,
-          style: context.textTheme.titleMedium,
-        ),
-        subtitle: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            if (transaction.description.isNotEmpty)
-              Text(
-                transaction.description,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-              ),
-            Text(
-              formattedDate,
-              style: context.textTheme.bodySmall
-                  ?.copyWith(color: AppColors.subText),
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        decoration: BoxDecoration(
+          color: const Color(0xFF2D2D3A),
+          borderRadius: BorderRadius.circular(12),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.2),
+              blurRadius: 5,
+              offset: const Offset(0, 2),
             ),
           ],
         ),
-        trailing: Text(
-          transaction.category.type == CategoriesType.income 
-              ? "+$formattedAmount" 
-              : "-$formattedAmount",
-          style: context.textTheme.titleMedium?.copyWith(
-            color: amountColor
-          )
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+          child: Row(
+            children: [
+              // Leading icon
+              Container(
+                width: 46,
+                height: 46,
+                decoration: BoxDecoration(
+                  color: transaction.category.color.withOpacity(0.15),
+                  shape: BoxShape.circle,
+                  border: Border.all(
+                    color: transaction.category.color.withOpacity(0.3),
+                    width: 1.5,
+                  ),
+                ),
+                child: Icon(
+                  transaction.category.icon,
+                  color: transaction.category.color,
+                  size: 22,
+                ),
+              ),
+              
+              const SizedBox(width: 16),
+              
+              // Content
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      transaction.category.name,
+                      style: context.textTheme.titleMedium?.copyWith(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    if (transaction.description.isNotEmpty)
+                      Padding(
+                        padding: const EdgeInsets.only(top: 4),
+                        child: Text(
+                          transaction.description,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: context.textTheme.bodyMedium?.copyWith(
+                            color: Colors.white.withOpacity(0.7),
+                          ),
+                        ),
+                      ),
+                  ],
+                ),
+              ),
+              
+              const SizedBox(width: 8),
+              
+              // Amount and time
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Text(
+                    formattedDate,
+                    style: context.textTheme.bodySmall?.copyWith(
+                      color: AppColors.subText.withOpacity(0.7),
+                      fontSize: 11,
+                    ),
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    transaction.category.type == CategoriesType.income 
+                        ? "+$formattedAmount" 
+                        : "-$formattedAmount",
+                    style: context.textTheme.titleMedium?.copyWith(
+                      color: amountColor,
+                      fontWeight: FontWeight.w700,
+                    )
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );

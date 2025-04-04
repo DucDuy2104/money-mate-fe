@@ -30,34 +30,65 @@ class SwitchCategoryItem extends StatelessWidget {
 
     return Container(
       width: width,
-      child: Card(
-        elevation: 2,
+      decoration: BoxDecoration(
         color: Colors.grey[200],
-        child: ListTile(
+        borderRadius: BorderRadius.circular(8),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.1),
+            blurRadius: 4,
+            offset: const Offset(0, 2),
+            spreadRadius: 0,
+          ),
+        ],
+      ),
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
           onTap: onTap,
-          leading: CircleAvatar(
-            backgroundColor: category.color.withOpacity(0.2),
-            child: Icon(
-              category.icon,
-              color: category.color,
-            ),
-          ),
-          title: Text(
-            category.name,
-            style: context.textTheme.titleMedium?.copyWith(color: Colors.black),
-          ),
-          subtitle: Text(
-            typeText,
-            style: context.textTheme.bodySmall?.copyWith(color: typeColor),
-          ),
-          trailing: CircleAvatar(
-            backgroundColor: type == MessageType.add
-                ? Colors.green.withOpacity(0.2)
-                : Colors.red.withOpacity(0.2),
-            child: Icon(
-              type == MessageType.add ? Icons.check : Icons.close,
-              color: type == MessageType.add ? Colors.green : Colors.red,
-              size: 20,
+          borderRadius: BorderRadius.circular(8),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+            child: Row(
+              children: [
+                CircleAvatar(
+                  backgroundColor: category.color.withOpacity(0.2),
+                  child: Icon(
+                    category.icon,
+                    color: category.color,
+                  ),
+                ),
+                const SizedBox(width: 16),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        category.name,
+                        style: context.textTheme.titleMedium?.copyWith(color: Colors.black),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      Text(
+                        typeText,
+                        style: context.textTheme.bodySmall?.copyWith(color: typeColor),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ],
+                  ),
+                ),
+                CircleAvatar(
+                  backgroundColor: type == MessageType.add
+                      ? Colors.green.withOpacity(0.2)
+                      : Colors.red.withOpacity(0.2),
+                  child: Icon(
+                    type == MessageType.add ? Icons.check : Icons.close,
+                    color: type == MessageType.add ? Colors.green : Colors.red,
+                    size: 20,
+                  ),
+                ),
+              ],
             ),
           ),
         ),
