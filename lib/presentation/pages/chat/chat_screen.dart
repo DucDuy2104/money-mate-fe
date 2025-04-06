@@ -2,6 +2,7 @@ import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:money_mate/presentation/pages/chat/bloc/chat_bloc.dart';
+import 'package:money_mate/presentation/pages/chat/widgets/bot_dialog.dart';
 import 'package:money_mate/presentation/pages/chat/widgets/message_input.dart';
 import 'package:money_mate/presentation/pages/chat/widgets/message_item.dart';
 import 'package:money_mate/presentation/pages/chat/widgets/typing_indicator.dart';
@@ -109,7 +110,10 @@ class _ChatScreenState extends State<ChatScreen> {
                       IconButton(
                         icon: const Icon(EvaIcons.moreVertical),
                         onPressed: () {
-                          // TODO: go to chat settings
+                          showUpdateBotDialog(context, conversation.bot, (updateBot) {
+                            BlocProvider.of<ChatBloc>(context)
+                                .add(ChatEvent.updateBot(context, updateBot));
+                          });
                         },
                       ),
                     ],

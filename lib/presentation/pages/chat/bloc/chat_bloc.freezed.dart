@@ -31,6 +31,7 @@ mixin _$ChatEvent {
     required TResult Function(String id, bool isLoading) setMessageLoading,
     required TResult Function(String id) setMessageCancel,
     required TResult Function(String id) setMessageEnable,
+    required TResult Function(BuildContext context, Bot bot) updateBot,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -48,6 +49,7 @@ mixin _$ChatEvent {
     TResult? Function(String id, bool isLoading)? setMessageLoading,
     TResult? Function(String id)? setMessageCancel,
     TResult? Function(String id)? setMessageEnable,
+    TResult? Function(BuildContext context, Bot bot)? updateBot,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -65,6 +67,7 @@ mixin _$ChatEvent {
     TResult Function(String id, bool isLoading)? setMessageLoading,
     TResult Function(String id)? setMessageCancel,
     TResult Function(String id)? setMessageEnable,
+    TResult Function(BuildContext context, Bot bot)? updateBot,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -79,6 +82,7 @@ mixin _$ChatEvent {
     required TResult Function(_SetMessageLoading value) setMessageLoading,
     required TResult Function(_SetMessageCancel value) setMessageCancel,
     required TResult Function(_SetMessageEnable value) setMessageEnable,
+    required TResult Function(_UpdateBot value) updateBot,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -92,6 +96,7 @@ mixin _$ChatEvent {
     TResult? Function(_SetMessageLoading value)? setMessageLoading,
     TResult? Function(_SetMessageCancel value)? setMessageCancel,
     TResult? Function(_SetMessageEnable value)? setMessageEnable,
+    TResult? Function(_UpdateBot value)? updateBot,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -105,6 +110,7 @@ mixin _$ChatEvent {
     TResult Function(_SetMessageLoading value)? setMessageLoading,
     TResult Function(_SetMessageCancel value)? setMessageCancel,
     TResult Function(_SetMessageEnable value)? setMessageEnable,
+    TResult Function(_UpdateBot value)? updateBot,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -184,6 +190,7 @@ class _$GetChatDataImpl implements _GetChatData {
     required TResult Function(String id, bool isLoading) setMessageLoading,
     required TResult Function(String id) setMessageCancel,
     required TResult Function(String id) setMessageEnable,
+    required TResult Function(BuildContext context, Bot bot) updateBot,
   }) {
     return getChatData();
   }
@@ -204,6 +211,7 @@ class _$GetChatDataImpl implements _GetChatData {
     TResult? Function(String id, bool isLoading)? setMessageLoading,
     TResult? Function(String id)? setMessageCancel,
     TResult? Function(String id)? setMessageEnable,
+    TResult? Function(BuildContext context, Bot bot)? updateBot,
   }) {
     return getChatData?.call();
   }
@@ -224,6 +232,7 @@ class _$GetChatDataImpl implements _GetChatData {
     TResult Function(String id, bool isLoading)? setMessageLoading,
     TResult Function(String id)? setMessageCancel,
     TResult Function(String id)? setMessageEnable,
+    TResult Function(BuildContext context, Bot bot)? updateBot,
     required TResult orElse(),
   }) {
     if (getChatData != null) {
@@ -244,6 +253,7 @@ class _$GetChatDataImpl implements _GetChatData {
     required TResult Function(_SetMessageLoading value) setMessageLoading,
     required TResult Function(_SetMessageCancel value) setMessageCancel,
     required TResult Function(_SetMessageEnable value) setMessageEnable,
+    required TResult Function(_UpdateBot value) updateBot,
   }) {
     return getChatData(this);
   }
@@ -260,6 +270,7 @@ class _$GetChatDataImpl implements _GetChatData {
     TResult? Function(_SetMessageLoading value)? setMessageLoading,
     TResult? Function(_SetMessageCancel value)? setMessageCancel,
     TResult? Function(_SetMessageEnable value)? setMessageEnable,
+    TResult? Function(_UpdateBot value)? updateBot,
   }) {
     return getChatData?.call(this);
   }
@@ -276,6 +287,7 @@ class _$GetChatDataImpl implements _GetChatData {
     TResult Function(_SetMessageLoading value)? setMessageLoading,
     TResult Function(_SetMessageCancel value)? setMessageCancel,
     TResult Function(_SetMessageEnable value)? setMessageEnable,
+    TResult Function(_UpdateBot value)? updateBot,
     required TResult orElse(),
   }) {
     if (getChatData != null) {
@@ -343,6 +355,7 @@ class _$ConnectImpl implements _Connect {
     required TResult Function(String id, bool isLoading) setMessageLoading,
     required TResult Function(String id) setMessageCancel,
     required TResult Function(String id) setMessageEnable,
+    required TResult Function(BuildContext context, Bot bot) updateBot,
   }) {
     return connect();
   }
@@ -363,6 +376,7 @@ class _$ConnectImpl implements _Connect {
     TResult? Function(String id, bool isLoading)? setMessageLoading,
     TResult? Function(String id)? setMessageCancel,
     TResult? Function(String id)? setMessageEnable,
+    TResult? Function(BuildContext context, Bot bot)? updateBot,
   }) {
     return connect?.call();
   }
@@ -383,6 +397,7 @@ class _$ConnectImpl implements _Connect {
     TResult Function(String id, bool isLoading)? setMessageLoading,
     TResult Function(String id)? setMessageCancel,
     TResult Function(String id)? setMessageEnable,
+    TResult Function(BuildContext context, Bot bot)? updateBot,
     required TResult orElse(),
   }) {
     if (connect != null) {
@@ -403,6 +418,7 @@ class _$ConnectImpl implements _Connect {
     required TResult Function(_SetMessageLoading value) setMessageLoading,
     required TResult Function(_SetMessageCancel value) setMessageCancel,
     required TResult Function(_SetMessageEnable value) setMessageEnable,
+    required TResult Function(_UpdateBot value) updateBot,
   }) {
     return connect(this);
   }
@@ -419,6 +435,7 @@ class _$ConnectImpl implements _Connect {
     TResult? Function(_SetMessageLoading value)? setMessageLoading,
     TResult? Function(_SetMessageCancel value)? setMessageCancel,
     TResult? Function(_SetMessageEnable value)? setMessageEnable,
+    TResult? Function(_UpdateBot value)? updateBot,
   }) {
     return connect?.call(this);
   }
@@ -435,6 +452,7 @@ class _$ConnectImpl implements _Connect {
     TResult Function(_SetMessageLoading value)? setMessageLoading,
     TResult Function(_SetMessageCancel value)? setMessageCancel,
     TResult Function(_SetMessageEnable value)? setMessageEnable,
+    TResult Function(_UpdateBot value)? updateBot,
     required TResult orElse(),
   }) {
     if (connect != null) {
@@ -542,6 +560,7 @@ class _$UpdateMessagesImpl implements _UpdateMessages {
     required TResult Function(String id, bool isLoading) setMessageLoading,
     required TResult Function(String id) setMessageCancel,
     required TResult Function(String id) setMessageEnable,
+    required TResult Function(BuildContext context, Bot bot) updateBot,
   }) {
     return updateMessages(message);
   }
@@ -562,6 +581,7 @@ class _$UpdateMessagesImpl implements _UpdateMessages {
     TResult? Function(String id, bool isLoading)? setMessageLoading,
     TResult? Function(String id)? setMessageCancel,
     TResult? Function(String id)? setMessageEnable,
+    TResult? Function(BuildContext context, Bot bot)? updateBot,
   }) {
     return updateMessages?.call(message);
   }
@@ -582,6 +602,7 @@ class _$UpdateMessagesImpl implements _UpdateMessages {
     TResult Function(String id, bool isLoading)? setMessageLoading,
     TResult Function(String id)? setMessageCancel,
     TResult Function(String id)? setMessageEnable,
+    TResult Function(BuildContext context, Bot bot)? updateBot,
     required TResult orElse(),
   }) {
     if (updateMessages != null) {
@@ -602,6 +623,7 @@ class _$UpdateMessagesImpl implements _UpdateMessages {
     required TResult Function(_SetMessageLoading value) setMessageLoading,
     required TResult Function(_SetMessageCancel value) setMessageCancel,
     required TResult Function(_SetMessageEnable value) setMessageEnable,
+    required TResult Function(_UpdateBot value) updateBot,
   }) {
     return updateMessages(this);
   }
@@ -618,6 +640,7 @@ class _$UpdateMessagesImpl implements _UpdateMessages {
     TResult? Function(_SetMessageLoading value)? setMessageLoading,
     TResult? Function(_SetMessageCancel value)? setMessageCancel,
     TResult? Function(_SetMessageEnable value)? setMessageEnable,
+    TResult? Function(_UpdateBot value)? updateBot,
   }) {
     return updateMessages?.call(this);
   }
@@ -634,6 +657,7 @@ class _$UpdateMessagesImpl implements _UpdateMessages {
     TResult Function(_SetMessageLoading value)? setMessageLoading,
     TResult Function(_SetMessageCancel value)? setMessageCancel,
     TResult Function(_SetMessageEnable value)? setMessageEnable,
+    TResult Function(_UpdateBot value)? updateBot,
     required TResult orElse(),
   }) {
     if (updateMessages != null) {
@@ -709,6 +733,7 @@ class _$LeaveRoomImpl implements _LeaveRoom {
     required TResult Function(String id, bool isLoading) setMessageLoading,
     required TResult Function(String id) setMessageCancel,
     required TResult Function(String id) setMessageEnable,
+    required TResult Function(BuildContext context, Bot bot) updateBot,
   }) {
     return leaveRoom();
   }
@@ -729,6 +754,7 @@ class _$LeaveRoomImpl implements _LeaveRoom {
     TResult? Function(String id, bool isLoading)? setMessageLoading,
     TResult? Function(String id)? setMessageCancel,
     TResult? Function(String id)? setMessageEnable,
+    TResult? Function(BuildContext context, Bot bot)? updateBot,
   }) {
     return leaveRoom?.call();
   }
@@ -749,6 +775,7 @@ class _$LeaveRoomImpl implements _LeaveRoom {
     TResult Function(String id, bool isLoading)? setMessageLoading,
     TResult Function(String id)? setMessageCancel,
     TResult Function(String id)? setMessageEnable,
+    TResult Function(BuildContext context, Bot bot)? updateBot,
     required TResult orElse(),
   }) {
     if (leaveRoom != null) {
@@ -769,6 +796,7 @@ class _$LeaveRoomImpl implements _LeaveRoom {
     required TResult Function(_SetMessageLoading value) setMessageLoading,
     required TResult Function(_SetMessageCancel value) setMessageCancel,
     required TResult Function(_SetMessageEnable value) setMessageEnable,
+    required TResult Function(_UpdateBot value) updateBot,
   }) {
     return leaveRoom(this);
   }
@@ -785,6 +813,7 @@ class _$LeaveRoomImpl implements _LeaveRoom {
     TResult? Function(_SetMessageLoading value)? setMessageLoading,
     TResult? Function(_SetMessageCancel value)? setMessageCancel,
     TResult? Function(_SetMessageEnable value)? setMessageEnable,
+    TResult? Function(_UpdateBot value)? updateBot,
   }) {
     return leaveRoom?.call(this);
   }
@@ -801,6 +830,7 @@ class _$LeaveRoomImpl implements _LeaveRoom {
     TResult Function(_SetMessageLoading value)? setMessageLoading,
     TResult Function(_SetMessageCancel value)? setMessageCancel,
     TResult Function(_SetMessageEnable value)? setMessageEnable,
+    TResult Function(_UpdateBot value)? updateBot,
     required TResult orElse(),
   }) {
     if (leaveRoom != null) {
@@ -925,6 +955,7 @@ class _$CancelTransactionImpl implements _CancelTransaction {
     required TResult Function(String id, bool isLoading) setMessageLoading,
     required TResult Function(String id) setMessageCancel,
     required TResult Function(String id) setMessageEnable,
+    required TResult Function(BuildContext context, Bot bot) updateBot,
   }) {
     return cancelTransaction(message, context, onSuccess);
   }
@@ -945,6 +976,7 @@ class _$CancelTransactionImpl implements _CancelTransaction {
     TResult? Function(String id, bool isLoading)? setMessageLoading,
     TResult? Function(String id)? setMessageCancel,
     TResult? Function(String id)? setMessageEnable,
+    TResult? Function(BuildContext context, Bot bot)? updateBot,
   }) {
     return cancelTransaction?.call(message, context, onSuccess);
   }
@@ -965,6 +997,7 @@ class _$CancelTransactionImpl implements _CancelTransaction {
     TResult Function(String id, bool isLoading)? setMessageLoading,
     TResult Function(String id)? setMessageCancel,
     TResult Function(String id)? setMessageEnable,
+    TResult Function(BuildContext context, Bot bot)? updateBot,
     required TResult orElse(),
   }) {
     if (cancelTransaction != null) {
@@ -985,6 +1018,7 @@ class _$CancelTransactionImpl implements _CancelTransaction {
     required TResult Function(_SetMessageLoading value) setMessageLoading,
     required TResult Function(_SetMessageCancel value) setMessageCancel,
     required TResult Function(_SetMessageEnable value) setMessageEnable,
+    required TResult Function(_UpdateBot value) updateBot,
   }) {
     return cancelTransaction(this);
   }
@@ -1001,6 +1035,7 @@ class _$CancelTransactionImpl implements _CancelTransaction {
     TResult? Function(_SetMessageLoading value)? setMessageLoading,
     TResult? Function(_SetMessageCancel value)? setMessageCancel,
     TResult? Function(_SetMessageEnable value)? setMessageEnable,
+    TResult? Function(_UpdateBot value)? updateBot,
   }) {
     return cancelTransaction?.call(this);
   }
@@ -1017,6 +1052,7 @@ class _$CancelTransactionImpl implements _CancelTransaction {
     TResult Function(_SetMessageLoading value)? setMessageLoading,
     TResult Function(_SetMessageCancel value)? setMessageCancel,
     TResult Function(_SetMessageEnable value)? setMessageEnable,
+    TResult Function(_UpdateBot value)? updateBot,
     required TResult orElse(),
   }) {
     if (cancelTransaction != null) {
@@ -1154,6 +1190,7 @@ class _$EnableTransactionImpl implements _EnableTransaction {
     required TResult Function(String id, bool isLoading) setMessageLoading,
     required TResult Function(String id) setMessageCancel,
     required TResult Function(String id) setMessageEnable,
+    required TResult Function(BuildContext context, Bot bot) updateBot,
   }) {
     return enableTransaction(message, context, onSuccess);
   }
@@ -1174,6 +1211,7 @@ class _$EnableTransactionImpl implements _EnableTransaction {
     TResult? Function(String id, bool isLoading)? setMessageLoading,
     TResult? Function(String id)? setMessageCancel,
     TResult? Function(String id)? setMessageEnable,
+    TResult? Function(BuildContext context, Bot bot)? updateBot,
   }) {
     return enableTransaction?.call(message, context, onSuccess);
   }
@@ -1194,6 +1232,7 @@ class _$EnableTransactionImpl implements _EnableTransaction {
     TResult Function(String id, bool isLoading)? setMessageLoading,
     TResult Function(String id)? setMessageCancel,
     TResult Function(String id)? setMessageEnable,
+    TResult Function(BuildContext context, Bot bot)? updateBot,
     required TResult orElse(),
   }) {
     if (enableTransaction != null) {
@@ -1214,6 +1253,7 @@ class _$EnableTransactionImpl implements _EnableTransaction {
     required TResult Function(_SetMessageLoading value) setMessageLoading,
     required TResult Function(_SetMessageCancel value) setMessageCancel,
     required TResult Function(_SetMessageEnable value) setMessageEnable,
+    required TResult Function(_UpdateBot value) updateBot,
   }) {
     return enableTransaction(this);
   }
@@ -1230,6 +1270,7 @@ class _$EnableTransactionImpl implements _EnableTransaction {
     TResult? Function(_SetMessageLoading value)? setMessageLoading,
     TResult? Function(_SetMessageCancel value)? setMessageCancel,
     TResult? Function(_SetMessageEnable value)? setMessageEnable,
+    TResult? Function(_UpdateBot value)? updateBot,
   }) {
     return enableTransaction?.call(this);
   }
@@ -1246,6 +1287,7 @@ class _$EnableTransactionImpl implements _EnableTransaction {
     TResult Function(_SetMessageLoading value)? setMessageLoading,
     TResult Function(_SetMessageCancel value)? setMessageCancel,
     TResult Function(_SetMessageEnable value)? setMessageEnable,
+    TResult Function(_UpdateBot value)? updateBot,
     required TResult orElse(),
   }) {
     if (enableTransaction != null) {
@@ -1363,6 +1405,7 @@ class _$SetMessageLoadingImpl implements _SetMessageLoading {
     required TResult Function(String id, bool isLoading) setMessageLoading,
     required TResult Function(String id) setMessageCancel,
     required TResult Function(String id) setMessageEnable,
+    required TResult Function(BuildContext context, Bot bot) updateBot,
   }) {
     return setMessageLoading(id, isLoading);
   }
@@ -1383,6 +1426,7 @@ class _$SetMessageLoadingImpl implements _SetMessageLoading {
     TResult? Function(String id, bool isLoading)? setMessageLoading,
     TResult? Function(String id)? setMessageCancel,
     TResult? Function(String id)? setMessageEnable,
+    TResult? Function(BuildContext context, Bot bot)? updateBot,
   }) {
     return setMessageLoading?.call(id, isLoading);
   }
@@ -1403,6 +1447,7 @@ class _$SetMessageLoadingImpl implements _SetMessageLoading {
     TResult Function(String id, bool isLoading)? setMessageLoading,
     TResult Function(String id)? setMessageCancel,
     TResult Function(String id)? setMessageEnable,
+    TResult Function(BuildContext context, Bot bot)? updateBot,
     required TResult orElse(),
   }) {
     if (setMessageLoading != null) {
@@ -1423,6 +1468,7 @@ class _$SetMessageLoadingImpl implements _SetMessageLoading {
     required TResult Function(_SetMessageLoading value) setMessageLoading,
     required TResult Function(_SetMessageCancel value) setMessageCancel,
     required TResult Function(_SetMessageEnable value) setMessageEnable,
+    required TResult Function(_UpdateBot value) updateBot,
   }) {
     return setMessageLoading(this);
   }
@@ -1439,6 +1485,7 @@ class _$SetMessageLoadingImpl implements _SetMessageLoading {
     TResult? Function(_SetMessageLoading value)? setMessageLoading,
     TResult? Function(_SetMessageCancel value)? setMessageCancel,
     TResult? Function(_SetMessageEnable value)? setMessageEnable,
+    TResult? Function(_UpdateBot value)? updateBot,
   }) {
     return setMessageLoading?.call(this);
   }
@@ -1455,6 +1502,7 @@ class _$SetMessageLoadingImpl implements _SetMessageLoading {
     TResult Function(_SetMessageLoading value)? setMessageLoading,
     TResult Function(_SetMessageCancel value)? setMessageCancel,
     TResult Function(_SetMessageEnable value)? setMessageEnable,
+    TResult Function(_UpdateBot value)? updateBot,
     required TResult orElse(),
   }) {
     if (setMessageLoading != null) {
@@ -1560,6 +1608,7 @@ class _$SetMessageCancelImpl implements _SetMessageCancel {
     required TResult Function(String id, bool isLoading) setMessageLoading,
     required TResult Function(String id) setMessageCancel,
     required TResult Function(String id) setMessageEnable,
+    required TResult Function(BuildContext context, Bot bot) updateBot,
   }) {
     return setMessageCancel(id);
   }
@@ -1580,6 +1629,7 @@ class _$SetMessageCancelImpl implements _SetMessageCancel {
     TResult? Function(String id, bool isLoading)? setMessageLoading,
     TResult? Function(String id)? setMessageCancel,
     TResult? Function(String id)? setMessageEnable,
+    TResult? Function(BuildContext context, Bot bot)? updateBot,
   }) {
     return setMessageCancel?.call(id);
   }
@@ -1600,6 +1650,7 @@ class _$SetMessageCancelImpl implements _SetMessageCancel {
     TResult Function(String id, bool isLoading)? setMessageLoading,
     TResult Function(String id)? setMessageCancel,
     TResult Function(String id)? setMessageEnable,
+    TResult Function(BuildContext context, Bot bot)? updateBot,
     required TResult orElse(),
   }) {
     if (setMessageCancel != null) {
@@ -1620,6 +1671,7 @@ class _$SetMessageCancelImpl implements _SetMessageCancel {
     required TResult Function(_SetMessageLoading value) setMessageLoading,
     required TResult Function(_SetMessageCancel value) setMessageCancel,
     required TResult Function(_SetMessageEnable value) setMessageEnable,
+    required TResult Function(_UpdateBot value) updateBot,
   }) {
     return setMessageCancel(this);
   }
@@ -1636,6 +1688,7 @@ class _$SetMessageCancelImpl implements _SetMessageCancel {
     TResult? Function(_SetMessageLoading value)? setMessageLoading,
     TResult? Function(_SetMessageCancel value)? setMessageCancel,
     TResult? Function(_SetMessageEnable value)? setMessageEnable,
+    TResult? Function(_UpdateBot value)? updateBot,
   }) {
     return setMessageCancel?.call(this);
   }
@@ -1652,6 +1705,7 @@ class _$SetMessageCancelImpl implements _SetMessageCancel {
     TResult Function(_SetMessageLoading value)? setMessageLoading,
     TResult Function(_SetMessageCancel value)? setMessageCancel,
     TResult Function(_SetMessageEnable value)? setMessageEnable,
+    TResult Function(_UpdateBot value)? updateBot,
     required TResult orElse(),
   }) {
     if (setMessageCancel != null) {
@@ -1755,6 +1809,7 @@ class _$SetMessageEnableImpl implements _SetMessageEnable {
     required TResult Function(String id, bool isLoading) setMessageLoading,
     required TResult Function(String id) setMessageCancel,
     required TResult Function(String id) setMessageEnable,
+    required TResult Function(BuildContext context, Bot bot) updateBot,
   }) {
     return setMessageEnable(id);
   }
@@ -1775,6 +1830,7 @@ class _$SetMessageEnableImpl implements _SetMessageEnable {
     TResult? Function(String id, bool isLoading)? setMessageLoading,
     TResult? Function(String id)? setMessageCancel,
     TResult? Function(String id)? setMessageEnable,
+    TResult? Function(BuildContext context, Bot bot)? updateBot,
   }) {
     return setMessageEnable?.call(id);
   }
@@ -1795,6 +1851,7 @@ class _$SetMessageEnableImpl implements _SetMessageEnable {
     TResult Function(String id, bool isLoading)? setMessageLoading,
     TResult Function(String id)? setMessageCancel,
     TResult Function(String id)? setMessageEnable,
+    TResult Function(BuildContext context, Bot bot)? updateBot,
     required TResult orElse(),
   }) {
     if (setMessageEnable != null) {
@@ -1815,6 +1872,7 @@ class _$SetMessageEnableImpl implements _SetMessageEnable {
     required TResult Function(_SetMessageLoading value) setMessageLoading,
     required TResult Function(_SetMessageCancel value) setMessageCancel,
     required TResult Function(_SetMessageEnable value) setMessageEnable,
+    required TResult Function(_UpdateBot value) updateBot,
   }) {
     return setMessageEnable(this);
   }
@@ -1831,6 +1889,7 @@ class _$SetMessageEnableImpl implements _SetMessageEnable {
     TResult? Function(_SetMessageLoading value)? setMessageLoading,
     TResult? Function(_SetMessageCancel value)? setMessageCancel,
     TResult? Function(_SetMessageEnable value)? setMessageEnable,
+    TResult? Function(_UpdateBot value)? updateBot,
   }) {
     return setMessageEnable?.call(this);
   }
@@ -1847,6 +1906,7 @@ class _$SetMessageEnableImpl implements _SetMessageEnable {
     TResult Function(_SetMessageLoading value)? setMessageLoading,
     TResult Function(_SetMessageCancel value)? setMessageCancel,
     TResult Function(_SetMessageEnable value)? setMessageEnable,
+    TResult Function(_UpdateBot value)? updateBot,
     required TResult orElse(),
   }) {
     if (setMessageEnable != null) {
@@ -1865,6 +1925,228 @@ abstract class _SetMessageEnable implements ChatEvent {
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SetMessageEnableImplCopyWith<_$SetMessageEnableImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$UpdateBotImplCopyWith<$Res> {
+  factory _$$UpdateBotImplCopyWith(
+          _$UpdateBotImpl value, $Res Function(_$UpdateBotImpl) then) =
+      __$$UpdateBotImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({BuildContext context, Bot bot});
+
+  $BotCopyWith<$Res> get bot;
+}
+
+/// @nodoc
+class __$$UpdateBotImplCopyWithImpl<$Res>
+    extends _$ChatEventCopyWithImpl<$Res, _$UpdateBotImpl>
+    implements _$$UpdateBotImplCopyWith<$Res> {
+  __$$UpdateBotImplCopyWithImpl(
+      _$UpdateBotImpl _value, $Res Function(_$UpdateBotImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of ChatEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? context = null,
+    Object? bot = null,
+  }) {
+    return _then(_$UpdateBotImpl(
+      null == context
+          ? _value.context
+          : context // ignore: cast_nullable_to_non_nullable
+              as BuildContext,
+      null == bot
+          ? _value.bot
+          : bot // ignore: cast_nullable_to_non_nullable
+              as Bot,
+    ));
+  }
+
+  /// Create a copy of ChatEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $BotCopyWith<$Res> get bot {
+    return $BotCopyWith<$Res>(_value.bot, (value) {
+      return _then(_value.copyWith(bot: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$UpdateBotImpl implements _UpdateBot {
+  const _$UpdateBotImpl(this.context, this.bot);
+
+  @override
+  final BuildContext context;
+  @override
+  final Bot bot;
+
+  @override
+  String toString() {
+    return 'ChatEvent.updateBot(context: $context, bot: $bot)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$UpdateBotImpl &&
+            (identical(other.context, context) || other.context == context) &&
+            (identical(other.bot, bot) || other.bot == bot));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, context, bot);
+
+  /// Create a copy of ChatEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$UpdateBotImplCopyWith<_$UpdateBotImpl> get copyWith =>
+      __$$UpdateBotImplCopyWithImpl<_$UpdateBotImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() getChatData,
+    required TResult Function() connect,
+    required TResult Function(Message message) updateMessages,
+    required TResult Function() leaveRoom,
+    required TResult Function(
+            Message message, BuildContext context, VoidCallback onSuccess)
+        cancelTransaction,
+    required TResult Function(
+            Message message, BuildContext context, VoidCallback onSuccess)
+        enableTransaction,
+    required TResult Function(String id, bool isLoading) setMessageLoading,
+    required TResult Function(String id) setMessageCancel,
+    required TResult Function(String id) setMessageEnable,
+    required TResult Function(BuildContext context, Bot bot) updateBot,
+  }) {
+    return updateBot(context, bot);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? getChatData,
+    TResult? Function()? connect,
+    TResult? Function(Message message)? updateMessages,
+    TResult? Function()? leaveRoom,
+    TResult? Function(
+            Message message, BuildContext context, VoidCallback onSuccess)?
+        cancelTransaction,
+    TResult? Function(
+            Message message, BuildContext context, VoidCallback onSuccess)?
+        enableTransaction,
+    TResult? Function(String id, bool isLoading)? setMessageLoading,
+    TResult? Function(String id)? setMessageCancel,
+    TResult? Function(String id)? setMessageEnable,
+    TResult? Function(BuildContext context, Bot bot)? updateBot,
+  }) {
+    return updateBot?.call(context, bot);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? getChatData,
+    TResult Function()? connect,
+    TResult Function(Message message)? updateMessages,
+    TResult Function()? leaveRoom,
+    TResult Function(
+            Message message, BuildContext context, VoidCallback onSuccess)?
+        cancelTransaction,
+    TResult Function(
+            Message message, BuildContext context, VoidCallback onSuccess)?
+        enableTransaction,
+    TResult Function(String id, bool isLoading)? setMessageLoading,
+    TResult Function(String id)? setMessageCancel,
+    TResult Function(String id)? setMessageEnable,
+    TResult Function(BuildContext context, Bot bot)? updateBot,
+    required TResult orElse(),
+  }) {
+    if (updateBot != null) {
+      return updateBot(context, bot);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetChatData value) getChatData,
+    required TResult Function(_Connect value) connect,
+    required TResult Function(_UpdateMessages value) updateMessages,
+    required TResult Function(_LeaveRoom value) leaveRoom,
+    required TResult Function(_CancelTransaction value) cancelTransaction,
+    required TResult Function(_EnableTransaction value) enableTransaction,
+    required TResult Function(_SetMessageLoading value) setMessageLoading,
+    required TResult Function(_SetMessageCancel value) setMessageCancel,
+    required TResult Function(_SetMessageEnable value) setMessageEnable,
+    required TResult Function(_UpdateBot value) updateBot,
+  }) {
+    return updateBot(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetChatData value)? getChatData,
+    TResult? Function(_Connect value)? connect,
+    TResult? Function(_UpdateMessages value)? updateMessages,
+    TResult? Function(_LeaveRoom value)? leaveRoom,
+    TResult? Function(_CancelTransaction value)? cancelTransaction,
+    TResult? Function(_EnableTransaction value)? enableTransaction,
+    TResult? Function(_SetMessageLoading value)? setMessageLoading,
+    TResult? Function(_SetMessageCancel value)? setMessageCancel,
+    TResult? Function(_SetMessageEnable value)? setMessageEnable,
+    TResult? Function(_UpdateBot value)? updateBot,
+  }) {
+    return updateBot?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetChatData value)? getChatData,
+    TResult Function(_Connect value)? connect,
+    TResult Function(_UpdateMessages value)? updateMessages,
+    TResult Function(_LeaveRoom value)? leaveRoom,
+    TResult Function(_CancelTransaction value)? cancelTransaction,
+    TResult Function(_EnableTransaction value)? enableTransaction,
+    TResult Function(_SetMessageLoading value)? setMessageLoading,
+    TResult Function(_SetMessageCancel value)? setMessageCancel,
+    TResult Function(_SetMessageEnable value)? setMessageEnable,
+    TResult Function(_UpdateBot value)? updateBot,
+    required TResult orElse(),
+  }) {
+    if (updateBot != null) {
+      return updateBot(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _UpdateBot implements ChatEvent {
+  const factory _UpdateBot(final BuildContext context, final Bot bot) =
+      _$UpdateBotImpl;
+
+  BuildContext get context;
+  Bot get bot;
+
+  /// Create a copy of ChatEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$UpdateBotImplCopyWith<_$UpdateBotImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -2497,6 +2779,7 @@ abstract class _Error implements ChatState {
 mixin _$ChatLoadedData {
   List<Message> get messages => throw _privateConstructorUsedError;
   Conversation get conversation => throw _privateConstructorUsedError;
+  bool get isLoading => throw _privateConstructorUsedError;
 
   /// Create a copy of ChatLoadedData
   /// with the given fields replaced by the non-null parameter values.
@@ -2511,7 +2794,8 @@ abstract class $ChatLoadedDataCopyWith<$Res> {
           ChatLoadedData value, $Res Function(ChatLoadedData) then) =
       _$ChatLoadedDataCopyWithImpl<$Res, ChatLoadedData>;
   @useResult
-  $Res call({List<Message> messages, Conversation conversation});
+  $Res call(
+      {List<Message> messages, Conversation conversation, bool isLoading});
 
   $ConversationCopyWith<$Res> get conversation;
 }
@@ -2533,6 +2817,7 @@ class _$ChatLoadedDataCopyWithImpl<$Res, $Val extends ChatLoadedData>
   $Res call({
     Object? messages = null,
     Object? conversation = null,
+    Object? isLoading = null,
   }) {
     return _then(_value.copyWith(
       messages: null == messages
@@ -2543,6 +2828,10 @@ class _$ChatLoadedDataCopyWithImpl<$Res, $Val extends ChatLoadedData>
           ? _value.conversation
           : conversation // ignore: cast_nullable_to_non_nullable
               as Conversation,
+      isLoading: null == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 
@@ -2565,7 +2854,8 @@ abstract class _$$ChatLoadedDataImplCopyWith<$Res>
       __$$ChatLoadedDataImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<Message> messages, Conversation conversation});
+  $Res call(
+      {List<Message> messages, Conversation conversation, bool isLoading});
 
   @override
   $ConversationCopyWith<$Res> get conversation;
@@ -2586,6 +2876,7 @@ class __$$ChatLoadedDataImplCopyWithImpl<$Res>
   $Res call({
     Object? messages = null,
     Object? conversation = null,
+    Object? isLoading = null,
   }) {
     return _then(_$ChatLoadedDataImpl(
       messages: null == messages
@@ -2596,6 +2887,10 @@ class __$$ChatLoadedDataImplCopyWithImpl<$Res>
           ? _value.conversation
           : conversation // ignore: cast_nullable_to_non_nullable
               as Conversation,
+      isLoading: null == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -2604,7 +2899,9 @@ class __$$ChatLoadedDataImplCopyWithImpl<$Res>
 
 class _$ChatLoadedDataImpl implements _ChatLoadedData {
   const _$ChatLoadedDataImpl(
-      {required final List<Message> messages, required this.conversation})
+      {required final List<Message> messages,
+      required this.conversation,
+      this.isLoading = false})
       : _messages = messages;
 
   final List<Message> _messages;
@@ -2617,10 +2914,13 @@ class _$ChatLoadedDataImpl implements _ChatLoadedData {
 
   @override
   final Conversation conversation;
+  @override
+  @JsonKey()
+  final bool isLoading;
 
   @override
   String toString() {
-    return 'ChatLoadedData(messages: $messages, conversation: $conversation)';
+    return 'ChatLoadedData(messages: $messages, conversation: $conversation, isLoading: $isLoading)';
   }
 
   @override
@@ -2630,12 +2930,14 @@ class _$ChatLoadedDataImpl implements _ChatLoadedData {
             other is _$ChatLoadedDataImpl &&
             const DeepCollectionEquality().equals(other._messages, _messages) &&
             (identical(other.conversation, conversation) ||
-                other.conversation == conversation));
+                other.conversation == conversation) &&
+            (identical(other.isLoading, isLoading) ||
+                other.isLoading == isLoading));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType,
-      const DeepCollectionEquality().hash(_messages), conversation);
+      const DeepCollectionEquality().hash(_messages), conversation, isLoading);
 
   /// Create a copy of ChatLoadedData
   /// with the given fields replaced by the non-null parameter values.
@@ -2650,12 +2952,15 @@ class _$ChatLoadedDataImpl implements _ChatLoadedData {
 abstract class _ChatLoadedData implements ChatLoadedData {
   const factory _ChatLoadedData(
       {required final List<Message> messages,
-      required final Conversation conversation}) = _$ChatLoadedDataImpl;
+      required final Conversation conversation,
+      final bool isLoading}) = _$ChatLoadedDataImpl;
 
   @override
   List<Message> get messages;
   @override
   Conversation get conversation;
+  @override
+  bool get isLoading;
 
   /// Create a copy of ChatLoadedData
   /// with the given fields replaced by the non-null parameter values.
