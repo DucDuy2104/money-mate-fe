@@ -75,6 +75,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
           transactions: transactions,
           categories: categories,
           statistic: statistic!)));
+      event.callback();
     } catch (e) {
       emit(const HomeState.error("Có lỗi xảy ra!"));
       debugPrint(e.toString());

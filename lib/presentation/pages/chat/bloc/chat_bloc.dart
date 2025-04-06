@@ -39,7 +39,6 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
   Future<void> _onGetChatData(
       _GetChatData event, Emitter<ChatState> emit) async {
     emit(const ChatState.loading());
-
     try {
       final conversationResult =
           await _conversationRepository.getBotConversation();

@@ -38,14 +38,13 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       }, (result) {
         categories = result;
       });
-      debugPrint('categories: ${categories.length}');
       final profileResult = await _usersRepository.getProfile();
       profileResult.fold((failure) {
         emit(ProfileState.error(failure.message));
       }, (profile) {
-        _onConnect();
         emit(ProfileState.loaded(
             ProfileData(categories: categories, profile: profile)));
+        _onConnect();
         event.callback();
       });
     } catch (e) {
