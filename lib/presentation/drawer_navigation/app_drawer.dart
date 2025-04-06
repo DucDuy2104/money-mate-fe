@@ -5,7 +5,7 @@ import 'package:money_mate/presentation/drawer_navigation/drawer_item.dart';
 import 'package:money_mate/presentation/drawer_navigation/drawer_service.dart';
 import 'package:money_mate/presentation/drawer_navigation/widgets/header_skeleton.dart';
 import 'package:money_mate/presentation/pages/profile/bloc/profile_bloc.dart';
-import 'package:money_mate/shared/constants/app_constants.dart';
+import 'package:money_mate/shared/constants/constants.dart';
 
 class AppDrawer extends StatefulWidget {
   final String currentRoute;
@@ -39,9 +39,9 @@ class _AppDrawerState extends State<AppDrawer> {
                     const Color(0xFF495057)
                   ]
                 : [
-                    const Color(0xFF007AFF),
-                    const Color(0xFF32CD32),
-                    const Color(0xFFFFD700)
+                    const Color(0xFF66B2FF),
+                    const Color(0xFF99CCFF),
+                    const Color(0xFFCCE5FF)
                   ],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
@@ -55,11 +55,11 @@ class _AppDrawerState extends State<AppDrawer> {
             // Drawer Items
             Expanded(
               child: ListView.builder(
-                padding: const EdgeInsets.only(top: 8),
+                padding: const EdgeInsets.only(top: AppDimens.padding),
                 itemCount: items.length,
                 itemBuilder: (context, index) {
                   return _buildDrawerItem(context, items[index]);
-                },
+                }
               ),
             ),
 
@@ -69,7 +69,7 @@ class _AppDrawerState extends State<AppDrawer> {
             // App Version
             const Divider(color: Colors.white70),
             const Padding(
-              padding: EdgeInsets.all(16.0),
+              padding: EdgeInsets.all(AppDimens.padding),
               child: Text(
                 'Money Mate Version 1.0.0',
                 style: TextStyle(color: Colors.white70),
@@ -83,15 +83,12 @@ class _AppDrawerState extends State<AppDrawer> {
 
   Widget _buildLogoutButton(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+      padding: const EdgeInsets.symmetric(horizontal: AppDimens.padding, vertical: AppDimens.paddingSmall),
       child: ElevatedButton.icon(
         icon: const Icon(Icons.logout, color: Colors.white),
-        label: const Text(
+        label: Text(
           'Đăng xuất',
-          style: TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-          ),
+          style: context.textTheme.bodyMedium,
         ),
         style: ElevatedButton.styleFrom(
           backgroundColor: Colors.redAccent,
@@ -119,11 +116,6 @@ class _AppDrawerState extends State<AppDrawer> {
                   ),
                   TextButton(
                     onPressed: () {
-                      Navigator.pop(context);
-                      // TODO: Implement logout logic here
-                      // For example:
-                      // AuthService.logout();
-                      // Then navigate to login page
                       context.go('/login');
                     },
                     child: const Text('Đăng xuất'),
@@ -228,25 +220,25 @@ class _AppDrawerState extends State<AppDrawer> {
                         ),
                       ],
                     ),
-                    const SizedBox(height: 16),
+                    AppDimens.space,
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         _buildStatItem(
-                            '${profile.transactionsCount}', 'Transactions'),
+                            '${profile.transactionsCount}', 'Giao dịch'),
                         Container(
                           height: 24,
                           width: 1,
                           color: Colors.white24,
                         ),
                         _buildStatItem(
-                            '${profile.categoriesCount}', 'Categories'),
+                            '${profile.categoriesCount}', 'Danh mục'),
                         Container(
                           height: 24,
                           width: 1,
                           color: Colors.white24,
                         ),
-                        _buildStatItem('${profile.reportsCount}', 'Reports'),
+                        _buildStatItem('${profile.reportsCount}', 'Báo cáo'),
                       ],
                     ),
                   ],
@@ -264,19 +256,12 @@ class _AppDrawerState extends State<AppDrawer> {
         children: [
           Text(
             count,
-            style: const TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-              color: Colors.white,
-            ),
+            style: context.textTheme.titleLarge
           ),
           const SizedBox(height: 2),
           Text(
             label,
-            style: const TextStyle(
-              fontSize: 12,
-              color: Colors.white70,
-            ),
+            style: context.textTheme.bodySmall?.copyWith(color: AppColors.subText)
           ),
         ],
       ),
@@ -292,28 +277,9 @@ class _AppDrawerState extends State<AppDrawer> {
         item.children.any((child) => widget.currentRoute == child.route);
 
     return Column(
+      mainAxisSize: MainAxisSize.min,
       children: [
-        ListTile(
-          leading: Icon(
-            item.icon,
-            color: (isSelected || hasSelectedChild)
-                ? Colors.white
-                : Colors.white70,
-          ),
-          title: Text(
-            item.title,
-            style: TextStyle(
-              color: isSelected ? Colors.white : Colors.white70,
-              fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
-            ),
-          ),
-          selected: isSelected,
-          trailing: hasChildren
-              ? Icon(
-                  isExpanded ? Icons.expand_less : Icons.expand_more,
-                  color: Colors.white70,
-                )
-              : null,
+        InkWell(
           onTap: () {
             if (hasChildren) {
               setState(() {
@@ -327,7 +293,45 @@ class _AppDrawerState extends State<AppDrawer> {
               if (!isSelected) context.go(item.route);
             }
           },
+          child: Padding(
+            padding: const EdgeInsets.all(AppDimens.padding),
+            child: Row(
+              children: [
+                // Icon
+                Icon(
+                  item.icon,
+                  color: (isSelected || hasSelectedChild)
+                      ? Colors.white
+                      : Colors.white70,
+                  size: 24,
+                ),
+                const SizedBox(width: 16),
+            
+                // Title
+                Expanded(
+                  child: Text(
+                    item.title,
+                    style: TextStyle(
+                      color: isSelected ? Colors.white : Colors.white70,
+                      fontWeight:
+                          isSelected ? FontWeight.bold : FontWeight.normal,
+                    ),
+                  ),
+                ),
+            
+                // Expand/Collapse icon for items with children
+                if (hasChildren)
+                  Icon(
+                    isExpanded ? Icons.expand_less : Icons.expand_more,
+                    color: Colors.white70,
+                    size: 24,
+                  ),
+              ],
+            ),
+          ),
         ),
+
+        // Children items
         if (hasChildren && isExpanded)
           Padding(
             padding: const EdgeInsets.only(left: 16.0),
@@ -335,26 +339,44 @@ class _AppDrawerState extends State<AppDrawer> {
               children: item.children.map((child) {
                 final isChildSelected = widget.currentRoute == child.route;
 
-                return ListTile(
-                  leading: Icon(
-                    child.icon,
-                    color: isChildSelected ? Colors.white : Colors.white70,
-                    size: 20,
-                  ),
-                  title: Text(
-                    child.title,
-                    style: TextStyle(
-                      fontWeight:
-                          isChildSelected ? FontWeight.bold : FontWeight.normal,
-                      color: isChildSelected ? Colors.white : Colors.white70,
-                    ),
-                  ),
-                  selected: isChildSelected,
-                  selectedTileColor: isChildSelected ? Colors.white24 : null,
+                return InkWell(
                   onTap: () {
                     Navigator.pop(context);
                     if (!isChildSelected) context.go(child.route);
                   },
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 16.0, vertical: 10.0),
+                    decoration: BoxDecoration(
+                      color:
+                          isChildSelected ? Colors.white24 : Colors.transparent,
+                      borderRadius: BorderRadius.circular(4.0),
+                    ),
+                    child: Row(
+                      children: [
+                        Icon(
+                          child.icon,
+                          color:
+                              isChildSelected ? Colors.white : Colors.white70,
+                          size: 20,
+                        ),
+                        const SizedBox(width: 12),
+                        Expanded(
+                          child: Text(
+                            child.title,
+                            style: TextStyle(
+                              fontWeight: isChildSelected
+                                  ? FontWeight.bold
+                                  : FontWeight.normal,
+                              color: isChildSelected
+                                  ? Colors.white
+                                  : Colors.white70,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 );
               }).toList(),
             ),

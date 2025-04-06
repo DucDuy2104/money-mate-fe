@@ -32,8 +32,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
   void _onGetData(_GetData event, Emitter<HomeState> emit) async {
     emit(const HomeState.loading());
-    await Future.delayed(const Duration(seconds: 2));
-
+    _onConnect();
+    _initSocket();
     try {
       List<Category> categories = [];
       List<Transaction> transactions = [];
@@ -75,8 +75,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
           transactions: transactions,
           categories: categories,
           statistic: statistic!)));
-      _onConnect();
-      _initSocket();
     } catch (e) {
       emit(const HomeState.error("Có lỗi xảy ra!"));
       debugPrint(e.toString());

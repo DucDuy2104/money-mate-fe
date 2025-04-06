@@ -10,6 +10,9 @@ import 'package:money_mate/presentation/routes/route_name.dart';
 import 'package:money_mate/shared/components/app_tab.dart';
 import 'package:money_mate/shared/components/app_toast.dart';
 import 'package:money_mate/shared/components/loading_scafford.dart';
+import 'package:money_mate/shared/constants/app_dimens.dart';
+import 'package:money_mate/shared/constants/app_theme.dart';
+import 'package:money_mate/shared/utils/screen_utils.dart';
 
 class CategoriesSetupScreen extends StatefulWidget {
   const CategoriesSetupScreen({super.key});
@@ -143,144 +146,104 @@ class _CategoriesSetupScreenState extends State<CategoriesSetupScreen>
           isLoading: state.maybeMap(loading: (_) => true, orElse: () => false),
           child: Scaffold(
             backgroundColor: const Color(0xFF121212),
-            body: SafeArea(
+            body: Padding(
+              padding: ScreenUtils.screenPaddingWithSafeArea(context),
               child: FadeTransition(
                 opacity: _fadeAnimation,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Padding(
-                      padding: EdgeInsets.fromLTRB(16, 16, 16, 0),
-                      child: Text(
-                        'Chọn danh mục',
-                        style: TextStyle(
-                          fontSize: 28,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
-                      ),
+                    Text('Chọn danh mục',
+                        style: context.textTheme.displaySmall),
+                    AppDimens.spaceSmall,
+                    const Text(
+                      'Chọn các danh mục phù hợp với thu chi của bạn (tối thiểu 3 danh mục chi tiêu và 1 danh mục thu nhập)',
                     ),
-                    const SizedBox(height: 8),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16),
-                      child: Text(
-                        'Chọn các danh mục phù hợp với thu chi của bạn (tối đa 10 danh mục mỗi loại)',
-                        style: TextStyle(
-                          fontSize: 16,
-                          color: Colors.grey[400],
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 16),
+                    AppDimens.spaceSmall,
                     AppTab(
                         tab1Name: 'Chi tiêu',
                         tab2Name: 'Thu nhập',
                         controller: _tabController),
-                    const SizedBox(height: 16),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16),
-                      child: Builder(
-                        builder: (context) {
-                          bool isExpenseTab = _tabController.index == 0;
-                          int selectedCount =
-                              BlocProvider.of<SetupCategoriesBloc>(context)
-                                  .getSelectedCategories()
-                                  .length;
+                    AppDimens.spaceSmall,
+                    Builder(
+                      builder: (context) {
+                        bool isExpenseTab = _tabController.index == 0;
+                        int selectedCount =
+                            BlocProvider.of<SetupCategoriesBloc>(context)
+                                .getSelectedCategories()
+                                .length;
 
-                          return Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(16),
-                              gradient: LinearGradient(
-                                colors: isExpenseTab
-                                    ? [
-                                        Colors.blue.withOpacity(0.2),
-                                        Colors.purple.withOpacity(0.2)
-                                      ]
-                                    : [
-                                        Colors.green.withOpacity(0.2),
-                                        Colors.teal.withOpacity(0.2)
-                                      ],
+                        return Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(16),
+                            gradient: LinearGradient(
+                              colors: isExpenseTab
+                                  ? [
+                                      Colors.blue.withOpacity(0.2),
+                                      Colors.purple.withOpacity(0.2)
+                                    ]
+                                  : [
+                                      Colors.green.withOpacity(0.2),
+                                      Colors.teal.withOpacity(0.2)
+                                    ],
+                            ),
+                          ),
+                          padding:
+                              const EdgeInsets.all(AppDimens.paddingMedium),
+                          child: Row(
+                            children: [
+                              Container(
+                                padding: const EdgeInsets.all(
+                                    AppDimens.paddingSmall),
+                                decoration: BoxDecoration(
+                                  color: Colors.white.withOpacity(0.2),
+                                  shape: BoxShape.circle,
+                                ),
+                                child: Icon(
+                                  Icons.lightbulb_outline,
+                                  color: isExpenseTab
+                                      ? Colors.amber
+                                      : Colors.lightGreen,
+                                ),
                               ),
-                            ),
-                            padding: const EdgeInsets.all(12),
-                            child: Row(
-                              children: [
-                                Container(
-                                  padding: const EdgeInsets.all(8),
-                                  decoration: BoxDecoration(
-                                    color: Colors.white.withOpacity(0.2),
-                                    shape: BoxShape.circle,
-                                  ),
-                                  child: Icon(
-                                    Icons.lightbulb_outline,
-                                    color: isExpenseTab
-                                        ? Colors.amber
-                                        : Colors.lightGreen,
-                                  ),
+                              AppDimens.spaceSmall,
+                              Expanded(
+                                child: Text(
+                                  'Đã chọn $selectedCount danh mục. Nhấn vào danh mục để thêm hoặc cập nhật hạn mức.',
                                 ),
-                                const SizedBox(width: 12),
-                                Expanded(
-                                  child: Text(
-                                    'Đã chọn $selectedCount danh mục. Nhấn vào danh mục để thêm hoặc cập nhật hạn mức.',
-                                    style: TextStyle(
-                                      color: Colors.grey[300],
-                                      fontSize: 14,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          );
-                        },
-                      ),
+                              ),
+                            ],
+                          ),
+                        );
+                      },
                     ),
-                    const SizedBox(height: 16),
+                    AppDimens.space,
                     Expanded(
                       child: TabBarView(
                         controller: _tabController,
                         children: [
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 16),
-                            child: CategoriesGrid(
-                              categories: systemExpenseCategories,
-                              onCategorySelected: toggleCategory,
-                            ),
+                          CategoriesGrid(
+                            categories: systemExpenseCategories,
+                            onCategorySelected: toggleCategory,
                           ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 16),
-                            child: CategoriesGrid(
-                              categories: systemIncomeCategories,
-                              onCategorySelected: toggleCategory,
-                            ),
+                          CategoriesGrid(
+                            categories: systemIncomeCategories,
+                            onCategorySelected: toggleCategory,
                           ),
                         ],
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 16, vertical: 24),
-                      child: SizedBox(
-                        width: double.infinity,
-                        height: 56,
-                        child: ElevatedButton(
-                          onPressed: () {
-                            onSetupCategories();
-                          },
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: const Color(0xFF6200EE),
-                            foregroundColor: Colors.white,
-                            elevation: 0,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(16),
-                            ),
-                          ),
-                          child: const Text(
-                            'Bắt đầu sử dụng',
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
+                    AppDimens.space,
+                    SizedBox(
+                      width: double.infinity,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          onSetupCategories();
+                        },
+                        child: Text(
+                          'Bắt đầu sử dụng',
+                          style: context.textTheme.bodyLarge
+                              ?.copyWith(color: Colors.white),
                         ),
                       ),
                     ),

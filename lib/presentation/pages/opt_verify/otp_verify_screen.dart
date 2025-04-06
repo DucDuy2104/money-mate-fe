@@ -12,6 +12,7 @@ import 'package:money_mate/shared/constants/app_assets.dart';
 import 'package:money_mate/shared/constants/app_colors.dart';
 import 'package:money_mate/shared/constants/app_dimens.dart';
 import 'package:money_mate/shared/constants/app_theme.dart';
+import 'package:money_mate/shared/utils/screen_utils.dart';
 
 class OtpVerificationScreen extends StatefulWidget {
   final User user;
@@ -147,7 +148,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
             extendBodyBehindAppBar: true,
             resizeToAvoidBottomInset: false,
             body: Padding(
-              padding: const EdgeInsets.all(AppDimens.padding),
+              padding: ScreenUtils.screenPaddingWithSafeArea(context),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -166,7 +167,6 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                   AppDimens.space,
                   Text(
                     'Chúng tôi đã gửi mã xác thực đến ${widget.user.email}',
-                    style: context.textTheme.bodyMedium,
                     textAlign: TextAlign.center,
                   ),
                   AppDimens.spaceLarge,
@@ -192,7 +192,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                     ),
                   ),
                   AppDimens.spaceLarge,
-                  Container(
+                  SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
                       onPressed: verifyOtp,

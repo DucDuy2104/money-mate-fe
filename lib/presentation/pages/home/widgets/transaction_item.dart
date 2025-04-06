@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:money_mate/domain/entities/transaction.dart';
 import 'package:money_mate/shared/constants/app_colors.dart';
+import 'package:money_mate/shared/constants/app_dimens.dart';
 import 'package:money_mate/shared/constants/app_theme.dart';
 import 'package:money_mate/shared/enums/category_type.dart';
 import 'package:money_mate/shared/helper/currency_heler.dart';
@@ -14,7 +15,7 @@ class TransactionItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final formattedDate = TimeHelper.formatFriendlyDate(transaction.createdAt);
+    final formattedDate = TimeHelper.formatCustomDateTime(transaction.createdAt);
     final formattedAmount = CurrencyHelper.formatCurrency(transaction.amount);
 
     final Color amountColor = transaction.category.type == CategoriesType.income
@@ -54,7 +55,7 @@ class TransactionItem extends StatelessWidget {
                 child: Icon(
                   transaction.category.icon,
                   color: transaction.category.color,
-                  size: 22,
+                  size: AppDimens.iconSize,
                 ),
               ),
               
@@ -79,7 +80,7 @@ class TransactionItem extends StatelessWidget {
                           transaction.description,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
-                          style: context.textTheme.bodyMedium?.copyWith(
+                          style: context.textTheme.bodySmall?.copyWith(
                             color: Colors.white.withOpacity(0.7),
                           ),
                         ),
@@ -87,8 +88,7 @@ class TransactionItem extends StatelessWidget {
                   ],
                 ),
               ),
-              
-              const SizedBox(width: 8),
+              AppDimens.spaceSmall,
               
               // Amount and time
               Column(
@@ -96,9 +96,8 @@ class TransactionItem extends StatelessWidget {
                 children: [
                   Text(
                     formattedDate,
-                    style: context.textTheme.bodySmall?.copyWith(
+                    style: context.textTheme.labelSmall?.copyWith(
                       color: AppColors.subText.withOpacity(0.7),
-                      fontSize: 11,
                     ),
                   ),
                   const SizedBox(height: 4),

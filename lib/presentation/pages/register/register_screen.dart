@@ -10,6 +10,7 @@ import 'package:money_mate/shared/constants/app_assets.dart';
 import 'package:money_mate/shared/constants/app_colors.dart';
 import 'package:money_mate/shared/constants/app_dimens.dart';
 import 'package:money_mate/shared/constants/app_theme.dart';
+import 'package:money_mate/shared/utils/screen_utils.dart';
 
 class RegisterScreen extends StatelessWidget {
   RegisterScreen({super.key});
@@ -64,27 +65,24 @@ class RegisterScreen extends StatelessWidget {
           child: Scaffold(
             resizeToAvoidBottomInset: false,
             body: Padding(
-              padding: const EdgeInsets.all(AppDimens.padding),
+              padding: ScreenUtils.screenPaddingWithSafeArea(context),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Image.asset(AppAssets.storySetWellcome,
                       width: 200, height: 200, fit: BoxFit.contain),
-                  AppDimens.spaceLarge,
+                  AppDimens.space,
                   TextField(
                     controller: _emailController,
                     focusNode: _emailFocusNode,
                     onSubmitted: (value) {
                       _passwordFocusNode.requestFocus();
                     },
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       labelText: 'Email',
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(
-                              AppDimens.borderRadiusSmall)),
                     ),
                   ),
-                  AppDimens.spaceLarge,
+                  AppDimens.space,
                   TextField(
                     controller: _passwordController,
                     focusNode: _passwordFocusNode,
@@ -92,14 +90,11 @@ class RegisterScreen extends StatelessWidget {
                       _confirmPasswordFocusNode.requestFocus();
                     },
                     obscureText: true,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       labelText: 'Mật khẩu',
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(
-                              AppDimens.borderRadiusSmall)),
                     ),
                   ),
-                  AppDimens.spaceLarge,
+                  AppDimens.space,
                   TextField(
                     controller: _confirmPasswordController,
                     focusNode: _confirmPasswordFocusNode,
@@ -107,15 +102,12 @@ class RegisterScreen extends StatelessWidget {
                       _onRegister(context);
                     },
                     obscureText: true,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       labelText: 'Nhập lại mật khẩu',
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(
-                              AppDimens.borderRadiusSmall)),
                     ),
                   ),
                   AppDimens.space,
-                  Container(
+                  SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
                       onPressed: () {

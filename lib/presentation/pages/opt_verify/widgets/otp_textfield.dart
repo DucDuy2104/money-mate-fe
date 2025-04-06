@@ -12,13 +12,13 @@ class OtpTextField extends StatefulWidget {
   final TextStyle? style;
 
   const OtpTextField({
-    Key? key,
+    super.key,
     required this.controller,
     required this.focusNode,
     this.onChanged,
     this.onBackspacePressed,
     this.style,
-  }) : super(key: key);
+  });
 
   @override
   State<OtpTextField> createState() => _OtpTextFieldState();
@@ -83,7 +83,7 @@ class _OtpTextFieldState extends State<OtpTextField> {
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(AppDimens.borderRadiusSmall),
-              borderSide: BorderSide(color: AppColors.primaryColor, width: 2),
+              borderSide: const BorderSide(color: AppColors.primaryColor, width: 2),
             ),
           ),
           inputFormatters: [FilteringTextInputFormatter.digitsOnly],

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class AppDimens {
   static const double iconSize = 24.0;
+  static const double iconSizeSmall = 16.0;
   static const double avatar = 48.0;
 
   static const double padding = 16.0;

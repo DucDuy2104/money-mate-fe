@@ -2,6 +2,7 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:money_mate/domain/entities/category.dart';
 import 'package:money_mate/shared/constants/app_dimens.dart';
+import 'package:money_mate/shared/constants/app_theme.dart';
 import 'package:money_mate/shared/enums/category_type.dart';
 
 class ExpensePieChart extends StatelessWidget {
@@ -14,14 +15,14 @@ class ExpensePieChart extends StatelessWidget {
     final data = getExpenseData(categories);
     if (data.isEmpty) {
       return Container(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.all(AppDimens.padding),
         decoration: BoxDecoration(
           color: const Color(0xFF1E1E2E),
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(AppDimens.borderRadiusMedium),
           boxShadow: [
             BoxShadow(
               color: Colors.black.withOpacity(0.2),
-              blurRadius: 10,
+              blurRadius: AppDimens.borderRadiusMedium,
               offset: const Offset(0, 4),
             ),
           ],
@@ -35,14 +36,10 @@ class ExpensePieChart extends StatelessWidget {
               fit: BoxFit.contain,
             ),
             AppDimens.spaceMedium,
-            const Text(
+            Text(
               "Bạn chưa có dữ liệu chi tiêu",
               textAlign: TextAlign.center,
-              style: TextStyle(
-                color: Color(0xFF8D8D9A),
-                fontSize: 16,
-                fontWeight: FontWeight.w500,
-              ),
+              style: context.textTheme.bodyLarge
             ),
           ],
         ),
@@ -50,30 +47,25 @@ class ExpensePieChart extends StatelessWidget {
     }
 
     return Container(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.all(AppDimens.padding),
       decoration: BoxDecoration(
         color: const Color(0xFF1E1E2E),
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(AppDimens.borderRadius),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.2),
-            blurRadius: 10,
+            blurRadius: AppDimens.borderRadius,
             offset: const Offset(0, 4),
           ),
         ],
       ),
       child: Column(
         children: [
-          const Text(
+          Text(
             "Chi tiêu theo danh mục",
-            style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-              color: Color(0xFFC9C9D5),
-              letterSpacing: 0.5,
-            ),
+            style: context.textTheme.titleLarge
           ),
-          const SizedBox(height: 24),
+          AppDimens.spaceLarge,
           SizedBox(
             height: 300,
             child: Stack(
@@ -92,19 +84,16 @@ class ExpensePieChart extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Text(
-                      "${_formatCurrency(data.values.reduce((a, b) => a + b))}",
+                      _formatCurrency(data.values.reduce((a, b) => a + b)),
                       style: const TextStyle(
                         color: Color(0xFFE0E0E0),
                         fontSize: 24,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    const Text(
+                    Text(
                       "Tổng",
-                      style: TextStyle(
-                        color: Color(0xFF8D8D9A),
-                        fontSize: 14,
-                      ),
+                      style: context.textTheme.bodyMedium
                     ),
                   ],
                 ),
@@ -112,7 +101,7 @@ class ExpensePieChart extends StatelessWidget {
             ),
           ),
           AppDimens.spaceLarge,
-          _buildEnhancedLegend(data, categories),
+          _buildEnhancedLegend(context, data, categories),
         ],
       ),
     );
@@ -142,8 +131,6 @@ List<PieChartSectionData> _generatePieSections(
   return data.entries.map((entry) {
     // Find the corresponding category object to get its color
     final category = categories.firstWhere((cat) => cat.name == entry.key);
-    final percentage =
-        (entry.value / data.values.reduce((a, b) => a + b) * 100);
 
     return PieChartSectionData(
       color: category.color, // Use the category's color
@@ -160,6 +147,7 @@ List<PieChartSectionData> _generatePieSections(
 }
 
 Widget _buildEnhancedLegend(
+  BuildContext context,
     Map<String, double> data, List<Category> categories) {
   final Map<String, double> percentages = {};
   final double total = data.values.reduce((a, b) => a + b);
@@ -182,7 +170,7 @@ Widget _buildEnhancedLegend(
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
         decoration: BoxDecoration(
           color: const Color(0xFF242438),
-          borderRadius: BorderRadius.circular(30),
+          borderRadius: BorderRadius.circular(AppDimens.borderRadiusSmall * 2),
           border: Border.all(
             color: category.color.withOpacity(0.5),
             width: 1,
@@ -199,23 +187,15 @@ Widget _buildEnhancedLegend(
                 shape: BoxShape.circle,
               ),
             ),
-            const SizedBox(width: 8),
+            AppDimens.spaceSmall,
             Text(
               entry.key,
-              style: const TextStyle(
-                color: Color(0xFFD5D5E0),
-                fontSize: 14,
-                fontWeight: FontWeight.w500,
-              ),
+              style: context.textTheme.bodyMedium
             ),
-            const SizedBox(width: 6),
+            AppDimens.spaceSmall,
             Text(
               "${entry.value.toStringAsFixed(1)}%",
-              style: const TextStyle(
-                color: Color(0xFF8D8D9A),
-                fontSize: 14,
-                fontWeight: FontWeight.w500,
-              ),
+              style: context.textTheme.bodyMedium
             ),
           ],
         ),

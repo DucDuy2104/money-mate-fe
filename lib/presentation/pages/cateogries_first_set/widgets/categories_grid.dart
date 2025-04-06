@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:money_mate/domain/entities/category.dart';
 import 'package:money_mate/presentation/pages/cateogries_first_set/widgets/categories_grid_skeleton.dart';
+import 'package:money_mate/shared/constants/constants.dart';
+import 'package:money_mate/shared/helper/currency_heler.dart';
 
 class CategoriesGrid extends StatelessWidget {
   final List<Category> categories;
@@ -15,6 +17,7 @@ class CategoriesGrid extends StatelessWidget {
   Widget build(BuildContext context) {
     if (categories.isEmpty) return const CategoriesGridSkeleton();
     return GridView.builder(
+      padding: EdgeInsets.zero,
       physics: const BouncingScrollPhysics(),
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 3,
@@ -33,7 +36,7 @@ class CategoriesGrid extends StatelessWidget {
           child: AnimatedContainer(
             duration: const Duration(milliseconds: 200),
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(16),
+              borderRadius: BorderRadius.circular(AppDimens.borderRadius),
               gradient: isSelected
                   ? LinearGradient(
                       begin: Alignment.topLeft,
@@ -63,7 +66,7 @@ class CategoriesGrid extends StatelessWidget {
               onTap: () {
                 onCategorySelected(category);
               },
-              borderRadius: BorderRadius.circular(16),
+              borderRadius: BorderRadius.circular(AppDimens.borderRadius),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -80,12 +83,11 @@ class CategoriesGrid extends StatelessWidget {
                       size: 26,
                     ),
                   ),
-                  const SizedBox(height: 8),
+                  AppDimens.spaceSmall,
                   Text(
                     category.name,
                     textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 14,
+                    style: context.textTheme.bodyMedium?.copyWith(
                       fontWeight:
                           isSelected ? FontWeight.bold : FontWeight.normal,
                       color: isSelected ? category.color : Colors.white,
@@ -93,14 +95,12 @@ class CategoriesGrid extends StatelessWidget {
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
-                  if (isSelected && category.budget != null) ...[
-                    const SizedBox(height: 4),
+                  if (isSelected) ...[
+                    AppDimens.spaceSmall,
                     Text(
-                      '${category.budget!.toStringAsFixed(0)} đ',
-                      style: TextStyle(
-                        fontSize: 12,
+                      CurrencyHelper.formatCurrency(category.budget),
+                      style: context.textTheme.bodySmall?.copyWith(
                         color: category.color,
-                        fontWeight: FontWeight.w500,
                       ),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,

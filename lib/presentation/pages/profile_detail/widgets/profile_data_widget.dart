@@ -3,7 +3,8 @@ import 'package:intl/intl.dart';
 import 'package:money_mate/domain/entities/user.dart';
 import 'package:money_mate/presentation/pages/profile_detail/funcs/show_update_name_dialog.dart';
 import 'package:money_mate/shared/components/loading_scafford.dart';
-import 'package:money_mate/shared/constants/app_constants.dart';
+import 'package:money_mate/shared/constants/constants.dart';
+import 'package:money_mate/shared/helper/currency_heler.dart';
 
 class ProfileDataWidget extends StatelessWidget {
   final bool isLoading;
@@ -12,18 +13,12 @@ class ProfileDataWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final currencyFormatter =
-        NumberFormat.currency(locale: 'vi_VN', symbol: '₫');
-    String formattedBudget = currencyFormatter.format(user.budget);
     return LoadingScaffold(
       isLoading: isLoading,
       child: Scaffold(
         backgroundColor: const Color(0xFF121212),
         appBar: AppBar(
-          title: const Text(
-            'Thông tin hồ sơ',
-            style: TextStyle(fontWeight: FontWeight.w600),
-          ),
+          title: const Text('Thông tin hồ sơ'),
           backgroundColor: const Color(0xFF1E1E1E),
           elevation: 0,
         ),
@@ -40,10 +35,9 @@ class ProfileDataWidget extends StatelessWidget {
                   ),
                 ),
                 padding: const EdgeInsets.only(
-                  left: 20,
-                  right: 20,
-                  top: 20,
-                  bottom: 40,
+                  left: AppDimens.padding,
+                  right: AppDimens.paddingMedium,
+                  top: AppDimens.paddingMedium,
                 ),
                 child: Column(
                   children: [
@@ -69,111 +63,96 @@ class ProfileDataWidget extends StatelessWidget {
                         ),
                       ),
                     ),
-                    const SizedBox(height: 20),
+                    AppDimens.space,
                     Row(
                       mainAxisSize: MainAxisSize.min,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
                           user.name!,
-                          style: const TextStyle(
-                            fontSize: 26,
+                          style: context.textTheme.headlineSmall?.copyWith(
                             fontWeight: FontWeight.bold,
-                            color: Colors.white,
                           ),
                         ),
-                        const SizedBox(width: 8),
+                        AppDimens.spaceMedium,
                         GestureDetector(
                           onTap: () =>
                               showNameUpdateDialog(context, user.name!),
                           child: Container(
-                            padding: const EdgeInsets.all(4),
+                            padding: const EdgeInsets.all(
+                                AppDimens.paddingSmall / 2),
                             decoration: BoxDecoration(
                               color: const Color(0xFF2A2A2A),
                               borderRadius: BorderRadius.circular(6),
                             ),
                             child: const Icon(
                               Icons.edit,
-                              size: 16,
+                              size: AppDimens.iconSizeSmall,
                               color: Color(0xFF66B2FF),
                             ),
                           ),
                         ),
                       ],
                     ),
-                    const SizedBox(height: 8),
-                    // Email với biểu tượng
                     Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         const Icon(
                           Icons.email_outlined,
-                          size: 16,
+                          size: AppDimens.iconSizeSmall,
                           color: Color(0xFF66B2FF),
                         ),
-                        const SizedBox(width: 6),
+                        AppDimens.spaceSmall,
                         Text(
                           user.email,
-                          style: const TextStyle(
-                            fontSize: 16,
-                            color: Colors.grey,
+                          style: context.textTheme.bodyLarge?.copyWith(
+                            color: Colors.grey[300],
                           ),
                         ),
                       ],
                     ),
                     if (user.phoneNumber != null)
-                      Padding(
-                        padding: const EdgeInsets.only(top: 4),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            const Icon(
-                              Icons.phone_outlined,
-                              size: 16,
-                              color: Color(0xFF66B2FF),
+                      Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          const Icon(
+                            Icons.phone_outlined,
+                            size: AppDimens.iconSizeSmall,
+                            color: Color(0xFF66B2FF),
+                          ),
+                          AppDimens.spaceSmall,
+                          Text(
+                            user.phoneNumber!,
+                            style: context.textTheme.bodyMedium?.copyWith(
+                              color: Colors.grey[400],
                             ),
-                            const SizedBox(width: 6),
-                            Text(
-                              user.phoneNumber!,
-                              style: const TextStyle(
-                                fontSize: 16,
-                                color: Colors.grey,
-                              ),
-                            ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                   ],
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.all(16.0),
+                padding: const EdgeInsets.all(AppDimens.padding),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Padding(
-                      padding: EdgeInsets.only(left: 8.0, bottom: 12.0),
-                      child: Text(
-                        'Thông tin Tài khoản',
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white70,
-                        ),
-                      ),
-                    ),
+                    AppDimens.space,
                     _buildInfoCard(
+                      context: context,
                       icon: Icons.badge_outlined,
                       title: 'Vai trò',
                       value: user.role,
                     ),
                     _buildInfoCard(
+                      context: context,
                       icon: Icons.account_balance_wallet_outlined,
                       title: 'Ngân sách',
-                      value: formattedBudget,
+                      value: CurrencyHelper.formatCurrency(user.budget),
                       highlightValue: true,
                     ),
                     _buildInfoCard(
+                      context: context,
                       icon: Icons.check_circle_outline,
                       title: 'Trạng thái tài khoản',
                       value:
@@ -183,11 +162,13 @@ class ProfileDataWidget extends StatelessWidget {
                           : const Color(0xFFFF5252),
                     ),
                     _buildInfoCard(
+                      context: context,
                       icon: Icons.calendar_today_outlined,
                       title: 'Ngày tạo',
                       value: DateFormat.yMMMd().format(user.createdAt),
                     ),
                     _buildInfoCard(
+                      context: context,
                       icon: Icons.update_outlined,
                       title: 'Ngày cập nhật',
                       value: DateFormat.yMMMd().format(user.updatedAt),
@@ -205,6 +186,7 @@ class ProfileDataWidget extends StatelessWidget {
 }
 
 Widget _buildInfoCard({
+  required BuildContext context,
   required IconData icon,
   required String title,
   required String value,
@@ -213,10 +195,10 @@ Widget _buildInfoCard({
   bool isLast = false,
 }) {
   return Container(
-    margin: EdgeInsets.only(bottom: isLast ? 0 : 12),
+    margin: EdgeInsets.only(bottom: isLast ? 0 : AppDimens.paddingMedium),
     decoration: BoxDecoration(
       color: const Color(0xFF1E1E1E),
-      borderRadius: BorderRadius.circular(12),
+      borderRadius: BorderRadius.circular(AppDimens.borderRadius),
       boxShadow: [
         BoxShadow(
           color: Colors.black.withOpacity(0.2),
@@ -226,38 +208,37 @@ Widget _buildInfoCard({
       ],
     ),
     child: Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+      padding: const EdgeInsets.symmetric(
+          horizontal: AppDimens.padding, vertical: AppDimens.paddingSmall),
       child: Row(
         children: [
           Container(
-            padding: const EdgeInsets.all(8),
+            padding: const EdgeInsets.all(AppDimens.borderRadiusSmall),
             decoration: BoxDecoration(
               color: const Color(0xFF2A2A2A),
-              borderRadius: BorderRadius.circular(8),
+              borderRadius: BorderRadius.circular(AppDimens.borderRadiusSmall),
             ),
             child: Icon(
               icon,
               color: const Color(0xFF66B2FF),
-              size: 22,
+              size: AppDimens.iconSize,
             ),
           ),
-          const SizedBox(width: 16),
+          AppDimens.space,
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   title,
-                  style: const TextStyle(
-                    fontSize: 14,
-                    color: Colors.grey,
+                  style: context.textTheme.bodyMedium?.copyWith(
+                    color: Colors.grey[400],
                   ),
                 ),
-                const SizedBox(height: 2),
+                AppDimens.spaceSmall,
                 Text(
                   value,
-                  style: TextStyle(
-                    fontSize: 16,
+                  style: context.textTheme.bodyLarge?.copyWith(
                     fontWeight:
                         highlightValue ? FontWeight.bold : FontWeight.normal,
                     color: valueColor ??

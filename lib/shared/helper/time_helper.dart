@@ -24,4 +24,26 @@ class TimeHelper {
       return formatDate(dateTime);
     }
   }
+
+  // Transaction date formatting
+  static String formatCustomDateTime(DateTime dateTime) {
+    final now = DateTime.now();
+    final today = DateTime(now.year, now.month, now.day);
+    final yesterday = today.subtract(const Duration(days: 1));
+    final inputDate = DateTime(dateTime.year, dateTime.month, dateTime.day);
+
+    final timeFormat = DateFormat('HH:mm');
+    final dateFormat = DateFormat('dd/MM');
+    final fullDateFormat = DateFormat('dd/MM/yyyy');
+
+    if (inputDate == today) {
+      return timeFormat.format(dateTime);
+    } else if (inputDate == yesterday) {
+      return 'hôm qua ${timeFormat.format(dateTime)}';
+    } else if (dateTime.year == now.year) {
+      return '${dateFormat.format(dateTime)} ${timeFormat.format(dateTime)}';
+    } else {
+      return '${fullDateFormat.format(dateTime)} ${timeFormat.format(dateTime)}';
+    }
+  }
 }

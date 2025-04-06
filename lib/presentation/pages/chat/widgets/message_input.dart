@@ -6,41 +6,40 @@ import 'package:money_mate/shared/constants/app_dimens.dart';
 class MessageInput extends StatelessWidget {
   final TextEditingController textController;
   final VoidCallback onSendMessage;
+  final FocusNode focusNode;
 
   const MessageInput(
-      {super.key, required this.textController, required this.onSendMessage});
+      {super.key, required this.textController, required this.onSendMessage, required this.focusNode});
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.symmetric(horizontal: AppDimens.paddingSmall),
-      child: Row(
-        children: [
-          Expanded(
-            child: TextField(
-              controller: textController,
-              onSubmitted: (text) {
-                onSendMessage();
-                textController.clear();
-              },
-              decoration: InputDecoration(
-                suffixIcon: IconButton(
-                  icon: const Icon(
-                    EvaIcons.navigation,
-                    color: AppColors.primaryColor,
-                  ),
-                  onPressed: () => onSendMessage(),
+    return Row(
+      children: [
+        Expanded(
+          child: TextField(
+            focusNode: focusNode,
+            controller: textController,
+            onSubmitted: (text) {
+              onSendMessage();
+              textController.clear();
+            },
+            decoration: InputDecoration(
+              suffixIcon: IconButton(
+                icon: const Icon(
+                  EvaIcons.navigation,
+                  color: AppColors.primaryColor,
                 ),
-                hintText: "Bạn vừa chi tiền vào thứ gì?",
-                border: OutlineInputBorder(
-                  borderRadius:
-                      BorderRadius.circular(AppDimens.borderRadiusMedium),
-                  borderSide: const BorderSide(color: AppColors.subText),
-                ),
+                onPressed: () => onSendMessage(),
+              ),
+              hintText: "Bạn vừa chi tiền vào thứ gì?",
+              border: OutlineInputBorder(
+                borderRadius:
+                    BorderRadius.circular(AppDimens.borderRadiusMedium),
+                borderSide: const BorderSide(color: AppColors.subText),
               ),
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

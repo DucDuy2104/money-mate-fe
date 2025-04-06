@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 
 class AppColors {
-  static const primaryColor = Color(0xFF0362FC);
+  static const primaryColor = Color(0xFF66B2FF);
   static const upColor = Colors.green;
   static const downColor = Colors.red;
-  static const subText = Colors.grey;
+  static const subText = Color(0xFF888888)
+;
 
   // Light mode colors
   static const background = Color(0xFFFFFFFF);

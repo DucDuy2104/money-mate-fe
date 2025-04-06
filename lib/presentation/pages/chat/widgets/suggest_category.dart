@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:money_mate/domain/entities/category.dart';
 import 'package:money_mate/presentation/pages/category/bloc/categories_bloc.dart';
 import 'package:money_mate/shared/constants/app_colors.dart';
+import 'package:money_mate/shared/constants/app_dimens.dart';
 import 'package:money_mate/shared/constants/app_theme.dart';
 import 'package:money_mate/shared/enums/category_type.dart';
 
@@ -28,7 +29,7 @@ class SuggestCategoryItem extends StatelessWidget {
       width: MediaQuery.of(context).size.width * 0.7,
       decoration: BoxDecoration(
         color: Colors.grey[200],
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(AppDimens.borderRadiusMedium),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.1),
@@ -40,15 +41,15 @@ class SuggestCategoryItem extends StatelessWidget {
       ),
       child: InkWell(
         onTap: onTap,
-        borderRadius: BorderRadius.circular(8),
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+          padding: const EdgeInsets.symmetric(
+              horizontal: AppDimens.padding, vertical: AppDimens.paddingMedium),
           child: Row(
             children: [
               CircleAvatar(
                 radius: 20,
                 backgroundColor: category.color.withOpacity(0.2),
-                child: Icon(category.icon, color: category.color, size: 20),
+                child: Icon(category.icon, color: category.color, size: AppDimens.iconSize),
               ),
               const SizedBox(width: 12),
               Expanded(
@@ -84,17 +85,15 @@ class SuggestCategoryItem extends StatelessWidget {
                     style: ElevatedButton.styleFrom(
                       backgroundColor: category.color,
                       foregroundColor: Colors.white,
-                      padding: const EdgeInsets.symmetric(horizontal: 8),
+                      padding: const EdgeInsets.symmetric(horizontal: AppDimens.padding),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(6),
                       ),
                       elevation: 0,
                     ),
-                    child: const Text(
+                    child: Text(
                       "Thêm",
-                      style: TextStyle(fontSize: 12),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
+                      style: context.textTheme.bodyMedium,
                     ),
                   );
                 },

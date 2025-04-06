@@ -93,8 +93,8 @@ class _MessageItemState extends State<MessageItem>
                         maxWidth: MediaQuery.of(context).size.width * 0.7,
                       ),
                       padding: const EdgeInsets.symmetric(
-                        horizontal: 16,
-                        vertical: 12,
+                        horizontal: AppDimens.padding,
+                        vertical: AppDimens.paddingMedium,
                       ),
                       decoration: BoxDecoration(
                           color: widget.message.isSentByMe
@@ -103,19 +103,24 @@ class _MessageItemState extends State<MessageItem>
                                   ? Colors.pinkAccent
                                   : Colors.grey[200]),
                           borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(
-                                widget.message.isSentByMe ? 20 : 4),
-                            topRight: Radius.circular(
-                                widget.message.isSentByMe ? 4 : 20),
+                            topLeft: Radius.circular(widget.message.isSentByMe
+                                ? AppDimens.borderRadiusMedium
+                                : AppDimens.borderRadiusSmall / 2),
+                            topRight: Radius.circular(widget.message.isSentByMe
+                                ? AppDimens.borderRadiusSmall / 2
+                                : AppDimens.borderRadiusMedium),
                             bottomLeft: Radius.circular(
-                                widget.message.isSentByMe ? 20 : 20),
+                                widget.message.isSentByMe
+                                    ? AppDimens.borderRadiusMedium
+                                    : AppDimens.borderRadiusMedium),
                             bottomRight: Radius.circular(
-                                widget.message.isSentByMe ? 20 : 20),
+                                widget.message.isSentByMe
+                                    ? AppDimens.borderRadiusMedium
+                                    : AppDimens.borderRadiusMedium),
                           )),
                       child: Text(
                         widget.message.content,
-                        style: TextStyle(
-                          fontSize: 15,
+                        style: context.textTheme.bodyMedium?.copyWith(
                           color: widget.message.isSentByMe
                               ? Colors.white
                               : Colors.black87,
@@ -165,10 +170,13 @@ class _MessageItemState extends State<MessageItem>
                       )
                     ],
                     Padding(
-                      padding: const EdgeInsets.only(top: 4, left: 4, right: 4),
+                      padding: const EdgeInsets.only(
+                          top: AppDimens.paddingSmall / 2,
+                          left: AppDimens.paddingMedium,
+                          right: AppDimens.paddingMedium),
                       child: Text(widget.message.createdAt.toHourMinute(),
-                          style: context.textTheme.bodySmall?.copyWith(
-                              fontSize: 10, color: AppColors.subText)),
+                          style: context.textTheme.labelSmall
+                              ?.copyWith(color: AppColors.subText)),
                     ),
                   ],
                 ),

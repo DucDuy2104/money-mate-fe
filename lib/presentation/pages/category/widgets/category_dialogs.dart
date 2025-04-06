@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:money_mate/domain/entities/category.dart';
+import 'package:money_mate/shared/constants/app_dimens.dart';
+import 'package:money_mate/shared/constants/app_theme.dart';
 import 'package:money_mate/shared/enums/category_type.dart';
 
 class CategoryDialogs {
@@ -19,13 +21,14 @@ class CategoryDialogs {
         return Dialog(
           backgroundColor: const Color(0xFF1E1E2E),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(AppDimens.borderRadiusMedium),
           ),
-          insetPadding: const EdgeInsets.symmetric(horizontal: 16),
+          insetPadding:
+              const EdgeInsets.symmetric(horizontal: AppDimens.padding),
           child: ConstrainedBox(
             constraints: const BoxConstraints(maxWidth: 400),
             child: Padding(
-              padding: const EdgeInsets.all(16),
+              padding: const EdgeInsets.all(AppDimens.padding),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -33,37 +36,34 @@ class CategoryDialogs {
                   Row(
                     children: [
                       Container(
-                        padding: const EdgeInsets.all(10),
+                        padding: const EdgeInsets.all(AppDimens.paddingSmall),
                         decoration: BoxDecoration(
                           color: category.color.withOpacity(0.2),
-                          borderRadius: BorderRadius.circular(10),
+                          borderRadius: BorderRadius.circular(
+                              AppDimens.borderRadiusSmall),
                         ),
                         child: Icon(
                           category.icon,
                           color: category.color,
-                          size: 24, 
+                          size: AppDimens.iconSize,
                         ),
                       ),
-                      const SizedBox(width: 12),
+                      AppDimens.spaceMedium,
                       Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
                               category.name,
-                              style: const TextStyle(
-                                fontSize: 18, 
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                              ),
+                              style: context.textTheme.titleLarge,
                             ),
-                            const SizedBox(height: 2),
+                            AppDimens.divider,
                             Text(
                               category.type == CategoriesType.expense
                                   ? "Chi tiêu"
                                   : "Thu nhập",
                               style: TextStyle(
-                                fontSize: 13, 
+                                fontSize: 13,
                                 color: Colors.white.withOpacity(0.7),
                               ),
                             ),
@@ -72,27 +72,19 @@ class CategoryDialogs {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 16),
-                  const Text(
-                    "Ngân sách",
-                    style: TextStyle(
-                      fontSize: 15, 
-                      fontWeight: FontWeight.w600,
-                      color: Colors.white,
-                    ),
-                  ),
-                  const SizedBox(height: 6),
+                  AppDimens.space,
+                  Text("Ngân sách", style: context.textTheme.bodyMedium),
+                  AppDimens.spaceSmall,
                   TextField(
                     controller: budgetController,
                     keyboardType: TextInputType.number,
-                    style: const TextStyle(color: Colors.white),
                     decoration: InputDecoration(
                       filled: true,
                       fillColor: Colors.white.withOpacity(0.1),
                       prefixIcon: const Icon(
                         Icons.attach_money,
                         color: Colors.white70,
-                        size: 20, 
+                        size: AppDimens.iconSize,
                       ),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
@@ -102,18 +94,17 @@ class CategoryDialogs {
                         borderRadius: BorderRadius.circular(10),
                         borderSide: BorderSide(
                           color: category.color,
-                          width: 1.5, 
+                          width: 1.5,
                         ),
                       ),
                       hintText: "Nhập ngân sách",
-                      hintStyle: TextStyle(color: Colors.white.withOpacity(0.5)),
                       contentPadding: const EdgeInsets.symmetric(
-                        vertical: 12,
-                        horizontal: 12,
+                        vertical: AppDimens.paddingMedium,
+                        horizontal: AppDimens.paddingMedium,
                       ),
                     ),
                   ),
-                  const SizedBox(height: 16),
+                  AppDimens.space,
                   Row(
                     children: [
                       Expanded(
@@ -124,21 +115,18 @@ class CategoryDialogs {
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.grey.withOpacity(0.3),
                             foregroundColor: Colors.white,
-                            padding: const EdgeInsets.symmetric(vertical: 12),
+                            padding: const EdgeInsets.symmetric(
+                                vertical: AppDimens.paddingMedium),
                             shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10),
+                              borderRadius:
+                                  BorderRadius.circular(AppDimens.borderRadius),
                             ),
                           ),
-                          child: const Text(
-                            "Huỷ",
-                            style: TextStyle(
-                              fontWeight: FontWeight.w600,
-                              fontSize: 14, 
-                            ),
-                          ),
+                          child:
+                              Text("Huỷ", style: context.textTheme.bodyMedium),
                         ),
                       ),
-                      const SizedBox(width: 10),
+                      AppDimens.spaceMedium,
                       Expanded(
                         child: ElevatedButton(
                           onPressed: () {
@@ -148,25 +136,23 @@ class CategoryDialogs {
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.redAccent,
                             foregroundColor: Colors.white,
-                            padding: const EdgeInsets.symmetric(vertical: 12),
+                            padding: const EdgeInsets.symmetric(
+                                vertical: AppDimens.paddingMedium),
                             shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10),
+                              borderRadius:
+                                  BorderRadius.circular(AppDimens.borderRadius),
                             ),
                           ),
-                          child: const Text(
-                            "Xoá bỏ",
-                            style: TextStyle(
-                              fontWeight: FontWeight.w600,
-                              fontSize: 14, 
-                            ),
-                          ),
+                          child: Text("Xoá bỏ",
+                              style: context.textTheme.bodyMedium),
                         ),
                       ),
-                      const SizedBox(width: 10),
+                      AppDimens.spaceMedium,
                       Expanded(
                         child: ElevatedButton(
                           onPressed: () {
-                            final budget = double.tryParse(budgetController.text);
+                            final budget =
+                                double.tryParse(budgetController.text);
                             if (budget != null) {
                               onUpdate(budget);
                               Navigator.of(context).pop();
@@ -175,19 +161,16 @@ class CategoryDialogs {
                           style: ElevatedButton.styleFrom(
                             backgroundColor: category.color,
                             foregroundColor: Colors.white,
-                            padding: const EdgeInsets.symmetric(vertical: 12),
+                            padding: const EdgeInsets.symmetric(
+                                vertical: AppDimens.paddingSmall),
                             shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10),
+                              borderRadius:
+                                  BorderRadius.circular(AppDimens.borderRadius),
                             ),
                             elevation: 0,
                           ),
-                          child: const Text(
-                            "Cập nhật",
-                            style: TextStyle(
-                              fontWeight: FontWeight.w600,
-                              fontSize: 14, 
-                            ),
-                          ),
+                          child: Text("Cập nhật",
+                              style: context.textTheme.bodyMedium),
                         ),
                       ),
                     ],
@@ -207,7 +190,7 @@ class CategoryDialogs {
     Function(double) onAdd,
     VoidCallback onCancel,
   ) async {
-    final TextEditingController _budgetController = TextEditingController(
+    final TextEditingController budgetController = TextEditingController(
       text: category.budget.toString(),
     );
 
@@ -217,13 +200,14 @@ class CategoryDialogs {
         return Dialog(
           backgroundColor: const Color(0xFF1E1E2E),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(AppDimens.borderRadius),
           ),
-          insetPadding: const EdgeInsets.symmetric(horizontal: 16),
+          insetPadding:
+              const EdgeInsets.symmetric(horizontal: AppDimens.padding),
           child: ConstrainedBox(
-            constraints: const BoxConstraints(maxWidth: 400), 
+            constraints: const BoxConstraints(maxWidth: 400),
             child: Padding(
-              padding: const EdgeInsets.all(16),
+              padding: const EdgeInsets.all(AppDimens.padding),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -231,57 +215,41 @@ class CategoryDialogs {
                   Row(
                     children: [
                       Container(
-                        padding: const EdgeInsets.all(10),
+                        padding: const EdgeInsets.all(AppDimens.paddingMedium),
                         decoration: BoxDecoration(
                           color: category.color.withOpacity(0.2),
-                          borderRadius: BorderRadius.circular(10),
+                          borderRadius:
+                              BorderRadius.circular(AppDimens.borderRadius),
                         ),
                         child: Icon(
                           category.icon,
                           color: category.color,
-                          size: 24,
+                          size: AppDimens.iconSize,
                         ),
                       ),
-                      const SizedBox(width: 12),
+                      AppDimens.spaceMedium,
                       Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
+                            Text("Thêm ${category.name}",
+                                style: context.textTheme.titleLarge),
+                            AppDimens.divider,
                             Text(
-                              "Thêm ${category.name}",
-                              style: const TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                              ),
-                            ),
-                            const SizedBox(height: 2),
-                            Text(
-                              category.type == CategoriesType.expense
-                                  ? "Danh mục chi tiêu"
-                                  : "Danh mục thu nhập",
-                              style: TextStyle(
-                                fontSize: 13, 
-                                color: Colors.white.withOpacity(0.7),
-                              ),
-                            ),
+                                category.type == CategoriesType.expense
+                                    ? "Danh mục chi tiêu"
+                                    : "Danh mục thu nhập",
+                                style: context.textTheme.bodyMedium),
                           ],
                         ),
                       ),
                     ],
                   ),
-                  const SizedBox(height: 16),
-                  const Text(
-                    "Đặt ngân sách",
-                    style: TextStyle(
-                      fontSize: 15, 
-                      fontWeight: FontWeight.w600,
-                      color: Colors.white,
-                    ),
-                  ),
-                  const SizedBox(height: 6),
+                  AppDimens.space,
+                  Text("Đặt ngân sách", style: context.textTheme.bodyMedium),
+                  AppDimens.spaceSmall,
                   TextField(
-                    controller: _budgetController,
+                    controller: budgetController,
                     keyboardType: TextInputType.number,
                     style: const TextStyle(color: Colors.white),
                     decoration: InputDecoration(
@@ -290,58 +258,54 @@ class CategoryDialogs {
                       prefixIcon: const Icon(
                         Icons.attach_money,
                         color: Colors.white70,
-                        size: 20, 
+                        size: AppDimens.iconSize,
                       ),
                       border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
+                        borderRadius:
+                            BorderRadius.circular(AppDimens.borderRadius),
                         borderSide: BorderSide.none,
                       ),
                       focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
+                        borderRadius:
+                            BorderRadius.circular(AppDimens.borderRadius),
                         borderSide: BorderSide(
                           color: category.color,
-                          width: 1.5, 
+                          width: 1.5,
                         ),
                       ),
                       hintText: "Nhập số tiền ngân sách",
-                      hintStyle: TextStyle(color: Colors.white.withOpacity(0.5)),
-                      contentPadding: const EdgeInsets.symmetric(
-                        vertical: 12,
-                        horizontal: 12,
-                      ),
+                      hintStyle: TextStyle(
+                          color: const Color.fromARGB(255, 19, 16, 16)
+                              .withOpacity(0.5)),
+                      contentPadding:
+                          const EdgeInsets.all(AppDimens.paddingMedium),
                     ),
                   ),
-                  const SizedBox(height: 10),
+                  AppDimens.spaceMedium,
                   Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 12,
-                      vertical: 10,
-                    ),
+                    padding: const EdgeInsets.all(AppDimens.paddingMedium),
                     decoration: BoxDecoration(
                       color: Colors.white.withOpacity(0.05),
-                      borderRadius: BorderRadius.circular(8),
+                      borderRadius: BorderRadius.circular(AppDimens.borderRadiusSmall),
                     ),
                     child: Row(
                       children: [
                         Icon(
                           Icons.info_outline,
-                          size: 16, 
+                          size: AppDimens.iconSizeSmall,
                           color: Colors.white.withOpacity(0.7),
                         ),
                         const SizedBox(width: 8),
                         Expanded(
                           child: Text(
                             "Thao tác này sẽ thêm danh mục vào kế hoạch ngân sách của bạn",
-                            style: TextStyle(
-                              fontSize: 13, 
-                              color: Colors.white.withOpacity(0.7),
-                            ),
+                            style: context.textTheme.bodyMedium
                           ),
                         ),
                       ],
                     ),
                   ),
-                  const SizedBox(height: 16),
+                  AppDimens.space,
                   Row(
                     children: [
                       Expanded(
@@ -353,25 +317,23 @@ class CategoryDialogs {
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.white.withOpacity(0.1),
                             foregroundColor: Colors.white,
-                            padding: const EdgeInsets.symmetric(vertical: 12),
+                            padding: const EdgeInsets.symmetric(vertical: AppDimens.paddingMedium),
                             shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10),
+                              borderRadius: BorderRadius.circular(AppDimens.borderRadius),
                             ),
                           ),
-                          child: const Text(
+                          child: Text(
                             "Hủy",
-                            style: TextStyle(
-                              fontWeight: FontWeight.w600,
-                              fontSize: 14, 
-                            ),
+                            style: context.textTheme.bodyMedium
                           ),
                         ),
                       ),
-                      const SizedBox(width: 10),
+                      AppDimens.spaceMedium,
                       Expanded(
                         child: ElevatedButton(
                           onPressed: () {
-                            final nganSach = double.tryParse(_budgetController.text);
+                            final nganSach =
+                                double.tryParse(budgetController.text);
                             if (nganSach != null) {
                               onAdd(nganSach);
                               Navigator.of(context).pop();
@@ -380,18 +342,15 @@ class CategoryDialogs {
                           style: ElevatedButton.styleFrom(
                             backgroundColor: category.color,
                             foregroundColor: Colors.white,
-                            padding: const EdgeInsets.symmetric(vertical: 12),
+                            padding: const EdgeInsets.symmetric(vertical: AppDimens.paddingMedium),
                             shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10),
+                              borderRadius: BorderRadius.circular(AppDimens.borderRadius),
                             ),
                             elevation: 0,
                           ),
-                          child: const Text(
+                          child: Text(
                             "Thêm",
-                            style: TextStyle(
-                              fontWeight: FontWeight.w600,
-                              fontSize: 14, 
-                            ),
+                            style: context.textTheme.bodyMedium
                           ),
                         ),
                       ),
