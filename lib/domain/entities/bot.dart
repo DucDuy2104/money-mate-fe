@@ -10,3 +10,12 @@ class Bot with _$Bot {
     required String description,
   }) = _Bot;
 }
+
+extension BotX on Bot {
+  Map<String, dynamic> toJson() {
+    return {
+      'name': name,
+      'description': description,
+    };
+  }
+}

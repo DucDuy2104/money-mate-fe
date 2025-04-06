@@ -12,6 +12,7 @@ class ChatState with _$ChatState {
 class ChatLoadedData with _$ChatLoadedData {
   const factory ChatLoadedData({
     required List<Message> messages,
-    required Conversation conversation
+    required Conversation conversation,
+    @Default(false) bool isLoading,
   }) = _ChatLoadedData;
 }

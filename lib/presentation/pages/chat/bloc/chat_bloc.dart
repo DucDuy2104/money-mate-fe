@@ -4,9 +4,11 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:money_mate/core/service/getit/locator.dart';
 import 'package:money_mate/core/service/socket/socket_service.dart';
 import 'package:money_mate/data/models/message_model.dart';
+import 'package:money_mate/data/repositories/bots_repository.dart';
 import 'package:money_mate/data/repositories/conversation_repository.dart';
 import 'package:money_mate/data/repositories/messages_repository.dart';
 import 'package:money_mate/data/repositories/transactions_repository.dart';
+import 'package:money_mate/domain/entities/bot.dart';
 import 'package:money_mate/domain/entities/conversation.dart';
 import 'package:money_mate/domain/entities/message.dart';
 import 'package:money_mate/domain/entities/transaction.dart';
@@ -23,6 +25,7 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
   final MessagesRepository _messagesRepository = getIt<MessagesRepository>();
   final TransactionsRepository _transactionsRepository =
       getIt<TransactionsRepository>();
+  final BotsRepository _botsRepository = getIt<BotsRepository>();
   final SocketService _socketService = getIt<SocketService>();
   ChatBloc() : super(const ChatState.initial()) {
     on<_GetChatData>(_onGetChatData);
@@ -34,6 +37,7 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
     on<_SetMessageLoading>(_onSetMessageLoading);
     on<_SetMessageCancel>(_onSetMessageCancel);
     on<_SetMessageEnable>(_onSetMessageEnable);
+    on<_UpdateBot>(_onUpdateBot);
   }
 
   Future<void> _onGetChatData(
@@ -69,6 +73,25 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
       if (!emit.isDone) {
         emit(ChatState.error(e.toString()));
       }
+    }
+  }
+
+  // Update bot
+  void _onUpdateBot(_UpdateBot event, Emitter<ChatState> emit) async {
+    try {
+      AppToast.info(event.context, 'Đang cập nhật...');
+      final botUpdateResult = await _botsRepository.updateBot(event.bot);
+      botUpdateResult.fold((failure) {
+        AppToast.error(event.context, 'Không thể cập nhật bot');
+      }, (bot) {
+        AppToast.success(event.context, 'Cập nhật bot thành công');
+        state.maybeMap(
+            loaded: (state) => emit(ChatState.loaded(state.chatData.copyWith(
+                conversation: state.chatData.conversation.copyWith(bot: bot)))),
+            orElse: () {});
+      });
+    } catch (e) {
+      debugPrint('Bug: ${e.toString()}');
     }
   }
 
