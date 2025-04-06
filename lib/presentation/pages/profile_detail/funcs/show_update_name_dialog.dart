@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:money_mate/presentation/pages/profile/bloc/profile_bloc.dart';
 import 'package:money_mate/shared/components/app_toast.dart';
+import 'package:money_mate/shared/constants/app_colors.dart';
+import 'package:money_mate/shared/constants/app_dimens.dart';
+import 'package:money_mate/shared/constants/app_theme.dart';
 
 void showNameUpdateDialog(BuildContext context, String currentName) {
   final TextEditingController nameController =
@@ -29,10 +32,10 @@ void showNameUpdateDialog(BuildContext context, String currentName) {
         elevation: 0,
         child: Container(
           width: double.infinity,
-          padding: const EdgeInsets.all(20),
+          padding: const EdgeInsets.all(AppDimens.padding),
           decoration: BoxDecoration(
             color: const Color(0xFF1E1E1E),
-            borderRadius: BorderRadius.circular(16),
+            borderRadius: BorderRadius.circular(AppDimens.borderRadius),
             boxShadow: [
               BoxShadow(
                 color: Colors.black.withOpacity(0.3),
@@ -41,7 +44,7 @@ void showNameUpdateDialog(BuildContext context, String currentName) {
               ),
             ],
             border: Border.all(
-              color: const Color(0xFF66B2FF).withOpacity(0.3),
+              color: AppColors.primaryColor.withOpacity(0.3),
               width: 1,
             ),
           ),
@@ -52,54 +55,49 @@ void showNameUpdateDialog(BuildContext context, String currentName) {
               Row(
                 children: [
                   Container(
-                    padding: const EdgeInsets.all(8),
+                    padding: const EdgeInsets.all(AppDimens.borderRadiusSmall),
                     decoration: BoxDecoration(
                       color: const Color(0xFF2A2A2A),
-                      borderRadius: BorderRadius.circular(8),
+                      borderRadius: BorderRadius.circular(AppDimens.borderRadiusSmall),
                     ),
                     child: const Icon(
                       Icons.edit,
-                      size: 18,
-                      color: Color(0xFF66B2FF),
+                      size: AppDimens.iconSize,
+                      color: AppColors.primaryColor,
                     ),
                   ),
-                  const SizedBox(width: 12),
-                  const Text(
+                  AppDimens.spaceMedium,
+                  Text(
                     'Cập nhật tên',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: context.textTheme.bodyLarge,
                   ),
                 ],
               ),
-              const SizedBox(height: 20),
+              AppDimens.space,
               TextField(
                 controller: nameController,
-                style: const TextStyle(color: Colors.white, fontSize: 16),
                 decoration: InputDecoration(
                   hintText: 'Nhập tên mới',
                   hintStyle: TextStyle(color: Colors.grey.withOpacity(0.7)),
                   filled: true,
                   fillColor: const Color(0xFF2A2A2A),
                   contentPadding:
-                      const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+                      const EdgeInsets.symmetric(horizontal: AppDimens.padding, vertical: AppDimens.paddingMedium),
                   border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
+                    borderRadius: BorderRadius.circular(AppDimens.borderRadius),
                     borderSide: BorderSide.none,
                   ),
                   focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
+                    borderRadius: BorderRadius.circular(AppDimens.borderRadius),
                     borderSide:
-                        const BorderSide(color: Color(0xFF66B2FF), width: 1.5),
+                        const BorderSide(color: AppColors.primaryColor, width: 1.5),
                   ),
                   prefixIcon: const Icon(
                     Icons.person_outline,
-                    color: Color(0xFF66B2FF),
+                    color: AppColors.primaryColor,
                   ),
                 ),
-                cursorColor: const Color(0xFF66B2FF),
+                cursorColor: AppColors.primaryColor,
                 autofocus: true,
               ),
               const SizedBox(height: 24),
@@ -111,12 +109,12 @@ void showNameUpdateDialog(BuildContext context, String currentName) {
                     color: Colors.transparent,
                     child: InkWell(
                       onTap: () => Navigator.of(context).pop(),
-                      borderRadius: BorderRadius.circular(8),
+                      borderRadius: BorderRadius.circular(AppDimens.borderRadiusSmall),
                       child: Ink(
                         padding: const EdgeInsets.symmetric(
-                            horizontal: 16, vertical: 10),
+                            horizontal: AppDimens.padding, vertical: AppDimens.paddingMedium),
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8),
+                          borderRadius: BorderRadius.circular(AppDimens.borderRadiusSmall),
                           border:
                               Border.all(color: Colors.grey.withOpacity(0.3)),
                         ),
@@ -130,8 +128,7 @@ void showNameUpdateDialog(BuildContext context, String currentName) {
                       ),
                     ),
                   ),
-                  const SizedBox(width: 12),
-                  // Nút Lưu
+                  AppDimens.spaceSmall,
                   Material(
                     color: Colors.transparent,
                     child: InkWell(
@@ -140,16 +137,16 @@ void showNameUpdateDialog(BuildContext context, String currentName) {
                           Navigator.of(context).pop();
                         });
                       },
-                      borderRadius: BorderRadius.circular(8),
+                      borderRadius: BorderRadius.circular(AppDimens.borderRadiusSmall),
                       child: Ink(
                         padding: const EdgeInsets.symmetric(
-                            horizontal: 20, vertical: 10),
+                            horizontal: AppDimens.padding, vertical: AppDimens.paddingMedium),
                         decoration: BoxDecoration(
-                          color: const Color(0xFF66B2FF),
+                          color: AppColors.primaryColor,
                           borderRadius: BorderRadius.circular(8),
                           boxShadow: [
                             BoxShadow(
-                              color: const Color(0xFF66B2FF).withOpacity(0.3),
+                              color: AppColors.primaryColor.withOpacity(0.3),
                               blurRadius: 8,
                               offset: const Offset(0, 2),
                             ),

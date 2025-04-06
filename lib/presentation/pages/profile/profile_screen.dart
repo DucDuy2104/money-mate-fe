@@ -42,6 +42,7 @@ class ProfileScreen extends StatelessWidget {
             AppDimens.spaceSmall,
             const AppTab(
                 tab1Name: 'Hôm nay', tab2Name: 'Tháng này', controller: null),
+            AppDimens.spaceSmall,
             Expanded(
               child: TabBarView(
                 children: [

@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:money_mate/presentation/pages/profile/bloc/profile_bloc.dart';
 import 'package:money_mate/presentation/pages/profile/widgets/profile_skeleton.dart';
-import 'package:money_mate/shared/constants/app_constants.dart';
+import 'package:money_mate/shared/constants/constants.dart';
+import 'package:money_mate/shared/helper/currency_heler.dart';
 
 class ProfileCard extends StatelessWidget {
   const ProfileCard({super.key});
@@ -14,221 +15,177 @@ class ProfileCard extends StatelessWidget {
     return BlocBuilder<ProfileBloc, ProfileState>(
       builder: (context, state) {
         return state.maybeMap(
-            loaded: (state) {
-              final profile = state.data.profile;
-              return Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                    colors: isDarkMode
-                        ? [const Color(0xFF2B2D3E), const Color(0xFF1A1C2A)]
-                        : [const Color(0xFFFFFFFF), const Color(0xFFF8F9FE)],
+          loaded: (state) {
+            final profile = state.data.profile;
+            return Container(
+              padding: const EdgeInsets.all(AppDimens.paddingMedium),
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: isDarkMode
+                      ? [const Color(0xFF232538), const Color(0xFF171926)]
+                      : [const Color(0xFFFFFFFF), const Color(0xFFF5F7FD)],
+                ),
+                borderRadius: BorderRadius.circular(AppDimens.borderRadiusMedium),
+                boxShadow: [
+                  BoxShadow(
+                    color: isDarkMode
+                        ? Colors.black.withOpacity(0.4)
+                        : Colors.grey.withOpacity(0.2),
+                    blurRadius: 10,
+                    spreadRadius: 1,
+                    offset: const Offset(0, 4),
                   ),
-                  borderRadius: BorderRadius.circular(20),
-                  boxShadow: [
-                    BoxShadow(
-                      color: isDarkMode
-                          ? Colors.black.withOpacity(0.3)
-                          : Colors.grey.withOpacity(0.15),
-                      blurRadius: 12,
-                      spreadRadius: 1,
-                      offset: const Offset(0, 6),
-                    ),
-                  ],
-                ),
-                child: Row(
-                  children: [
-                    // Avatar with gradient border
-                    Container(
-                      padding: const EdgeInsets.all(2),
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        gradient: const LinearGradient(
-                          begin: Alignment.topLeft,
-                          end: Alignment.bottomRight,
-                          colors: [
-                            Color(0xFF4776E6),
-                            Color(0xFF8E54E9),
-                          ],
+                ],
+              ),
+              child: Row(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(2.5),
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: AppColors.primaryColor,
+                      boxShadow: [
+                        BoxShadow(
+                          color: AppColors.primaryColor.withOpacity(0.3),
+                          blurRadius: 8,
+                          spreadRadius: 1,
+                          offset: const Offset(0, 2),
                         ),
-                        boxShadow: [
-                          BoxShadow(
-                            color: const Color(0xFF8E54E9).withOpacity(0.2),
-                            blurRadius: 8,
-                            spreadRadius: 1,
-                            offset: const Offset(0, 3),
-                          ),
-                        ],
-                      ),
+                      ],
+                    ),
+                    child: CircleAvatar(
+                      radius: AppDimens.borderRadiusLarge * 1.2,
+                      backgroundColor: isDarkMode ? const Color(0xFF1A1C2A) : Colors.white,
                       child: CircleAvatar(
-                        radius: 32,
-                        backgroundColor:
-                            isDarkMode ? const Color(0xFF1A1C2A) : Colors.white,
-                        child: CircleAvatar(
-                          radius: 30,
-                          backgroundImage: NetworkImage(
-                              profile.avatarUrl ?? AppConstants.tempImage),
-                        ),
+                        radius: AppDimens.borderRadiusLarge * 1.2 - 2,
+                        backgroundImage: NetworkImage(profile.avatarUrl ?? AppConstants.tempImage),
                       ),
                     ),
-                    const SizedBox(width: 14),
+                  ),
+                  AppDimens.spaceMedium,
 
-                    // User information
-                    Expanded(
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
+                  Expanded(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Flexible(
+                          child: Text(
                             profile.name!,
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                              color:
-                                  isDarkMode ? Colors.white : Color(0xFF303952),
-                              letterSpacing: 0.3,
+                            style: context.textTheme.bodyLarge?.copyWith(
+                              fontWeight: FontWeight.w600,
+                              color: isDarkMode ? Colors.white : Colors.black87,
                             ),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
                           ),
-                          const SizedBox(height: 4),
-                          Row(
-                            children: [
-                              Icon(
-                                Icons.email_outlined,
-                                size: 14,
-                                color: isDarkMode
-                                    ? Colors.grey[400]
-                                    : Colors.grey[600],
-                              ),
-                              const SizedBox(width: 4),
-                              Text(
+                        ),
+                        AppDimens.divider,
+                        Row(
+                          children: [
+                            Icon(
+                              Icons.email_outlined,
+                              size: AppDimens.iconSizeSmall,
+                              color: isDarkMode ? Colors.grey[400] : Colors.grey[600],
+                            ),
+                            AppDimens.divider,
+                            Flexible(
+                              child: Text(
                                 profile.email,
-                                style: TextStyle(
-                                  fontSize: 12,
-                                  color: isDarkMode
-                                      ? Colors.grey[400]
-                                      : Colors.grey[600],
+                                style: context.textTheme.bodySmall?.copyWith(
+                                  color: isDarkMode ? Colors.grey[400] : Colors.grey[600],
                                 ),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
                               ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-
-                    // Vertical divider
-                    Container(
-                      height: 50,
-                      width: 1,
-                      margin: const EdgeInsets.symmetric(horizontal: 12),
-                      decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          begin: Alignment.topCenter,
-                          end: Alignment.bottomCenter,
-                          colors: [
-                            Colors.grey.withOpacity(0.05),
-                            Colors.grey.withOpacity(0.2),
-                            Colors.grey.withOpacity(0.05),
+                            ),
                           ],
                         ),
-                      ),
+                      ],
                     ),
+                  ),
 
-                    // Balance column
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 10, horizontal: 12),
-                      decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          begin: Alignment.topLeft,
-                          end: Alignment.bottomRight,
-                          colors: isDarkMode
-                              ? [
-                                  const Color(0xFF2E7D32),
-                                  const Color(0xFF1B5E20)
-                                ]
-                              : [
-                                  const Color(0xFFE8F5E9),
-                                  const Color(0xFFC8E6C9)
-                                ],
-                        ),
-                        borderRadius: BorderRadius.circular(12),
-                        boxShadow: [
-                          BoxShadow(
-                            color: isDarkMode
-                                ? Colors.black.withOpacity(0.2)
-                                : Colors.green.withOpacity(0.1),
-                            blurRadius: 6,
-                            spreadRadius: 0,
-                            offset: const Offset(0, 3),
-                          ),
-                        ],
-                      ),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Container(
-                            padding: const EdgeInsets.all(6),
-                            decoration: BoxDecoration(
-                              color: isDarkMode
-                                  ? Colors.green[800]!.withOpacity(0.3)
-                                  : Colors.white.withOpacity(0.6),
-                              shape: BoxShape.circle,
-                            ),
-                            child: Icon(
-                              Icons.account_balance_wallet,
-                              color: isDarkMode
-                                  ? Colors.greenAccent
-                                  : Colors.green[700],
-                              size: 16,
-                            ),
-                          ),
-                          const SizedBox(height: 6),
-                          Text(
-                            "Số dư",
-                            style: TextStyle(
-                              fontSize: 10,
-                              color: isDarkMode
-                                  ? Colors.green[100]
-                                  : Colors.green[800],
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                          const SizedBox(height: 3),
-                          Text(
-                            _formatMoney(profile.budget),
-                            style: TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.bold,
-                              color:
-                                  isDarkMode ? Colors.white : Colors.green[900],
-                            ),
-                          ),
+                  Container(
+                    height: 44,
+                    width: 1.5,
+                    margin: const EdgeInsets.symmetric(horizontal: 10),
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        colors: [
+                          Colors.grey.withOpacity(0.05),
+                          Colors.grey.withOpacity(0.3),
+                          Colors.grey.withOpacity(0.05),
                         ],
                       ),
                     ),
-                  ],
-                ),
-              );
-            },
-            orElse: () => const ProfileSkeleton());
+                  ),
+
+                  Container(
+                    padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                        colors: isDarkMode
+                            ? [const Color(0xFF2E7D32), const Color(0xFF1B5E20)]
+                            : [const Color(0xFFE3F2FD), const Color(0xFFBBDEFB)],
+                      ),
+                      borderRadius: BorderRadius.circular(AppDimens.borderRadius * 1.2),
+                      boxShadow: [
+                        BoxShadow(
+                          color: isDarkMode
+                              ? Colors.black.withOpacity(0.25)
+                              : Colors.blue.withOpacity(0.15),
+                          blurRadius: 6,
+                          spreadRadius: 0,
+                          offset: const Offset(0, 2),
+                        ),
+                      ],
+                    ),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Container(
+                          decoration: BoxDecoration(
+                            color: isDarkMode
+                                ? Colors.green[800]!.withOpacity(0.4)
+                                : Colors.white.withOpacity(0.8),
+                            shape: BoxShape.circle,
+                          ),
+                          child: Icon(
+                            Icons.account_balance_wallet,
+                            color: isDarkMode ? Colors.greenAccent : Colors.blue[700],
+                            size: AppDimens.iconSizeSmall,
+                          ),
+                        ),
+                        AppDimens.divider,
+                        Text(
+                          "Số dư",
+                          style: context.textTheme.labelSmall?.copyWith(
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        Text(
+                          CurrencyHelper.formatCurrencyCompact(profile.budget),
+                          style: context.textTheme.bodySmall?.copyWith(
+                            fontWeight: FontWeight.w600,
+                            color: isDarkMode ? Colors.white : Colors.blue[800],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            );
+          },
+          orElse: () => const ProfileSkeleton(),
+        );
       },
     );
-  }
-
-  // Format money with suffix and add currency symbol
-  String _formatMoney(double amount) {
-    if (amount >= 1000000000) {
-      return '${(amount / 1000000000).toStringAsFixed(amount % 1000000000 == 0 ? 0 : 1)}B ₫';
-    } else if (amount >= 1000000) {
-      return '${(amount / 1000000).toStringAsFixed(amount % 1000000 == 0 ? 0 : 1)}M ₫';
-    } else if (amount >= 1000) {
-      return '${(amount / 1000).toStringAsFixed(amount % 1000 == 0 ? 0 : 1)}K ₫';
-    } else {
-      return '${amount.toStringAsFixed(amount % 1 == 0 ? 0 : 1)} ₫';
-    }
   }
 }

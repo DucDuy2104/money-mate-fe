@@ -22,6 +22,7 @@ class ChatScreen extends StatefulWidget {
 class _ChatScreenState extends State<ChatScreen> {
   final TextEditingController _textController = TextEditingController();
   final ScrollController _scrollController = ScrollController();
+  final FocusNode _focusNode = FocusNode();
 
   @override
   void initState() {
@@ -29,6 +30,7 @@ class _ChatScreenState extends State<ChatScreen> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       connectSocket();
       getBotConversation();
+      scrollerListener();
     });
   }
 
@@ -37,6 +39,14 @@ class _ChatScreenState extends State<ChatScreen> {
     leaveRoom();
     _textController.dispose();
     super.dispose();
+  }
+
+  void scrollerListener() {
+    _scrollController.addListener(() {
+      if (_focusNode.hasFocus) {
+        _focusNode.unfocus();
+      }
+    });
   }
 
   void getBotConversation() {
@@ -81,15 +91,19 @@ class _ChatScreenState extends State<ChatScreen> {
                     loading: (state) => true, orElse: () => false),
                 child: Scaffold(
                   appBar: AppBar(
-                    title: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(conversation.bot.name,
-                            style: context.textTheme.bodyLarge),
-                        Text(conversation.bot.description,
-                            style: context.textTheme.bodySmall
-                                ?.copyWith(color: AppColors.subText)),
-                      ],
+                    title: Align(
+                      alignment: Alignment.centerLeft,
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(conversation.bot.name,
+                              style: context.textTheme.bodyLarge),
+                          Text(conversation.bot.description,
+                              style: context.textTheme.bodySmall
+                                  ?.copyWith(color: AppColors.subText)),
+                        ],
+                      ),
                     ),
                     actions: [
                       IconButton(
@@ -111,9 +125,10 @@ class _ChatScreenState extends State<ChatScreen> {
                             controller: _scrollController,
                             padding:
                                 const EdgeInsets.all(AppDimens.paddingSmall),
-                            itemCount: messages.isNotEmpty && messages[0].isSentByMe
-                                ? messages.length + 1
-                                : messages.length,
+                            itemCount:
+                                messages.isNotEmpty && messages[0].isSentByMe
+                                    ? messages.length + 1
+                                    : messages.length,
                             itemBuilder: (context, index) {
                               if (index == 0 && messages[0].isSentByMe) {
                                 return const TypingIndicator();
@@ -130,8 +145,10 @@ class _ChatScreenState extends State<ChatScreen> {
                             color: Theme.of(context).cardColor,
                           ),
                           child: MessageInput(
-                              textController: _textController,
-                              onSendMessage: onSendMessage),
+                            textController: _textController,
+                            onSendMessage: onSendMessage,
+                            focusNode: _focusNode,
+                          ),
                         ),
                       ],
                     ),

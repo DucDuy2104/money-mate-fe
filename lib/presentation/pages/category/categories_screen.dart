@@ -134,32 +134,32 @@ class _CategoriesScreenState extends State<CategoriesScreen>
               ),
             ),
             drawer: const AppDrawer(currentRoute: RouteNames.category),
-            body: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                AppTab(
-                    tab1Name: 'Chi tiêu',
-                    tab2Name: 'Thu nhập',
-                    controller: _tabController),
-                AppDimens.spaceSmall,
-                Expanded(
-                  child: FadeTransition(
-                    opacity: _fadeAnimation,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 16),
-                          child: Builder(
+            body: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: AppDimens.paddingMedium),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  AppTab(
+                      tab1Name: 'Chi tiêu',
+                      tab2Name: 'Thu nhập',
+                      controller: _tabController),
+                  AppDimens.spaceSmall,
+                  Expanded(
+                    child: FadeTransition(
+                      opacity: _fadeAnimation,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Builder(
                             builder: (context) {
                               bool isExpenseTab = _tabController.index == 0;
                               int selectedCount =
                                   BlocProvider.of<CategoriesBloc>(context)
                                       .countSelectedCategories();
-
+                          
                               return Container(
                                 decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(16),
+                                  borderRadius: BorderRadius.circular(AppDimens.borderRadius),
                                   gradient: LinearGradient(
                                     colors: isExpenseTab
                                         ? [
@@ -172,11 +172,11 @@ class _CategoriesScreenState extends State<CategoriesScreen>
                                           ],
                                   ),
                                 ),
-                                padding: const EdgeInsets.all(12),
+                                padding: const EdgeInsets.all(AppDimens.paddingMedium),
                                 child: Row(
                                   children: [
                                     Container(
-                                      padding: const EdgeInsets.all(8),
+                                      padding: const EdgeInsets.all(AppDimens.borderRadiusSmall),
                                       decoration: BoxDecoration(
                                         color: Colors.white.withOpacity(0.2),
                                         shape: BoxShape.circle,
@@ -188,7 +188,7 @@ class _CategoriesScreenState extends State<CategoriesScreen>
                                             : Colors.lightGreen,
                                       ),
                                     ),
-                                    const SizedBox(width: 12),
+                                    AppDimens.spaceSmall,
                                     Expanded(
                                       child: Text(
                                         'Đã chọn $selectedCount danh mục. Nhấn vào danh mục để thêm hoặc cập nhật hạn mức.',
@@ -203,36 +203,28 @@ class _CategoriesScreenState extends State<CategoriesScreen>
                               );
                             },
                           ),
-                        ),
-                        const SizedBox(height: 16),
-                        Expanded(
-                          child: TabBarView(
-                            controller: _tabController,
-                            children: [
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 16),
-                                child: CategoriesGrid(
+                          AppDimens.spaceSmall,
+                          Expanded(
+                            child: TabBarView(
+                              controller: _tabController,
+                              children: [
+                                CategoriesGrid(
                                   categories: systemExpenseCategories,
                                   onCategorySelected: toggleCategory,
                                 ),
-                              ),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 16),
-                                child: CategoriesGrid(
+                                CategoriesGrid(
                                   categories: systemIncomeCategories,
                                   onCategorySelected: toggleCategory,
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         );

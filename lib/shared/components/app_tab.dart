@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:money_mate/shared/constants/constants.dart';
 
 class AppTab extends StatelessWidget {
   final String tab1Name;
@@ -9,7 +10,6 @@ class AppTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       height: 56,
       decoration: BoxDecoration(
         gradient: const LinearGradient(
@@ -45,14 +45,7 @@ class AppTab extends StatelessWidget {
           ),
           indicatorSize: TabBarIndicatorSize.tab,
           indicator: BoxDecoration(
-            gradient: const LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              colors: [
-                Color(0xFF6B55E0),
-                Color(0xFF8363E8),
-              ],
-            ),
+            color: AppColors.primaryColor,
             borderRadius: BorderRadius.circular(30),
             boxShadow: [
               BoxShadow(

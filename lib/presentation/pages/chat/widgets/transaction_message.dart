@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:money_mate/domain/entities/transaction.dart';
+import 'package:money_mate/shared/constants/constants.dart';
 import 'package:money_mate/shared/helper/currency_heler.dart';
 
 class TransactionInfoMessage extends StatelessWidget {
@@ -20,7 +21,7 @@ class TransactionInfoMessage extends StatelessWidget {
       width: MediaQuery.of(context).size.width * 0.7,
       decoration: BoxDecoration(
         color: Colors.grey[200],
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(AppDimens.borderRadius),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.1),
@@ -30,7 +31,8 @@ class TransactionInfoMessage extends StatelessWidget {
           ),
         ],
       ),
-      padding: const EdgeInsets.all(12),
+      padding: const EdgeInsets.symmetric(
+          vertical: AppDimens.paddingMedium, horizontal: AppDimens.padding),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -38,46 +40,41 @@ class TransactionInfoMessage extends StatelessWidget {
           Row(
             children: [
               Container(
-                padding: const EdgeInsets.all(6),
+                padding: const EdgeInsets.all(AppDimens.paddingSmall),
                 decoration: BoxDecoration(
                   color: transaction.category.color.withOpacity(0.2),
-                  borderRadius: BorderRadius.circular(10),
+                  borderRadius: BorderRadius.circular(AppDimens.borderRadius),
                 ),
                 child: Icon(
                   transaction.category.icon,
                   color: transaction.category.color,
-                  size: 16,
+                  size: AppDimens.iconSize,
                 ),
               ),
-              const SizedBox(width: 8),
+              AppDimens.spaceSmall,
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       transaction.category.name,
-                      style: const TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.black87,
-                      ),
+                      style: context.textTheme.bodyMedium
+                          ?.copyWith(color: Colors.black),
                       overflow: TextOverflow.ellipsis,
                     ),
                     Row(
                       children: [
                         Text(
                           transaction.category.type.name,
-                          style: const TextStyle(
-                            fontSize: 10,
-                            color: Colors.black54,
+                          style: context.textTheme.labelSmall?.copyWith(
+                            color: AppColors.subText,
                           ),
                         ),
-                        const SizedBox(width: 4),
+                        AppDimens.divider,
                         Text(
                           '• ${_formatDate(transaction.createdAt)} ${_formatTime(transaction.createdAt)}',
-                          style: TextStyle(
-                            fontSize: 10,
-                            color: Colors.grey[600],
+                          style: context.textTheme.labelSmall?.copyWith(
+                            color: AppColors.subText,
                           ),
                         ),
                       ],
@@ -88,40 +85,35 @@ class TransactionInfoMessage extends StatelessWidget {
               _buildActionButton(),
             ],
           ),
-          const SizedBox(height: 8),
+          AppDimens.spaceSmall,
           Row(
             children: [
               Expanded(
                 flex: 3,
                 child: Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+                  padding: const EdgeInsets.all(AppDimens.paddingSmall),
                   decoration: BoxDecoration(
                     color: transaction.amount >= 0
                         ? Colors.teal[50]
                         : Colors.red[50],
-                    borderRadius: BorderRadius.circular(10),
+                    borderRadius:
+                        BorderRadius.circular(AppDimens.borderRadiusSmall),
                   ),
                   child: Text(
                     CurrencyHelper.formatCurrencyCompact(transaction.amount),
-                    style: TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.w700,
-                      color: transaction.amount >= 0
-                          ? Colors.teal[800]
-                          : Colors.red[800],
+                    style: context.textTheme.bodyMedium?.copyWith(
+                      color: Colors.teal[800],
                     ),
                     textAlign: TextAlign.center,
                   ),
                 ),
               ),
               if (transaction.description.isNotEmpty) ...[
-                const SizedBox(width: 8),
+                AppDimens.spaceSmall,
                 Expanded(
                   flex: 5,
                   child: Container(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+                    padding: const EdgeInsets.all(AppDimens.paddingSmall),
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(10),
@@ -129,8 +121,7 @@ class TransactionInfoMessage extends StatelessWidget {
                     ),
                     child: Text(
                       transaction.description,
-                      style: TextStyle(
-                        fontSize: 12,
+                      style: context.textTheme.bodySmall?.copyWith(
                         color: Colors.grey[800],
                       ),
                       maxLines: 2,
@@ -149,8 +140,8 @@ class TransactionInfoMessage extends StatelessWidget {
   Widget _buildActionButton() {
     if (transaction.isLoading) {
       return SizedBox(
-        width: 16,
-        height: 16,
+        width: AppDimens.iconSize,
+        height: AppDimens.iconSize,
         child: CircularProgressIndicator(
           strokeWidth: 2,
           valueColor: AlwaysStoppedAnimation<Color>(Colors.grey[600]!),
@@ -162,7 +153,7 @@ class TransactionInfoMessage extends StatelessWidget {
         child: Icon(
           Icons.refresh,
           color: Colors.grey[600],
-          size: 16,
+          size: AppDimens.iconSizeSmall,
         ),
       );
     } else {
@@ -171,7 +162,7 @@ class TransactionInfoMessage extends StatelessWidget {
         child: Icon(
           Icons.close,
           color: Colors.grey[600],
-          size: 16,
+          size: AppDimens.iconSizeSmall,
         ),
       );
     }

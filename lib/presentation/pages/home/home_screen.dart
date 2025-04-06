@@ -8,10 +8,10 @@ import 'package:money_mate/presentation/drawer_navigation/app_drawer.dart';
 import 'package:money_mate/presentation/pages/home/widgets/category_item.dart';
 import 'package:money_mate/presentation/pages/home/widgets/expense_chart.dart';
 import 'package:money_mate/presentation/pages/home/widgets/transaction_item.dart';
+import 'package:money_mate/presentation/pages/home/widgets/wallet_widget.dart';
 import 'package:money_mate/presentation/pages/profile/bloc/profile_bloc.dart';
 import 'package:money_mate/presentation/routes/route_name.dart';
 import 'package:money_mate/shared/components/loading_scafford.dart';
-import 'package:money_mate/shared/constants/app_dimens.dart';
 import 'package:money_mate/shared/constants/constants.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -76,7 +76,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         );
                       },
                     ),
-                    title: Text('👋Hôm nay bạn thế nào?'),
+                    title: const SimpleWalletWidget(),
                   ),
                   drawer: const AppDrawer(currentRoute: RouteNames.home),
                   floatingActionButton: FloatingActionButton(
@@ -94,13 +94,12 @@ class _HomeScreenState extends State<HomeScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         IncomeExpenseChart(statistic: statistic),
-                        const SizedBox(height: 20),
-                        const Text("Danh mục tiêu dùng",
-                            style: TextStyle(
-                                fontSize: 18, fontWeight: FontWeight.bold)),
-                        const SizedBox(height: 10),
+                        AppDimens.spaceMedium,
+                        Text("Danh mục tiêu dùng",
+                            style: context.textTheme.titleLarge),
+                        AppDimens.spaceSmall,
                         SizedBox(
-                          height: 110,
+                          height: 85,
                           child: ListView.separated(
                             scrollDirection: Axis.horizontal,
                             itemCount: categories.length,
@@ -113,11 +112,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                     AppDimens.divider,
                           ),
                         ),
-                        const SizedBox(height: 20),
-                        const Text("Chi tiêu gần đây",
-                            style: TextStyle(
-                                fontSize: 18, fontWeight: FontWeight.bold)),
-                        const SizedBox(height: 10),
+                        AppDimens.spaceMedium,
+                        Text("Chi tiêu gần đây",
+                            style: context.textTheme.titleLarge),
+                        AppDimens.spaceSmall,
                         Expanded(
                           child: ListView.separated(
                             separatorBuilder: (context, index) =>

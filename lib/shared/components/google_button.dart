@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:money_mate/shared/constants/app_dimens.dart';
 
 // ignore: must_be_immutable
 class GoogleSignInButton extends StatelessWidget {
@@ -22,7 +23,7 @@ class GoogleSignInButton extends StatelessWidget {
           backgroundColor: Colors.white,
           foregroundColor: Colors.black,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-          padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+          padding: const EdgeInsets.symmetric(vertical: AppDimens.padding, horizontal: AppDimens.padding),
           elevation: 2,
         ),
       ),
