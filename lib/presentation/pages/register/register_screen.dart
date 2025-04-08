@@ -123,7 +123,10 @@ class RegisterScreen extends StatelessWidget {
                     ),
                   ),
                   AppDimens.space,
-                  GoogleSignInButton(content: 'Đăng ký với Google'),
+                  GoogleSignInButton(
+                    content: 'Đăng ký với Google',
+                    onTap: () {},
+                  ),
                   const SizedBox(height: 20),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
