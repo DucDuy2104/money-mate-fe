@@ -10,6 +10,7 @@ abstract class AuthRemoteDataSource {
   ResultFuture<UserModel> verification(String userId, String code);
   ResultFuture<LoginDataModel> login(String email, String password);
   ResultFuture<LoginDataModel> refreshToken();
+  ResultFuture<LoginDataModel> signinWithGoogle(String idToken);
 }
 
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
@@ -62,12 +63,22 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     return _apiClient.post(
         req: req, parser: (data) => LoginDataModel.fromJson(data));
   }
-  
+
   @override
   ResultFuture<LoginDataModel> refreshToken() {
     final req = ApiRequest(
       url: '/auth/refresh-token',
     );
+
+    return _apiClient.get(
+        req: req, parser: (data) => LoginDataModel.fromJson(data));
+  }
+
+  @override
+  ResultFuture<LoginDataModel> signinWithGoogle(String idToken) {
+    final req = ApiRequest(url: '/auth/google', headers: {
+      'Authorization': 'Bearer $idToken',
+    });
 
     return _apiClient.get(
         req: req, parser: (data) => LoginDataModel.fromJson(data));

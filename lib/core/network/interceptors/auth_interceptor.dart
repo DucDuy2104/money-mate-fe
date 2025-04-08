@@ -9,20 +9,23 @@ class AuthInterceptor extends Interceptor {
   final OnboardLocalDataSource _localDataSource;
   late AuthRepository _authRepository;
   static const String _refreshEndpoint = '/auth/refresh-token';
+  static const String _googleAuthEndpoint = '/auth/google';
 
   AuthInterceptor(this._dio, this._localDataSource);
 
   @override
   void onRequest(
       RequestOptions options, RequestInterceptorHandler handler) async {
-    if (options.path != _refreshEndpoint) {
+    if (options.path == _refreshEndpoint) {
+      options.headers['Authorization'] =
+          'Bearer ${_localDataSource.getRefreshToken()}';
+    }
+    if (options.path != _refreshEndpoint &&
+        options.path != _googleAuthEndpoint) {
       final accessToken = _localDataSource.getAccessToken();
       if (accessToken != null) {
         options.headers['Authorization'] = 'Bearer $accessToken';
       }
-    } else {
-      options.headers['Authorization'] =
-          'Bearer ${_localDataSource.getRefreshToken()}';
     }
     handler.next(options);
   }
@@ -35,7 +38,8 @@ class AuthInterceptor extends Interceptor {
   @override
   void onError(DioException err, ErrorInterceptorHandler handler) async {
     if ((err.response?.statusCode == 401 || err.response?.statusCode == 417) &&
-        err.requestOptions.path != _refreshEndpoint) {
+        err.requestOptions.path != _refreshEndpoint &&
+        err.requestOptions.path != _googleAuthEndpoint) {
       try {
         _authRepository = getIt<AuthRepository>();
         final refreshResult = await _authRepository.refreshToken();

@@ -8,4 +8,5 @@ abstract class AuthRepository {
   ResultFuture<User> verification(String userId, String code);
   ResultFuture<LoginData> login(String email, String password);
   ResultFuture<LoginData> refreshToken();
+  ResultFuture<LoginData> signinWithGoogle(String idToken);
 }
