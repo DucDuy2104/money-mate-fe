@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:money_mate/presentation/pages/register/bloc/register_bloc.dart';
+import 'package:money_mate/presentation/pages/auth/bloc/auth_bloc.dart';
+import 'package:money_mate/presentation/routes/bloc/routes_bloc.dart';
 import 'package:money_mate/presentation/routes/route_name.dart';
 import 'package:money_mate/shared/components/app_toast.dart';
 import 'package:money_mate/shared/components/google_button.dart';
@@ -12,56 +13,69 @@ import 'package:money_mate/shared/constants/app_dimens.dart';
 import 'package:money_mate/shared/constants/app_theme.dart';
 import 'package:money_mate/shared/utils/screen_utils.dart';
 
-class RegisterScreen extends StatelessWidget {
-  RegisterScreen({super.key});
+class LoginScreen extends StatelessWidget {
+  LoginScreen({super.key});
 
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _confirmPasswordController =
-      TextEditingController();
-  final FocusNode _emailFocusNode = FocusNode();
   final FocusNode _passwordFocusNode = FocusNode();
-  final FocusNode _confirmPasswordFocusNode = FocusNode();
+  final FocusNode _emailFocusNode = FocusNode();
 
-  void _onRegister(BuildContext context) {
-    final email = _emailController.text;
-    final password = _passwordController.text;
-    final confirmPassword = _confirmPasswordController.text;
-    _emailFocusNode.unfocus();
-    _passwordFocusNode.unfocus();
-    _confirmPasswordFocusNode.unfocus();
-    if (email.isEmpty || password.isEmpty || confirmPassword.isEmpty) {
-      AppToast.warning(context, 'Vui lòng điền đầy đủ thông tin');
-      return;
+  void _onLogin(BuildContext context) {
+    try {
+      final email = _emailController.text;
+      final password = _passwordController.text;
+      _emailFocusNode.unfocus();
+      _passwordFocusNode.unfocus();
+      if (email.isEmpty || password.isEmpty) {
+        AppToast.error(context, 'Vui lòng nhập đủ thông tin');
+        return;
+      }
+
+      BlocProvider.of<AuthBloc>(context).add(AuthEvent.login(email, password));
+    } catch (e) {
+      AppToast.error(context, 'Đã có lỗi xảy ra');
+      debugPrint(e.toString());
     }
+  }
 
-    if (password != confirmPassword) {
-      AppToast.warning(context, 'Mật khẩu xác nhận không trùng khớp');
-      return;
+  void _onGoogleSignin(BuildContext context) {
+    try {
+      BlocProvider.of<AuthBloc>(context).add(const AuthEvent.googleSignin());
+    } catch (e) {
+      AppToast.error(context, 'Đã có lỗi xảy ra');
+      debugPrint(e.toString());
     }
-
-    BlocProvider.of<RegisterBloc>(context)
-        .add(RegisterEvent.register(email, password));
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<RegisterBloc, RegisterState>(
-      listener: (BuildContext context, RegisterState state) {
+    return BlocConsumer<AuthBloc, AuthState>(
+      listener: (context, state) {
         state.maybeMap(
-            success: (data) => {
-                  context.pushNamed(RouteNames.otpVerificationName,
-                      extra: data.user)
-                },
-            failure: (failure) => {AppToast.error(context, failure.error)},
+            success: (state) {
+              final user = state.user;
+              if (!user.isActive) {
+                context.goNamed(RouteNames.otpVerificationName, extra: user);
+                return;
+              }
+              if (!user.isSetup) {
+                context.goNamed(RouteNames.setupName);
+                return;
+              }
+              BlocProvider.of<RoutesBloc>(context)
+                  .add(const RoutesEvent.setAuth());
+              context.goNamed(RouteNames.homeName);
+            },
+            error: (state) {
+              AppToast.error(context, state.error);
+            },
             orElse: () {});
       },
       builder: (context, state) {
         return LoadingScaffold(
-          isLoading: state.maybeMap(
-            loading: (_) => true,
-            orElse: () => false,
-          ),
+          isLoading:
+              state.maybeMap(loading: (data) => true, orElse: () => false),
           child: Scaffold(
             resizeToAvoidBottomInset: false,
             body: Padding(
@@ -69,25 +83,23 @@ class RegisterScreen extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Image.asset(AppAssets.storySetWellcome,
+                  Image.asset(AppAssets.storySetBack,
                       width: 200, height: 200, fit: BoxFit.contain),
-                  AppDimens.space,
+                  AppDimens.spaceLarge,
                   TextField(
                     controller: _emailController,
                     focusNode: _emailFocusNode,
                     onSubmitted: (value) {
                       _passwordFocusNode.requestFocus();
                     },
-                    decoration: const InputDecoration(
-                      labelText: 'Email',
-                    ),
+                    decoration: const InputDecoration(labelText: 'Email'),
                   ),
                   AppDimens.space,
                   TextField(
                     controller: _passwordController,
                     focusNode: _passwordFocusNode,
                     onSubmitted: (value) {
-                      _confirmPasswordFocusNode.requestFocus();
+                      _onLogin(context);
                     },
                     obscureText: true,
                     decoration: const InputDecoration(
@@ -95,28 +107,25 @@ class RegisterScreen extends StatelessWidget {
                     ),
                   ),
                   AppDimens.space,
-                  TextField(
-                    controller: _confirmPasswordController,
-                    focusNode: _confirmPasswordFocusNode,
-                    onSubmitted: (value) {
-                      _onRegister(context);
-                    },
-                    obscureText: true,
-                    decoration: const InputDecoration(
-                      labelText: 'Nhập lại mật khẩu',
-                    ),
-                  ),
+                  Align(
+                      alignment: Alignment.centerLeft,
+                      child: GestureDetector(
+                          onTap: () {},
+                          child: Text(
+                            'Quên mật khẩu?',
+                            style: context.textTheme.bodyMedium
+                                ?.copyWith(color: AppColors.primaryColor),
+                          ))),
                   AppDimens.space,
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
                       onPressed: () {
-                        //TODO: handle register
-                        _onRegister(context);
-                        // context.goNamed(RouteNames.categoryRegisterName);
+                        //TODO: Handle login
+                        _onLogin(context);
                       },
                       child: Text(
-                        'Đăng ký',
+                        'Đăng nhập',
                         style: context.textTheme.bodyLarge
                             ?.copyWith(color: Colors.white),
                       ),
@@ -124,21 +133,23 @@ class RegisterScreen extends StatelessWidget {
                   ),
                   AppDimens.space,
                   GoogleSignInButton(
-                    content: 'Đăng ký với Google',
-                    onTap: () {},
+                    content: 'Đăng nhập với Google',
+                    onTap: () {
+                      _onGoogleSignin(context);
+                    },
                   ),
-                  const SizedBox(height: 20),
+                  AppDimens.space,
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Text("Bạn đã có tài khoản?"),
+                      const Text("Bạn chưa có tài khoản?"),
                       AppDimens.spaceSmall,
                       GestureDetector(
                         onTap: () {
-                          // Navigate to Login screen
-                          context.goNamed(RouteNames.loginName);
+                          // TODO: Navigate to Register screen
+                          context.goNamed(RouteNames.registerName);
                         },
-                        child: Text('Đăng nhập ngay',
+                        child: Text('Đăng ký ngay',
                             style: context.textTheme.bodyMedium
                                 ?.copyWith(color: AppColors.primaryColor)),
                       )

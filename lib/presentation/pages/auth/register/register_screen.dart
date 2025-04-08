@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:money_mate/core/service/auth_service/google_auth_service.dart';
-import 'package:money_mate/presentation/pages/login/bloc/login_bloc.dart';
-import 'package:money_mate/presentation/routes/bloc/routes_bloc.dart';
+import 'package:money_mate/presentation/pages/auth/bloc/auth_bloc.dart';
 import 'package:money_mate/presentation/routes/route_name.dart';
 import 'package:money_mate/shared/components/app_toast.dart';
 import 'package:money_mate/shared/components/google_button.dart';
@@ -14,27 +12,40 @@ import 'package:money_mate/shared/constants/app_dimens.dart';
 import 'package:money_mate/shared/constants/app_theme.dart';
 import 'package:money_mate/shared/utils/screen_utils.dart';
 
-class LoginScreen extends StatelessWidget {
-  LoginScreen({super.key});
+class RegisterScreen extends StatelessWidget {
+  RegisterScreen({super.key});
 
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  final FocusNode _passwordFocusNode = FocusNode();
+  final TextEditingController _confirmPasswordController =
+      TextEditingController();
   final FocusNode _emailFocusNode = FocusNode();
+  final FocusNode _passwordFocusNode = FocusNode();
+  final FocusNode _confirmPasswordFocusNode = FocusNode();
 
-  void _onLogin(BuildContext context) {
+  void _onRegister(BuildContext context) {
+    final email = _emailController.text;
+    final password = _passwordController.text;
+    final confirmPassword = _confirmPasswordController.text;
+    _emailFocusNode.unfocus();
+    _passwordFocusNode.unfocus();
+    _confirmPasswordFocusNode.unfocus();
+    if (email.isEmpty || password.isEmpty || confirmPassword.isEmpty) {
+      AppToast.warning(context, 'Vui lòng điền đầy đủ thông tin');
+      return;
+    }
+
+    if (password != confirmPassword) {
+      AppToast.warning(context, 'Mật khẩu xác nhận không trùng khớp');
+      return;
+    }
+
+    BlocProvider.of<AuthBloc>(context).add(AuthEvent.register(email, password));
+  }
+
+  void _onGoogleSignin(BuildContext context) {
     try {
-      final email = _emailController.text;
-      final password = _passwordController.text;
-      _emailFocusNode.unfocus();
-      _passwordFocusNode.unfocus();
-      if (email.isEmpty || password.isEmpty) {
-        AppToast.error(context, 'Vui lòng nhập đủ thông tin');
-        return;
-      }
-
-      BlocProvider.of<LoginBloc>(context)
-          .add(LoginEvent.login(email, password));
+      BlocProvider.of<AuthBloc>(context).add(const AuthEvent.googleSignin());
     } catch (e) {
       AppToast.error(context, 'Đã có lỗi xảy ra');
       debugPrint(e.toString());
@@ -43,31 +54,25 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<LoginBloc, LoginState>(
-      listener: (context, state) {
+    return BlocConsumer<AuthBloc, AuthState>(
+      listener: (BuildContext context, AuthState state) {
         state.maybeMap(
-            success: (value) {
-              final user = value.data.user;
-              if (!user.isActive) {
-                context.goNamed(RouteNames.otpVerificationName, extra: user);
-                return;
-              }
-              if (!user.isSetup) {
+            success: (data) {
+              if (data.user.isActive) {
                 context.goNamed(RouteNames.setupName);
                 return;
               }
-              BlocProvider.of<RoutesBloc>(context).add(const RoutesEvent.setAuth());
-              context.goNamed(RouteNames.homeName);
+              context.goNamed(RouteNames.otpVerificationName, extra: data.user);
             },
-            error: (value) {
-              AppToast.error(context, value.errorMessage);
-            },
+            error: (failure) => {AppToast.error(context, failure.error)},
             orElse: () {});
       },
       builder: (context, state) {
         return LoadingScaffold(
-          isLoading:
-              state.maybeMap(loading: (data) => true, orElse: () => false),
+          isLoading: state.maybeMap(
+            loading: (_) => true,
+            orElse: () => false,
+          ),
           child: Scaffold(
             resizeToAvoidBottomInset: false,
             body: Padding(
@@ -75,9 +80,9 @@ class LoginScreen extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Image.asset(AppAssets.storySetBack,
+                  Image.asset(AppAssets.storySetWellcome,
                       width: 200, height: 200, fit: BoxFit.contain),
-                  AppDimens.spaceLarge,
+                  AppDimens.space,
                   TextField(
                     controller: _emailController,
                     focusNode: _emailFocusNode,
@@ -85,7 +90,7 @@ class LoginScreen extends StatelessWidget {
                       _passwordFocusNode.requestFocus();
                     },
                     decoration: const InputDecoration(
-                      labelText: 'Email'
+                      labelText: 'Email',
                     ),
                   ),
                   AppDimens.space,
@@ -93,7 +98,7 @@ class LoginScreen extends StatelessWidget {
                     controller: _passwordController,
                     focusNode: _passwordFocusNode,
                     onSubmitted: (value) {
-                      _onLogin(context);
+                      _confirmPasswordFocusNode.requestFocus();
                     },
                     obscureText: true,
                     decoration: const InputDecoration(
@@ -101,47 +106,52 @@ class LoginScreen extends StatelessWidget {
                     ),
                   ),
                   AppDimens.space,
-                  Align(
-                      alignment: Alignment.centerLeft,
-                      child: GestureDetector(
-                          onTap: () {
-                          },
-                          child: Text(
-                            'Quên mật khẩu?',
-                            style: context.textTheme.bodyMedium
-                                ?.copyWith(color: AppColors.primaryColor),
-                          ))),
+                  TextField(
+                    controller: _confirmPasswordController,
+                    focusNode: _confirmPasswordFocusNode,
+                    onSubmitted: (value) {
+                      _onRegister(context);
+                    },
+                    obscureText: true,
+                    decoration: const InputDecoration(
+                      labelText: 'Nhập lại mật khẩu',
+                    ),
+                  ),
                   AppDimens.space,
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
                       onPressed: () {
-                        //TODO: Handle login
-                        _onLogin(context);
+                        //TODO: handle register
+                        _onRegister(context);
+                        // context.goNamed(RouteNames.categoryRegisterName);
                       },
                       child: Text(
-                        'Đăng nhập',
+                        'Đăng ký',
                         style: context.textTheme.bodyLarge
                             ?.copyWith(color: Colors.white),
                       ),
                     ),
                   ),
                   AppDimens.space,
-                  GoogleSignInButton(content: 'Đăng nhập với Google', onTap: () { 
-                    signInWithGoogle();
-                   },),
-                  AppDimens.space,
+                  GoogleSignInButton(
+                    content: 'Đăng ký với Google',
+                    onTap: () {
+                      _onGoogleSignin(context);
+                    },
+                  ),
+                  const SizedBox(height: 20),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Text("Bạn chưa có tài khoản?"),
+                      const Text("Bạn đã có tài khoản?"),
                       AppDimens.spaceSmall,
                       GestureDetector(
                         onTap: () {
-                          // TODO: Navigate to Register screen
-                          context.goNamed(RouteNames.registerName);
+                          // Navigate to Login screen
+                          context.goNamed(RouteNames.loginName);
                         },
-                        child: Text('Đăng ký ngay',
+                        child: Text('Đăng nhập ngay',
                             style: context.textTheme.bodyMedium
                                 ?.copyWith(color: AppColors.primaryColor)),
                       )

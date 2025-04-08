@@ -44,4 +44,11 @@ class AuthRepositoryImpl extends AuthRepository {
     return result.fold((failure) => Left(failure),
         (loginDataModel) => Right(loginDataModel.toEntity()));
   }
+  
+  @override
+  ResultFuture<LoginData> signinWithGoogle(String idToken) async {
+    final result = await _authRemoteDataSource.signinWithGoogle(idToken);
+    return result.fold((failure) => Left(failure),
+        (loginDataModel) => Right(loginDataModel.toEntity()));
+  }
 }
