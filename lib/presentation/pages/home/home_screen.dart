@@ -12,6 +12,7 @@ import 'package:money_mate/presentation/pages/home/widgets/wallet_widget.dart';
 import 'package:money_mate/presentation/pages/profile/bloc/profile_bloc.dart';
 import 'package:money_mate/presentation/routes/route_name.dart';
 import 'package:money_mate/shared/components/loading_scafford.dart';
+import 'package:money_mate/shared/constants/app_assets.dart';
 import 'package:money_mate/shared/constants/constants.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -85,7 +86,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         // TODO: go to chat screen
                         context.pushNamed(RouteNames.chatName);
                       },
-                      child: Image.asset('assets/images/otter.png',
+                      child: Image.asset(AppAssets.appLogo,
                           width: 100, height: 100, fit: BoxFit.cover)),
                   body: Padding(
                     padding: const EdgeInsets.symmetric(

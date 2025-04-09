@@ -1,5 +1,6 @@
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:money_mate/presentation/drawer_navigation/app_drawer.dart';
 import 'package:money_mate/presentation/routes/route_name.dart';
 import 'package:money_mate/shared/constants/constants.dart';
@@ -64,7 +65,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
             _buildSettingItem(
               icon: Icons.lock,
               title: 'Đổi mật khẩu',
-              onTap: () => _showChangePasswordDialog(),
+              onTap: () {
+                context.pushNamed(RouteNames.updatePasswordName);
+              },
             ),
             const Divider(height: 1),
             
@@ -221,165 +224,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
         value: value,
         onChanged: onChanged,
         activeColor: AppColors.primaryColor,
-      ),
-    );
-  }
-
-  // Dialog để đổi mật khẩu
-  void _showChangePasswordDialog() {
-    final TextEditingController currentPasswordController = TextEditingController();
-    final TextEditingController newPasswordController = TextEditingController();
-    final TextEditingController confirmPasswordController = TextEditingController();
-    bool _obscureCurrentPassword = true;
-    bool _obscureNewPassword = true;
-    bool _obscureConfirmPassword = true;
-    
-    showDialog(
-      context: context,
-      builder: (context) => StatefulBuilder(
-        builder: (context, setState) {
-          return AlertDialog(
-            backgroundColor: Colors.grey.shade900,
-            title: const Text('Đổi mật khẩu', style: TextStyle(color: Colors.white)),
-            contentPadding: const EdgeInsets.all(AppDimens.paddingMd),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(AppDimens.radiusMd),
-            ),
-            content: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                TextField(
-                  controller: currentPasswordController,
-                  obscureText: _obscureCurrentPassword,
-                  style: const TextStyle(color: Colors.white),
-                  decoration: InputDecoration(
-                    labelText: 'Mật khẩu hiện tại',
-                    labelStyle: TextStyle(color: Colors.grey[400]),
-                    enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey[700]!),
-                    ),
-                    focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: AppColors.primaryColor),
-                    ),
-                    suffixIcon: IconButton(
-                      icon: Icon(
-                        _obscureCurrentPassword ? Icons.visibility : Icons.visibility_off,
-                        color: Colors.grey[400],
-                        size: AppDimens.iconSizeSmall,
-                      ),
-                      onPressed: () {
-                        setState(() {
-                          _obscureCurrentPassword = !_obscureCurrentPassword;
-                        });
-                      },
-                    ),
-                  ),
-                ),
-                AppDimens.spaceMd,
-                TextField(
-                  controller: newPasswordController,
-                  obscureText: _obscureNewPassword,
-                  style: const TextStyle(color: Colors.white),
-                  decoration: InputDecoration(
-                    labelText: 'Mật khẩu mới',
-                    labelStyle: TextStyle(color: Colors.grey[400]),
-                    enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey[700]!),
-                    ),
-                    focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: AppColors.primaryColor),
-                    ),
-                    suffixIcon: IconButton(
-                      icon: Icon(
-                        _obscureNewPassword ? Icons.visibility : Icons.visibility_off,
-                        color: Colors.grey[400],
-                        size: AppDimens.iconSizeSmall,
-                      ),
-                      onPressed: () {
-                        setState(() {
-                          _obscureNewPassword = !_obscureNewPassword;
-                        });
-                      },
-                    ),
-                  ),
-                ),
-                AppDimens.spaceMd,
-                TextField(
-                  controller: confirmPasswordController,
-                  obscureText: _obscureConfirmPassword,
-                  style: const TextStyle(color: Colors.white),
-                  decoration: InputDecoration(
-                    labelText: 'Xác nhận mật khẩu mới',
-                    labelStyle: TextStyle(color: Colors.grey[400]),
-                    enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey[700]!),
-                    ),
-                    focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: AppColors.primaryColor),
-                    ),
-                    suffixIcon: IconButton(
-                      icon: Icon(
-                        _obscureConfirmPassword ? Icons.visibility : Icons.visibility_off,
-                        color: Colors.grey[400],
-                        size: AppDimens.iconSizeSmall,
-                      ),
-                      onPressed: () {
-                        setState(() {
-                          _obscureConfirmPassword = !_obscureConfirmPassword;
-                        });
-                      },
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            actions: [
-              TextButton(
-                child: const Text('Hủy', style: TextStyle(color: Colors.grey)),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-              ),
-              TextButton(
-                child: Text('Lưu', style: TextStyle(color: AppColors.primaryColor)),
-                onPressed: () {
-                  // Triển khai chức năng đổi mật khẩu ở đây
-                  if (newPasswordController.text.isEmpty ||
-                      currentPasswordController.text.isEmpty ||
-                      confirmPasswordController.text.isEmpty) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text('Vui lòng điền đầy đủ thông tin'),
-                        backgroundColor: Colors.red,
-                      ),
-                    );
-                    return;
-                  }
-                  
-                  if (newPasswordController.text != confirmPasswordController.text) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text('Mật khẩu mới không khớp'),
-                        backgroundColor: Colors.red,
-                      ),
-                    );
-                    return;
-                  }
-                  
-                  // Gọi API đổi mật khẩu ở đây
-                  
-                  Navigator.pop(context);
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text('Đổi mật khẩu thành công'),
-                      backgroundColor: Colors.green,
-                    ),
-                  );
-                },
-              ),
-            ],
-          );
-        },
       ),
     );
   }

@@ -3,4 +3,5 @@ class AppAssets {
   static const String storySetWellcome = 'assets/images/story_set_wellcome.png';
   static const String storySetVerification = 'assets/images/story_set_verify.png';
   static const String storySetSetup = 'assets/images/story_set_setup.png';
+  static const String appLogo = 'assets/images/app_logo.png';
 }
