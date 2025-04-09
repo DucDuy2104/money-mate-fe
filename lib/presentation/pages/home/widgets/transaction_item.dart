@@ -88,7 +88,7 @@ class TransactionItem extends StatelessWidget {
                   ],
                 ),
               ),
-              AppDimens.spaceSmall,
+              AppDimens.spaceSm,
               
               // Amount and time
               Column(

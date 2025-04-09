@@ -33,7 +33,7 @@ class SwitchCategoryItem extends StatelessWidget {
       width: width,
       decoration: BoxDecoration(
         color: Colors.grey[200],
-        borderRadius: BorderRadius.circular(AppDimens.borderRadiusMedium),
+        borderRadius: BorderRadius.circular(AppDimens.radiusMd),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.1),
@@ -45,9 +45,10 @@ class SwitchCategoryItem extends StatelessWidget {
       ),
       child: InkWell(
         onTap: onTap,
-        borderRadius: BorderRadius.circular(AppDimens.borderRadiusMedium),
+        borderRadius: BorderRadius.circular(AppDimens.radiusMd),
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: AppDimens.padding, vertical: AppDimens.paddingMedium),
+          padding: const EdgeInsets.symmetric(
+              horizontal: AppDimens.paddingMd, vertical: AppDimens.paddingMd),
           child: Row(
             children: [
               CircleAvatar(
@@ -57,20 +58,22 @@ class SwitchCategoryItem extends StatelessWidget {
                   color: category.color,
                 ),
               ),
-              AppDimens.space,
+              AppDimens.spaceMd,
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       category.name,
-                      style: context.textTheme.titleMedium?.copyWith(color: Colors.black),
+                      style: context.textTheme.titleMedium
+                          ?.copyWith(color: Colors.black),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
                     Text(
                       typeText,
-                      style: context.textTheme.bodySmall?.copyWith(color: typeColor),
+                      style: context.textTheme.bodySmall
+                          ?.copyWith(color: typeColor),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),

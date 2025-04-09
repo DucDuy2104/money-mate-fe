@@ -69,7 +69,7 @@ class ExpensePieChartSkeleton extends StatelessWidget {
               ],
             ),
           ),
-          AppDimens.spaceLarge,
+          AppDimens.spaceLg,
           _buildLegendSkeleton(),
         ],
       ),

@@ -39,10 +39,10 @@ class ProfileScreen extends StatelessWidget {
                   context.pushNamed(RouteNames.profileDetailsName);
                 },
                 child: const ProfileCard()),
-            AppDimens.spaceSmall,
+            AppDimens.spaceSm,
             const AppTab(
                 tab1Name: 'Hôm nay', tab2Name: 'Tháng này', controller: null),
-            AppDimens.spaceSmall,
+            AppDimens.spaceSm,
             Expanded(
               child: TabBarView(
                 children: [

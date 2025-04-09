@@ -12,7 +12,6 @@ import 'package:money_mate/shared/components/app_toast.dart';
 import 'package:money_mate/shared/components/loading_scafford.dart';
 import 'package:money_mate/shared/constants/app_dimens.dart';
 import 'package:money_mate/shared/constants/app_theme.dart';
-import 'package:money_mate/shared/utils/screen_utils.dart';
 
 class CategoriesSetupScreen extends StatefulWidget {
   const CategoriesSetupScreen({super.key});
@@ -147,7 +146,7 @@ class _CategoriesSetupScreenState extends State<CategoriesSetupScreen>
           child: Scaffold(
             backgroundColor: const Color(0xFF121212),
             body: Padding(
-              padding: ScreenUtils.screenPaddingWithSafeArea(context),
+              padding: const EdgeInsets.all(AppDimens.paddingMd),
               child: FadeTransition(
                 opacity: _fadeAnimation,
                 child: Column(
@@ -155,16 +154,16 @@ class _CategoriesSetupScreenState extends State<CategoriesSetupScreen>
                   children: [
                     Text('Chọn danh mục',
                         style: context.textTheme.displaySmall),
-                    AppDimens.spaceSmall,
+                    AppDimens.spaceSm,
                     const Text(
                       'Chọn các danh mục phù hợp với thu chi của bạn (tối thiểu 3 danh mục chi tiêu và 1 danh mục thu nhập)',
                     ),
-                    AppDimens.spaceSmall,
+                    AppDimens.spaceSm,
                     AppTab(
                         tab1Name: 'Chi tiêu',
                         tab2Name: 'Thu nhập',
                         controller: _tabController),
-                    AppDimens.spaceSmall,
+                    AppDimens.spaceSm,
                     Builder(
                       builder: (context) {
                         bool isExpenseTab = _tabController.index == 0;
@@ -175,7 +174,7 @@ class _CategoriesSetupScreenState extends State<CategoriesSetupScreen>
 
                         return Container(
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(16),
+                            borderRadius: BorderRadius.circular(AppDimens.radiusLg),
                             gradient: LinearGradient(
                               colors: isExpenseTab
                                   ? [
@@ -189,12 +188,12 @@ class _CategoriesSetupScreenState extends State<CategoriesSetupScreen>
                             ),
                           ),
                           padding:
-                              const EdgeInsets.all(AppDimens.paddingMedium),
+                              const EdgeInsets.all(AppDimens.paddingMd),
                           child: Row(
                             children: [
                               Container(
                                 padding: const EdgeInsets.all(
-                                    AppDimens.paddingSmall),
+                                    AppDimens.paddingSm),
                                 decoration: BoxDecoration(
                                   color: Colors.white.withOpacity(0.2),
                                   shape: BoxShape.circle,
@@ -206,7 +205,7 @@ class _CategoriesSetupScreenState extends State<CategoriesSetupScreen>
                                       : Colors.lightGreen,
                                 ),
                               ),
-                              AppDimens.spaceSmall,
+                              AppDimens.spaceSm,
                               Expanded(
                                 child: Text(
                                   'Đã chọn $selectedCount danh mục. Nhấn vào danh mục để thêm hoặc cập nhật hạn mức.',
@@ -217,7 +216,7 @@ class _CategoriesSetupScreenState extends State<CategoriesSetupScreen>
                         );
                       },
                     ),
-                    AppDimens.space,
+                    AppDimens.spaceMd,
                     Expanded(
                       child: TabBarView(
                         controller: _tabController,
@@ -233,7 +232,7 @@ class _CategoriesSetupScreenState extends State<CategoriesSetupScreen>
                         ],
                       ),
                     ),
-                    AppDimens.space,
+                    AppDimens.spaceMd,
                     SizedBox(
                       width: double.infinity,
                       child: ElevatedButton(

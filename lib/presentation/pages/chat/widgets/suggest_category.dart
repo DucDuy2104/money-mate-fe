@@ -29,7 +29,7 @@ class SuggestCategoryItem extends StatelessWidget {
       width: MediaQuery.of(context).size.width * 0.7,
       decoration: BoxDecoration(
         color: Colors.grey[200],
-        borderRadius: BorderRadius.circular(AppDimens.borderRadiusMedium),
+        borderRadius: BorderRadius.circular(AppDimens.radiusMd),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.1),
@@ -43,7 +43,7 @@ class SuggestCategoryItem extends StatelessWidget {
         onTap: onTap,
         child: Padding(
           padding: const EdgeInsets.symmetric(
-              horizontal: AppDimens.padding, vertical: AppDimens.paddingMedium),
+              horizontal: AppDimens.paddingMd, vertical: AppDimens.paddingMd),
           child: Row(
             children: [
               CircleAvatar(
@@ -85,7 +85,7 @@ class SuggestCategoryItem extends StatelessWidget {
                     style: ElevatedButton.styleFrom(
                       backgroundColor: category.color,
                       foregroundColor: Colors.white,
-                      padding: const EdgeInsets.symmetric(horizontal: AppDimens.padding),
+                      padding: const EdgeInsets.symmetric(horizontal: AppDimens.paddingMd),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(6),
                       ),

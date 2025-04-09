@@ -76,38 +76,38 @@ class _SplashScreenState extends State<SplashScreen>
           children: [
             // Decorative elements (circles and squares)
             Positioned(
-              top: AppDimens.paddingLarge * 2,
-              left: AppDimens.padding,
+              top: AppDimens.paddingLg * 2,
+              left: AppDimens.paddingMd,
               child: FadeIn(
                 delay: const Duration(milliseconds: 300),
                 child: Container(
-                  width: AppDimens.iconSizeSmall + AppDimens.paddingSmall,
-                  height: AppDimens.iconSizeSmall + AppDimens.paddingSmall,
+                  width: AppDimens.iconSizeSmall + AppDimens.paddingSm,
+                  height: AppDimens.iconSizeSmall + AppDimens.paddingSm,
                   decoration: BoxDecoration(
                     color: AppColors.primaryColor.withOpacity(0.2),
-                    borderRadius: BorderRadius.circular(AppDimens.borderRadiusSmall),
+                    borderRadius: BorderRadius.circular(AppDimens.radiusMd),
                   ),
                 ),
               ),
             ),
             Positioned(
-              bottom: AppDimens.paddingLarge * 5,
-              right: AppDimens.paddingLarge,
+              bottom: AppDimens.paddingLg * 5,
+              right: AppDimens.paddingLg,
               child: FadeIn(
                 delay: const Duration(milliseconds: 500),
                 child: Container(
-                  width: AppDimens.iconSize + AppDimens.paddingSmall,
-                  height: AppDimens.iconSize + AppDimens.paddingSmall,
+                  width: AppDimens.iconSize + AppDimens.paddingSm,
+                  height: AppDimens.iconSize + AppDimens.paddingSm,
                   decoration: BoxDecoration(
                     color: AppColors.primaryColor.withOpacity(0.15),
-                    borderRadius: BorderRadius.circular(AppDimens.borderRadius),
+                    borderRadius: BorderRadius.circular(AppDimens.radiusMd),
                   ),
                 ),
               ),
             ),
             Positioned(
-              top: AppDimens.paddingLarge * 6,
-              right: AppDimens.paddingLarge * 2,
+              top: AppDimens.paddingLg * 6,
+              right: AppDimens.paddingLg * 2,
               child: FadeIn(
                 delay: const Duration(milliseconds: 400),
                 child: Container(
@@ -137,7 +137,7 @@ class _SplashScreenState extends State<SplashScreen>
                           fit: BoxFit.contain,
                         ),
                       ),
-                      AppDimens.spaceLarge,
+                      AppDimens.spaceLg,
                       FadeInUp(
                         child: Text(
                           'MoneyMate',
@@ -151,12 +151,13 @@ class _SplashScreenState extends State<SplashScreen>
                                   AppColors.primaryColor.withOpacity(0.8),
                                   AppColors.primaryColor,
                                 ],
-                              ).createShader(const Rect.fromLTWH(0.0, 0.0, 200.0, 70.0)),
+                              ).createShader(
+                                  const Rect.fromLTWH(0.0, 0.0, 200.0, 70.0)),
                             letterSpacing: 1.2,
                           ),
                         ),
                       ),
-                      AppDimens.spaceMedium,
+                      AppDimens.spaceMd,
                       FadeInUp(
                         delay: const Duration(milliseconds: 300),
                         child: Text(

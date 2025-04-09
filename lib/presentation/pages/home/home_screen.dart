@@ -89,15 +89,16 @@ class _HomeScreenState extends State<HomeScreen> {
                           width: 100, height: 100, fit: BoxFit.cover)),
                   body: Padding(
                     padding: const EdgeInsets.symmetric(
-                        horizontal: AppDimens.paddingSmall),
+                        horizontal: AppDimens.paddingMd),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        AppDimens.spaceMd, // Add top spacing
                         IncomeExpenseChart(statistic: statistic),
-                        AppDimens.spaceMedium,
+                        AppDimens.spaceMd,
                         Text("Danh mục tiêu dùng",
                             style: context.textTheme.titleLarge),
-                        AppDimens.spaceSmall,
+                        AppDimens.spaceSm,
                         SizedBox(
                           height: 85,
                           child: ListView.separated(
@@ -112,10 +113,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                     AppDimens.divider,
                           ),
                         ),
-                        AppDimens.spaceMedium,
+                        AppDimens.spaceMd,
                         Text("Chi tiêu gần đây",
                             style: context.textTheme.titleLarge),
-                        AppDimens.spaceSmall,
+                        AppDimens.spaceSm,
                         Expanded(
                           child: ListView.separated(
                             separatorBuilder: (context, index) =>
@@ -123,11 +124,11 @@ class _HomeScreenState extends State<HomeScreen> {
                             itemCount: transactions.length,
                             itemBuilder: (context, index) {
                               final transaction = transactions[index];
-
                               return TransactionItem(transaction: transaction);
                             },
                           ),
                         ),
+                        AppDimens.spaceSm, // Add bottom spacing
                       ],
                     ),
                   ),

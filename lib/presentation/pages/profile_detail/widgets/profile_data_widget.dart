@@ -35,9 +35,9 @@ class ProfileDataWidget extends StatelessWidget {
                   ),
                 ),
                 padding: const EdgeInsets.only(
-                  left: AppDimens.padding,
-                  right: AppDimens.paddingMedium,
-                  top: AppDimens.paddingMedium,
+                  left: AppDimens.paddingMd,
+                  right: AppDimens.paddingMd,
+                  top: AppDimens.paddingMd,
                 ),
                 child: Column(
                   children: [
@@ -53,17 +53,17 @@ class ProfileDataWidget extends StatelessWidget {
                         ],
                       ),
                       child: CircleAvatar(
-                        radius: 55,
+                        radius: 50,
                         backgroundColor: const Color(0xFF66B2FF),
                         child: CircleAvatar(
-                          radius: 52,
+                          radius: 48,
                           backgroundImage: NetworkImage(
                             user.avatarUrl ?? AppConstants.tempImage,
                           ),
                         ),
                       ),
                     ),
-                    AppDimens.space,
+                    AppDimens.spaceMd,
                     Row(
                       mainAxisSize: MainAxisSize.min,
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -74,16 +74,16 @@ class ProfileDataWidget extends StatelessWidget {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        AppDimens.spaceMedium,
+                        AppDimens.spaceMd,
                         GestureDetector(
                           onTap: () =>
                               showNameUpdateDialog(context, user.name!),
                           child: Container(
-                            padding: const EdgeInsets.all(
-                                AppDimens.paddingSmall / 2),
+                            padding: const EdgeInsets.all(AppDimens.paddingXs),
                             decoration: BoxDecoration(
                               color: const Color(0xFF2A2A2A),
-                              borderRadius: BorderRadius.circular(6),
+                              borderRadius:
+                                  BorderRadius.circular(AppDimens.radiusSm / 2),
                             ),
                             child: const Icon(
                               Icons.edit,
@@ -94,6 +94,7 @@ class ProfileDataWidget extends StatelessWidget {
                         ),
                       ],
                     ),
+                    AppDimens.spaceSm,
                     Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
@@ -102,7 +103,7 @@ class ProfileDataWidget extends StatelessWidget {
                           size: AppDimens.iconSizeSmall,
                           color: Color(0xFF66B2FF),
                         ),
-                        AppDimens.spaceSmall,
+                        AppDimens.spaceSm,
                         Text(
                           user.email,
                           style: context.textTheme.bodyLarge?.copyWith(
@@ -112,32 +113,36 @@ class ProfileDataWidget extends StatelessWidget {
                       ],
                     ),
                     if (user.phoneNumber != null)
-                      Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          const Icon(
-                            Icons.phone_outlined,
-                            size: AppDimens.iconSizeSmall,
-                            color: Color(0xFF66B2FF),
-                          ),
-                          AppDimens.spaceSmall,
-                          Text(
-                            user.phoneNumber!,
-                            style: context.textTheme.bodyMedium?.copyWith(
-                              color: Colors.grey[400],
+                      Padding(
+                        padding:
+                            const EdgeInsets.only(top: AppDimens.paddingXs),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            const Icon(
+                              Icons.phone_outlined,
+                              size: AppDimens.iconSizeSmall,
+                              color: Color(0xFF66B2FF),
                             ),
-                          ),
-                        ],
+                            AppDimens.spaceSm,
+                            Text(
+                              user.phoneNumber!,
+                              style: context.textTheme.bodyMedium?.copyWith(
+                                color: Colors.grey[400],
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                   ],
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.all(AppDimens.padding),
+                padding: const EdgeInsets.all(AppDimens.paddingMd),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    AppDimens.space,
+                    AppDimens.spaceSm,
                     _buildInfoCard(
                       context: context,
                       icon: Icons.badge_outlined,
@@ -195,10 +200,10 @@ Widget _buildInfoCard({
   bool isLast = false,
 }) {
   return Container(
-    margin: EdgeInsets.only(bottom: isLast ? 0 : AppDimens.paddingMedium),
+    margin: EdgeInsets.only(bottom: isLast ? 0 : AppDimens.paddingSm),
     decoration: BoxDecoration(
       color: const Color(0xFF1E1E1E),
-      borderRadius: BorderRadius.circular(AppDimens.borderRadius),
+      borderRadius: BorderRadius.circular(AppDimens.radiusMd),
       boxShadow: [
         BoxShadow(
           color: Colors.black.withOpacity(0.2),
@@ -209,14 +214,14 @@ Widget _buildInfoCard({
     ),
     child: Padding(
       padding: const EdgeInsets.symmetric(
-          horizontal: AppDimens.padding, vertical: AppDimens.paddingSmall),
+          horizontal: AppDimens.paddingMd, vertical: AppDimens.paddingSm),
       child: Row(
         children: [
           Container(
-            padding: const EdgeInsets.all(AppDimens.borderRadiusSmall),
+            padding: const EdgeInsets.all(AppDimens.paddingSm),
             decoration: BoxDecoration(
               color: const Color(0xFF2A2A2A),
-              borderRadius: BorderRadius.circular(AppDimens.borderRadiusSmall),
+              borderRadius: BorderRadius.circular(AppDimens.radiusSm),
             ),
             child: Icon(
               icon,
@@ -224,7 +229,7 @@ Widget _buildInfoCard({
               size: AppDimens.iconSize,
             ),
           ),
-          AppDimens.space,
+          AppDimens.spaceMd,
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -235,7 +240,7 @@ Widget _buildInfoCard({
                     color: Colors.grey[400],
                   ),
                 ),
-                AppDimens.spaceSmall,
+                AppDimens.spaceXs,
                 Text(
                   value,
                   style: context.textTheme.bodyLarge?.copyWith(

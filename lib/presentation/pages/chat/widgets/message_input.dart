@@ -33,7 +33,7 @@ class MessageInput extends StatelessWidget {
               hintText: "Bạn vừa chi tiền vào thứ gì?",
               border: OutlineInputBorder(
                 borderRadius:
-                    BorderRadius.circular(AppDimens.borderRadiusMedium),
+                    BorderRadius.circular(AppDimens.radiusSm),
                 borderSide: const BorderSide(color: AppColors.subText),
               ),
             ),

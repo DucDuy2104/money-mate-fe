@@ -22,7 +22,7 @@ class GoogleSignInButton extends StatelessWidget {
           backgroundColor: Colors.white,
           foregroundColor: Colors.black,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-          padding: const EdgeInsets.symmetric(vertical: AppDimens.padding, horizontal: AppDimens.padding),
+          padding: const EdgeInsets.symmetric(vertical: AppDimens.paddingMd, horizontal: AppDimens.paddingMd),
           elevation: 2,
         ),
       ),

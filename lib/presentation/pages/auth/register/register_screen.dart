@@ -10,7 +10,6 @@ import 'package:money_mate/shared/constants/app_assets.dart';
 import 'package:money_mate/shared/constants/app_colors.dart';
 import 'package:money_mate/shared/constants/app_dimens.dart';
 import 'package:money_mate/shared/constants/app_theme.dart';
-import 'package:money_mate/shared/utils/screen_utils.dart';
 
 class RegisterScreen extends StatelessWidget {
   RegisterScreen({super.key});
@@ -76,13 +75,13 @@ class RegisterScreen extends StatelessWidget {
           child: Scaffold(
             resizeToAvoidBottomInset: false,
             body: Padding(
-              padding: ScreenUtils.screenPaddingWithSafeArea(context),
+              padding: const EdgeInsets.symmetric(horizontal: AppDimens.paddingMd),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Image.asset(AppAssets.storySetWellcome,
                       width: 200, height: 200, fit: BoxFit.contain),
-                  AppDimens.space,
+                  AppDimens.spaceMd,
                   TextField(
                     controller: _emailController,
                     focusNode: _emailFocusNode,
@@ -93,7 +92,7 @@ class RegisterScreen extends StatelessWidget {
                       labelText: 'Email',
                     ),
                   ),
-                  AppDimens.space,
+                  AppDimens.spaceMd,
                   TextField(
                     controller: _passwordController,
                     focusNode: _passwordFocusNode,
@@ -105,7 +104,7 @@ class RegisterScreen extends StatelessWidget {
                       labelText: 'Mật khẩu',
                     ),
                   ),
-                  AppDimens.space,
+                  AppDimens.spaceMd,
                   TextField(
                     controller: _confirmPasswordController,
                     focusNode: _confirmPasswordFocusNode,
@@ -117,15 +116,20 @@ class RegisterScreen extends StatelessWidget {
                       labelText: 'Nhập lại mật khẩu',
                     ),
                   ),
-                  AppDimens.space,
+                  AppDimens.spaceMd,
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
                       onPressed: () {
                         //TODO: handle register
                         _onRegister(context);
-                        // context.goNamed(RouteNames.categoryRegisterName);
                       },
+                      style: ElevatedButton.styleFrom(
+                        padding: const EdgeInsets.symmetric(vertical: AppDimens.paddingMd),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(AppDimens.radiusSm),
+                        ),
+                      ),
                       child: Text(
                         'Đăng ký',
                         style: context.textTheme.bodyLarge
@@ -133,19 +137,19 @@ class RegisterScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  AppDimens.space,
+                  AppDimens.spaceMd,
                   GoogleSignInButton(
                     content: 'Đăng ký với Google',
                     onTap: () {
                       _onGoogleSignin(context);
                     },
                   ),
-                  const SizedBox(height: 20),
+                  SizedBox(height: AppDimens.paddingLg),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       const Text("Bạn đã có tài khoản?"),
-                      AppDimens.spaceSmall,
+                      AppDimens.spaceSm,
                       GestureDetector(
                         onTap: () {
                           // Navigate to Login screen

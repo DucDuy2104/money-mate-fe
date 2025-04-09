@@ -11,7 +11,6 @@ import 'package:money_mate/shared/constants/app_assets.dart';
 import 'package:money_mate/shared/constants/app_colors.dart';
 import 'package:money_mate/shared/constants/app_dimens.dart';
 import 'package:money_mate/shared/constants/app_theme.dart';
-import 'package:money_mate/shared/utils/screen_utils.dart';
 
 class LoginScreen extends StatelessWidget {
   LoginScreen({super.key});
@@ -79,13 +78,13 @@ class LoginScreen extends StatelessWidget {
           child: Scaffold(
             resizeToAvoidBottomInset: false,
             body: Padding(
-              padding: ScreenUtils.screenPaddingWithSafeArea(context),
+              padding: const EdgeInsets.symmetric(horizontal: AppDimens.paddingMd),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Image.asset(AppAssets.storySetBack,
                       width: 200, height: 200, fit: BoxFit.contain),
-                  AppDimens.spaceLarge,
+                  AppDimens.spaceLg,
                   TextField(
                     controller: _emailController,
                     focusNode: _emailFocusNode,
@@ -94,7 +93,7 @@ class LoginScreen extends StatelessWidget {
                     },
                     decoration: const InputDecoration(labelText: 'Email'),
                   ),
-                  AppDimens.space,
+                  AppDimens.spaceMd,
                   TextField(
                     controller: _passwordController,
                     focusNode: _passwordFocusNode,
@@ -106,7 +105,7 @@ class LoginScreen extends StatelessWidget {
                       labelText: 'Mật khẩu',
                     ),
                   ),
-                  AppDimens.space,
+                  AppDimens.spaceMd,
                   Align(
                       alignment: Alignment.centerLeft,
                       child: GestureDetector(
@@ -116,7 +115,7 @@ class LoginScreen extends StatelessWidget {
                             style: context.textTheme.bodyMedium
                                 ?.copyWith(color: AppColors.primaryColor),
                           ))),
-                  AppDimens.space,
+                  AppDimens.spaceMd,
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
@@ -131,19 +130,19 @@ class LoginScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  AppDimens.space,
+                  AppDimens.spaceMd,
                   GoogleSignInButton(
                     content: 'Đăng nhập với Google',
                     onTap: () {
                       _onGoogleSignin(context);
                     },
                   ),
-                  AppDimens.space,
+                  AppDimens.spaceMd,
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       const Text("Bạn chưa có tài khoản?"),
-                      AppDimens.spaceSmall,
+                      AppDimens.spaceSm,
                       GestureDetector(
                         onTap: () {
                           // TODO: Navigate to Register screen

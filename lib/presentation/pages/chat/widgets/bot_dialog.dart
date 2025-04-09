@@ -52,15 +52,15 @@ class _EditBotDialogState extends State<EditBotDialog> {
   Widget build(BuildContext context) {
     return Dialog(
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(AppDimens.borderRadiusMedium),
+        borderRadius: BorderRadius.circular(AppDimens.radiusMd),
       ),
       elevation: 0,
       backgroundColor: Colors.transparent,
       child: Container(
-        padding: const EdgeInsets.all(AppDimens.paddingLarge),
+        padding: const EdgeInsets.all(AppDimens.paddingLg),
         decoration: BoxDecoration(
           color: const Color(0xFF1E1E1E),
-          borderRadius: BorderRadius.circular(AppDimens.borderRadiusMedium),
+          borderRadius: BorderRadius.circular(AppDimens.radiusMd),
           border: Border.all(color: const Color(0xFF2C2C2C)),
         ),
         child: Column(
@@ -74,20 +74,20 @@ class _EditBotDialogState extends State<EditBotDialog> {
                     fontWeight: FontWeight.bold,
                   ),
             ),
-            AppDimens.spaceMedium,
+            AppDimens.spaceMd,
             _buildEditField(
               context,
               label: 'Tên',
               controller: _nameController,
             ),
-            AppDimens.spaceMedium,
+            AppDimens.spaceMd,
             _buildEditField(
               context,
               label: 'Mô tả',
               controller: _descriptionController,
               maxLines: 3,
             ),
-            AppDimens.spaceLarge,
+            AppDimens.spaceLg,
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
@@ -98,7 +98,7 @@ class _EditBotDialogState extends State<EditBotDialog> {
                   ),
                   child: const Text('Huỷ'),
                 ),
-                AppDimens.spaceSmall,
+                AppDimens.spaceSm,
                 ElevatedButton(
                   onPressed: _isDataChanged
                       ? () {
@@ -115,7 +115,7 @@ class _EditBotDialogState extends State<EditBotDialog> {
                     backgroundColor: const Color(0xFF66B2FF),
                     foregroundColor: Colors.white,
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(AppDimens.borderRadiusSmall),
+                      borderRadius: BorderRadius.circular(AppDimens.radiusSm),
                     ),
                     disabledBackgroundColor: const Color(0xFF66B2FF).withOpacity(0.3),
                     disabledForegroundColor: Colors.white70,
@@ -145,22 +145,22 @@ class _EditBotDialogState extends State<EditBotDialog> {
                 color: Colors.white70,
               ),
         ),
-        const SizedBox(height: 8.0),
+        AppDimens.spaceXs,
         TextField(
           controller: controller,
           style: const TextStyle(color: Colors.white),
           maxLines: maxLines,
           decoration: InputDecoration(
             contentPadding: const EdgeInsets.symmetric(
-              horizontal: AppDimens.paddingSmall,
-              vertical: AppDimens.paddingSmall,
+              horizontal: AppDimens.paddingSm,
+              vertical: AppDimens.paddingSm,
             ),
             enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(AppDimens.borderRadiusSmall),
+              borderRadius: BorderRadius.circular(AppDimens.radiusSm),
               borderSide: const BorderSide(color: Color(0xFF3D3D3D)),
             ),
             focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(AppDimens.borderRadiusSmall),
+              borderRadius: BorderRadius.circular(AppDimens.radiusSm),
               borderSide: const BorderSide(color: Color(0xFF66B2FF), width: 2),
             ),
             filled: true,

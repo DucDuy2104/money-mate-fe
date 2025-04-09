@@ -10,7 +10,8 @@ const _darkBackgroundColor = Color(0xFF121212);
 const _lightTextColor = Color(0xFF212121);
 const _darkTextColor = Colors.white;
 
-const double _defaultBorderRadius = AppDimens.borderRadiusSmall;
+// Using standardized border radius from AppDimens
+const double _defaultBorderRadius = AppDimens.radiusSm;
 
 final _materialColorPrimary = MaterialColor(
   _primaryColor.value,
@@ -43,11 +44,15 @@ class AppThemeData {
       ),
       iconTheme: const IconThemeData(
         color: _lightTextColor,
+        size: AppDimens.iconSize,
       ),
       appBarTheme: AppBarTheme(
         backgroundColor: Colors.white,
         elevation: 0,
-        iconTheme: const IconThemeData(color: _primaryColor),
+        iconTheme: const IconThemeData(
+          color: _primaryColor,
+          size: AppDimens.iconSize,
+        ),
         titleTextStyle: GoogleFonts.poppins(
           fontSize: 18,
           fontWeight: FontWeight.w600,
@@ -103,8 +108,8 @@ class AppThemeData {
         ),
         buttonColor: _primaryColor,
         padding: const EdgeInsets.symmetric(
-          vertical: AppDimens.padding,
-          horizontal: AppDimens.padding,
+          vertical: AppDimens.paddingMd,
+          horizontal: AppDimens.paddingMd,
         ),
         textTheme: ButtonTextTheme.primary,
       ),
@@ -112,8 +117,8 @@ class AppThemeData {
         style: ElevatedButton.styleFrom(
           backgroundColor: _primaryColor,
           padding: const EdgeInsets.symmetric(
-            vertical: AppDimens.padding,
-            horizontal: AppDimens.paddingLarge,
+            vertical: AppDimens.paddingMd,
+            horizontal: AppDimens.paddingLg,
           ),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(_defaultBorderRadius),
@@ -125,8 +130,8 @@ class AppThemeData {
         filled: true,
         fillColor: Colors.white,
         contentPadding: const EdgeInsets.symmetric(
-          horizontal: AppDimens.padding,
-          vertical: AppDimens.padding,
+          horizontal: AppDimens.paddingMd,
+          vertical: AppDimens.paddingMd,
         ),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(_defaultBorderRadius),
@@ -169,27 +174,27 @@ class AppThemeData {
           borderRadius: BorderRadius.circular(_defaultBorderRadius),
         ),
         margin: const EdgeInsets.symmetric(
-          vertical: AppDimens.paddingSmall,
-          horizontal: AppDimens.paddingSmall,
+          vertical: AppDimens.paddingSm,
+          horizontal: AppDimens.paddingSm,
         ),
       ),
       listTileTheme: const ListTileThemeData(
         contentPadding: EdgeInsets.symmetric(
-          horizontal: AppDimens.padding,
-          vertical: AppDimens.paddingSmall,
+          horizontal: AppDimens.paddingMd,
+          vertical: AppDimens.paddingSm,
         ),
         minLeadingWidth: 24,
         iconColor: _lightTextColor,
         textColor: _lightTextColor,
       ),
       dividerTheme: const DividerThemeData(
-        space: AppDimens.padding,
+        space: AppDimens.paddingMd,
         thickness: 1,
       ),
       chipTheme: ChipThemeData(
         padding: const EdgeInsets.symmetric(
-          horizontal: AppDimens.paddingSmall,
-          vertical: AppDimens.paddingSmall / 2,
+          horizontal: AppDimens.paddingSm,
+          vertical: AppDimens.paddingXs,
         ),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(_defaultBorderRadius),
@@ -213,11 +218,15 @@ class AppThemeData {
       ),
       iconTheme: const IconThemeData(
         color: _darkTextColor,
+        size: AppDimens.iconSize,
       ),
       appBarTheme: AppBarTheme(
         backgroundColor: _darkBackgroundColor,
         elevation: 0,
-        iconTheme: const IconThemeData(color: _darkTextColor),
+        iconTheme: const IconThemeData(
+          color: _darkTextColor,
+          size: AppDimens.iconSize,
+        ),
         titleTextStyle: GoogleFonts.poppins(
           fontSize: 18,
           fontWeight: FontWeight.w600,
@@ -273,8 +282,8 @@ class AppThemeData {
         ),
         buttonColor: _primaryColor,
         padding: const EdgeInsets.symmetric(
-          vertical: AppDimens.padding,
-          horizontal: AppDimens.paddingLarge,
+          vertical: AppDimens.paddingMd,
+          horizontal: AppDimens.paddingLg,
         ),
         textTheme: ButtonTextTheme.primary,
       ),
@@ -282,8 +291,8 @@ class AppThemeData {
         style: ElevatedButton.styleFrom(
           backgroundColor: _primaryColor,
           padding: const EdgeInsets.symmetric(
-            vertical: AppDimens.padding,
-            horizontal: AppDimens.paddingLarge,
+            vertical: AppDimens.paddingMd,
+            horizontal: AppDimens.paddingLg,
           ),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(_defaultBorderRadius),
@@ -300,8 +309,8 @@ class AppThemeData {
         filled: true,
         fillColor: const Color(0xFF2C2C2C),
         contentPadding: const EdgeInsets.symmetric(
-          horizontal: AppDimens.padding,
-          vertical: AppDimens.padding,
+          horizontal: AppDimens.paddingMd,
+          vertical: AppDimens.paddingMd,
         ),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(_defaultBorderRadius),
@@ -344,28 +353,28 @@ class AppThemeData {
           borderRadius: BorderRadius.circular(_defaultBorderRadius),
         ),
         margin: const EdgeInsets.symmetric(
-          vertical: AppDimens.paddingSmall,
-          horizontal: AppDimens.paddingSmall,
+          vertical: AppDimens.paddingSm,
+          horizontal: AppDimens.paddingSm,
         ),
       ),
       listTileTheme: const ListTileThemeData(
         contentPadding: EdgeInsets.symmetric(
-          horizontal: AppDimens.padding,
-          vertical: AppDimens.paddingSmall,
+          horizontal: AppDimens.paddingMd,
+          vertical: AppDimens.paddingSm,
         ),
         minLeadingWidth: 24,
         iconColor: _darkTextColor,
         textColor: _darkTextColor,
       ),
       dividerTheme: DividerThemeData(
-        space: AppDimens.padding,
+        space: AppDimens.paddingMd,
         thickness: 1,
         color: Colors.grey.shade800,
       ),
       chipTheme: ChipThemeData(
         padding: const EdgeInsets.symmetric(
-          horizontal: AppDimens.paddingSmall,
-          vertical: AppDimens.paddingSmall / 2,
+          horizontal: AppDimens.paddingSm,
+          vertical: AppDimens.paddingXs,
         ),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(_defaultBorderRadius),

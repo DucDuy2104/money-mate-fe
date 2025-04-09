@@ -18,7 +18,7 @@ class ProfileCard extends StatelessWidget {
           loaded: (state) {
             final profile = state.data.profile;
             return Container(
-              padding: const EdgeInsets.all(AppDimens.paddingMedium),
+              padding: const EdgeInsets.all(AppDimens.paddingMd),
               decoration: BoxDecoration(
                 gradient: LinearGradient(
                   begin: Alignment.topLeft,
@@ -27,7 +27,7 @@ class ProfileCard extends StatelessWidget {
                       ? [const Color(0xFF232538), const Color(0xFF171926)]
                       : [const Color(0xFFFFFFFF), const Color(0xFFF5F7FD)],
                 ),
-                borderRadius: BorderRadius.circular(AppDimens.borderRadiusMedium),
+                borderRadius: BorderRadius.circular(AppDimens.radiusMd),
                 boxShadow: [
                   BoxShadow(
                     color: isDarkMode
@@ -56,15 +56,15 @@ class ProfileCard extends StatelessWidget {
                       ],
                     ),
                     child: CircleAvatar(
-                      radius: AppDimens.borderRadiusLarge * 1.2,
+                      radius: AppDimens.avatarSize / 2,
                       backgroundColor: isDarkMode ? const Color(0xFF1A1C2A) : Colors.white,
                       child: CircleAvatar(
-                        radius: AppDimens.borderRadiusLarge * 1.2 - 2,
+                        radius: (AppDimens.avatarSize / 2) - 2,
                         backgroundImage: NetworkImage(profile.avatarUrl ?? AppConstants.tempImage),
                       ),
                     ),
                   ),
-                  AppDimens.spaceMedium,
+                  AppDimens.spaceMd,
 
                   Expanded(
                     child: Column(
@@ -90,7 +90,7 @@ class ProfileCard extends StatelessWidget {
                               size: AppDimens.iconSizeSmall,
                               color: isDarkMode ? Colors.grey[400] : Colors.grey[600],
                             ),
-                            AppDimens.divider,
+                            AppDimens.spaceXs,
                             Flexible(
                               child: Text(
                                 profile.email,
@@ -110,7 +110,7 @@ class ProfileCard extends StatelessWidget {
                   Container(
                     height: 44,
                     width: 1.5,
-                    margin: const EdgeInsets.symmetric(horizontal: 10),
+                    margin: const EdgeInsets.symmetric(horizontal: AppDimens.paddingSm),
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
                         begin: Alignment.topCenter,
@@ -125,7 +125,10 @@ class ProfileCard extends StatelessWidget {
                   ),
 
                   Container(
-                    padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
+                    padding: const EdgeInsets.symmetric(
+                      vertical: AppDimens.paddingSm, 
+                      horizontal: AppDimens.paddingSm + 2
+                    ),
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
                         begin: Alignment.topLeft,
@@ -134,7 +137,7 @@ class ProfileCard extends StatelessWidget {
                             ? [const Color(0xFF2E7D32), const Color(0xFF1B5E20)]
                             : [const Color(0xFFE3F2FD), const Color(0xFFBBDEFB)],
                       ),
-                      borderRadius: BorderRadius.circular(AppDimens.borderRadius * 1.2),
+                      borderRadius: BorderRadius.circular(AppDimens.radiusMd),
                       boxShadow: [
                         BoxShadow(
                           color: isDarkMode
