@@ -12,18 +12,13 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
-  // App Settings
   bool _notificationsEnabled = true;
-  bool _biometricAuthEnabled = true;
   String _currency = 'VND';
   String _language = 'Tiếng Việt';
-  bool _darkMode = true;
-  double _budgetWarningThreshold = 0.8; // 80% of budget
+  double _budgetWarningThreshold = 0.8;
 
-  // Currency options
   final List<String> _currencyOptions = ['VND', 'USD', 'EUR', 'JPY', 'GBP'];
   
-  // Language options
   final List<String> _languageOptions = ['Tiếng Việt', 'English', '日本語', '한국어', '中文'];
 
   @override
@@ -34,7 +29,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         leading: Builder(
           builder: (context) {
             return IconButton(
-              icon: const Icon(EvaIcons.menu2Outline),
+              icon: const Icon(EvaIcons.menu2Outline, size: AppDimens.iconSize),
               onPressed: () {
                 Scaffold.of(context).openDrawer();
               },
@@ -44,6 +39,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       ),
       drawer: const AppDrawer(currentRoute: RouteNames.settings),
       body: SingleChildScrollView(
+        padding: const EdgeInsets.symmetric(vertical: AppDimens.paddingSm),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -61,19 +57,17 @@ class _SettingsScreenState extends State<SettingsScreen> {
               subtitle: _currency,
               onTap: () => _showCurrencyDialog(),
             ),
-            _buildSwitchItem(
-              icon: Icons.dark_mode,
-              title: 'Chế độ tối',
-              value: _darkMode,
-              onChanged: (value) {
-                setState(() {
-                  _darkMode = value;
-                });
-                // Triển khai thay đổi theme ở đây
-              },
-            ),
             const Divider(height: 1),
         
+            // Security
+            _buildSectionHeader('Bảo mật'),
+            _buildSettingItem(
+              icon: Icons.lock,
+              title: 'Đổi mật khẩu',
+              onTap: () => _showChangePasswordDialog(),
+            ),
+            const Divider(height: 1),
+            
             // Notifications
             _buildSectionHeader('Thông báo'),
             _buildSwitchItem(
@@ -92,28 +86,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
               subtitle: 'Khi chi tiêu đạt ${(_budgetWarningThreshold * 100).toInt()}% ngân sách',
               onTap: () => _showBudgetWarningDialog(),
               enabled: _notificationsEnabled,
-            ),
-            const Divider(height: 1),
-        
-            // Security
-            _buildSectionHeader('Bảo mật'),
-            _buildSwitchItem(
-              icon: Icons.fingerprint,
-              title: 'Xác thực sinh trắc học',
-              subtitle: 'Sử dụng vân tay hoặc Face ID để đăng nhập',
-              value: _biometricAuthEnabled,
-              onChanged: (value) {
-                setState(() {
-                  _biometricAuthEnabled = value;
-                });
-              },
-            ),
-            _buildSettingItem(
-              icon: Icons.lock,
-              title: 'Đổi mật khẩu',
-              onTap: () {
-                // Triển khai chức năng đổi mật khẩu ở đây
-              },
             ),
             const Divider(height: 1),
         
@@ -160,13 +132,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 // Mở trang trợ giúp
               },
             ),
-            _buildSettingItem(
-              icon: Icons.rate_review,
-              title: 'Đánh giá ứng dụng',
-              onTap: () {
-                // Mở trang đánh giá trên app store
-              },
-            ),
+            AppDimens.spaceXs,
           ],
         ),
       ),
@@ -175,7 +141,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   Widget _buildSectionHeader(String title) {
     return Padding(
-      padding: const EdgeInsets.only(left: 16.0, top: 24.0, bottom: 8.0),
+      padding: const EdgeInsets.only(
+        left: AppDimens.paddingMd, 
+        top: AppDimens.paddingMd, 
+        bottom: AppDimens.paddingXs
+      ),
       child: Text(
         title.toUpperCase(),
         style: TextStyle(
@@ -197,8 +167,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
     bool danger = false,
   }) {
     return ListTile(
+      contentPadding: const EdgeInsets.symmetric(
+        horizontal: AppDimens.paddingMd,
+        vertical: AppDimens.paddingXs,
+      ),
       leading: Icon(
         icon,
+        size: AppDimens.iconSize,
         color: danger ? Colors.red : (enabled ? Colors.grey[300] : Colors.grey[700]),
       ),
       title: Text(
@@ -229,7 +204,15 @@ class _SettingsScreenState extends State<SettingsScreen> {
     required ValueChanged<bool> onChanged,
   }) {
     return ListTile(
-      leading: Icon(icon, color: Colors.grey[300]),
+      contentPadding: const EdgeInsets.symmetric(
+        horizontal: AppDimens.paddingMd,
+        vertical: AppDimens.paddingXs,
+      ),
+      leading: Icon(
+        icon, 
+        size: AppDimens.iconSize,
+        color: Colors.grey[300]
+      ),
       title: Text(title, style: const TextStyle(color: Colors.white)),
       subtitle: subtitle != null
           ? Text(subtitle, style: TextStyle(color: Colors.grey[400], fontSize: 13))
@@ -242,6 +225,165 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
   }
 
+  // Dialog để đổi mật khẩu
+  void _showChangePasswordDialog() {
+    final TextEditingController currentPasswordController = TextEditingController();
+    final TextEditingController newPasswordController = TextEditingController();
+    final TextEditingController confirmPasswordController = TextEditingController();
+    bool _obscureCurrentPassword = true;
+    bool _obscureNewPassword = true;
+    bool _obscureConfirmPassword = true;
+    
+    showDialog(
+      context: context,
+      builder: (context) => StatefulBuilder(
+        builder: (context, setState) {
+          return AlertDialog(
+            backgroundColor: Colors.grey.shade900,
+            title: const Text('Đổi mật khẩu', style: TextStyle(color: Colors.white)),
+            contentPadding: const EdgeInsets.all(AppDimens.paddingMd),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(AppDimens.radiusMd),
+            ),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                TextField(
+                  controller: currentPasswordController,
+                  obscureText: _obscureCurrentPassword,
+                  style: const TextStyle(color: Colors.white),
+                  decoration: InputDecoration(
+                    labelText: 'Mật khẩu hiện tại',
+                    labelStyle: TextStyle(color: Colors.grey[400]),
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Colors.grey[700]!),
+                    ),
+                    focusedBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: AppColors.primaryColor),
+                    ),
+                    suffixIcon: IconButton(
+                      icon: Icon(
+                        _obscureCurrentPassword ? Icons.visibility : Icons.visibility_off,
+                        color: Colors.grey[400],
+                        size: AppDimens.iconSizeSmall,
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          _obscureCurrentPassword = !_obscureCurrentPassword;
+                        });
+                      },
+                    ),
+                  ),
+                ),
+                AppDimens.spaceMd,
+                TextField(
+                  controller: newPasswordController,
+                  obscureText: _obscureNewPassword,
+                  style: const TextStyle(color: Colors.white),
+                  decoration: InputDecoration(
+                    labelText: 'Mật khẩu mới',
+                    labelStyle: TextStyle(color: Colors.grey[400]),
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Colors.grey[700]!),
+                    ),
+                    focusedBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: AppColors.primaryColor),
+                    ),
+                    suffixIcon: IconButton(
+                      icon: Icon(
+                        _obscureNewPassword ? Icons.visibility : Icons.visibility_off,
+                        color: Colors.grey[400],
+                        size: AppDimens.iconSizeSmall,
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          _obscureNewPassword = !_obscureNewPassword;
+                        });
+                      },
+                    ),
+                  ),
+                ),
+                AppDimens.spaceMd,
+                TextField(
+                  controller: confirmPasswordController,
+                  obscureText: _obscureConfirmPassword,
+                  style: const TextStyle(color: Colors.white),
+                  decoration: InputDecoration(
+                    labelText: 'Xác nhận mật khẩu mới',
+                    labelStyle: TextStyle(color: Colors.grey[400]),
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Colors.grey[700]!),
+                    ),
+                    focusedBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: AppColors.primaryColor),
+                    ),
+                    suffixIcon: IconButton(
+                      icon: Icon(
+                        _obscureConfirmPassword ? Icons.visibility : Icons.visibility_off,
+                        color: Colors.grey[400],
+                        size: AppDimens.iconSizeSmall,
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          _obscureConfirmPassword = !_obscureConfirmPassword;
+                        });
+                      },
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            actions: [
+              TextButton(
+                child: const Text('Hủy', style: TextStyle(color: Colors.grey)),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+              TextButton(
+                child: Text('Lưu', style: TextStyle(color: AppColors.primaryColor)),
+                onPressed: () {
+                  // Triển khai chức năng đổi mật khẩu ở đây
+                  if (newPasswordController.text.isEmpty ||
+                      currentPasswordController.text.isEmpty ||
+                      confirmPasswordController.text.isEmpty) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('Vui lòng điền đầy đủ thông tin'),
+                        backgroundColor: Colors.red,
+                      ),
+                    );
+                    return;
+                  }
+                  
+                  if (newPasswordController.text != confirmPasswordController.text) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('Mật khẩu mới không khớp'),
+                        backgroundColor: Colors.red,
+                      ),
+                    );
+                    return;
+                  }
+                  
+                  // Gọi API đổi mật khẩu ở đây
+                  
+                  Navigator.pop(context);
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text('Đổi mật khẩu thành công'),
+                      backgroundColor: Colors.green,
+                    ),
+                  );
+                },
+              ),
+            ],
+          );
+        },
+      ),
+    );
+  }
+
   // Dialog để chọn đơn vị tiền tệ
   void _showCurrencyDialog() {
     showDialog(
@@ -249,6 +391,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       builder: (context) => AlertDialog(
         backgroundColor: Colors.grey.shade900,
         title: const Text('Đơn vị tiền tệ', style: TextStyle(color: Colors.white)),
+        contentPadding: const EdgeInsets.symmetric(vertical: AppDimens.paddingSm),
         content: SizedBox(
           width: double.maxFinite,
           child: ListView.builder(
@@ -257,9 +400,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
             itemBuilder: (context, index) {
               final currency = _currencyOptions[index];
               return ListTile(
+                contentPadding: const EdgeInsets.symmetric(horizontal: AppDimens.paddingMd),
                 title: Text(currency, style: const TextStyle(color: Colors.white)),
                 trailing: _currency == currency
-                    ? Icon(Icons.check, color: AppColors.primaryColor)
+                    ? Icon(Icons.check, color: AppColors.primaryColor, size: AppDimens.iconSizeSmall)
                     : null,
                 onTap: () {
                   setState(() {
@@ -290,6 +434,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       builder: (context) => AlertDialog(
         backgroundColor: Colors.grey.shade900,
         title: const Text('Ngôn ngữ', style: TextStyle(color: Colors.white)),
+        contentPadding: const EdgeInsets.symmetric(vertical: AppDimens.paddingSm),
         content: SizedBox(
           width: double.maxFinite,
           child: ListView.builder(
@@ -298,9 +443,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
             itemBuilder: (context, index) {
               final language = _languageOptions[index];
               return ListTile(
+                contentPadding: const EdgeInsets.symmetric(horizontal: AppDimens.paddingMd),
                 title: Text(language, style: const TextStyle(color: Colors.white)),
                 trailing: _language == language
-                    ? Icon(Icons.check, color: AppColors.primaryColor)
+                    ? Icon(Icons.check, color: AppColors.primaryColor, size: AppDimens.iconSizeSmall)
                     : null,
                 onTap: () {
                   setState(() {
@@ -333,6 +479,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       builder: (context) => AlertDialog(
         backgroundColor: Colors.grey.shade900,
         title: const Text('Cảnh báo ngân sách', style: TextStyle(color: Colors.white)),
+        contentPadding: const EdgeInsets.all(AppDimens.paddingMd),
         content: StatefulBuilder(
           builder: (context, setState) {
             return Column(
@@ -342,7 +489,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   'Cảnh báo khi chi tiêu đạt ${(tempThreshold * 100).toInt()}% ngân sách',
                   style: TextStyle(color: Colors.grey[300]),
                 ),
-                const SizedBox(height: 16),
+                AppDimens.spaceMd,
                 Slider(
                   value: tempThreshold,
                   min: 0.5,
@@ -389,9 +536,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
       builder: (context) => AlertDialog(
         backgroundColor: Colors.grey.shade900,
         title: const Text('Xóa tất cả dữ liệu?', style: TextStyle(color: Colors.white)),
+        contentPadding: const EdgeInsets.all(AppDimens.paddingMd),
         content: const Text(
           'Hành động này sẽ xóa vĩnh viễn tất cả dữ liệu và cài đặt của bạn. Bạn không thể hoàn tác hành động này.',
           style: TextStyle(color: Colors.white70),
+        ),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(AppDimens.radiusMd),
         ),
         actions: [
           TextButton(
