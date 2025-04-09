@@ -13,6 +13,7 @@ import 'package:money_mate/shared/components/app_tab.dart';
 import 'package:money_mate/shared/components/app_toast.dart';
 import 'package:money_mate/shared/components/loading_scafford.dart';
 import 'package:money_mate/shared/constants/app_dimens.dart';
+import 'package:money_mate/shared/constants/app_theme.dart';
 import 'package:money_mate/shared/enums/category_type.dart';
 
 class CategoriesScreen extends StatefulWidget {
@@ -134,7 +135,8 @@ class _CategoriesScreenState extends State<CategoriesScreen>
             ),
             drawer: const AppDrawer(currentRoute: RouteNames.category),
             body: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: AppDimens.paddingMd),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: AppDimens.paddingMd),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -155,47 +157,40 @@ class _CategoriesScreenState extends State<CategoriesScreen>
                               int selectedCount =
                                   BlocProvider.of<CategoriesBloc>(context)
                                       .countSelectedCategories();
-                          
+
                               return Container(
                                 decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(AppDimens.radiusMd),
+                                  borderRadius:
+                                      BorderRadius.circular(AppDimens.radiusMd),
                                   gradient: LinearGradient(
-                                    colors: isExpenseTab
-                                        ? [
-                                            Colors.blue.withOpacity(0.2),
-                                            Colors.purple.withOpacity(0.2)
-                                          ]
-                                        : [
-                                            Colors.green.withOpacity(0.2),
-                                            Colors.teal.withOpacity(0.2)
-                                          ],
+                                    colors: [
+                                      Colors.green.withOpacity(0.2),
+                                      Colors.teal.withOpacity(0.2)
+                                    ],
                                   ),
                                 ),
-                                padding: const EdgeInsets.all(AppDimens.paddingMd),
+                                padding:
+                                    const EdgeInsets.all(AppDimens.paddingMd),
                                 child: Row(
                                   children: [
                                     Container(
-                                      padding: const EdgeInsets.all(AppDimens.paddingSm),
+                                      padding: const EdgeInsets.all(
+                                          AppDimens.paddingSm),
                                       decoration: BoxDecoration(
                                         color: Colors.white.withOpacity(0.2),
                                         shape: BoxShape.circle,
                                       ),
-                                      child: Icon(
+                                      child: const Icon(
                                         Icons.lightbulb_outline,
                                         size: AppDimens.iconSize,
-                                        color: isExpenseTab
-                                            ? Colors.amber
-                                            : Colors.lightGreen,
+                                        color: Colors.lightGreen,
                                       ),
                                     ),
                                     AppDimens.spaceSm,
                                     Expanded(
                                       child: Text(
                                         'Đã chọn $selectedCount danh mục. Nhấn vào danh mục để thêm hoặc cập nhật hạn mức.',
-                                        style: TextStyle(
-                                          color: Colors.grey[300],
-                                          fontSize: 14,
-                                        ),
+                                        style: context.textTheme.bodyMedium
                                       ),
                                     ),
                                   ],

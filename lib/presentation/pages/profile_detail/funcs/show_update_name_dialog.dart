@@ -27,6 +27,7 @@ void showNameUpdateDialog(BuildContext context, String currentName) {
   showDialog(
     context: context,
     builder: (BuildContext context) {
+      final colors = AppColors.colorsData(context);
       return Dialog(
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -34,7 +35,7 @@ void showNameUpdateDialog(BuildContext context, String currentName) {
           width: double.infinity,
           padding: const EdgeInsets.all(AppDimens.paddingMd),
           decoration: BoxDecoration(
-            color: const Color(0xFF1E1E1E),
+            color: colors.dialogColor,
             borderRadius: BorderRadius.circular(AppDimens.radiusMd),
             boxShadow: [
               BoxShadow(
@@ -57,7 +58,7 @@ void showNameUpdateDialog(BuildContext context, String currentName) {
                   Container(
                     padding: const EdgeInsets.all(AppDimens.radiusSm),
                     decoration: BoxDecoration(
-                      color: const Color(0xFF2A2A2A),
+                      color: colors.seccondColor,
                       borderRadius: BorderRadius.circular(AppDimens.radiusSm),
                     ),
                     child: const Icon(
@@ -78,9 +79,6 @@ void showNameUpdateDialog(BuildContext context, String currentName) {
                 controller: nameController,
                 decoration: InputDecoration(
                   hintText: 'Nhập tên mới',
-                  hintStyle: TextStyle(color: Colors.grey.withOpacity(0.7)),
-                  filled: true,
-                  fillColor: const Color(0xFF2A2A2A),
                   contentPadding: const EdgeInsets.symmetric(
                       horizontal: AppDimens.paddingMd,
                       vertical: AppDimens.paddingMd),

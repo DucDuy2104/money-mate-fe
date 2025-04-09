@@ -22,14 +22,6 @@ class TransactionInfoMessage extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.grey[200],
         borderRadius: BorderRadius.circular(AppDimens.radiusMd),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.1),
-            blurRadius: 8,
-            spreadRadius: 0.5,
-            offset: const Offset(0, 2),
-          ),
-        ],
       ),
       padding: const EdgeInsets.symmetric(
           vertical: AppDimens.paddingMd, horizontal: AppDimens.paddingMd),

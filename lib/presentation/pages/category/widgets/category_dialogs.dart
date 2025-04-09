@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:money_mate/domain/entities/category.dart';
+import 'package:money_mate/shared/constants/app_colors.dart';
 import 'package:money_mate/shared/constants/app_dimens.dart';
 import 'package:money_mate/shared/constants/app_theme.dart';
 import 'package:money_mate/shared/enums/category_type.dart';
@@ -11,6 +12,7 @@ class CategoryDialogs {
     Function(double) onUpdate,
     VoidCallback onDeselect,
   ) async {
+    final colors = AppColors.colorsData(context);
     final TextEditingController budgetController = TextEditingController(
       text: category.budget > 0
           ? (category.budget % 1 == 0
@@ -23,7 +25,7 @@ class CategoryDialogs {
       context: context,
       builder: (BuildContext context) {
         return Dialog(
-          backgroundColor: const Color(0xFF1E1E2E),
+          backgroundColor: colors.dialogColor,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(AppDimens.radiusMd),
           ),
@@ -65,11 +67,7 @@ class CategoryDialogs {
                             Text(
                               category.type == CategoriesType.expense
                                   ? "Chi tiêu"
-                                  : "Thu nhập",
-                              style: TextStyle(
-                                fontSize: 13,
-                                color: Colors.white.withOpacity(0.7),
-                              ),
+                                  : "Thu nhập"
                             ),
                           ],
                         ),
@@ -87,7 +85,6 @@ class CategoryDialogs {
                       fillColor: Colors.white.withOpacity(0.1),
                       prefixIcon: const Icon(
                         Icons.attach_money,
-                        color: Colors.white70,
                         size: AppDimens.iconSize,
                       ),
                       border: OutlineInputBorder(
@@ -194,6 +191,7 @@ class CategoryDialogs {
     Function(double) onAdd,
     VoidCallback onCancel,
   ) async {
+    final colors = AppColors.colorsData(context);
     final TextEditingController budgetController = TextEditingController(
       text: category.budget > 0
           ? (category.budget % 1 == 0
@@ -206,7 +204,7 @@ class CategoryDialogs {
       context: context,
       builder: (BuildContext context) {
         return Dialog(
-          backgroundColor: const Color(0xFF1E1E2E),
+          backgroundColor: colors.dialogColor,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(AppDimens.radiusMd),
           ),
@@ -259,13 +257,11 @@ class CategoryDialogs {
                   TextField(
                     controller: budgetController,
                     keyboardType: TextInputType.number,
-                    style: const TextStyle(color: Colors.white),
                     decoration: InputDecoration(
                       filled: true,
                       fillColor: Colors.white.withOpacity(0.1),
                       prefixIcon: const Icon(
                         Icons.attach_money,
-                        color: Colors.white70,
                         size: AppDimens.iconSize,
                       ),
                       border: OutlineInputBorder(
@@ -280,9 +276,6 @@ class CategoryDialogs {
                         ),
                       ),
                       hintText: "Nhập số tiền ngân sách",
-                      hintStyle: TextStyle(
-                          color: const Color.fromARGB(255, 19, 16, 16)
-                              .withOpacity(0.5)),
                       contentPadding: const EdgeInsets.all(AppDimens.paddingMd),
                     ),
                   ),
@@ -290,15 +283,14 @@ class CategoryDialogs {
                   Container(
                     padding: const EdgeInsets.all(AppDimens.paddingMd),
                     decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.05),
+                      color: AppColors.primaryColor.withOpacity(0.5),
                       borderRadius: BorderRadius.circular(AppDimens.radiusSm),
                     ),
                     child: Row(
                       children: [
-                        Icon(
+                        const Icon(
                           Icons.info_outline,
-                          size: AppDimens.iconSizeSmall,
-                          color: Colors.white.withOpacity(0.7),
+                          size: AppDimens.iconSize,
                         ),
                         const SizedBox(width: 8),
                         Expanded(
@@ -320,7 +312,6 @@ class CategoryDialogs {
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.white.withOpacity(0.1),
-                            foregroundColor: Colors.white,
                             padding: const EdgeInsets.symmetric(
                                 vertical: AppDimens.paddingMd),
                             shape: RoundedRectangleBorder(

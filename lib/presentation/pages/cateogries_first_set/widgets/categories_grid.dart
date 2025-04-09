@@ -16,6 +16,7 @@ class CategoriesGrid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (categories.isEmpty) return const CategoriesGridSkeleton();
+    final colors = AppColors.colorsData(context);
     return GridView.builder(
       padding: EdgeInsets.zero,
       physics: const BouncingScrollPhysics(),
@@ -47,7 +48,7 @@ class CategoriesGrid extends StatelessWidget {
                       ],
                     )
                   : null,
-              color: isSelected ? null : const Color(0xFF1E1E1E),
+              color: isSelected ? null : colors.seccondColor,
               boxShadow: isSelected
                   ? [
                       BoxShadow(
@@ -90,7 +91,7 @@ class CategoriesGrid extends StatelessWidget {
                     style: context.textTheme.bodyMedium?.copyWith(
                       fontWeight:
                           isSelected ? FontWeight.bold : FontWeight.normal,
-                      color: isSelected ? category.color : Colors.white,
+                      color: isSelected ? category.color : null,
                     ),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,

@@ -93,9 +93,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        AppDimens.spaceMd, // Add top spacing
                         IncomeExpenseChart(statistic: statistic),
-                        AppDimens.spaceMd,
+                        AppDimens.spaceSm,
                         Text("Danh mục tiêu dùng",
                             style: context.textTheme.titleLarge),
                         AppDimens.spaceSm,

@@ -18,7 +18,7 @@ class SimpleWalletWidget extends StatelessWidget {
           children: [
             const Icon(
               Icons.account_balance_wallet,
-              size: AppDimens.iconSize,
+              size: AppDimens.iconSize
             ),
             AppDimens.spaceSm,
             Text(

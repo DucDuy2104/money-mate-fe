@@ -30,14 +30,6 @@ class SuggestCategoryItem extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.grey[200],
         borderRadius: BorderRadius.circular(AppDimens.radiusMd),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.1),
-            blurRadius: 4,
-            spreadRadius: 0,
-            offset: const Offset(0, 1),
-          ),
-        ],
       ),
       child: InkWell(
         onTap: onTap,

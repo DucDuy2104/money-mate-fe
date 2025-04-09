@@ -13,27 +13,18 @@ class ProfileDataWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = AppColors.colorsData(context);
     return LoadingScaffold(
       isLoading: isLoading,
       child: Scaffold(
-        backgroundColor: const Color(0xFF121212),
         appBar: AppBar(
           title: const Text('Thông tin hồ sơ'),
-          backgroundColor: const Color(0xFF1E1E1E),
-          elevation: 0,
         ),
         body: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Container(
-                decoration: const BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    colors: [Color(0xFF1E1E1E), Color(0xFF121212)],
-                  ),
-                ),
                 padding: const EdgeInsets.only(
                   left: AppDimens.paddingMd,
                   right: AppDimens.paddingMd,
@@ -81,7 +72,7 @@ class ProfileDataWidget extends StatelessWidget {
                           child: Container(
                             padding: const EdgeInsets.all(AppDimens.paddingXs),
                             decoration: BoxDecoration(
-                              color: const Color(0xFF2A2A2A),
+                              color: colors.seccondColor,
                               borderRadius:
                                   BorderRadius.circular(AppDimens.radiusSm / 2),
                             ),
@@ -107,7 +98,7 @@ class ProfileDataWidget extends StatelessWidget {
                         Text(
                           user.email,
                           style: context.textTheme.bodyLarge?.copyWith(
-                            color: Colors.grey[300],
+                            color: colors.subTextColor,
                           ),
                         ),
                       ],
@@ -199,10 +190,11 @@ Widget _buildInfoCard({
   Color? valueColor,
   bool isLast = false,
 }) {
+  final colors = AppColors.colorsData(context);
   return Container(
     margin: EdgeInsets.only(bottom: isLast ? 0 : AppDimens.paddingSm),
     decoration: BoxDecoration(
-      color: const Color(0xFF1E1E1E),
+      color: colors.seccondColor,
       borderRadius: BorderRadius.circular(AppDimens.radiusMd),
       boxShadow: [
         BoxShadow(
@@ -220,7 +212,7 @@ Widget _buildInfoCard({
           Container(
             padding: const EdgeInsets.all(AppDimens.paddingSm),
             decoration: BoxDecoration(
-              color: const Color(0xFF2A2A2A),
+              color: colors.thirdColor,
               borderRadius: BorderRadius.circular(AppDimens.radiusSm),
             ),
             child: Icon(
@@ -237,7 +229,7 @@ Widget _buildInfoCard({
                 Text(
                   title,
                   style: context.textTheme.bodyMedium?.copyWith(
-                    color: Colors.grey[400],
+                    color: colors.subTextColor,
                   ),
                 ),
                 AppDimens.spaceXs,
@@ -249,7 +241,7 @@ Widget _buildInfoCard({
                     color: valueColor ??
                         (highlightValue
                             ? const Color(0xFF66B2FF)
-                            : Colors.white),
+                            : null),
                   ),
                 ),
               ],
