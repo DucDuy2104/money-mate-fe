@@ -75,7 +75,7 @@ class _MessageItemState extends State<MessageItem>
       child: SlideTransition(
         position: _slideAnimation,
         child: Container(
-          margin: const EdgeInsets.symmetric(vertical: AppDimens.paddingSmall),
+          margin: const EdgeInsets.symmetric(vertical: AppDimens.paddingXs),
           child: Row(
             mainAxisAlignment: widget.message.isSentByMe
                 ? MainAxisAlignment.end
@@ -93,8 +93,8 @@ class _MessageItemState extends State<MessageItem>
                         maxWidth: MediaQuery.of(context).size.width * 0.7,
                       ),
                       padding: const EdgeInsets.symmetric(
-                        horizontal: AppDimens.padding,
-                        vertical: AppDimens.paddingMedium,
+                        horizontal: AppDimens.paddingMd,
+                        vertical: AppDimens.paddingMd,
                       ),
                       decoration: BoxDecoration(
                           color: widget.message.isSentByMe
@@ -104,19 +104,19 @@ class _MessageItemState extends State<MessageItem>
                                   : Colors.grey[200]),
                           borderRadius: BorderRadius.only(
                             topLeft: Radius.circular(widget.message.isSentByMe
-                                ? AppDimens.borderRadiusMedium
-                                : AppDimens.borderRadiusSmall / 2),
+                                ? AppDimens.radiusMd
+                                : AppDimens.radiusSm / 2),
                             topRight: Radius.circular(widget.message.isSentByMe
-                                ? AppDimens.borderRadiusSmall / 2
-                                : AppDimens.borderRadiusMedium),
+                                ? AppDimens.radiusSm / 2
+                                : AppDimens.radiusMd),
                             bottomLeft: Radius.circular(
                                 widget.message.isSentByMe
-                                    ? AppDimens.borderRadiusMedium
-                                    : AppDimens.borderRadiusMedium),
+                                    ? AppDimens.radiusMd
+                                    : AppDimens.radiusMd),
                             bottomRight: Radius.circular(
                                 widget.message.isSentByMe
-                                    ? AppDimens.borderRadiusMedium
-                                    : AppDimens.borderRadiusMedium),
+                                    ? AppDimens.radiusMd
+                                    : AppDimens.radiusMd),
                           )),
                       child: Text(
                         widget.message.content,
@@ -129,7 +129,7 @@ class _MessageItemState extends State<MessageItem>
                     ),
                     if (!widget.message.isSentByMe &&
                         widget.message.type == MessageType.transaction) ...[
-                      AppDimens.spaceSmall,
+                      AppDimens.spaceSm,
                       TransactionInfoMessage(
                         transaction: widget.message.transaction!,
                         onCancel: () {
@@ -149,7 +149,7 @@ class _MessageItemState extends State<MessageItem>
                     if (!widget.message.isSentByMe &&
                             widget.message.type == MessageType.add ||
                         widget.message.type == MessageType.delete) ...[
-                      AppDimens.spaceSmall,
+                      AppDimens.spaceSm,
                       SwitchCategoryItem(
                         category: widget.message.category!,
                         type: widget.message.type,
@@ -157,7 +157,7 @@ class _MessageItemState extends State<MessageItem>
                     ],
                     if (!widget.message.isSentByMe &&
                         widget.message.type == MessageType.recommend) ...[
-                      AppDimens.spaceSmall,
+                      AppDimens.spaceSm,
                       SuggestCategoryItem(
                         category: widget.message.category!,
                         onApprove: () {
@@ -171,9 +171,9 @@ class _MessageItemState extends State<MessageItem>
                     ],
                     Padding(
                       padding: const EdgeInsets.only(
-                          top: AppDimens.paddingSmall / 2,
-                          left: AppDimens.paddingMedium,
-                          right: AppDimens.paddingMedium),
+                          top: AppDimens.paddingXs,
+                          left: AppDimens.paddingMd,
+                          right: AppDimens.paddingMd),
                       child: Text(widget.message.createdAt.toHourMinute(),
                           style: context.textTheme.labelSmall
                               ?.copyWith(color: AppColors.subText)),

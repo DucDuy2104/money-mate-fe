@@ -22,8 +22,8 @@ class CategoriesGrid extends StatelessWidget {
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 3,
         childAspectRatio: 0.85,
-        crossAxisSpacing: 12,
-        mainAxisSpacing: 12,
+        crossAxisSpacing: AppDimens.paddingMd,
+        mainAxisSpacing: AppDimens.paddingMd,
       ),
       itemCount: categories.length,
       itemBuilder: (context, index) {
@@ -36,7 +36,7 @@ class CategoriesGrid extends StatelessWidget {
           child: AnimatedContainer(
             duration: const Duration(milliseconds: 200),
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(AppDimens.borderRadius),
+              borderRadius: BorderRadius.circular(AppDimens.radiusMd),
               gradient: isSelected
                   ? LinearGradient(
                       begin: Alignment.topLeft,
@@ -66,13 +66,13 @@ class CategoriesGrid extends StatelessWidget {
               onTap: () {
                 onCategorySelected(category);
               },
-              borderRadius: BorderRadius.circular(AppDimens.borderRadius),
+              borderRadius: BorderRadius.circular(AppDimens.radiusMd),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
-                    width: 48,
-                    height: 48,
+                    width: AppDimens.avatarSize,
+                    height: AppDimens.avatarSize,
                     decoration: BoxDecoration(
                       color: category.color.withOpacity(0.2),
                       shape: BoxShape.circle,
@@ -80,10 +80,10 @@ class CategoriesGrid extends StatelessWidget {
                     child: Icon(
                       category.icon,
                       color: category.color,
-                      size: 26,
+                      size: AppDimens.iconSize + 2,
                     ),
                   ),
-                  AppDimens.spaceSmall,
+                  AppDimens.spaceSm,
                   Text(
                     category.name,
                     textAlign: TextAlign.center,
@@ -96,7 +96,7 @@ class CategoriesGrid extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                   ),
                   if (isSelected) ...[
-                    AppDimens.spaceSmall,
+                    AppDimens.spaceSm,
                     Text(
                       CurrencyHelper.formatCurrency(category.budget),
                       style: context.textTheme.bodySmall?.copyWith(

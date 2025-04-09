@@ -55,12 +55,11 @@ class _AppDrawerState extends State<AppDrawer> {
             // Drawer Items
             Expanded(
               child: ListView.builder(
-                padding: const EdgeInsets.only(top: AppDimens.padding),
-                itemCount: items.length,
-                itemBuilder: (context, index) {
-                  return _buildDrawerItem(context, items[index]);
-                }
-              ),
+                  padding: const EdgeInsets.only(top: AppDimens.paddingMd),
+                  itemCount: items.length,
+                  itemBuilder: (context, index) {
+                    return _buildDrawerItem(context, items[index]);
+                  }),
             ),
 
             // Logout Button
@@ -69,8 +68,8 @@ class _AppDrawerState extends State<AppDrawer> {
             // App Version
             const Divider(color: Colors.white70),
             const Padding(
-              padding: EdgeInsets.all(AppDimens.padding),
-              child: Text(
+              padding: const EdgeInsets.all(AppDimens.paddingMd),
+              child: const Text(
                 'Money Mate Version 1.0.0',
                 style: TextStyle(color: Colors.white70),
               ),
@@ -83,7 +82,8 @@ class _AppDrawerState extends State<AppDrawer> {
 
   Widget _buildLogoutButton(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: AppDimens.padding, vertical: AppDimens.paddingSmall),
+      padding: const EdgeInsets.symmetric(
+          horizontal: AppDimens.paddingMd, vertical: AppDimens.paddingSm),
       child: ElevatedButton.icon(
         icon: const Icon(Icons.logout, color: Colors.white),
         label: Text(
@@ -94,7 +94,7 @@ class _AppDrawerState extends State<AppDrawer> {
           backgroundColor: Colors.redAccent,
           minimumSize: const Size.fromHeight(48),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8),
+            borderRadius: BorderRadius.circular(AppDimens.radiusSm),
           ),
           elevation: 3,
         ),
@@ -136,7 +136,8 @@ class _AppDrawerState extends State<AppDrawer> {
             loaded: (state) {
               final profile = state.data.profile;
               return Container(
-                padding: const EdgeInsets.fromLTRB(16, 48, 16, 16),
+                padding: EdgeInsets.fromLTRB(AppDimens.paddingMd, 48,
+                    AppDimens.paddingMd, AppDimens.paddingMd),
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                     colors: isDarkMode
@@ -159,8 +160,8 @@ class _AppDrawerState extends State<AppDrawer> {
                     Row(
                       children: [
                         Container(
-                          width: 70,
-                          height: 70,
+                          width: AppDimens.avatarSize * 1.5,
+                          height: AppDimens.avatarSize * 1.5,
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
                             border: Border.all(color: Colors.white, width: 2),
@@ -173,13 +174,13 @@ class _AppDrawerState extends State<AppDrawer> {
                             ],
                           ),
                           child: CircleAvatar(
-                            radius: 35,
+                            radius: AppDimens.avatarSize * 0.75,
                             backgroundImage: NetworkImage(
                                 profile.avatarUrl ?? AppConstants.tempImage),
                             backgroundColor: Colors.grey[200],
                           ),
                         ),
-                        const SizedBox(width: 16),
+                        AppDimens.spaceMd,
                         Expanded(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -194,15 +195,15 @@ class _AppDrawerState extends State<AppDrawer> {
                                 ),
                                 overflow: TextOverflow.ellipsis,
                               ),
-                              const SizedBox(height: 4),
+                              AppDimens.spaceXs,
                               Row(
                                 children: [
                                   const Icon(
                                     Icons.email_outlined,
                                     color: Colors.white70,
-                                    size: 14,
+                                    size: AppDimens.iconSizeSmall,
                                   ),
-                                  const SizedBox(width: 4),
+                                  const SizedBox(width: AppDimens.paddingXs),
                                   Expanded(
                                     child: Text(
                                       profile.email,
@@ -220,7 +221,7 @@ class _AppDrawerState extends State<AppDrawer> {
                         ),
                       ],
                     ),
-                    AppDimens.space,
+                    AppDimens.spaceMd,
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -254,15 +255,11 @@ class _AppDrawerState extends State<AppDrawer> {
     return Expanded(
       child: Column(
         children: [
-          Text(
-            count,
-            style: context.textTheme.titleLarge
-          ),
-          const SizedBox(height: 2),
-          Text(
-            label,
-            style: context.textTheme.bodySmall?.copyWith(color: AppColors.subText)
-          ),
+          Text(count, style: context.textTheme.titleLarge),
+          const SizedBox(height: AppDimens.paddingXs / 2),
+          Text(label,
+              style: context.textTheme.bodySmall
+                  ?.copyWith(color: AppColors.subText)),
         ],
       ),
     );
@@ -294,7 +291,7 @@ class _AppDrawerState extends State<AppDrawer> {
             }
           },
           child: Padding(
-            padding: const EdgeInsets.all(AppDimens.padding),
+            padding: const EdgeInsets.all(AppDimens.paddingMd),
             child: Row(
               children: [
                 // Icon
@@ -303,10 +300,10 @@ class _AppDrawerState extends State<AppDrawer> {
                   color: (isSelected || hasSelectedChild)
                       ? Colors.white
                       : Colors.white70,
-                  size: 24,
+                  size: AppDimens.iconSize,
                 ),
-                const SizedBox(width: 16),
-            
+                const SizedBox(width: AppDimens.paddingMd),
+
                 // Title
                 Expanded(
                   child: Text(
@@ -318,13 +315,13 @@ class _AppDrawerState extends State<AppDrawer> {
                     ),
                   ),
                 ),
-            
+
                 // Expand/Collapse icon for items with children
                 if (hasChildren)
                   Icon(
                     isExpanded ? Icons.expand_less : Icons.expand_more,
                     color: Colors.white70,
-                    size: 24,
+                    size: AppDimens.iconSize,
                   ),
               ],
             ),
@@ -334,7 +331,7 @@ class _AppDrawerState extends State<AppDrawer> {
         // Children items
         if (hasChildren && isExpanded)
           Padding(
-            padding: const EdgeInsets.only(left: 16.0),
+            padding: const EdgeInsets.only(left: AppDimens.paddingMd),
             child: Column(
               children: item.children.map((child) {
                 final isChildSelected = widget.currentRoute == child.route;
@@ -346,11 +343,13 @@ class _AppDrawerState extends State<AppDrawer> {
                   },
                   child: Container(
                     padding: const EdgeInsets.symmetric(
-                        horizontal: 16.0, vertical: 10.0),
+                        horizontal: AppDimens.paddingMd,
+                        vertical: AppDimens.paddingSm),
                     decoration: BoxDecoration(
                       color:
                           isChildSelected ? Colors.white24 : Colors.transparent,
-                      borderRadius: BorderRadius.circular(4.0),
+                      borderRadius:
+                          BorderRadius.circular(AppDimens.radiusSm / 2),
                     ),
                     child: Row(
                       children: [
@@ -358,9 +357,9 @@ class _AppDrawerState extends State<AppDrawer> {
                           child.icon,
                           color:
                               isChildSelected ? Colors.white : Colors.white70,
-                          size: 20,
+                          size: AppDimens.iconSizeSmall + 4,
                         ),
-                        const SizedBox(width: 12),
+                        const SizedBox(width: AppDimens.paddingSm + 4),
                         Expanded(
                           child: Text(
                             child.title,

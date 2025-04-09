@@ -1,23 +1,31 @@
 import 'package:flutter/material.dart';
 
 class AppDimens {
+  // Icon sizes
   static const double iconSize = 24.0;
   static const double iconSizeSmall = 16.0;
-  static const double avatar = 48.0;
 
-  static const double padding = 16.0;
-  static const double paddingSmall = 8.0;
-  static const double paddingMedium = 12.0;
-  static const double paddingLarge = 24.0;
+  // Avatar
+  static const double avatarSize = 48.0;
 
-  static const double borderRadius = 12.0;
-  static const double borderRadiusSmall = 8.0;
-  static const double borderRadiusMedium = 16.0;
-  static const double borderRadiusLarge = 24.0;
+  // Padding (spacing)
+  static const double paddingXs = 4.0;   // Extra Small
+  static const double paddingSm = 8.0;   // Small
+  static const double paddingMd = 16.0;  // Medium (default)
+  static const double paddingLg = 24.0;  // Large
 
-  static const Widget space = SizedBox(height: padding, width: padding);
-  static const Widget spaceSmall = SizedBox(height: paddingSmall, width: paddingSmall);
-  static const Widget spaceMedium = SizedBox(height: paddingMedium, width: paddingMedium);
-  static const Widget spaceLarge = SizedBox(height: paddingLarge, width: paddingLarge);
-  static const Widget divider = SizedBox(height: paddingSmall / 2, width: paddingSmall);
+  // Border Radius
+  static const double radiusSm = 8.0;
+  static const double radiusMd = 12.0;
+  static const double radiusLg = 16.0;
+  static const double radiusXl = 24.0;
+
+  // Spacing widgets
+  static const Widget spaceXs = SizedBox(height: paddingXs, width: paddingXs);
+  static const Widget spaceSm = SizedBox(height: paddingSm, width: paddingSm);
+  static const Widget spaceMd = SizedBox(height: paddingMd, width: paddingMd);
+  static const Widget spaceLg = SizedBox(height: paddingLg, width: paddingLg);
+
+  // Divider spacing
+  static const Widget divider = SizedBox(height: paddingSm / 2, width: paddingSm);
 }

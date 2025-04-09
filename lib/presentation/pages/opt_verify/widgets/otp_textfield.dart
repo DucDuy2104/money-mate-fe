@@ -75,14 +75,14 @@ class _OtpTextFieldState extends State<OtpTextField> {
           decoration: InputDecoration(
             counterText: '',
             border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(AppDimens.borderRadiusSmall),
+              borderRadius: BorderRadius.circular(AppDimens.radiusSm),
             ),
             enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(AppDimens.borderRadiusSmall),
+              borderRadius: BorderRadius.circular(AppDimens.radiusSm),
               borderSide: BorderSide(color: Colors.grey.shade300),
             ),
             focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(AppDimens.borderRadiusSmall),
+              borderRadius: BorderRadius.circular(AppDimens.radiusSm),
               borderSide: const BorderSide(color: AppColors.primaryColor, width: 2),
             ),
           ),

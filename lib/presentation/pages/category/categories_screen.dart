@@ -44,7 +44,6 @@ class _CategoriesScreenState extends State<CategoriesScreen>
       ),
     );
     _animationController.forward();
-
   }
 
   void disableCategories(Category category) {
@@ -135,7 +134,7 @@ class _CategoriesScreenState extends State<CategoriesScreen>
             ),
             drawer: const AppDrawer(currentRoute: RouteNames.category),
             body: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: AppDimens.paddingMedium),
+              padding: const EdgeInsets.symmetric(horizontal: AppDimens.paddingMd),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -143,7 +142,7 @@ class _CategoriesScreenState extends State<CategoriesScreen>
                       tab1Name: 'Chi tiêu',
                       tab2Name: 'Thu nhập',
                       controller: _tabController),
-                  AppDimens.spaceSmall,
+                  AppDimens.spaceSm,
                   Expanded(
                     child: FadeTransition(
                       opacity: _fadeAnimation,
@@ -159,7 +158,7 @@ class _CategoriesScreenState extends State<CategoriesScreen>
                           
                               return Container(
                                 decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(AppDimens.borderRadius),
+                                  borderRadius: BorderRadius.circular(AppDimens.radiusMd),
                                   gradient: LinearGradient(
                                     colors: isExpenseTab
                                         ? [
@@ -172,23 +171,24 @@ class _CategoriesScreenState extends State<CategoriesScreen>
                                           ],
                                   ),
                                 ),
-                                padding: const EdgeInsets.all(AppDimens.paddingMedium),
+                                padding: const EdgeInsets.all(AppDimens.paddingMd),
                                 child: Row(
                                   children: [
                                     Container(
-                                      padding: const EdgeInsets.all(AppDimens.borderRadiusSmall),
+                                      padding: const EdgeInsets.all(AppDimens.paddingSm),
                                       decoration: BoxDecoration(
                                         color: Colors.white.withOpacity(0.2),
                                         shape: BoxShape.circle,
                                       ),
                                       child: Icon(
                                         Icons.lightbulb_outline,
+                                        size: AppDimens.iconSize,
                                         color: isExpenseTab
                                             ? Colors.amber
                                             : Colors.lightGreen,
                                       ),
                                     ),
-                                    AppDimens.spaceSmall,
+                                    AppDimens.spaceSm,
                                     Expanded(
                                       child: Text(
                                         'Đã chọn $selectedCount danh mục. Nhấn vào danh mục để thêm hoặc cập nhật hạn mức.',
@@ -203,7 +203,7 @@ class _CategoriesScreenState extends State<CategoriesScreen>
                               );
                             },
                           ),
-                          AppDimens.spaceSmall,
+                          AppDimens.spaceSm,
                           Expanded(
                             child: TabBarView(
                               controller: _tabController,

@@ -21,7 +21,7 @@ class TransactionInfoMessage extends StatelessWidget {
       width: MediaQuery.of(context).size.width * 0.7,
       decoration: BoxDecoration(
         color: Colors.grey[200],
-        borderRadius: BorderRadius.circular(AppDimens.borderRadius),
+        borderRadius: BorderRadius.circular(AppDimens.radiusMd),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.1),
@@ -32,7 +32,7 @@ class TransactionInfoMessage extends StatelessWidget {
         ],
       ),
       padding: const EdgeInsets.symmetric(
-          vertical: AppDimens.paddingMedium, horizontal: AppDimens.padding),
+          vertical: AppDimens.paddingMd, horizontal: AppDimens.paddingMd),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -40,10 +40,10 @@ class TransactionInfoMessage extends StatelessWidget {
           Row(
             children: [
               Container(
-                padding: const EdgeInsets.all(AppDimens.paddingSmall),
+                padding: const EdgeInsets.all(AppDimens.paddingSm),
                 decoration: BoxDecoration(
                   color: transaction.category.color.withOpacity(0.2),
-                  borderRadius: BorderRadius.circular(AppDimens.borderRadius),
+                  borderRadius: BorderRadius.circular(AppDimens.radiusMd),
                 ),
                 child: Icon(
                   transaction.category.icon,
@@ -51,7 +51,7 @@ class TransactionInfoMessage extends StatelessWidget {
                   size: AppDimens.iconSize,
                 ),
               ),
-              AppDimens.spaceSmall,
+              AppDimens.spaceSm,
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -85,19 +85,18 @@ class TransactionInfoMessage extends StatelessWidget {
               _buildActionButton(),
             ],
           ),
-          AppDimens.spaceSmall,
+          AppDimens.spaceSm,
           Row(
             children: [
               Expanded(
                 flex: 3,
                 child: Container(
-                  padding: const EdgeInsets.all(AppDimens.paddingSmall),
+                  padding: const EdgeInsets.all(AppDimens.paddingSm),
                   decoration: BoxDecoration(
                     color: transaction.amount >= 0
                         ? Colors.teal[50]
                         : Colors.red[50],
-                    borderRadius:
-                        BorderRadius.circular(AppDimens.borderRadiusSmall),
+                    borderRadius: BorderRadius.circular(AppDimens.radiusSm),
                   ),
                   child: Text(
                     CurrencyHelper.formatCurrencyCompact(transaction.amount),
@@ -109,14 +108,14 @@ class TransactionInfoMessage extends StatelessWidget {
                 ),
               ),
               if (transaction.description.isNotEmpty) ...[
-                AppDimens.spaceSmall,
+                AppDimens.spaceSm,
                 Expanded(
                   flex: 5,
                   child: Container(
-                    padding: const EdgeInsets.all(AppDimens.paddingSmall),
+                    padding: const EdgeInsets.all(AppDimens.paddingSm),
                     decoration: BoxDecoration(
                       color: Colors.white,
-                      borderRadius: BorderRadius.circular(10),
+                      borderRadius: BorderRadius.circular(AppDimens.radiusMd),
                       border: Border.all(color: Colors.grey[300]!),
                     ),
                     child: Text(

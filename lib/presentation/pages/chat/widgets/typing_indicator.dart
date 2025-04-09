@@ -78,7 +78,7 @@ class _TypingIndicatorState extends State<TypingIndicator> with SingleTickerProv
 
   Widget _buildDot(Animation<double> animation, int index) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: AppDimens.paddingSmall),
+      padding: const EdgeInsets.only(bottom: AppDimens.paddingXs),
       child: AnimatedBuilder(
         animation: animation,
         builder: (context, child) {

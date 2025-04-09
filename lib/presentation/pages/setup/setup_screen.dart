@@ -8,7 +8,6 @@ import 'package:money_mate/shared/components/loading_scafford.dart';
 import 'package:money_mate/shared/constants/app_assets.dart';
 import 'package:money_mate/shared/constants/app_dimens.dart';
 import 'package:money_mate/shared/constants/app_theme.dart';
-import 'package:money_mate/shared/utils/screen_utils.dart';
 
 class SetupScreen extends StatelessWidget {
   SetupScreen({super.key});
@@ -58,64 +57,101 @@ class SetupScreen extends StatelessWidget {
         return LoadingScaffold(
           isLoading: state.maybeMap(loading: (_) => true, orElse: () => false),
           child: Scaffold(
-            resizeToAvoidBottomInset: false,
+            resizeToAvoidBottomInset: true,
             body: SafeArea(
-              child: Padding(
-                padding: ScreenUtils.screenPaddingWithSafeArea(context),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Image.asset(
-                      AppAssets.storySetSetup,
-                      width: 150,
-                      height: 150,
-                      fit: BoxFit.contain,
+              child: SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: AppDimens.paddingMd,
+                    vertical: AppDimens.paddingLg,
+                  ),
+                  child: ConstrainedBox(
+                    constraints: BoxConstraints(
+                      minHeight: MediaQuery.of(context).size.height -
+                          MediaQuery.of(context).padding.top -
+                          MediaQuery.of(context).padding.bottom -
+                          AppDimens.paddingLg * 2,
                     ),
-                    AppDimens.spaceLarge,
-                    Text(
-                      'Thiết lập tài khoản',
-                      style: context.textTheme.titleLarge,
-                      textAlign: TextAlign.center,
-                    ),
-                    AppDimens.space,
-                    const Text(
-                      'Vui lòng nhập thêm thông tin ( Tên và ngân sách hiện tại của bạn ) để thiết lập tài khoản',
-                      textAlign: TextAlign.center,
-                    ),
-                    AppDimens.spaceLarge,
-                    TextField(
-                      controller: _nameController,
-                      focusNode: _nameFocusNode,
-                      onSubmitted: (_) => _budgetFocusNode.requestFocus(),
-                      decoration: const InputDecoration(
-                        labelText: 'Tên của bạn',
-                      ),
-                    ),
-                    AppDimens.space,
-                    TextField(
-                      controller: _budgetController,
-                      focusNode: _budgetFocusNode,
-                      onSubmitted: (_) => _onUpdate(context),
-                      keyboardType: TextInputType.number,
-                      decoration: const InputDecoration(
-                        labelText: 'Ngân sách hiện tại (VND)',
-                      ),
-                    ),
-                    AppDimens.space,
-                    SizedBox(
-                      width: double.infinity,
-                      child: ElevatedButton(
-                        onPressed: () => _onUpdate(context),
-                        child: Text(
-                          'Tiếp tục',
-                          style: context.textTheme.bodyLarge?.copyWith(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
+                    child: Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Image.asset(
+                            AppAssets.storySetSetup,
+                            width: MediaQuery.of(context).size.width * 0.4,
+                            height: MediaQuery.of(context).size.width * 0.4,
+                            fit: BoxFit.contain,
                           ),
-                        ),
+                          AppDimens.spaceMd,
+                          Text(
+                            'Thiết lập tài khoản',
+                            style: context.textTheme.titleLarge?.copyWith(
+                              fontWeight: FontWeight.bold,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                          AppDimens.spaceSm,
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: AppDimens.paddingMd),
+                            child: Text(
+                              'Vui lòng nhập thêm thông tin (Tên và ngân sách hiện tại của bạn) để thiết lập tài khoản',
+                              textAlign: TextAlign.center,
+                              style: context.textTheme.bodyMedium,
+                            ),
+                          ),
+                          AppDimens.spaceLg,
+                          TextField(
+                            controller: _nameController,
+                            focusNode: _nameFocusNode,
+                            onSubmitted: (_) => _budgetFocusNode.requestFocus(),
+                            decoration: InputDecoration(
+                              labelText: 'Tên của bạn',
+                              border: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.circular(AppDimens.radiusMd),
+                              ),
+                            ),
+                          ),
+                          AppDimens.spaceMd,
+                          TextField(
+                            controller: _budgetController,
+                            focusNode: _budgetFocusNode,
+                            onSubmitted: (_) => _onUpdate(context),
+                            keyboardType: TextInputType.number,
+                            decoration: InputDecoration(
+                              labelText: 'Ngân sách hiện tại (VND)',
+                              border: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.circular(AppDimens.radiusMd),
+                              ),
+                            ),
+                          ),
+                          AppDimens.spaceLg,
+                          SizedBox(
+                            width: double.infinity,
+                            child: ElevatedButton(
+                              onPressed: () => _onUpdate(context),
+                              style: ElevatedButton.styleFrom(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius:
+                                      BorderRadius.circular(AppDimens.radiusMd),
+                                ),
+                              ),
+                              child: Text(
+                                'Tiếp tục',
+                                style: context.textTheme.bodyLarge?.copyWith(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                  ],
+                  ),
                 ),
               ),
             ),

@@ -110,7 +110,8 @@ class _ChatScreenState extends State<ChatScreen> {
                       IconButton(
                         icon: const Icon(EvaIcons.moreVertical),
                         onPressed: () {
-                          showUpdateBotDialog(context, conversation.bot, (updateBot) {
+                          showUpdateBotDialog(context, conversation.bot,
+                              (updateBot) {
                             BlocProvider.of<ChatBloc>(context)
                                 .add(ChatEvent.updateBot(context, updateBot));
                           });
@@ -118,44 +119,41 @@ class _ChatScreenState extends State<ChatScreen> {
                       ),
                     ],
                   ),
-                  body: Padding(
-                    padding: const EdgeInsets.only(
-                        bottom: kBottomNavigationBarHeight),
-                    child: Column(
-                      children: [
-                        Expanded(
-                          child: ListView.builder(
-                            reverse: true,
-                            controller: _scrollController,
-                            padding:
-                                const EdgeInsets.all(AppDimens.paddingSmall),
-                            itemCount:
-                                messages.isNotEmpty && messages[0].isSentByMe
-                                    ? messages.length + 1
-                                    : messages.length,
-                            itemBuilder: (context, index) {
-                              if (index == 0 && messages[0].isSentByMe) {
-                                return const TypingIndicator();
-                              }
-                              final id =
-                                  messages[0].isSentByMe ? index - 1 : index;
-                              final message = messages[id];
-                              return MessageItem(message: message);
-                            },
-                          ),
+                  body: Column(
+                    children: [
+                      Expanded(
+                        child: ListView.builder(
+                          reverse: true,
+                          controller: _scrollController,
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: AppDimens.paddingMd),
+                          itemCount:
+                              messages.isNotEmpty && messages[0].isSentByMe
+                                  ? messages.length + 1
+                                  : messages.length,
+                          itemBuilder: (context, index) {
+                            if (index == 0 && messages[0].isSentByMe) {
+                              return const TypingIndicator();
+                            }
+                            final id =
+                                messages[0].isSentByMe ? index - 1 : index;
+                            final message = messages[id];
+                            return MessageItem(message: message);
+                          },
                         ),
-                        Container(
-                          decoration: BoxDecoration(
-                            color: Theme.of(context).cardColor,
-                          ),
-                          child: MessageInput(
-                            textController: _textController,
-                            onSendMessage: onSendMessage,
-                            focusNode: _focusNode,
-                          ),
+                      ),
+                      Container(
+                        margin: const EdgeInsets.all(AppDimens.paddingMd),
+                        decoration: BoxDecoration(
+                          color: Theme.of(context).cardColor,
                         ),
-                      ],
-                    ),
+                        child: MessageInput(
+                          textController: _textController,
+                          onSendMessage: onSendMessage,
+                          focusNode: _focusNode,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               );

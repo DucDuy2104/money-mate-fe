@@ -20,7 +20,7 @@ class SimpleWalletWidget extends StatelessWidget {
               Icons.account_balance_wallet,
               size: AppDimens.iconSize,
             ),
-            AppDimens.spaceSmall,
+            AppDimens.spaceSm,
             Text(
               CurrencyHelper.formatCurrency(balance),
             ),

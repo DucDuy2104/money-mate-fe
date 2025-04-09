@@ -12,7 +12,11 @@ class CategoryDialogs {
     VoidCallback onDeselect,
   ) async {
     final TextEditingController budgetController = TextEditingController(
-      text: category.budget.toString(),
+      text: category.budget > 0
+          ? (category.budget % 1 == 0
+              ? category.budget.toInt().toString()
+              : category.budget.toString())
+          : '',
     );
 
     return showDialog(
@@ -21,14 +25,14 @@ class CategoryDialogs {
         return Dialog(
           backgroundColor: const Color(0xFF1E1E2E),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(AppDimens.borderRadiusMedium),
+            borderRadius: BorderRadius.circular(AppDimens.radiusMd),
           ),
           insetPadding:
-              const EdgeInsets.symmetric(horizontal: AppDimens.padding),
+              const EdgeInsets.symmetric(horizontal: AppDimens.paddingMd),
           child: ConstrainedBox(
             constraints: const BoxConstraints(maxWidth: 400),
             child: Padding(
-              padding: const EdgeInsets.all(AppDimens.padding),
+              padding: const EdgeInsets.all(AppDimens.paddingMd),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -36,11 +40,11 @@ class CategoryDialogs {
                   Row(
                     children: [
                       Container(
-                        padding: const EdgeInsets.all(AppDimens.paddingSmall),
+                        padding: const EdgeInsets.all(AppDimens.paddingSm),
                         decoration: BoxDecoration(
                           color: category.color.withOpacity(0.2),
-                          borderRadius: BorderRadius.circular(
-                              AppDimens.borderRadiusSmall),
+                          borderRadius:
+                              BorderRadius.circular(AppDimens.radiusSm),
                         ),
                         child: Icon(
                           category.icon,
@@ -48,7 +52,7 @@ class CategoryDialogs {
                           size: AppDimens.iconSize,
                         ),
                       ),
-                      AppDimens.spaceMedium,
+                      AppDimens.spaceMd,
                       Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -72,9 +76,9 @@ class CategoryDialogs {
                       ),
                     ],
                   ),
-                  AppDimens.space,
+                  AppDimens.spaceMd,
                   Text("Ngân sách", style: context.textTheme.bodyMedium),
-                  AppDimens.spaceSmall,
+                  AppDimens.spaceSm,
                   TextField(
                     controller: budgetController,
                     keyboardType: TextInputType.number,
@@ -87,11 +91,11 @@ class CategoryDialogs {
                         size: AppDimens.iconSize,
                       ),
                       border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
+                        borderRadius: BorderRadius.circular(AppDimens.radiusSm),
                         borderSide: BorderSide.none,
                       ),
                       focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
+                        borderRadius: BorderRadius.circular(AppDimens.radiusSm),
                         borderSide: BorderSide(
                           color: category.color,
                           width: 1.5,
@@ -99,12 +103,12 @@ class CategoryDialogs {
                       ),
                       hintText: "Nhập ngân sách",
                       contentPadding: const EdgeInsets.symmetric(
-                        vertical: AppDimens.paddingMedium,
-                        horizontal: AppDimens.paddingMedium,
+                        vertical: AppDimens.paddingMd,
+                        horizontal: AppDimens.paddingMd,
                       ),
                     ),
                   ),
-                  AppDimens.space,
+                  AppDimens.spaceMd,
                   Row(
                     children: [
                       Expanded(
@@ -116,17 +120,17 @@ class CategoryDialogs {
                             backgroundColor: Colors.grey.withOpacity(0.3),
                             foregroundColor: Colors.white,
                             padding: const EdgeInsets.symmetric(
-                                vertical: AppDimens.paddingMedium),
+                                vertical: AppDimens.paddingMd),
                             shape: RoundedRectangleBorder(
                               borderRadius:
-                                  BorderRadius.circular(AppDimens.borderRadius),
+                                  BorderRadius.circular(AppDimens.radiusMd),
                             ),
                           ),
                           child:
                               Text("Huỷ", style: context.textTheme.bodyMedium),
                         ),
                       ),
-                      AppDimens.spaceMedium,
+                      AppDimens.spaceMd,
                       Expanded(
                         child: ElevatedButton(
                           onPressed: () {
@@ -137,17 +141,17 @@ class CategoryDialogs {
                             backgroundColor: Colors.redAccent,
                             foregroundColor: Colors.white,
                             padding: const EdgeInsets.symmetric(
-                                vertical: AppDimens.paddingMedium),
+                                vertical: AppDimens.paddingMd),
                             shape: RoundedRectangleBorder(
                               borderRadius:
-                                  BorderRadius.circular(AppDimens.borderRadius),
+                                  BorderRadius.circular(AppDimens.radiusMd),
                             ),
                           ),
                           child: Text("Xoá bỏ",
                               style: context.textTheme.bodyMedium),
                         ),
                       ),
-                      AppDimens.spaceMedium,
+                      AppDimens.spaceMd,
                       Expanded(
                         child: ElevatedButton(
                           onPressed: () {
@@ -162,10 +166,10 @@ class CategoryDialogs {
                             backgroundColor: category.color,
                             foregroundColor: Colors.white,
                             padding: const EdgeInsets.symmetric(
-                                vertical: AppDimens.paddingSmall),
+                                vertical: AppDimens.paddingMd),
                             shape: RoundedRectangleBorder(
                               borderRadius:
-                                  BorderRadius.circular(AppDimens.borderRadius),
+                                  BorderRadius.circular(AppDimens.radiusMd),
                             ),
                             elevation: 0,
                           ),
@@ -191,7 +195,11 @@ class CategoryDialogs {
     VoidCallback onCancel,
   ) async {
     final TextEditingController budgetController = TextEditingController(
-      text: category.budget.toString(),
+      text: category.budget > 0
+          ? (category.budget % 1 == 0
+              ? category.budget.toInt().toString()
+              : category.budget.toString())
+          : '',
     );
 
     return showDialog(
@@ -200,14 +208,14 @@ class CategoryDialogs {
         return Dialog(
           backgroundColor: const Color(0xFF1E1E2E),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(AppDimens.borderRadius),
+            borderRadius: BorderRadius.circular(AppDimens.radiusMd),
           ),
           insetPadding:
-              const EdgeInsets.symmetric(horizontal: AppDimens.padding),
+              const EdgeInsets.symmetric(horizontal: AppDimens.paddingMd),
           child: ConstrainedBox(
             constraints: const BoxConstraints(maxWidth: 400),
             child: Padding(
-              padding: const EdgeInsets.all(AppDimens.padding),
+              padding: const EdgeInsets.all(AppDimens.paddingMd),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -215,11 +223,11 @@ class CategoryDialogs {
                   Row(
                     children: [
                       Container(
-                        padding: const EdgeInsets.all(AppDimens.paddingMedium),
+                        padding: const EdgeInsets.all(AppDimens.paddingMd),
                         decoration: BoxDecoration(
                           color: category.color.withOpacity(0.2),
                           borderRadius:
-                              BorderRadius.circular(AppDimens.borderRadius),
+                              BorderRadius.circular(AppDimens.radiusMd),
                         ),
                         child: Icon(
                           category.icon,
@@ -227,7 +235,7 @@ class CategoryDialogs {
                           size: AppDimens.iconSize,
                         ),
                       ),
-                      AppDimens.spaceMedium,
+                      AppDimens.spaceMd,
                       Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -245,9 +253,9 @@ class CategoryDialogs {
                       ),
                     ],
                   ),
-                  AppDimens.space,
+                  AppDimens.spaceMd,
                   Text("Đặt ngân sách", style: context.textTheme.bodyMedium),
-                  AppDimens.spaceSmall,
+                  AppDimens.spaceSm,
                   TextField(
                     controller: budgetController,
                     keyboardType: TextInputType.number,
@@ -261,13 +269,11 @@ class CategoryDialogs {
                         size: AppDimens.iconSize,
                       ),
                       border: OutlineInputBorder(
-                        borderRadius:
-                            BorderRadius.circular(AppDimens.borderRadius),
+                        borderRadius: BorderRadius.circular(AppDimens.radiusMd),
                         borderSide: BorderSide.none,
                       ),
                       focusedBorder: OutlineInputBorder(
-                        borderRadius:
-                            BorderRadius.circular(AppDimens.borderRadius),
+                        borderRadius: BorderRadius.circular(AppDimens.radiusMd),
                         borderSide: BorderSide(
                           color: category.color,
                           width: 1.5,
@@ -277,16 +283,15 @@ class CategoryDialogs {
                       hintStyle: TextStyle(
                           color: const Color.fromARGB(255, 19, 16, 16)
                               .withOpacity(0.5)),
-                      contentPadding:
-                          const EdgeInsets.all(AppDimens.paddingMedium),
+                      contentPadding: const EdgeInsets.all(AppDimens.paddingMd),
                     ),
                   ),
-                  AppDimens.spaceMedium,
+                  AppDimens.spaceMd,
                   Container(
-                    padding: const EdgeInsets.all(AppDimens.paddingMedium),
+                    padding: const EdgeInsets.all(AppDimens.paddingMd),
                     decoration: BoxDecoration(
                       color: Colors.white.withOpacity(0.05),
-                      borderRadius: BorderRadius.circular(AppDimens.borderRadiusSmall),
+                      borderRadius: BorderRadius.circular(AppDimens.radiusSm),
                     ),
                     child: Row(
                       children: [
@@ -298,14 +303,13 @@ class CategoryDialogs {
                         const SizedBox(width: 8),
                         Expanded(
                           child: Text(
-                            "Thao tác này sẽ thêm danh mục vào kế hoạch ngân sách của bạn",
-                            style: context.textTheme.bodyMedium
-                          ),
+                              "Thao tác này sẽ thêm danh mục vào kế hoạch ngân sách của bạn",
+                              style: context.textTheme.bodyMedium),
                         ),
                       ],
                     ),
                   ),
-                  AppDimens.space,
+                  AppDimens.spaceMd,
                   Row(
                     children: [
                       Expanded(
@@ -317,18 +321,18 @@ class CategoryDialogs {
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.white.withOpacity(0.1),
                             foregroundColor: Colors.white,
-                            padding: const EdgeInsets.symmetric(vertical: AppDimens.paddingMedium),
+                            padding: const EdgeInsets.symmetric(
+                                vertical: AppDimens.paddingMd),
                             shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(AppDimens.borderRadius),
+                              borderRadius:
+                                  BorderRadius.circular(AppDimens.radiusMd),
                             ),
                           ),
-                          child: Text(
-                            "Hủy",
-                            style: context.textTheme.bodyMedium
-                          ),
+                          child:
+                              Text("Hủy", style: context.textTheme.bodyMedium),
                         ),
                       ),
-                      AppDimens.spaceMedium,
+                      AppDimens.spaceMd,
                       Expanded(
                         child: ElevatedButton(
                           onPressed: () {
@@ -342,16 +346,16 @@ class CategoryDialogs {
                           style: ElevatedButton.styleFrom(
                             backgroundColor: category.color,
                             foregroundColor: Colors.white,
-                            padding: const EdgeInsets.symmetric(vertical: AppDimens.paddingMedium),
+                            padding: const EdgeInsets.symmetric(
+                                vertical: AppDimens.paddingMd),
                             shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(AppDimens.borderRadius),
+                              borderRadius:
+                                  BorderRadius.circular(AppDimens.radiusMd),
                             ),
                             elevation: 0,
                           ),
-                          child: Text(
-                            "Thêm",
-                            style: context.textTheme.bodyMedium
-                          ),
+                          child:
+                              Text("Thêm", style: context.textTheme.bodyMedium),
                         ),
                       ),
                     ],

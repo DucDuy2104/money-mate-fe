@@ -12,7 +12,6 @@ import 'package:money_mate/shared/constants/app_assets.dart';
 import 'package:money_mate/shared/constants/app_colors.dart';
 import 'package:money_mate/shared/constants/app_dimens.dart';
 import 'package:money_mate/shared/constants/app_theme.dart';
-import 'package:money_mate/shared/utils/screen_utils.dart';
 
 class OtpVerificationScreen extends StatefulWidget {
   final User user;
@@ -148,7 +147,10 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
             extendBodyBehindAppBar: true,
             resizeToAvoidBottomInset: false,
             body: Padding(
-              padding: ScreenUtils.screenPaddingWithSafeArea(context),
+              padding: const EdgeInsets.only(
+                  top: AppDimens.paddingSm,
+                  right: AppDimens.paddingMd,
+                  left: AppDimens.paddingMd),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -158,18 +160,18 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                     height: 150,
                     fit: BoxFit.contain,
                   ),
-                  AppDimens.spaceLarge,
+                  AppDimens.spaceMd,
                   Text(
                     'Nhập mã OTP',
                     style: context.textTheme.titleLarge,
                     textAlign: TextAlign.center,
                   ),
-                  AppDimens.space,
+                  AppDimens.spaceSm,
                   Text(
                     'Chúng tôi đã gửi mã xác thực đến ${widget.user.email}',
                     textAlign: TextAlign.center,
                   ),
-                  AppDimens.spaceLarge,
+                  AppDimens.spaceMd,
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: List.generate(
@@ -191,7 +193,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                       ),
                     ),
                   ),
-                  AppDimens.spaceLarge,
+                  AppDimens.spaceLg,
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
@@ -203,7 +205,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                       ),
                     ),
                   ),
-                  AppDimens.space,
+                  AppDimens.spaceMd,
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -214,7 +216,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                         style: context.textTheme.bodyMedium,
                       ),
                       if (_canResend) ...[
-                        AppDimens.spaceSmall,
+                        AppDimens.spaceXs,
                         GestureDetector(
                           onTap: () {
                             if (!_canResend) {

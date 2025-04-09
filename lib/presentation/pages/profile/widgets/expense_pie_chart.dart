@@ -15,14 +15,14 @@ class ExpensePieChart extends StatelessWidget {
     final data = getExpenseData(categories);
     if (data.isEmpty) {
       return Container(
-        padding: const EdgeInsets.all(AppDimens.padding),
+        padding: const EdgeInsets.all(AppDimens.paddingMd),
         decoration: BoxDecoration(
           color: const Color(0xFF1E1E2E),
-          borderRadius: BorderRadius.circular(AppDimens.borderRadiusMedium),
+          borderRadius: BorderRadius.circular(AppDimens.radiusMd),
           boxShadow: [
             BoxShadow(
               color: Colors.black.withOpacity(0.2),
-              blurRadius: AppDimens.borderRadiusMedium,
+              blurRadius: AppDimens.radiusMd,
               offset: const Offset(0, 4),
             ),
           ],
@@ -35,37 +35,32 @@ class ExpensePieChart extends StatelessWidget {
               height: 180,
               fit: BoxFit.contain,
             ),
-            AppDimens.spaceMedium,
-            Text(
-              "Bạn chưa có dữ liệu chi tiêu",
-              textAlign: TextAlign.center,
-              style: context.textTheme.bodyLarge
-            ),
+            AppDimens.spaceMd,
+            Text("Bạn chưa có dữ liệu chi tiêu",
+                textAlign: TextAlign.center,
+                style: context.textTheme.bodyLarge),
           ],
         ),
       );
     }
 
     return Container(
-      padding: const EdgeInsets.all(AppDimens.padding),
+      padding: const EdgeInsets.all(AppDimens.paddingMd),
       decoration: BoxDecoration(
         color: const Color(0xFF1E1E2E),
-        borderRadius: BorderRadius.circular(AppDimens.borderRadius),
+        borderRadius: BorderRadius.circular(AppDimens.radiusMd),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.2),
-            blurRadius: AppDimens.borderRadius,
+            blurRadius: AppDimens.radiusMd,
             offset: const Offset(0, 4),
           ),
         ],
       ),
       child: Column(
         children: [
-          Text(
-            "Chi tiêu theo danh mục",
-            style: context.textTheme.titleLarge
-          ),
-          AppDimens.spaceLarge,
+          Text("Chi tiêu theo danh mục", style: context.textTheme.titleLarge),
+          AppDimens.spaceMd,
           SizedBox(
             height: 300,
             child: Stack(
@@ -91,16 +86,13 @@ class ExpensePieChart extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    Text(
-                      "Tổng",
-                      style: context.textTheme.bodyMedium
-                    ),
+                    Text("Tổng", style: context.textTheme.bodyMedium),
                   ],
                 ),
               ],
             ),
           ),
-          AppDimens.spaceLarge,
+          AppDimens.spaceMd,
           _buildEnhancedLegend(context, data, categories),
         ],
       ),
@@ -147,8 +139,7 @@ List<PieChartSectionData> _generatePieSections(
 }
 
 Widget _buildEnhancedLegend(
-  BuildContext context,
-    Map<String, double> data, List<Category> categories) {
+    BuildContext context, Map<String, double> data, List<Category> categories) {
   final Map<String, double> percentages = {};
   final double total = data.values.reduce((a, b) => a + b);
   data.forEach((key, value) {
@@ -159,18 +150,19 @@ Widget _buildEnhancedLegend(
       percentages.entries.toList()..sort((a, b) => b.value.compareTo(a.value));
 
   return Wrap(
-    spacing: 12,
-    runSpacing: 12,
+    spacing: AppDimens.paddingSm,
+    runSpacing: AppDimens.paddingSm,
     alignment: WrapAlignment.center,
     children: sortedEntries.map((entry) {
       // Find the corresponding category object to get its color
       final category = categories.firstWhere((cat) => cat.name == entry.key);
 
       return Container(
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+        padding: const EdgeInsets.symmetric(
+            horizontal: AppDimens.paddingSm, vertical: AppDimens.paddingXs),
         decoration: BoxDecoration(
           color: const Color(0xFF242438),
-          borderRadius: BorderRadius.circular(AppDimens.borderRadiusSmall * 2),
+          borderRadius: BorderRadius.circular(AppDimens.radiusSm),
           border: Border.all(
             color: category.color.withOpacity(0.5),
             width: 1,
@@ -187,16 +179,11 @@ Widget _buildEnhancedLegend(
                 shape: BoxShape.circle,
               ),
             ),
-            AppDimens.spaceSmall,
-            Text(
-              entry.key,
-              style: context.textTheme.bodyMedium
-            ),
-            AppDimens.spaceSmall,
-            Text(
-              "${entry.value.toStringAsFixed(1)}%",
-              style: context.textTheme.bodyMedium
-            ),
+            AppDimens.spaceXs,
+            Text(entry.key, style: context.textTheme.bodyMedium),
+            AppDimens.spaceXs,
+            Text("${entry.value.toStringAsFixed(1)}%",
+                style: context.textTheme.bodyMedium),
           ],
         ),
       );
