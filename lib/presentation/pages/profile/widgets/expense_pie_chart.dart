@@ -14,19 +14,8 @@ class ExpensePieChart extends StatelessWidget {
   Widget build(BuildContext context) {
     final data = getExpenseData(categories);
     if (data.isEmpty) {
-      return Container(
+      return Padding(
         padding: const EdgeInsets.all(AppDimens.paddingMd),
-        decoration: BoxDecoration(
-          color: const Color(0xFF1E1E2E),
-          borderRadius: BorderRadius.circular(AppDimens.radiusMd),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.2),
-              blurRadius: AppDimens.radiusMd,
-              offset: const Offset(0, 4),
-            ),
-          ],
-        ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -44,19 +33,8 @@ class ExpensePieChart extends StatelessWidget {
       );
     }
 
-    return Container(
+    return Padding(
       padding: const EdgeInsets.all(AppDimens.paddingMd),
-      decoration: BoxDecoration(
-        color: const Color(0xFF1E1E2E),
-        borderRadius: BorderRadius.circular(AppDimens.radiusMd),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.2),
-            blurRadius: AppDimens.radiusMd,
-            offset: const Offset(0, 4),
-          ),
-        ],
-      ),
       child: Column(
         children: [
           Text("Chi tiêu theo danh mục", style: context.textTheme.titleLarge),
@@ -80,11 +58,7 @@ class ExpensePieChart extends StatelessWidget {
                   children: [
                     Text(
                       _formatCurrency(data.values.reduce((a, b) => a + b)),
-                      style: const TextStyle(
-                        color: Color(0xFFE0E0E0),
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
-                      ),
+                      style: context.textTheme.titleLarge
                     ),
                     Text("Tổng", style: context.textTheme.bodyMedium),
                   ],
@@ -161,7 +135,6 @@ Widget _buildEnhancedLegend(
         padding: const EdgeInsets.symmetric(
             horizontal: AppDimens.paddingSm, vertical: AppDimens.paddingXs),
         decoration: BoxDecoration(
-          color: const Color(0xFF242438),
           borderRadius: BorderRadius.circular(AppDimens.radiusSm),
           border: Border.all(
             color: category.color.withOpacity(0.5),

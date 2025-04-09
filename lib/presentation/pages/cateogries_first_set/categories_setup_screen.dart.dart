@@ -144,109 +144,103 @@ class _CategoriesSetupScreenState extends State<CategoriesSetupScreen>
         return LoadingScaffold(
           isLoading: state.maybeMap(loading: (_) => true, orElse: () => false),
           child: Scaffold(
-            backgroundColor: const Color(0xFF121212),
-            body: Padding(
-              padding: const EdgeInsets.all(AppDimens.paddingMd),
-              child: FadeTransition(
-                opacity: _fadeAnimation,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text('Chọn danh mục',
-                        style: context.textTheme.displaySmall),
-                    AppDimens.spaceSm,
-                    const Text(
-                      'Chọn các danh mục phù hợp với thu chi của bạn (tối thiểu 3 danh mục chi tiêu và 1 danh mục thu nhập)',
-                    ),
-                    AppDimens.spaceSm,
-                    AppTab(
-                        tab1Name: 'Chi tiêu',
-                        tab2Name: 'Thu nhập',
-                        controller: _tabController),
-                    AppDimens.spaceSm,
-                    Builder(
-                      builder: (context) {
-                        bool isExpenseTab = _tabController.index == 0;
-                        int selectedCount =
-                            BlocProvider.of<SetupCategoriesBloc>(context)
-                                .getSelectedCategories()
-                                .length;
-
-                        return Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(AppDimens.radiusLg),
-                            gradient: LinearGradient(
-                              colors: isExpenseTab
-                                  ? [
-                                      Colors.blue.withOpacity(0.2),
-                                      Colors.purple.withOpacity(0.2)
-                                    ]
-                                  : [
-                                      Colors.green.withOpacity(0.2),
-                                      Colors.teal.withOpacity(0.2)
-                                    ],
-                            ),
-                          ),
-                          padding:
-                              const EdgeInsets.all(AppDimens.paddingMd),
-                          child: Row(
-                            children: [
-                              Container(
-                                padding: const EdgeInsets.all(
-                                    AppDimens.paddingSm),
-                                decoration: BoxDecoration(
-                                  color: Colors.white.withOpacity(0.2),
-                                  shape: BoxShape.circle,
-                                ),
-                                child: Icon(
-                                  Icons.lightbulb_outline,
-                                  color: isExpenseTab
-                                      ? Colors.amber
-                                      : Colors.lightGreen,
-                                ),
-                              ),
-                              AppDimens.spaceSm,
-                              Expanded(
-                                child: Text(
-                                  'Đã chọn $selectedCount danh mục. Nhấn vào danh mục để thêm hoặc cập nhật hạn mức.',
-                                ),
-                              ),
-                            ],
-                          ),
-                        );
-                      },
-                    ),
-                    AppDimens.spaceMd,
-                    Expanded(
-                      child: TabBarView(
-                        controller: _tabController,
-                        children: [
-                          CategoriesGrid(
-                            categories: systemExpenseCategories,
-                            onCategorySelected: toggleCategory,
-                          ),
-                          CategoriesGrid(
-                            categories: systemIncomeCategories,
-                            onCategorySelected: toggleCategory,
-                          ),
-                        ],
+            body: SafeArea(
+              child: Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: AppDimens.paddingMd),
+                child: FadeTransition(
+                  opacity: _fadeAnimation,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text('Chọn danh mục',
+                          style: context.textTheme.displaySmall),
+                      AppDimens.spaceSm,
+                      const Text(
+                        'Chọn các danh mục phù hợp với thu chi của bạn (tối thiểu 3 danh mục chi tiêu và 1 danh mục thu nhập)',
                       ),
-                    ),
-                    AppDimens.spaceMd,
-                    SizedBox(
-                      width: double.infinity,
-                      child: ElevatedButton(
-                        onPressed: () {
-                          onSetupCategories();
+                      AppDimens.spaceSm,
+                      AppTab(
+                          tab1Name: 'Chi tiêu',
+                          tab2Name: 'Thu nhập',
+                          controller: _tabController),
+                      AppDimens.spaceSm,
+                      Builder(
+                        builder: (context) {
+                          int selectedCount =
+                              BlocProvider.of<SetupCategoriesBloc>(context)
+                                  .getSelectedCategories()
+                                  .length;
+
+                          return Container(
+                            decoration: BoxDecoration(
+                              borderRadius:
+                                  BorderRadius.circular(AppDimens.radiusLg),
+                              gradient: LinearGradient(
+                                colors: [
+                                        Colors.green.withOpacity(0.2),
+                                        Colors.teal.withOpacity(0.2)
+                                      ],
+                              ),
+                            ),
+                            padding: const EdgeInsets.all(AppDimens.paddingMd),
+                            child: Row(
+                              children: [
+                                Container(
+                                  padding:
+                                      const EdgeInsets.all(AppDimens.paddingSm),
+                                  decoration: BoxDecoration(
+                                    color: Colors.white.withOpacity(0.2),
+                                    shape: BoxShape.circle,
+                                  ),
+                                  child: const Icon(
+                                    Icons.lightbulb_outline,
+                                    color: Colors.lightGreen
+                                  ),
+                                ),
+                                AppDimens.spaceSm,
+                                Expanded(
+                                  child: Text(
+                                    'Đã chọn $selectedCount danh mục. Nhấn vào danh mục để thêm hoặc cập nhật hạn mức.',
+                                  ),
+                                ),
+                              ],
+                            ),
+                          );
                         },
-                        child: Text(
-                          'Bắt đầu sử dụng',
-                          style: context.textTheme.bodyLarge
-                              ?.copyWith(color: Colors.white),
+                      ),
+                      AppDimens.spaceMd,
+                      Expanded(
+                        child: TabBarView(
+                          controller: _tabController,
+                          children: [
+                            CategoriesGrid(
+                              categories: systemExpenseCategories,
+                              onCategorySelected: toggleCategory,
+                            ),
+                            CategoriesGrid(
+                              categories: systemIncomeCategories,
+                              onCategorySelected: toggleCategory,
+                            ),
+                          ],
                         ),
                       ),
-                    ),
-                  ],
+                      AppDimens.spaceMd,
+                      SizedBox(
+                        width: double.infinity,
+                        child: ElevatedButton(
+                          onPressed: () {
+                            onSetupCategories();
+                          },
+                          child: Text(
+                            'Bắt đầu sử dụng',
+                            style: context.textTheme.bodyLarge
+                                ?.copyWith(color: Colors.white),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),

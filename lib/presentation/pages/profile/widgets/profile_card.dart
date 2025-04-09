@@ -11,6 +11,7 @@ class ProfileCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    final colors = AppColors.colorsData(context);
 
     return BlocBuilder<ProfileBloc, ProfileState>(
       builder: (context, state) {
@@ -20,13 +21,7 @@ class ProfileCard extends StatelessWidget {
             return Container(
               padding: const EdgeInsets.all(AppDimens.paddingMd),
               decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  colors: isDarkMode
-                      ? [const Color(0xFF232538), const Color(0xFF171926)]
-                      : [const Color(0xFFFFFFFF), const Color(0xFFF5F7FD)],
-                ),
+                color: colors.seccondColor,
                 borderRadius: BorderRadius.circular(AppDimens.radiusMd),
                 boxShadow: [
                   BoxShadow(
@@ -56,10 +51,10 @@ class ProfileCard extends StatelessWidget {
                       ],
                     ),
                     child: CircleAvatar(
-                      radius: AppDimens.avatarSize / 2,
-                      backgroundColor: isDarkMode ? const Color(0xFF1A1C2A) : Colors.white,
+                      radius: AppDimens.avatarSize / 1.7,
+                      backgroundColor: Colors.white,
                       child: CircleAvatar(
-                        radius: (AppDimens.avatarSize / 2) - 2,
+                        radius: (AppDimens.avatarSize / 1.7) - 2,
                         backgroundImage: NetworkImage(profile.avatarUrl ?? AppConstants.tempImage),
                       ),
                     ),
@@ -74,10 +69,7 @@ class ProfileCard extends StatelessWidget {
                         Flexible(
                           child: Text(
                             profile.name!,
-                            style: context.textTheme.bodyLarge?.copyWith(
-                              fontWeight: FontWeight.w600,
-                              color: isDarkMode ? Colors.white : Colors.black87,
-                            ),
+                            style: context.textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold),
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                           ),
@@ -88,14 +80,14 @@ class ProfileCard extends StatelessWidget {
                             Icon(
                               Icons.email_outlined,
                               size: AppDimens.iconSizeSmall,
-                              color: isDarkMode ? Colors.grey[400] : Colors.grey[600],
+                              color: colors.subTextColor,
                             ),
                             AppDimens.spaceXs,
                             Flexible(
                               child: Text(
                                 profile.email,
                                 style: context.textTheme.bodySmall?.copyWith(
-                                  color: isDarkMode ? Colors.grey[400] : Colors.grey[600],
+                                  color: colors.subTextColor,
                                 ),
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
@@ -152,18 +144,10 @@ class ProfileCard extends StatelessWidget {
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Container(
-                          decoration: BoxDecoration(
-                            color: isDarkMode
-                                ? Colors.green[800]!.withOpacity(0.4)
-                                : Colors.white.withOpacity(0.8),
-                            shape: BoxShape.circle,
-                          ),
-                          child: Icon(
-                            Icons.account_balance_wallet,
-                            color: isDarkMode ? Colors.greenAccent : Colors.blue[700],
-                            size: AppDimens.iconSizeSmall,
-                          ),
+                        Icon(
+                          Icons.account_balance_wallet,
+                          color: isDarkMode ? Colors.greenAccent : Colors.blue[700],
+                          size: AppDimens.iconSizeSmall,
                         ),
                         AppDimens.divider,
                         Text(

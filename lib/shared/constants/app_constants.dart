@@ -18,5 +18,5 @@ final class AppConstants {
   static final parentWidgetKey = GlobalKey();
 
   static const tempImage =
-      "https://gratisography.com/wp-content/uploads/2024/11/gratisography-augmented-reality-800x525.jpg";
+      "https://cdn2.iconfinder.com/data/icons/business-flat-outline-2/614/1049_-_Dollar_With_Man-512.png";
 }

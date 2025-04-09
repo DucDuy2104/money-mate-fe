@@ -27,22 +27,14 @@ class _AppDrawerState extends State<AppDrawer> {
     final items = DrawerService.getDrawerItems();
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
 
+    final colors = AppColors.colorsData(context);
+
     return Drawer(
       child: Container(
         padding: EdgeInsets.only(bottom: MediaQuery.of(context).padding.bottom),
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            colors: isDarkMode
-                ? [
-                    const Color(0xFF1E1E1E),
-                    const Color(0xFF343A40),
-                    const Color(0xFF495057)
-                  ]
-                : [
-                    const Color(0xFF66B2FF),
-                    const Color(0xFF99CCFF),
-                    const Color(0xFFCCE5FF)
-                  ],
+            colors: colors.gradientColors,
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
@@ -67,11 +59,11 @@ class _AppDrawerState extends State<AppDrawer> {
 
             // App Version
             const Divider(color: Colors.white70),
-            const Padding(
-              padding: const EdgeInsets.all(AppDimens.paddingMd),
-              child: const Text(
+            Padding(
+              padding:  EdgeInsets.all(AppDimens.paddingMd),
+              child:  Text(
                 'Money Mate Version 1.0.0',
-                style: TextStyle(color: Colors.white70),
+                style: TextStyle(color: colors.subTextColor),
               ),
             ),
           ],
@@ -81,11 +73,12 @@ class _AppDrawerState extends State<AppDrawer> {
   }
 
   Widget _buildLogoutButton(BuildContext context) {
+    final colors = AppColors.colorsData(context);
     return Padding(
       padding: const EdgeInsets.symmetric(
           horizontal: AppDimens.paddingMd, vertical: AppDimens.paddingSm),
       child: ElevatedButton.icon(
-        icon: const Icon(Icons.logout, color: Colors.white),
+        icon: Icon(Icons.logout, color:  colors.contrastColor),
         label: Text(
           'Đăng xuất',
           style: context.textTheme.bodyMedium,
@@ -130,19 +123,18 @@ class _AppDrawerState extends State<AppDrawer> {
   }
 
   Widget _buildModernHeader(BuildContext context, bool isDarkMode) {
+    final colors = AppColors.colorsData(context);
     return BlocBuilder<ProfileBloc, ProfileState>(
       builder: (context, state) {
         return state.maybeMap(
             loaded: (state) {
               final profile = state.data.profile;
               return Container(
-                padding: EdgeInsets.fromLTRB(AppDimens.paddingMd, 48,
+                padding: const EdgeInsets.fromLTRB(AppDimens.paddingMd, 48,
                     AppDimens.paddingMd, AppDimens.paddingMd),
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
-                    colors: isDarkMode
-                        ? [const Color(0xFF232526), const Color(0xFF414345)]
-                        : [const Color(0xFF2193b0), const Color(0xFF6dd5ed)],
+                    colors: colors.gradientColors.reversed.toList(),
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
                   ),
@@ -160,8 +152,8 @@ class _AppDrawerState extends State<AppDrawer> {
                     Row(
                       children: [
                         Container(
-                          width: AppDimens.avatarSize * 1.5,
-                          height: AppDimens.avatarSize * 1.5,
+                          width: AppDimens.avatarSize * 1.2,
+                          height: AppDimens.avatarSize * 1.2,
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
                             border: Border.all(color: Colors.white, width: 2),
@@ -187,29 +179,23 @@ class _AppDrawerState extends State<AppDrawer> {
                             children: [
                               Text(
                                 profile.name!,
-                                style: const TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                  letterSpacing: 0.5,
-                                ),
+                                style: context.textTheme.titleLarge,
                                 overflow: TextOverflow.ellipsis,
                               ),
                               AppDimens.spaceXs,
                               Row(
                                 children: [
-                                  const Icon(
+                                  Icon(
                                     Icons.email_outlined,
-                                    color: Colors.white70,
+                                    color: colors.subTextColor,
                                     size: AppDimens.iconSizeSmall,
                                   ),
                                   const SizedBox(width: AppDimens.paddingXs),
                                   Expanded(
                                     child: Text(
                                       profile.email,
-                                      style: const TextStyle(
-                                        color: Colors.white70,
-                                        fontSize: 14,
+                                      style: context.textTheme.bodyMedium?.copyWith(
+                                        color: colors.subTextColor
                                       ),
                                       overflow: TextOverflow.ellipsis,
                                     ),
@@ -230,14 +216,14 @@ class _AppDrawerState extends State<AppDrawer> {
                         Container(
                           height: 24,
                           width: 1,
-                          color: Colors.white24,
+                          color: colors.contrastColor,
                         ),
                         _buildStatItem(
                             '${profile.categoriesCount}', 'Danh mục'),
                         Container(
                           height: 24,
                           width: 1,
-                          color: Colors.white24,
+                          color: colors.contrastColor,
                         ),
                         _buildStatItem('${profile.reportsCount}', 'Báo cáo'),
                       ],
@@ -272,6 +258,7 @@ class _AppDrawerState extends State<AppDrawer> {
     final isExpanded = _expandedItems.contains(item.route);
     final hasSelectedChild = hasChildren &&
         item.children.any((child) => widget.currentRoute == child.route);
+    final colors = AppColors.colorsData(context);
 
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -298,8 +285,8 @@ class _AppDrawerState extends State<AppDrawer> {
                 Icon(
                   item.icon,
                   color: (isSelected || hasSelectedChild)
-                      ? Colors.white
-                      : Colors.white70,
+                      ? null
+                      : colors.subTextColor,
                   size: AppDimens.iconSize,
                 ),
                 const SizedBox(width: AppDimens.paddingMd),
@@ -309,7 +296,7 @@ class _AppDrawerState extends State<AppDrawer> {
                   child: Text(
                     item.title,
                     style: TextStyle(
-                      color: isSelected ? Colors.white : Colors.white70,
+                      color: isSelected ? null : colors.subTextColor,
                       fontWeight:
                           isSelected ? FontWeight.bold : FontWeight.normal,
                     ),

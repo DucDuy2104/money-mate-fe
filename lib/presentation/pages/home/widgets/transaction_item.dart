@@ -18,6 +18,8 @@ class TransactionItem extends StatelessWidget {
     final formattedDate = TimeHelper.formatCustomDateTime(transaction.createdAt);
     final formattedAmount = CurrencyHelper.formatCurrency(transaction.amount);
 
+    final colors = AppColors.colorsData(context);
+
     final Color amountColor = transaction.category.type == CategoriesType.income
         ? AppColors.upColor
         : AppColors.downColor;
@@ -26,15 +28,8 @@ class TransactionItem extends StatelessWidget {
       onTap: onTap,
       child: Container(
         decoration: BoxDecoration(
-          color: const Color(0xFF2D2D3A),
+          color: colors.seccondColor,
           borderRadius: BorderRadius.circular(12),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.2),
-              blurRadius: 5,
-              offset: const Offset(0, 2),
-            ),
-          ],
         ),
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
@@ -59,7 +54,7 @@ class TransactionItem extends StatelessWidget {
                 ),
               ),
               
-              const SizedBox(width: 16),
+              AppDimens.spaceMd,
               
               // Content
               Expanded(
@@ -69,7 +64,6 @@ class TransactionItem extends StatelessWidget {
                     Text(
                       transaction.category.name,
                       style: context.textTheme.titleMedium?.copyWith(
-                        color: Colors.white,
                         fontWeight: FontWeight.w600,
                       ),
                     ),
@@ -81,7 +75,7 @@ class TransactionItem extends StatelessWidget {
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                           style: context.textTheme.bodySmall?.copyWith(
-                            color: Colors.white.withOpacity(0.7),
+                            color: colors.subTextColor,
                           ),
                         ),
                       ),
@@ -97,10 +91,10 @@ class TransactionItem extends StatelessWidget {
                   Text(
                     formattedDate,
                     style: context.textTheme.labelSmall?.copyWith(
-                      color: AppColors.subText.withOpacity(0.7),
+                      color: colors.subTextColor,
                     ),
                   ),
-                  const SizedBox(height: 4),
+                  AppDimens.spaceXs,
                   Text(
                     transaction.category.type == CategoriesType.income 
                         ? "+$formattedAmount" 

@@ -32,49 +32,52 @@ class ProfileScreen extends StatelessWidget {
           ),
         ),
         drawer: const AppDrawer(currentRoute: RouteNames.profile),
-        body: Column(
-          children: [
-            GestureDetector(
-                onTap: () {
-                  context.pushNamed(RouteNames.profileDetailsName);
-                },
-                child: const ProfileCard()),
-            AppDimens.spaceSm,
-            const AppTab(
-                tab1Name: 'Hôm nay', tab2Name: 'Tháng này', controller: null),
-            AppDimens.spaceSm,
-            Expanded(
-              child: TabBarView(
-                children: [
-                  BlocBuilder<ProfileBloc, ProfileState>(
-                    builder: (context, state) {
-                      return state.maybeMap(
-                          loaded: (state) {
-                            debugPrint("loaded: ${state.data.categories.length}");
-                            return ExpensePieChart(
-                                categories: state.data.categories);
-                          },
-                          updating: (state) {
-                            return ExpensePieChart(
-                                categories: state.data.categories);
-                          },
-                          orElse: () => const ExpensePieChartSkeleton());
-                    },
-                  ),
-                  BlocBuilder<HomeBloc, HomeState>(
-                    builder: (context, state) {
-                      return state.maybeMap(
-                          loaded: (state) {
-                            return ExpensePieChart(
-                                categories: state.data.categories);
-                          },
-                          orElse: () => const ExpensePieChartSkeleton());
-                    },
-                  ),
-                ],
+        body: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: AppDimens.paddingMd),
+          child: Column(
+            children: [
+              GestureDetector(
+                  onTap: () {
+                    context.pushNamed(RouteNames.profileDetailsName);
+                  },
+                  child: const ProfileCard()),
+              AppDimens.spaceSm,
+              const AppTab(
+                  tab1Name: 'Hôm nay', tab2Name: 'Tháng này', controller: null),
+              AppDimens.spaceSm,
+              Expanded(
+                child: TabBarView(
+                  children: [
+                    BlocBuilder<ProfileBloc, ProfileState>(
+                      builder: (context, state) {
+                        return state.maybeMap(
+                            loaded: (state) {
+                              debugPrint("loaded: ${state.data.categories.length}");
+                              return ExpensePieChart(
+                                  categories: state.data.categories);
+                            },
+                            updating: (state) {
+                              return ExpensePieChart(
+                                  categories: state.data.categories);
+                            },
+                            orElse: () => const ExpensePieChartSkeleton());
+                      },
+                    ),
+                    BlocBuilder<HomeBloc, HomeState>(
+                      builder: (context, state) {
+                        return state.maybeMap(
+                            loaded: (state) {
+                              return ExpensePieChart(
+                                  categories: state.data.categories);
+                            },
+                            orElse: () => const ExpensePieChartSkeleton());
+                      },
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

@@ -50,7 +50,6 @@ class AppThemeData {
         backgroundColor: Colors.white,
         elevation: 0,
         iconTheme: const IconThemeData(
-          color: _primaryColor,
           size: AppDimens.iconSize,
         ),
         titleTextStyle: GoogleFonts.poppins(

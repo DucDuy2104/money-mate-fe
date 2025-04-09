@@ -5,35 +5,26 @@ class AppTab extends StatelessWidget {
   final String tab1Name;
   final String tab2Name;
   final TabController? controller;
-  const AppTab({super.key, required this.tab1Name, required this.tab2Name, required this.controller});
+  const AppTab(
+      {super.key,
+      required this.tab1Name,
+      required this.tab2Name,
+      required this.controller});
 
   @override
   Widget build(BuildContext context) {
+    final colors = AppColors.colorsData(context);
     return Container(
       height: 56,
       decoration: BoxDecoration(
-        gradient: const LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [
-            Color(0xFF1E1E2C),
-            Color(0xFF131324),
-          ],
-        ),
         borderRadius: BorderRadius.circular(30),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.25),
-            blurRadius: 12,
-            offset: const Offset(0, 4),
-          ),
-        ],
+        color: colors.seccondColor,
       ),
       child: Padding(
         padding: const EdgeInsets.all(4),
         child: TabBar(
           controller: controller,
-          labelColor: Colors.white,
+          labelColor: colors.contrastColor,
           unselectedLabelColor: Colors.grey[400],
           labelStyle: const TextStyle(
             fontWeight: FontWeight.bold,
@@ -63,8 +54,8 @@ class AppTab extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(Icons.calendar_today, size: 16),
-                  SizedBox(width: 6),
+                  const Icon(Icons.calendar_today, size: 16),
+                  const SizedBox(width: 6),
                   Text(tab1Name),
                 ],
               ),
@@ -73,8 +64,8 @@ class AppTab extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(Icons.calendar_month, size: 16),
-                  SizedBox(width: 6),
+                  const Icon(Icons.calendar_month, size: 16),
+                  const SizedBox(width: 6),
                   Text(tab2Name),
                 ],
               ),

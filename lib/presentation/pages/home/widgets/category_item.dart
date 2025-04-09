@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:money_mate/domain/entities/category.dart';
+import 'package:money_mate/shared/constants/app_colors.dart';
+import 'package:money_mate/shared/constants/app_dimens.dart';
+import 'package:money_mate/shared/constants/app_theme.dart';
 import 'package:money_mate/shared/enums/category_type.dart';
 
 class CategoryItem extends StatelessWidget {
@@ -28,49 +31,29 @@ class CategoryItem extends StatelessWidget {
     String limitMessage = category.type == CategoriesType.expense
         ? 'Gần hết hạn mức'
         : 'Chưa đạt mục tiêu';
-
-    List<Color> gradientColors = category.isSelected
-        ? [
-            const Color(0xFF2D2D3A),
-            const Color(0xFF1E1E2A),
-          ]
-        : [
-            const Color(0xFF1E1E2A),
-            const Color(0xFF2D2D3A),
-          ];
+    final colors = AppColors.colorsData(context);
 
     return GestureDetector(
       onTap: onTap,
       child: Stack(
         children: [
           Container(
-            width: 250, // Reduced from 300
+            width: 250,
             decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                colors: gradientColors,
-              ),
-              borderRadius: BorderRadius.circular(16), // Reduced from 20
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.3),
-                  blurRadius: 8, // Reduced from 12
-                  offset: const Offset(0, 3), // Reduced from 4
-                ),
-              ],
+              color: colors.seccondColor,
+              borderRadius: BorderRadius.circular(AppDimens.radiusMd),
             ),
             child: Padding(
-              padding: const EdgeInsets.all(12), // Reduced from 16
+              padding: const EdgeInsets.all(AppDimens.radiusMd),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center, // Center vertically
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Row(
-                    crossAxisAlignment: CrossAxisAlignment.center, // Center vertically
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Container(
-                        width: 40, // Reduced from 50
-                        height: 40, // Reduced from 50
+                        width: 40,
+                        height: 40,
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           gradient: LinearGradient(
@@ -84,88 +67,73 @@ class CategoryItem extends StatelessWidget {
                           boxShadow: [
                             BoxShadow(
                               color: progressColor.withOpacity(0.3),
-                              blurRadius: 6, // Reduced from 8
-                              spreadRadius: 0.5, // Reduced from 1
+                              blurRadius: 6,
+                              spreadRadius: 0.5, 
                             ),
                           ],
                         ),
                         child: Icon(
                           category.icon,
-                          color: Colors.white,
-                          size: 20, // Reduced from 24
+                          size: AppDimens.iconSize,
                         ),
                       ),
-                      const SizedBox(width: 12), // Reduced from 16
+                      AppDimens.spaceSm,
                       Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.center, // Center vertically
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
                                   category.name,
-                                  style: TextStyle(
-                                    color: category.isSelected
-                                        ? Colors.white
-                                        : Colors.white.withOpacity(0.6),
-                                    fontSize: 16, // Reduced from 18
-                                    fontWeight: FontWeight.w600,
-                                    letterSpacing: 0.5,
-                                  ),
+                                  style: context.textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w600),
                                 ),
                                 if (isNearLimit && category.isSelected)
                                   Container(
                                     padding: const EdgeInsets.symmetric(
-                                        horizontal: 6, vertical: 3), // Reduced from 8, 4
+                                        horizontal: 6, vertical: 3),
                                     decoration: BoxDecoration(
                                       color: (category.type ==
                                                   CategoriesType.expense
-                                              ? Colors.red
-                                              : Colors.amber)
+                                              ? Colors.red.shade300
+                                              : Colors.amber.shade300)
                                           .withOpacity(0.2),
-                                      borderRadius: BorderRadius.circular(10), // Reduced from 12
+                                      borderRadius: BorderRadius.circular(10),
                                     ),
                                     child: Text(
                                       limitMessage,
-                                      style: TextStyle(
+                                      style: context.textTheme.labelSmall?.copyWith(
                                         color: category.type ==
                                                 CategoriesType.expense
-                                            ? Colors.red[300]
-                                            : Colors.amber[300],
-                                        fontSize: 9, // Reduced from 10
-                                        fontWeight: FontWeight.w500,
+                                            ? Colors.red
+                                            : Colors.amber,
                                       ),
                                     ),
                                   ),
                               ],
                             ),
-                            const SizedBox(height: 2), // Added small vertical spacing
+                            const SizedBox(height: 2),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
                                   '${(percent).toInt()}%',
-                                  style: TextStyle(
+                                  style: context.textTheme.bodyMedium?.copyWith(
                                     color: category.isSelected
                                         ? progressColor
                                         : progressColor.withOpacity(0.6),
-                                    fontSize: 14, // Reduced from 16
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
                                 Text(
                                   '${formatMoney(category.currentBudget)} / ${formatMoney(category.budget)}',
-                                  style: TextStyle(
-                                    color: Colors.white.withOpacity(
-                                        category.isSelected ? 0.7 : 0.5),
-                                    fontSize: 12, // Reduced from 14
-                                  ),
+                                  style: context.textTheme.bodySmall
                                 ),
                               ],
                             ),
-                            const SizedBox(height: 6), // Reduced from 8
+                            AppDimens.divider,
                             CustomProgressBar(
                               progress: progress,
                               progressColor: progressColor,
@@ -180,14 +148,13 @@ class CategoryItem extends StatelessWidget {
               ),
             ),
           ),
-          // Disabled indicator (only shows when !isSelected)
           if (!category.isSelected)
             Positioned(
-              top: 8, // Reduced from 12
-              right: 8, // Reduced from 12
+              top: 8,
+              right: 8,
               child: Container(
-                width: 18, // Reduced from 24
-                height: 18, // Reduced from 24
+                width: 18,
+                height: 18,
                 decoration: const BoxDecoration(
                   color: Color(0xFF1E1E2A),
                   shape: BoxShape.circle,
@@ -196,7 +163,7 @@ class CategoryItem extends StatelessWidget {
                   child: Icon(
                     Icons.block,
                     color: Colors.grey,
-                    size: 12, // Reduced from 16
+                    size: 12, 
                   ),
                 ),
               ),
@@ -258,9 +225,9 @@ class CustomProgressBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 8, // Reduced from 12
+      height: 8, 
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(8), // Reduced from 10
+        borderRadius: BorderRadius.circular(AppDimens.radiusSm),
         color: Colors.white.withOpacity(0.08),
       ),
       child: Stack(
@@ -270,7 +237,7 @@ class CustomProgressBar extends StatelessWidget {
               return Container(
                 width: constraints.maxWidth * progress,
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8), // Reduced from 10
+                  borderRadius: BorderRadius.circular(AppDimens.radiusSm),
                   gradient: LinearGradient(
                     begin: Alignment.centerLeft,
                     end: Alignment.centerRight,
@@ -282,7 +249,7 @@ class CustomProgressBar extends StatelessWidget {
                   boxShadow: [
                     BoxShadow(
                       color: progressColor.withOpacity(isSelected ? 0.3 : 0.1),
-                      blurRadius: 4, // Reduced from 5
+                      blurRadius: 4,
                       offset: const Offset(0, 1),
                     ),
                   ],
@@ -295,15 +262,15 @@ class CustomProgressBar extends StatelessWidget {
             top: 0,
             left: 0,
             right: 0,
-            height: 3, // Reduced from 5
+            height: 3,
             child: LayoutBuilder(
               builder: (context, constraints) {
                 return Container(
                   width: constraints.maxWidth * progress,
                   decoration: BoxDecoration(
                     borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(8), // Reduced from 10
-                      topRight: Radius.circular(8), // Reduced from 10
+                      topLeft: Radius.circular(AppDimens.radiusSm),
+                      topRight: Radius.circular(AppDimens.radiusSm),
                     ),
                     gradient: LinearGradient(
                       begin: Alignment.topCenter,

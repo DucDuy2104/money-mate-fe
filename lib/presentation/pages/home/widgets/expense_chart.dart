@@ -1,6 +1,7 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:money_mate/domain/entities/statistic.dart';
+import 'package:money_mate/shared/constants/constants.dart';
 import 'package:money_mate/shared/utils/datetime_utils.dart';
 import 'package:intl/intl.dart';
 
@@ -18,16 +19,14 @@ class IncomeExpenseChart extends StatelessWidget {
     final incomes = statistic.incomes;
     final expenses = statistic.expenses;
     final maxY = [...incomes, ...expenses].reduce((a, b) => a > b ? a : b) * 2;
+    final colors = AppColors.colorsData(context);
     return ClipRRect(
       borderRadius: BorderRadius.circular(16),
       child: Container(
         width: double.infinity,
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            colors: [
-              Colors.black.withOpacity(0.85),
-              Colors.blueGrey.shade900.withOpacity(0.8),
-            ],
+            colors: colors.gradientColors,
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
@@ -50,18 +49,14 @@ class IncomeExpenseChart extends StatelessWidget {
                         interval: 1,
                         reservedSize: 32,
                         getTitlesWidget: (value, meta) {
-                          const style = TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white70,
-                          );
+                          final style = context.textTheme.bodySmall;
 
                           final months = DatetimeUtils.getLastFourMonths();
 
                           if (value.toInt() >= 0 &&
                               value.toInt() < months.length) {
                             return Padding(
-                              padding: const EdgeInsets.only(top: 8.0),
+                              padding: const EdgeInsets.only(top: AppDimens.paddingSm),
                               child: Text(months[value.toInt()], style: style),
                             );
                           }
@@ -167,6 +162,7 @@ class IncomeExpenseChart extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 _buildLegendItem(
+                  context,
                   const LinearGradient(
                     colors: [Colors.redAccent, Colors.pinkAccent],
                   ),
@@ -174,6 +170,7 @@ class IncomeExpenseChart extends StatelessWidget {
                 ),
                 const SizedBox(width: 24),
                 _buildLegendItem(
+                  context,
                   const LinearGradient(
                     colors: [Colors.blueAccent, Colors.cyanAccent],
                   ),
@@ -187,7 +184,7 @@ class IncomeExpenseChart extends StatelessWidget {
     );
   }
 
-  Widget _buildLegendItem(Gradient gradient, String label) {
+  Widget _buildLegendItem(BuildContext context, Gradient gradient, String label) {
     return Row(
       children: [
         Container(
@@ -201,11 +198,7 @@ class IncomeExpenseChart extends StatelessWidget {
         const SizedBox(width: 8),
         Text(
           label,
-          style: const TextStyle(
-            color: Colors.white70,
-            fontSize: 12,
-            fontWeight: FontWeight.w500,
-          ),
+          style: context.textTheme.bodySmall
         ),
       ],
     );
