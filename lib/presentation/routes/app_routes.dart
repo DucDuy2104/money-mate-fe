@@ -19,6 +19,7 @@ import 'package:money_mate/presentation/pages/setting/setting_screen.dart';
 import 'package:money_mate/presentation/pages/setup/bloc/setup_bloc.dart';
 import 'package:money_mate/presentation/pages/setup/setup_screen.dart';
 import 'package:money_mate/presentation/pages/splash/splash_screen.dart';
+import 'package:money_mate/presentation/pages/update_pass/bloc/password_bloc.dart';
 import 'package:money_mate/presentation/pages/update_pass/update_pass_screen.dart';
 import 'package:money_mate/presentation/routes/route_name.dart';
 
@@ -104,6 +105,9 @@ final List<GoRoute> appRoutes = [
   GoRoute(
     path: RouteNames.updatePassword,
     name: RouteNames.updatePasswordName,
-    builder: (context, state) => const UpdatePassScreen(),
+    builder: (context, state) => BlocProvider(
+      create: (context) => PasswordBloc(),
+      child: const UpdatePassScreen(),
+    ),
   )
 ];

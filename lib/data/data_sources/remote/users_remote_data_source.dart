@@ -6,6 +6,7 @@ import 'package:money_mate/shared/utils/typedefs.dart';
 abstract class UsersRemoteDataSource {
   ResultFuture<UserModel> update(Map<String, dynamic> body);
   ResultFuture<UserModel> getProfile();
+  ResultFuture<UserModel> updatePass(String oldPass, String newPass);
 }
 
 class UsersRemoteDataSourceImpl implements UsersRemoteDataSource {
@@ -21,5 +22,13 @@ class UsersRemoteDataSourceImpl implements UsersRemoteDataSource {
   ResultFuture<UserModel> getProfile() {
     final req = ApiRequest(url: '/users/profile');
     return _apiClient.get(req: req, parser: (data) => UserModel.fromJson(data));
+  }
+
+  @override
+  ResultFuture<UserModel> updatePass(String oldPass, String newPass) {
+    final req = ApiRequest(
+        url: '/users/change-password',
+        body: {'oldPass': oldPass, 'newPass': newPass});
+    return _apiClient.put(req: req, parser: (data) => UserModel.fromJson(data));
   }
 }
