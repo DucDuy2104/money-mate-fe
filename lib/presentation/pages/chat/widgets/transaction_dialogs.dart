@@ -49,8 +49,7 @@ class TransactionDialogs {
                     const SizedBox(width: 12),
                     Text(
                       'Hủy giao dịch',
-                      style: textTheme.headlineSmall?.copyWith(
-                        color: Colors.white,
+                      style: textTheme.titleLarge?.copyWith(
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -227,8 +226,7 @@ class TransactionDialogs {
                     const SizedBox(width: 12),
                     Text(
                       'Khôi phục giao dịch',
-                      style: textTheme.headlineSmall?.copyWith(
-                        color: Colors.white,
+                      style: textTheme.titleLarge?.copyWith(
                         fontWeight: FontWeight.bold,
                       ),
                     ),

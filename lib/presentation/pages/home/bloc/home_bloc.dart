@@ -28,6 +28,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     on<_GetData>(_onGetData);
     on<_ReloadData>(_onReloadData);
     on<_ReloadCategories>(_onReloadCategories);
+    on<_Logout>(_onLogout);
   }
 
   void _onGetData(_GetData event, Emitter<HomeState> emit) async {
@@ -166,5 +167,9 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   void _initSocket() {
     // Listen to reload
     _socketService.emit(SocketEnum.initSocket.name, null);
+  }
+
+  void _onLogout(_Logout event, Emitter<HomeState> emit) {
+    emit(const HomeState.initial());
   }
 }

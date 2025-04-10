@@ -25,6 +25,7 @@ mixin _$CategoriesEvent {
     required TResult Function(String categoryId, VoidCallback callback)
         disableCategory,
     required TResult Function(String userId) reload,
+    required TResult Function() logout,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -35,6 +36,7 @@ mixin _$CategoriesEvent {
     TResult? Function(String categoryId, VoidCallback callback)?
         disableCategory,
     TResult? Function(String userId)? reload,
+    TResult? Function()? logout,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -44,6 +46,7 @@ mixin _$CategoriesEvent {
         enableCategory,
     TResult Function(String categoryId, VoidCallback callback)? disableCategory,
     TResult Function(String userId)? reload,
+    TResult Function()? logout,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -53,6 +56,7 @@ mixin _$CategoriesEvent {
     required TResult Function(_EnableCategory value) enableCategory,
     required TResult Function(_DisableCategory value) disableCategory,
     required TResult Function(_Reload value) reload,
+    required TResult Function(_Logout value) logout,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -61,6 +65,7 @@ mixin _$CategoriesEvent {
     TResult? Function(_EnableCategory value)? enableCategory,
     TResult? Function(_DisableCategory value)? disableCategory,
     TResult? Function(_Reload value)? reload,
+    TResult? Function(_Logout value)? logout,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -69,6 +74,7 @@ mixin _$CategoriesEvent {
     TResult Function(_EnableCategory value)? enableCategory,
     TResult Function(_DisableCategory value)? disableCategory,
     TResult Function(_Reload value)? reload,
+    TResult Function(_Logout value)? logout,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -170,6 +176,7 @@ class _$GetCategoriesImpl implements _GetCategories {
     required TResult Function(String categoryId, VoidCallback callback)
         disableCategory,
     required TResult Function(String userId) reload,
+    required TResult Function() logout,
   }) {
     return getCategories(userId);
   }
@@ -183,6 +190,7 @@ class _$GetCategoriesImpl implements _GetCategories {
     TResult? Function(String categoryId, VoidCallback callback)?
         disableCategory,
     TResult? Function(String userId)? reload,
+    TResult? Function()? logout,
   }) {
     return getCategories?.call(userId);
   }
@@ -195,6 +203,7 @@ class _$GetCategoriesImpl implements _GetCategories {
         enableCategory,
     TResult Function(String categoryId, VoidCallback callback)? disableCategory,
     TResult Function(String userId)? reload,
+    TResult Function()? logout,
     required TResult orElse(),
   }) {
     if (getCategories != null) {
@@ -210,6 +219,7 @@ class _$GetCategoriesImpl implements _GetCategories {
     required TResult Function(_EnableCategory value) enableCategory,
     required TResult Function(_DisableCategory value) disableCategory,
     required TResult Function(_Reload value) reload,
+    required TResult Function(_Logout value) logout,
   }) {
     return getCategories(this);
   }
@@ -221,6 +231,7 @@ class _$GetCategoriesImpl implements _GetCategories {
     TResult? Function(_EnableCategory value)? enableCategory,
     TResult? Function(_DisableCategory value)? disableCategory,
     TResult? Function(_Reload value)? reload,
+    TResult? Function(_Logout value)? logout,
   }) {
     return getCategories?.call(this);
   }
@@ -232,6 +243,7 @@ class _$GetCategoriesImpl implements _GetCategories {
     TResult Function(_EnableCategory value)? enableCategory,
     TResult Function(_DisableCategory value)? disableCategory,
     TResult Function(_Reload value)? reload,
+    TResult Function(_Logout value)? logout,
     required TResult orElse(),
   }) {
     if (getCategories != null) {
@@ -347,6 +359,7 @@ class _$EnableCategoryImpl implements _EnableCategory {
     required TResult Function(String categoryId, VoidCallback callback)
         disableCategory,
     required TResult Function(String userId) reload,
+    required TResult Function() logout,
   }) {
     return enableCategory(categoryId, budget, callback);
   }
@@ -360,6 +373,7 @@ class _$EnableCategoryImpl implements _EnableCategory {
     TResult? Function(String categoryId, VoidCallback callback)?
         disableCategory,
     TResult? Function(String userId)? reload,
+    TResult? Function()? logout,
   }) {
     return enableCategory?.call(categoryId, budget, callback);
   }
@@ -372,6 +386,7 @@ class _$EnableCategoryImpl implements _EnableCategory {
         enableCategory,
     TResult Function(String categoryId, VoidCallback callback)? disableCategory,
     TResult Function(String userId)? reload,
+    TResult Function()? logout,
     required TResult orElse(),
   }) {
     if (enableCategory != null) {
@@ -387,6 +402,7 @@ class _$EnableCategoryImpl implements _EnableCategory {
     required TResult Function(_EnableCategory value) enableCategory,
     required TResult Function(_DisableCategory value) disableCategory,
     required TResult Function(_Reload value) reload,
+    required TResult Function(_Logout value) logout,
   }) {
     return enableCategory(this);
   }
@@ -398,6 +414,7 @@ class _$EnableCategoryImpl implements _EnableCategory {
     TResult? Function(_EnableCategory value)? enableCategory,
     TResult? Function(_DisableCategory value)? disableCategory,
     TResult? Function(_Reload value)? reload,
+    TResult? Function(_Logout value)? logout,
   }) {
     return enableCategory?.call(this);
   }
@@ -409,6 +426,7 @@ class _$EnableCategoryImpl implements _EnableCategory {
     TResult Function(_EnableCategory value)? enableCategory,
     TResult Function(_DisableCategory value)? disableCategory,
     TResult Function(_Reload value)? reload,
+    TResult Function(_Logout value)? logout,
     required TResult orElse(),
   }) {
     if (enableCategory != null) {
@@ -519,6 +537,7 @@ class _$DisableCategoryImpl implements _DisableCategory {
     required TResult Function(String categoryId, VoidCallback callback)
         disableCategory,
     required TResult Function(String userId) reload,
+    required TResult Function() logout,
   }) {
     return disableCategory(categoryId, callback);
   }
@@ -532,6 +551,7 @@ class _$DisableCategoryImpl implements _DisableCategory {
     TResult? Function(String categoryId, VoidCallback callback)?
         disableCategory,
     TResult? Function(String userId)? reload,
+    TResult? Function()? logout,
   }) {
     return disableCategory?.call(categoryId, callback);
   }
@@ -544,6 +564,7 @@ class _$DisableCategoryImpl implements _DisableCategory {
         enableCategory,
     TResult Function(String categoryId, VoidCallback callback)? disableCategory,
     TResult Function(String userId)? reload,
+    TResult Function()? logout,
     required TResult orElse(),
   }) {
     if (disableCategory != null) {
@@ -559,6 +580,7 @@ class _$DisableCategoryImpl implements _DisableCategory {
     required TResult Function(_EnableCategory value) enableCategory,
     required TResult Function(_DisableCategory value) disableCategory,
     required TResult Function(_Reload value) reload,
+    required TResult Function(_Logout value) logout,
   }) {
     return disableCategory(this);
   }
@@ -570,6 +592,7 @@ class _$DisableCategoryImpl implements _DisableCategory {
     TResult? Function(_EnableCategory value)? enableCategory,
     TResult? Function(_DisableCategory value)? disableCategory,
     TResult? Function(_Reload value)? reload,
+    TResult? Function(_Logout value)? logout,
   }) {
     return disableCategory?.call(this);
   }
@@ -581,6 +604,7 @@ class _$DisableCategoryImpl implements _DisableCategory {
     TResult Function(_EnableCategory value)? enableCategory,
     TResult Function(_DisableCategory value)? disableCategory,
     TResult Function(_Reload value)? reload,
+    TResult Function(_Logout value)? logout,
     required TResult orElse(),
   }) {
     if (disableCategory != null) {
@@ -680,6 +704,7 @@ class _$ReloadImpl implements _Reload {
     required TResult Function(String categoryId, VoidCallback callback)
         disableCategory,
     required TResult Function(String userId) reload,
+    required TResult Function() logout,
   }) {
     return reload(userId);
   }
@@ -693,6 +718,7 @@ class _$ReloadImpl implements _Reload {
     TResult? Function(String categoryId, VoidCallback callback)?
         disableCategory,
     TResult? Function(String userId)? reload,
+    TResult? Function()? logout,
   }) {
     return reload?.call(userId);
   }
@@ -705,6 +731,7 @@ class _$ReloadImpl implements _Reload {
         enableCategory,
     TResult Function(String categoryId, VoidCallback callback)? disableCategory,
     TResult Function(String userId)? reload,
+    TResult Function()? logout,
     required TResult orElse(),
   }) {
     if (reload != null) {
@@ -720,6 +747,7 @@ class _$ReloadImpl implements _Reload {
     required TResult Function(_EnableCategory value) enableCategory,
     required TResult Function(_DisableCategory value) disableCategory,
     required TResult Function(_Reload value) reload,
+    required TResult Function(_Logout value) logout,
   }) {
     return reload(this);
   }
@@ -731,6 +759,7 @@ class _$ReloadImpl implements _Reload {
     TResult? Function(_EnableCategory value)? enableCategory,
     TResult? Function(_DisableCategory value)? disableCategory,
     TResult? Function(_Reload value)? reload,
+    TResult? Function(_Logout value)? logout,
   }) {
     return reload?.call(this);
   }
@@ -742,6 +771,7 @@ class _$ReloadImpl implements _Reload {
     TResult Function(_EnableCategory value)? enableCategory,
     TResult Function(_DisableCategory value)? disableCategory,
     TResult Function(_Reload value)? reload,
+    TResult Function(_Logout value)? logout,
     required TResult orElse(),
   }) {
     if (reload != null) {
@@ -761,6 +791,135 @@ abstract class _Reload implements CategoriesEvent {
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ReloadImplCopyWith<_$ReloadImpl> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$LogoutImplCopyWith<$Res> {
+  factory _$$LogoutImplCopyWith(
+          _$LogoutImpl value, $Res Function(_$LogoutImpl) then) =
+      __$$LogoutImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$LogoutImplCopyWithImpl<$Res>
+    extends _$CategoriesEventCopyWithImpl<$Res, _$LogoutImpl>
+    implements _$$LogoutImplCopyWith<$Res> {
+  __$$LogoutImplCopyWithImpl(
+      _$LogoutImpl _value, $Res Function(_$LogoutImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of CategoriesEvent
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$LogoutImpl implements _Logout {
+  const _$LogoutImpl();
+
+  @override
+  String toString() {
+    return 'CategoriesEvent.logout()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$LogoutImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String userId) getCategories,
+    required TResult Function(
+            String categoryId, double budget, VoidCallback callback)
+        enableCategory,
+    required TResult Function(String categoryId, VoidCallback callback)
+        disableCategory,
+    required TResult Function(String userId) reload,
+    required TResult Function() logout,
+  }) {
+    return logout();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String userId)? getCategories,
+    TResult? Function(String categoryId, double budget, VoidCallback callback)?
+        enableCategory,
+    TResult? Function(String categoryId, VoidCallback callback)?
+        disableCategory,
+    TResult? Function(String userId)? reload,
+    TResult? Function()? logout,
+  }) {
+    return logout?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String userId)? getCategories,
+    TResult Function(String categoryId, double budget, VoidCallback callback)?
+        enableCategory,
+    TResult Function(String categoryId, VoidCallback callback)? disableCategory,
+    TResult Function(String userId)? reload,
+    TResult Function()? logout,
+    required TResult orElse(),
+  }) {
+    if (logout != null) {
+      return logout();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetCategories value) getCategories,
+    required TResult Function(_EnableCategory value) enableCategory,
+    required TResult Function(_DisableCategory value) disableCategory,
+    required TResult Function(_Reload value) reload,
+    required TResult Function(_Logout value) logout,
+  }) {
+    return logout(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetCategories value)? getCategories,
+    TResult? Function(_EnableCategory value)? enableCategory,
+    TResult? Function(_DisableCategory value)? disableCategory,
+    TResult? Function(_Reload value)? reload,
+    TResult? Function(_Logout value)? logout,
+  }) {
+    return logout?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetCategories value)? getCategories,
+    TResult Function(_EnableCategory value)? enableCategory,
+    TResult Function(_DisableCategory value)? disableCategory,
+    TResult Function(_Reload value)? reload,
+    TResult Function(_Logout value)? logout,
+    required TResult orElse(),
+  }) {
+    if (logout != null) {
+      return logout(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Logout implements CategoriesEvent {
+  const factory _Logout() = _$LogoutImpl;
 }
 
 /// @nodoc
