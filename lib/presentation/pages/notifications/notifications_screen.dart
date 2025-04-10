@@ -3,20 +3,19 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:money_mate/presentation/drawer_navigation/app_drawer.dart';
 import 'package:money_mate/presentation/routes/route_name.dart';
+import 'package:money_mate/shared/constants/app_assets.dart';
 import 'package:money_mate/shared/constants/constants.dart';
 
-// Định nghĩa các loại thông báo
 enum NotificationType {
-  system,      // Thông báo hệ thống
-  event,       // Sự kiện
-  update,      // Bản cập nhật
-  holiday,     // Ngày lễ, chúc mừng
-  limit,       // Đạt hạn mức
-  reminder,    // Nhắc nhở
-  achievement, // Thành tựu
+  system,
+  event,
+  update,
+  holiday,
+  limit,
+  reminder,
+  achievement,
 }
 
-// Mô hình dữ liệu thông báo
 class Notification {
   final String id;
   final String title;
@@ -24,7 +23,7 @@ class Notification {
   final DateTime dateTime;
   final NotificationType type;
   final bool isRead;
-  final String? actionRoute; // Route để điều hướng khi nhấn vào thông báo
+  final String? actionRoute;
 
   Notification({
     required this.id,
@@ -36,7 +35,6 @@ class Notification {
     this.actionRoute,
   });
 
-  // Lấy biểu tượng tương ứng với loại thông báo
   IconData get icon {
     switch (type) {
       case NotificationType.system:
@@ -56,7 +54,6 @@ class Notification {
     }
   }
 
-  // Lấy màu tương ứng với loại thông báo
   Color get color {
     switch (type) {
       case NotificationType.system:
@@ -79,7 +76,6 @@ class Notification {
 
 class NotificationsScreen extends StatefulWidget {
   const NotificationsScreen({super.key});
-
 
   @override
   State<NotificationsScreen> createState() => _NotificationsScreenState();
@@ -161,19 +157,20 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
       if (_showUnreadOnly && notification.isRead) {
         return false;
       }
-      
+
       // Lọc theo loại thông báo
       if (_selectedType != null && notification.type != _selectedType) {
         return false;
       }
-      
+
       return true;
     }).toList();
   }
 
   void _markAsRead(String id) {
     setState(() {
-      final index = _notifications.indexWhere((notification) => notification.id == id);
+      final index =
+          _notifications.indexWhere((notification) => notification.id == id);
       if (index != -1) {
         // Tạo bản sao của thông báo với trạng thái đã đọc
         final updatedNotification = Notification(
@@ -185,7 +182,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
           isRead: true,
           actionRoute: _notifications[index].actionRoute,
         );
-        
+
         // Cập nhật danh sách thông báo
         _notifications[index] = updatedNotification;
       }
@@ -206,13 +203,13 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
             isRead: true,
             actionRoute: _notifications[i].actionRoute,
           );
-          
+
           // Cập nhật danh sách thông báo
           _notifications[i] = updatedNotification;
         }
       }
     });
-    
+
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
         content: Text('Đã đánh dấu tất cả thông báo là đã đọc'),
@@ -246,7 +243,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                     ),
                   ),
                   const Divider(color: Colors.grey),
-                  
+
                   // Lọc theo trạng thái đã đọc
                   SwitchListTile(
                     title: const Text(
@@ -264,7 +261,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                       });
                     },
                   ),
-                  
+
                   const SizedBox(height: 8),
                   const Text(
                     'Loại thông báo',
@@ -275,7 +272,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                     ),
                   ),
                   const SizedBox(height: 8),
-                  
+
                   // Danh sách loại thông báo
                   Wrap(
                     spacing: 8,
@@ -325,7 +322,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                             label = 'Thành tựu';
                             break;
                         }
-                        
+
                         return FilterChip(
                           label: Text(label),
                           selected: _selectedType == type,
@@ -354,7 +351,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                       }).toList(),
                     ],
                   ),
-                  
+
                   const SizedBox(height: 16),
                   SizedBox(
                     width: double.infinity,
@@ -383,9 +380,8 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
   @override
   Widget build(BuildContext context) {
     int unreadCount = _notifications.where((n) => !n.isRead).length;
-    
+
     return Scaffold(
-      backgroundColor: Colors.black,
       appBar: AppBar(
         title: const Text('Thông báo'),
         leading: Builder(
@@ -398,197 +394,225 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
             );
           },
         ),
-        actions: [
-          // Nút lọc
-          IconButton(
-            icon: const Icon(EvaIcons.funnelOutline),
-            onPressed: _showFilterBottomSheet,
-          ),
-          // Nút đánh dấu tất cả là đã đọc
-          if (unreadCount > 0)
-            IconButton(
-              icon: const Icon(EvaIcons.checkmarkSquare2Outline),
-              onPressed: _markAllAsRead,
-              tooltip: 'Đánh dấu tất cả là đã đọc',
-            ),
-        ],
       ),
       drawer: const AppDrawer(currentRoute: RouteNames.notifications),
-      body: _filteredNotifications.isEmpty
-          ? Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(
-                    EvaIcons.bellOffOutline,
-                    size: 64,
-                    color: Colors.grey.shade600,
-                  ),
-                  const SizedBox(height: 16),
-                  Text(
-                    _showUnreadOnly
-                        ? 'Không có thông báo chưa đọc'
-                        : _selectedType != null
-                            ? 'Không có thông báo loại này'
-                            : 'Không có thông báo nào',
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: Colors.grey.shade500,
-                    ),
-                  ),
-                ],
-              ),
-            )
-          : ListView.separated(
-              padding: const EdgeInsets.all(16),
-              itemCount: _filteredNotifications.length,
-              separatorBuilder: (context, index) => const SizedBox(height: 12),
-              itemBuilder: (context, index) {
-                final notification = _filteredNotifications[index];
-                
-                // Format thời gian thông báo
-                String formattedTime;
-                final now = DateTime.now();
-                final difference = now.difference(notification.dateTime);
-                
-                if (difference.inDays > 7) {
-                  // Hiển thị ngày tháng nếu quá 7 ngày
-                  formattedTime = DateFormat('dd/MM/yyyy').format(notification.dateTime);
-                } else if (difference.inDays > 0) {
-                  // Hiển thị số ngày trước
-                  formattedTime = '${difference.inDays} ngày trước';
-                } else if (difference.inHours > 0) {
-                  // Hiển thị số giờ trước
-                  formattedTime = '${difference.inHours} giờ trước';
-                } else if (difference.inMinutes > 0) {
-                  // Hiển thị số phút trước
-                  formattedTime = '${difference.inMinutes} phút trước';
-                } else {
-                  // Vừa xong
-                  formattedTime = 'Vừa xong';
-                }
-                
-                return InkWell(
-                  onTap: () {
-                    // Đánh dấu thông báo là đã đọc
-                    if (!notification.isRead) {
-                      _markAsRead(notification.id);
-                    }
-                    
-                    // Nếu có route hành động, điều hướng tới đó
-                    if (notification.actionRoute != null) {
-                      Navigator.pushNamed(context, notification.actionRoute!);
-                    }
-                  },
-                  borderRadius: BorderRadius.circular(16),
-                  child: Container(
-                    padding: const EdgeInsets.all(16),
-                    decoration: BoxDecoration(
-                      color: notification.isRead
-                          ? Colors.grey.shade900
-                          : Colors.grey.shade800,
-                      borderRadius: BorderRadius.circular(16),
-                      border: Border.all(
-                        color: notification.isRead
-                            ? Colors.transparent
-                            : notification.color.withOpacity(0.5),
-                        width: 1,
-                      ),
-                    ),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        // Icon loại thông báo
-                        Container(
-                          padding: const EdgeInsets.all(10),
-                          decoration: BoxDecoration(
-                            color: notification.color.withOpacity(0.1),
-                            shape: BoxShape.circle,
-                          ),
-                          child: Icon(
-                            notification.icon,
-                            color: notification.color,
-                            size: 24,
-                          ),
-                        ),
-                        const SizedBox(width: 12),
-                        
-                        // Nội dung thông báo
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  // Tiêu đề thông báo
-                                  Expanded(
-                                    child: Text(
-                                      notification.title,
-                                      style: TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: notification.isRead
-                                            ? FontWeight.normal
-                                            : FontWeight.bold,
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                  ),
-                                  
-                                  // Chỉ báo chưa đọc
-                                  if (!notification.isRead)
-                                    Container(
-                                      width: 8,
-                                      height: 8,
-                                      decoration: BoxDecoration(
-                                        color: notification.color,
-                                        shape: BoxShape.circle,
-                                      ),
-                                    ),
-                                ],
-                              ),
-                              const SizedBox(height: 6),
-                              
-                              // Nội dung thông báo
-                              Text(
-                                notification.message,
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  color: Colors.grey.shade300,
-                                ),
-                              ),
-                              const SizedBox(height: 8),
-                              
-                              // Thời gian thông báo
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    formattedTime,
-                                    style: TextStyle(
-                                      fontSize: 12,
-                                      color: Colors.grey.shade500,
-                                    ),
-                                  ),
-                                  
-                                  // Mũi tên nếu có hành động
-                                  if (notification.actionRoute != null)
-                                    Icon(
-                                      EvaIcons.arrowForwardOutline,
-                                      size: 16,
-                                      color: Colors.grey.shade500,
-                                    ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                );
-              },
-            ),
+      body: Center(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Image.asset(AppAssets.storySetNotiEmpty, width: 200, height: 200),
+            AppDimens.spaceMd,
+            const Text('Bạn không có thông báo nào')
+          ],
+        ),
+      ),
     );
+
+    // return Scaffold(
+    //   backgroundColor: Colors.black,
+    //   appBar: AppBar(
+    //     title: const Text('Thông báo'),
+    //     leading: Builder(
+    //       builder: (context) {
+    //         return IconButton(
+    //           icon: const Icon(EvaIcons.menu2Outline),
+    //           onPressed: () {
+    //             Scaffold.of(context).openDrawer();
+    //           },
+    //         );
+    //       },
+    //     ),
+    //     actions: [
+    //       // Nút lọc
+    //       IconButton(
+    //         icon: const Icon(EvaIcons.funnelOutline),
+    //         onPressed: _showFilterBottomSheet,
+    //       ),
+    //       // Nút đánh dấu tất cả là đã đọc
+    //       if (unreadCount > 0)
+    //         IconButton(
+    //           icon: const Icon(EvaIcons.checkmarkSquare2Outline),
+    //           onPressed: _markAllAsRead,
+    //           tooltip: 'Đánh dấu tất cả là đã đọc',
+    //         ),
+    //     ],
+    //   ),
+    //   drawer: const AppDrawer(currentRoute: RouteNames.notifications),
+    //   body: _filteredNotifications.isEmpty
+    //       ? Center(
+    //           child: Column(
+    //             mainAxisAlignment: MainAxisAlignment.center,
+    //             children: [
+    //               Icon(
+    //                 EvaIcons.bellOffOutline,
+    //                 size: 64,
+    //                 color: Colors.grey.shade600,
+    //               ),
+    //               const SizedBox(height: 16),
+    //               Text(
+    //                 _showUnreadOnly
+    //                     ? 'Không có thông báo chưa đọc'
+    //                     : _selectedType != null
+    //                         ? 'Không có thông báo loại này'
+    //                         : 'Không có thông báo nào',
+    //                 style: TextStyle(
+    //                   fontSize: 16,
+    //                   color: Colors.grey.shade500,
+    //                 ),
+    //               ),
+    //             ],
+    //           ),
+    //         )
+    //       : ListView.separated(
+    //           padding: const EdgeInsets.all(16),
+    //           itemCount: _filteredNotifications.length,
+    //           separatorBuilder: (context, index) => const SizedBox(height: 12),
+    //           itemBuilder: (context, index) {
+    //             final notification = _filteredNotifications[index];
+
+    //             // Format thời gian thông báo
+    //             String formattedTime;
+    //             final now = DateTime.now();
+    //             final difference = now.difference(notification.dateTime);
+
+    //             if (difference.inDays > 7) {
+    //               // Hiển thị ngày tháng nếu quá 7 ngày
+    //               formattedTime = DateFormat('dd/MM/yyyy').format(notification.dateTime);
+    //             } else if (difference.inDays > 0) {
+    //               // Hiển thị số ngày trước
+    //               formattedTime = '${difference.inDays} ngày trước';
+    //             } else if (difference.inHours > 0) {
+    //               // Hiển thị số giờ trước
+    //               formattedTime = '${difference.inHours} giờ trước';
+    //             } else if (difference.inMinutes > 0) {
+    //               // Hiển thị số phút trước
+    //               formattedTime = '${difference.inMinutes} phút trước';
+    //             } else {
+    //               // Vừa xong
+    //               formattedTime = 'Vừa xong';
+    //             }
+
+    //             return InkWell(
+    //               onTap: () {
+    //                 // Đánh dấu thông báo là đã đọc
+    //                 if (!notification.isRead) {
+    //                   _markAsRead(notification.id);
+    //                 }
+
+    //                 // Nếu có route hành động, điều hướng tới đó
+    //                 if (notification.actionRoute != null) {
+    //                   Navigator.pushNamed(context, notification.actionRoute!);
+    //                 }
+    //               },
+    //               borderRadius: BorderRadius.circular(16),
+    //               child: Container(
+    //                 padding: const EdgeInsets.all(16),
+    //                 decoration: BoxDecoration(
+    //                   color: notification.isRead
+    //                       ? Colors.grey.shade900
+    //                       : Colors.grey.shade800,
+    //                   borderRadius: BorderRadius.circular(16),
+    //                   border: Border.all(
+    //                     color: notification.isRead
+    //                         ? Colors.transparent
+    //                         : notification.color.withOpacity(0.5),
+    //                     width: 1,
+    //                   ),
+    //                 ),
+    //                 child: Row(
+    //                   crossAxisAlignment: CrossAxisAlignment.start,
+    //                   children: [
+    //                     // Icon loại thông báo
+    //                     Container(
+    //                       padding: const EdgeInsets.all(10),
+    //                       decoration: BoxDecoration(
+    //                         color: notification.color.withOpacity(0.1),
+    //                         shape: BoxShape.circle,
+    //                       ),
+    //                       child: Icon(
+    //                         notification.icon,
+    //                         color: notification.color,
+    //                         size: 24,
+    //                       ),
+    //                     ),
+    //                     const SizedBox(width: 12),
+
+    //                     // Nội dung thông báo
+    //                     Expanded(
+    //                       child: Column(
+    //                         crossAxisAlignment: CrossAxisAlignment.start,
+    //                         children: [
+    //                           Row(
+    //                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    //                             children: [
+    //                               // Tiêu đề thông báo
+    //                               Expanded(
+    //                                 child: Text(
+    //                                   notification.title,
+    //                                   style: TextStyle(
+    //                                     fontSize: 16,
+    //                                     fontWeight: notification.isRead
+    //                                         ? FontWeight.normal
+    //                                         : FontWeight.bold,
+    //                                     color: Colors.white,
+    //                                   ),
+    //                                 ),
+    //                               ),
+
+    //                               // Chỉ báo chưa đọc
+    //                               if (!notification.isRead)
+    //                                 Container(
+    //                                   width: 8,
+    //                                   height: 8,
+    //                                   decoration: BoxDecoration(
+    //                                     color: notification.color,
+    //                                     shape: BoxShape.circle,
+    //                                   ),
+    //                                 ),
+    //                             ],
+    //                           ),
+    //                           const SizedBox(height: 6),
+
+    //                           // Nội dung thông báo
+    //                           Text(
+    //                             notification.message,
+    //                             style: TextStyle(
+    //                               fontSize: 14,
+    //                               color: Colors.grey.shade300,
+    //                             ),
+    //                           ),
+    //                           const SizedBox(height: 8),
+
+    //                           // Thời gian thông báo
+    //                           Row(
+    //                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    //                             children: [
+    //                               Text(
+    //                                 formattedTime,
+    //                                 style: TextStyle(
+    //                                   fontSize: 12,
+    //                                   color: Colors.grey.shade500,
+    //                                 ),
+    //                               ),
+
+    //                               // Mũi tên nếu có hành động
+    //                               if (notification.actionRoute != null)
+    //                                 Icon(
+    //                                   EvaIcons.arrowForwardOutline,
+    //                                   size: 16,
+    //                                   color: Colors.grey.shade500,
+    //                                 ),
+    //                             ],
+    //                           ),
+    //                         ],
+    //                       ),
+    //                     ),
+    //                   ],
+    //                 ),
+    //               ),
+    //             );
+    //           },
+    //         ),
+    // );
   }
 }
