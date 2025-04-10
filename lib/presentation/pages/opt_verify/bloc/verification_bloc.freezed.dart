@@ -403,7 +403,7 @@ mixin _$VerificationState {
     required TResult Function() sendingCode,
     required TResult Function(bool isSuccess) codeSent,
     required TResult Function() verifying,
-    required TResult Function() verified,
+    required TResult Function(User user) verified,
     required TResult Function(String message) error,
   }) =>
       throw _privateConstructorUsedError;
@@ -413,7 +413,7 @@ mixin _$VerificationState {
     TResult? Function()? sendingCode,
     TResult? Function(bool isSuccess)? codeSent,
     TResult? Function()? verifying,
-    TResult? Function()? verified,
+    TResult? Function(User user)? verified,
     TResult? Function(String message)? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -423,7 +423,7 @@ mixin _$VerificationState {
     TResult Function()? sendingCode,
     TResult Function(bool isSuccess)? codeSent,
     TResult Function()? verifying,
-    TResult Function()? verified,
+    TResult Function(User user)? verified,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) =>
@@ -527,7 +527,7 @@ class _$InitialImpl implements _Initial {
     required TResult Function() sendingCode,
     required TResult Function(bool isSuccess) codeSent,
     required TResult Function() verifying,
-    required TResult Function() verified,
+    required TResult Function(User user) verified,
     required TResult Function(String message) error,
   }) {
     return initial();
@@ -540,7 +540,7 @@ class _$InitialImpl implements _Initial {
     TResult? Function()? sendingCode,
     TResult? Function(bool isSuccess)? codeSent,
     TResult? Function()? verifying,
-    TResult? Function()? verified,
+    TResult? Function(User user)? verified,
     TResult? Function(String message)? error,
   }) {
     return initial?.call();
@@ -553,7 +553,7 @@ class _$InitialImpl implements _Initial {
     TResult Function()? sendingCode,
     TResult Function(bool isSuccess)? codeSent,
     TResult Function()? verifying,
-    TResult Function()? verified,
+    TResult Function(User user)? verified,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -656,7 +656,7 @@ class _$SendingCodeImpl implements _SendingCode {
     required TResult Function() sendingCode,
     required TResult Function(bool isSuccess) codeSent,
     required TResult Function() verifying,
-    required TResult Function() verified,
+    required TResult Function(User user) verified,
     required TResult Function(String message) error,
   }) {
     return sendingCode();
@@ -669,7 +669,7 @@ class _$SendingCodeImpl implements _SendingCode {
     TResult? Function()? sendingCode,
     TResult? Function(bool isSuccess)? codeSent,
     TResult? Function()? verifying,
-    TResult? Function()? verified,
+    TResult? Function(User user)? verified,
     TResult? Function(String message)? error,
   }) {
     return sendingCode?.call();
@@ -682,7 +682,7 @@ class _$SendingCodeImpl implements _SendingCode {
     TResult Function()? sendingCode,
     TResult Function(bool isSuccess)? codeSent,
     TResult Function()? verifying,
-    TResult Function()? verified,
+    TResult Function(User user)? verified,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -813,7 +813,7 @@ class _$CodeSentImpl implements _CodeSent {
     required TResult Function() sendingCode,
     required TResult Function(bool isSuccess) codeSent,
     required TResult Function() verifying,
-    required TResult Function() verified,
+    required TResult Function(User user) verified,
     required TResult Function(String message) error,
   }) {
     return codeSent(isSuccess);
@@ -826,7 +826,7 @@ class _$CodeSentImpl implements _CodeSent {
     TResult? Function()? sendingCode,
     TResult? Function(bool isSuccess)? codeSent,
     TResult? Function()? verifying,
-    TResult? Function()? verified,
+    TResult? Function(User user)? verified,
     TResult? Function(String message)? error,
   }) {
     return codeSent?.call(isSuccess);
@@ -839,7 +839,7 @@ class _$CodeSentImpl implements _CodeSent {
     TResult Function()? sendingCode,
     TResult Function(bool isSuccess)? codeSent,
     TResult Function()? verifying,
-    TResult Function()? verified,
+    TResult Function(User user)? verified,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -950,7 +950,7 @@ class _$VerifyingImpl implements _Verifying {
     required TResult Function() sendingCode,
     required TResult Function(bool isSuccess) codeSent,
     required TResult Function() verifying,
-    required TResult Function() verified,
+    required TResult Function(User user) verified,
     required TResult Function(String message) error,
   }) {
     return verifying();
@@ -963,7 +963,7 @@ class _$VerifyingImpl implements _Verifying {
     TResult? Function()? sendingCode,
     TResult? Function(bool isSuccess)? codeSent,
     TResult? Function()? verifying,
-    TResult? Function()? verified,
+    TResult? Function(User user)? verified,
     TResult? Function(String message)? error,
   }) {
     return verifying?.call();
@@ -976,7 +976,7 @@ class _$VerifyingImpl implements _Verifying {
     TResult Function()? sendingCode,
     TResult Function(bool isSuccess)? codeSent,
     TResult Function()? verifying,
-    TResult Function()? verified,
+    TResult Function(User user)? verified,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -1039,6 +1039,10 @@ abstract class _$$VerifiedImplCopyWith<$Res> {
   factory _$$VerifiedImplCopyWith(
           _$VerifiedImpl value, $Res Function(_$VerifiedImpl) then) =
       __$$VerifiedImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({User user});
+
+  $UserCopyWith<$Res> get user;
 }
 
 /// @nodoc
@@ -1051,26 +1055,61 @@ class __$$VerifiedImplCopyWithImpl<$Res>
 
   /// Create a copy of VerificationState
   /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? user = null,
+  }) {
+    return _then(_$VerifiedImpl(
+      null == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as User,
+    ));
+  }
+
+  /// Create a copy of VerificationState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $UserCopyWith<$Res> get user {
+    return $UserCopyWith<$Res>(_value.user, (value) {
+      return _then(_value.copyWith(user: value));
+    });
+  }
 }
 
 /// @nodoc
 
 class _$VerifiedImpl implements _Verified {
-  const _$VerifiedImpl();
+  const _$VerifiedImpl(this.user);
+
+  @override
+  final User user;
 
   @override
   String toString() {
-    return 'VerificationState.verified()';
+    return 'VerificationState.verified(user: $user)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$VerifiedImpl);
+        (other.runtimeType == runtimeType &&
+            other is _$VerifiedImpl &&
+            (identical(other.user, user) || other.user == user));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, user);
+
+  /// Create a copy of VerificationState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$VerifiedImplCopyWith<_$VerifiedImpl> get copyWith =>
+      __$$VerifiedImplCopyWithImpl<_$VerifiedImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1079,10 +1118,10 @@ class _$VerifiedImpl implements _Verified {
     required TResult Function() sendingCode,
     required TResult Function(bool isSuccess) codeSent,
     required TResult Function() verifying,
-    required TResult Function() verified,
+    required TResult Function(User user) verified,
     required TResult Function(String message) error,
   }) {
-    return verified();
+    return verified(user);
   }
 
   @override
@@ -1092,10 +1131,10 @@ class _$VerifiedImpl implements _Verified {
     TResult? Function()? sendingCode,
     TResult? Function(bool isSuccess)? codeSent,
     TResult? Function()? verifying,
-    TResult? Function()? verified,
+    TResult? Function(User user)? verified,
     TResult? Function(String message)? error,
   }) {
-    return verified?.call();
+    return verified?.call(user);
   }
 
   @override
@@ -1105,12 +1144,12 @@ class _$VerifiedImpl implements _Verified {
     TResult Function()? sendingCode,
     TResult Function(bool isSuccess)? codeSent,
     TResult Function()? verifying,
-    TResult Function()? verified,
+    TResult Function(User user)? verified,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
     if (verified != null) {
-      return verified();
+      return verified(user);
     }
     return orElse();
   }
@@ -1160,7 +1199,15 @@ class _$VerifiedImpl implements _Verified {
 }
 
 abstract class _Verified implements VerificationState {
-  const factory _Verified() = _$VerifiedImpl;
+  const factory _Verified(final User user) = _$VerifiedImpl;
+
+  User get user;
+
+  /// Create a copy of VerificationState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$VerifiedImplCopyWith<_$VerifiedImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -1235,7 +1282,7 @@ class _$ErrorImpl implements _Error {
     required TResult Function() sendingCode,
     required TResult Function(bool isSuccess) codeSent,
     required TResult Function() verifying,
-    required TResult Function() verified,
+    required TResult Function(User user) verified,
     required TResult Function(String message) error,
   }) {
     return error(message);
@@ -1248,7 +1295,7 @@ class _$ErrorImpl implements _Error {
     TResult? Function()? sendingCode,
     TResult? Function(bool isSuccess)? codeSent,
     TResult? Function()? verifying,
-    TResult? Function()? verified,
+    TResult? Function(User user)? verified,
     TResult? Function(String message)? error,
   }) {
     return error?.call(message);
@@ -1261,7 +1308,7 @@ class _$ErrorImpl implements _Error {
     TResult Function()? sendingCode,
     TResult Function(bool isSuccess)? codeSent,
     TResult Function()? verifying,
-    TResult Function()? verified,
+    TResult Function(User user)? verified,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {

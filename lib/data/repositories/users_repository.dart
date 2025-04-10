@@ -5,4 +5,6 @@ abstract class UsersRepository {
   ResultFuture<User> update(Map<String, dynamic> body);
   ResultFuture<User> getProfile();
   ResultFuture<User> updatePass(String oldPass, String newPass);
+  ResultFuture<User> getUserViaEmail(String email);
+  ResultFuture<User> resetPassword(String id, String password);
 }

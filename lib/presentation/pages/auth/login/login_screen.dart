@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:money_mate/presentation/pages/auth/bloc/auth_bloc.dart';
+import 'package:money_mate/presentation/pages/opt_verify/otp_verify_screen.dart';
 import 'package:money_mate/presentation/routes/bloc/routes_bloc.dart';
 import 'package:money_mate/presentation/routes/route_name.dart';
 import 'package:money_mate/shared/components/app_toast.dart';
@@ -55,7 +56,9 @@ class LoginScreen extends StatelessWidget {
             success: (state) {
               final user = state.user;
               if (!user.isActive) {
-                context.goNamed(RouteNames.otpVerificationName, extra: user);
+                context.goNamed(RouteNames.otpVerificationName,
+                    extra: user,
+                    pathParameters: {'type': OtpTypes.register.name});
                 return;
               }
               if (!user.isSetup) {
@@ -78,7 +81,8 @@ class LoginScreen extends StatelessWidget {
           child: Scaffold(
             resizeToAvoidBottomInset: false,
             body: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: AppDimens.paddingMd),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: AppDimens.paddingMd),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -109,7 +113,9 @@ class LoginScreen extends StatelessWidget {
                   Align(
                       alignment: Alignment.centerLeft,
                       child: GestureDetector(
-                          onTap: () {},
+                          onTap: () {
+                            context.goNamed(RouteNames.emailToNextName);
+                          },
                           child: Text(
                             'Quên mật khẩu?',
                             style: context.textTheme.bodyMedium

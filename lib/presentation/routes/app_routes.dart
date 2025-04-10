@@ -8,6 +8,8 @@ import 'package:money_mate/presentation/pages/cateogries_first_set/categories_se
 import 'package:money_mate/presentation/pages/chat/bloc/chat_bloc.dart';
 import 'package:money_mate/presentation/pages/chat/chat_screen.dart';
 import 'package:money_mate/presentation/pages/auth/login/login_screen.dart';
+import 'package:money_mate/presentation/pages/email_to_next/bloc/email_next_bloc.dart';
+import 'package:money_mate/presentation/pages/email_to_next/email_to_next_screen.dart';
 import 'package:money_mate/presentation/pages/home/home_screen.dart';
 import 'package:money_mate/presentation/pages/notifications/notifications_screen.dart';
 import 'package:money_mate/presentation/pages/opt_verify/bloc/verification_bloc.dart';
@@ -15,6 +17,8 @@ import 'package:money_mate/presentation/pages/opt_verify/otp_verify_screen.dart'
 import 'package:money_mate/presentation/pages/profile/profile_screen.dart';
 import 'package:money_mate/presentation/pages/profile_detail/profile_detail_screen.dart';
 import 'package:money_mate/presentation/pages/auth/register/register_screen.dart';
+import 'package:money_mate/presentation/pages/reset_password/bloc/reset_pass_bloc.dart';
+import 'package:money_mate/presentation/pages/reset_password/reset_password_screen.dart';
 import 'package:money_mate/presentation/pages/setting/setting_screen.dart';
 import 'package:money_mate/presentation/pages/setup/bloc/setup_bloc.dart';
 import 'package:money_mate/presentation/pages/setup/setup_screen.dart';
@@ -48,10 +52,11 @@ final List<GoRoute> appRoutes = [
     path: RouteNames.otpVerification,
     name: RouteNames.otpVerificationName,
     builder: (context, state) {
+      final type = state.pathParameters['type'];
       final user = state.extra as User;
       return BlocProvider(
         create: (context) => VerificationBloc(),
-        child: OtpVerificationScreen(user: user),
+        child: OtpVerificationScreen(type: type, user: user),
       );
     },
   ),
@@ -109,5 +114,22 @@ final List<GoRoute> appRoutes = [
       create: (context) => PasswordBloc(),
       child: const UpdatePassScreen(),
     ),
-  )
+  ),
+  GoRoute(
+      path: RouteNames.resetPassword,
+      name: RouteNames.resetPasswordName,
+      builder: (context, state) {
+        final User user = state.extra as User;
+        return BlocProvider(
+          create: (context) => ResetPassBloc(),
+          child: ResetPassScreen(user: user),
+        );
+      }),
+  GoRoute(
+      path: RouteNames.emailToNext,
+      name: RouteNames.emailToNextName,
+      builder: (context, state) => BlocProvider(
+            create: (context) => EmailNextBloc(),
+            child: const EmailToNextScreen(),
+          ))
 ];

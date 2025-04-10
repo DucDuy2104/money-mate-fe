@@ -13,9 +13,13 @@ import 'package:money_mate/shared/constants/app_colors.dart';
 import 'package:money_mate/shared/constants/app_dimens.dart';
 import 'package:money_mate/shared/constants/app_theme.dart';
 
+enum OtpTypes { register, resetPass }
+
 class OtpVerificationScreen extends StatefulWidget {
   final User user;
-  const OtpVerificationScreen({super.key, required this.user});
+  final String? type;
+  const OtpVerificationScreen(
+      {super.key, required this.user, required this.type});
 
   @override
   State<OtpVerificationScreen> createState() => _OtpVerificationScreenState();
@@ -131,9 +135,18 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
             },
             verifying: (value) {},
             verified: (value) {
+              if (widget.type == OtpTypes.resetPass.name) {
               AppToast.success(
-                  context, 'Xác thực thành công, vui lòng đăng nhập');
-              context.goNamed(RouteNames.loginName);
+                  context, 'Xác thực thành công');
+                context.goNamed(RouteNames.resetPasswordName,
+                    extra: value.user);
+                return;
+              }
+              if (widget.type == OtpTypes.register.name) {
+                AppToast.success(context, 'Xác thực thành công. Vui lòng đăng nhập');
+                context.goNamed(RouteNames.loginName);
+                return;
+              }
             },
             sendingCode: (value) =>
                 {AppToast.info(context, 'Mã đang được gửi...')},

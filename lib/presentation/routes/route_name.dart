@@ -1,7 +1,7 @@
 class RouteNames {
   // Splash
   static const String splash = '/splash';
-  static const String splashName ='splash';
+  static const String splashName = 'splash';
 
   // Home
   static const String home = '/';
@@ -16,18 +16,18 @@ class RouteNames {
   static const String registerName = 'register';
 
   // OTP verification
-  static const String otpVerification = '/otp_verification';
+  static const String otpVerification = '/otp_verification/:type';
   static const String otpVerificationName = 'otp_verification';
 
   // Setup
   static const String setup = '/setup';
-  static const String setupName ='setup';
+  static const String setupName = 'setup';
 
   // Settings
   static const String settings = '/setting';
   static const String settingsName = 'setting';
 
-  // Chat 
+  // Chat
   static const String chat = '/chat';
   static const String chatName = 'chat';
 
@@ -54,4 +54,12 @@ class RouteNames {
   // Update password
   static const String updatePassword = '/update_password';
   static const String updatePasswordName = 'update_password';
+
+  // Reset password
+  static const String resetPassword = '/reset_password';
+  static const String resetPasswordName = 'reset_password';
+
+  // Email to next
+  static const String emailToNext = '/email_to_next';
+  static const String emailToNextName = 'email_to_next';
 }
