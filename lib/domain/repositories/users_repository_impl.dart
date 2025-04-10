@@ -28,4 +28,18 @@ class UsersRepositoryImpl extends UsersRepository {
     return result.fold(
         (failure) => Left(failure), (userModel) => Right(userModel.toEntity()));
   }
+
+  @override
+  ResultFuture<User> getUserViaEmail(String email) async {
+    final result = await _usersRemoteDataSource.getUserViaEmail(email);
+    return result.fold(
+        (failure) => Left(failure), (userModel) => Right(userModel.toEntity()));
+  }
+
+  @override
+  ResultFuture<User> resetPassword(String id, String password) async {
+    final result = await _usersRemoteDataSource.resetPassword(id, password);
+    return result.fold(
+        (failure) => Left(failure), (userModel) => Right(userModel.toEntity()));
+  }
 }

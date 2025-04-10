@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:money_mate/presentation/pages/auth/bloc/auth_bloc.dart';
+import 'package:money_mate/presentation/pages/opt_verify/otp_verify_screen.dart';
 import 'package:money_mate/presentation/routes/route_name.dart';
 import 'package:money_mate/shared/components/app_toast.dart';
 import 'package:money_mate/shared/components/google_button.dart';
@@ -61,7 +62,9 @@ class RegisterScreen extends StatelessWidget {
                 context.goNamed(RouteNames.setupName);
                 return;
               }
-              context.goNamed(RouteNames.otpVerificationName, extra: data.user);
+              context.goNamed(RouteNames.otpVerificationName,
+                  extra: data.user,
+                  pathParameters: {'type': OtpTypes.register.name});
             },
             error: (failure) => {AppToast.error(context, failure.error)},
             orElse: () {});
@@ -75,7 +78,8 @@ class RegisterScreen extends StatelessWidget {
           child: Scaffold(
             resizeToAvoidBottomInset: false,
             body: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: AppDimens.paddingMd),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: AppDimens.paddingMd),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -125,9 +129,11 @@ class RegisterScreen extends StatelessWidget {
                         _onRegister(context);
                       },
                       style: ElevatedButton.styleFrom(
-                        padding: const EdgeInsets.symmetric(vertical: AppDimens.paddingMd),
+                        padding: const EdgeInsets.symmetric(
+                            vertical: AppDimens.paddingMd),
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(AppDimens.radiusSm),
+                          borderRadius:
+                              BorderRadius.circular(AppDimens.radiusSm),
                         ),
                       ),
                       child: Text(
