@@ -20,21 +20,21 @@ mixin _$RoutesEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() startUp,
     required TResult Function() setAuth,
-    required TResult Function(BuildContext context) logout,
+    required TResult Function() logout,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? startUp,
     TResult? Function()? setAuth,
-    TResult? Function(BuildContext context)? logout,
+    TResult? Function()? logout,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? startUp,
     TResult Function()? setAuth,
-    TResult Function(BuildContext context)? logout,
+    TResult Function()? logout,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -126,7 +126,7 @@ class _$StartUpImpl implements _StartUp {
   TResult when<TResult extends Object?>({
     required TResult Function() startUp,
     required TResult Function() setAuth,
-    required TResult Function(BuildContext context) logout,
+    required TResult Function() logout,
   }) {
     return startUp();
   }
@@ -136,7 +136,7 @@ class _$StartUpImpl implements _StartUp {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? startUp,
     TResult? Function()? setAuth,
-    TResult? Function(BuildContext context)? logout,
+    TResult? Function()? logout,
   }) {
     return startUp?.call();
   }
@@ -146,7 +146,7 @@ class _$StartUpImpl implements _StartUp {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? startUp,
     TResult Function()? setAuth,
-    TResult Function(BuildContext context)? logout,
+    TResult Function()? logout,
     required TResult orElse(),
   }) {
     if (startUp != null) {
@@ -237,7 +237,7 @@ class _$SetAuthImpl implements _SetAuth {
   TResult when<TResult extends Object?>({
     required TResult Function() startUp,
     required TResult Function() setAuth,
-    required TResult Function(BuildContext context) logout,
+    required TResult Function() logout,
   }) {
     return setAuth();
   }
@@ -247,7 +247,7 @@ class _$SetAuthImpl implements _SetAuth {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? startUp,
     TResult? Function()? setAuth,
-    TResult? Function(BuildContext context)? logout,
+    TResult? Function()? logout,
   }) {
     return setAuth?.call();
   }
@@ -257,7 +257,7 @@ class _$SetAuthImpl implements _SetAuth {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? startUp,
     TResult Function()? setAuth,
-    TResult Function(BuildContext context)? logout,
+    TResult Function()? logout,
     required TResult orElse(),
   }) {
     if (setAuth != null) {
@@ -310,8 +310,6 @@ abstract class _$$LogoutImplCopyWith<$Res> {
   factory _$$LogoutImplCopyWith(
           _$LogoutImpl value, $Res Function(_$LogoutImpl) then) =
       __$$LogoutImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({BuildContext context});
 }
 
 /// @nodoc
@@ -324,60 +322,35 @@ class __$$LogoutImplCopyWithImpl<$Res>
 
   /// Create a copy of RoutesEvent
   /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? context = null,
-  }) {
-    return _then(_$LogoutImpl(
-      null == context
-          ? _value.context
-          : context // ignore: cast_nullable_to_non_nullable
-              as BuildContext,
-    ));
-  }
 }
 
 /// @nodoc
 
 class _$LogoutImpl implements _Logout {
-  const _$LogoutImpl(this.context);
-
-  @override
-  final BuildContext context;
+  const _$LogoutImpl();
 
   @override
   String toString() {
-    return 'RoutesEvent.logout(context: $context)';
+    return 'RoutesEvent.logout()';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$LogoutImpl &&
-            (identical(other.context, context) || other.context == context));
+        (other.runtimeType == runtimeType && other is _$LogoutImpl);
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, context);
-
-  /// Create a copy of RoutesEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$LogoutImplCopyWith<_$LogoutImpl> get copyWith =>
-      __$$LogoutImplCopyWithImpl<_$LogoutImpl>(this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() startUp,
     required TResult Function() setAuth,
-    required TResult Function(BuildContext context) logout,
+    required TResult Function() logout,
   }) {
-    return logout(context);
+    return logout();
   }
 
   @override
@@ -385,9 +358,9 @@ class _$LogoutImpl implements _Logout {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? startUp,
     TResult? Function()? setAuth,
-    TResult? Function(BuildContext context)? logout,
+    TResult? Function()? logout,
   }) {
-    return logout?.call(context);
+    return logout?.call();
   }
 
   @override
@@ -395,11 +368,11 @@ class _$LogoutImpl implements _Logout {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? startUp,
     TResult Function()? setAuth,
-    TResult Function(BuildContext context)? logout,
+    TResult Function()? logout,
     required TResult orElse(),
   }) {
     if (logout != null) {
-      return logout(context);
+      return logout();
     }
     return orElse();
   }
@@ -440,15 +413,7 @@ class _$LogoutImpl implements _Logout {
 }
 
 abstract class _Logout implements RoutesEvent {
-  const factory _Logout(final BuildContext context) = _$LogoutImpl;
-
-  BuildContext get context;
-
-  /// Create a copy of RoutesEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$LogoutImplCopyWith<_$LogoutImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  const factory _Logout() = _$LogoutImpl;
 }
 
 /// @nodoc

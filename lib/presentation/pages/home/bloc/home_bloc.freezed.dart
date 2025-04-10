@@ -22,6 +22,7 @@ mixin _$HomeEvent {
     required TResult Function() reloadData,
     required TResult Function() connect,
     required TResult Function() reloadCategories,
+    required TResult Function() logout,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -30,6 +31,7 @@ mixin _$HomeEvent {
     TResult? Function()? reloadData,
     TResult? Function()? connect,
     TResult? Function()? reloadCategories,
+    TResult? Function()? logout,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -38,6 +40,7 @@ mixin _$HomeEvent {
     TResult Function()? reloadData,
     TResult Function()? connect,
     TResult Function()? reloadCategories,
+    TResult Function()? logout,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -47,6 +50,7 @@ mixin _$HomeEvent {
     required TResult Function(_ReloadData value) reloadData,
     required TResult Function(_Connect value) connect,
     required TResult Function(_ReloadCategories value) reloadCategories,
+    required TResult Function(_Logout value) logout,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -55,6 +59,7 @@ mixin _$HomeEvent {
     TResult? Function(_ReloadData value)? reloadData,
     TResult? Function(_Connect value)? connect,
     TResult? Function(_ReloadCategories value)? reloadCategories,
+    TResult? Function(_Logout value)? logout,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -63,6 +68,7 @@ mixin _$HomeEvent {
     TResult Function(_ReloadData value)? reloadData,
     TResult Function(_Connect value)? connect,
     TResult Function(_ReloadCategories value)? reloadCategories,
+    TResult Function(_Logout value)? logout,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -161,6 +167,7 @@ class _$GetDataImpl implements _GetData {
     required TResult Function() reloadData,
     required TResult Function() connect,
     required TResult Function() reloadCategories,
+    required TResult Function() logout,
   }) {
     return getData(callback);
   }
@@ -172,6 +179,7 @@ class _$GetDataImpl implements _GetData {
     TResult? Function()? reloadData,
     TResult? Function()? connect,
     TResult? Function()? reloadCategories,
+    TResult? Function()? logout,
   }) {
     return getData?.call(callback);
   }
@@ -183,6 +191,7 @@ class _$GetDataImpl implements _GetData {
     TResult Function()? reloadData,
     TResult Function()? connect,
     TResult Function()? reloadCategories,
+    TResult Function()? logout,
     required TResult orElse(),
   }) {
     if (getData != null) {
@@ -198,6 +207,7 @@ class _$GetDataImpl implements _GetData {
     required TResult Function(_ReloadData value) reloadData,
     required TResult Function(_Connect value) connect,
     required TResult Function(_ReloadCategories value) reloadCategories,
+    required TResult Function(_Logout value) logout,
   }) {
     return getData(this);
   }
@@ -209,6 +219,7 @@ class _$GetDataImpl implements _GetData {
     TResult? Function(_ReloadData value)? reloadData,
     TResult? Function(_Connect value)? connect,
     TResult? Function(_ReloadCategories value)? reloadCategories,
+    TResult? Function(_Logout value)? logout,
   }) {
     return getData?.call(this);
   }
@@ -220,6 +231,7 @@ class _$GetDataImpl implements _GetData {
     TResult Function(_ReloadData value)? reloadData,
     TResult Function(_Connect value)? connect,
     TResult Function(_ReloadCategories value)? reloadCategories,
+    TResult Function(_Logout value)? logout,
     required TResult orElse(),
   }) {
     if (getData != null) {
@@ -286,6 +298,7 @@ class _$ReloadDataImpl implements _ReloadData {
     required TResult Function() reloadData,
     required TResult Function() connect,
     required TResult Function() reloadCategories,
+    required TResult Function() logout,
   }) {
     return reloadData();
   }
@@ -297,6 +310,7 @@ class _$ReloadDataImpl implements _ReloadData {
     TResult? Function()? reloadData,
     TResult? Function()? connect,
     TResult? Function()? reloadCategories,
+    TResult? Function()? logout,
   }) {
     return reloadData?.call();
   }
@@ -308,6 +322,7 @@ class _$ReloadDataImpl implements _ReloadData {
     TResult Function()? reloadData,
     TResult Function()? connect,
     TResult Function()? reloadCategories,
+    TResult Function()? logout,
     required TResult orElse(),
   }) {
     if (reloadData != null) {
@@ -323,6 +338,7 @@ class _$ReloadDataImpl implements _ReloadData {
     required TResult Function(_ReloadData value) reloadData,
     required TResult Function(_Connect value) connect,
     required TResult Function(_ReloadCategories value) reloadCategories,
+    required TResult Function(_Logout value) logout,
   }) {
     return reloadData(this);
   }
@@ -334,6 +350,7 @@ class _$ReloadDataImpl implements _ReloadData {
     TResult? Function(_ReloadData value)? reloadData,
     TResult? Function(_Connect value)? connect,
     TResult? Function(_ReloadCategories value)? reloadCategories,
+    TResult? Function(_Logout value)? logout,
   }) {
     return reloadData?.call(this);
   }
@@ -345,6 +362,7 @@ class _$ReloadDataImpl implements _ReloadData {
     TResult Function(_ReloadData value)? reloadData,
     TResult Function(_Connect value)? connect,
     TResult Function(_ReloadCategories value)? reloadCategories,
+    TResult Function(_Logout value)? logout,
     required TResult orElse(),
   }) {
     if (reloadData != null) {
@@ -403,6 +421,7 @@ class _$ConnectImpl implements _Connect {
     required TResult Function() reloadData,
     required TResult Function() connect,
     required TResult Function() reloadCategories,
+    required TResult Function() logout,
   }) {
     return connect();
   }
@@ -414,6 +433,7 @@ class _$ConnectImpl implements _Connect {
     TResult? Function()? reloadData,
     TResult? Function()? connect,
     TResult? Function()? reloadCategories,
+    TResult? Function()? logout,
   }) {
     return connect?.call();
   }
@@ -425,6 +445,7 @@ class _$ConnectImpl implements _Connect {
     TResult Function()? reloadData,
     TResult Function()? connect,
     TResult Function()? reloadCategories,
+    TResult Function()? logout,
     required TResult orElse(),
   }) {
     if (connect != null) {
@@ -440,6 +461,7 @@ class _$ConnectImpl implements _Connect {
     required TResult Function(_ReloadData value) reloadData,
     required TResult Function(_Connect value) connect,
     required TResult Function(_ReloadCategories value) reloadCategories,
+    required TResult Function(_Logout value) logout,
   }) {
     return connect(this);
   }
@@ -451,6 +473,7 @@ class _$ConnectImpl implements _Connect {
     TResult? Function(_ReloadData value)? reloadData,
     TResult? Function(_Connect value)? connect,
     TResult? Function(_ReloadCategories value)? reloadCategories,
+    TResult? Function(_Logout value)? logout,
   }) {
     return connect?.call(this);
   }
@@ -462,6 +485,7 @@ class _$ConnectImpl implements _Connect {
     TResult Function(_ReloadData value)? reloadData,
     TResult Function(_Connect value)? connect,
     TResult Function(_ReloadCategories value)? reloadCategories,
+    TResult Function(_Logout value)? logout,
     required TResult orElse(),
   }) {
     if (connect != null) {
@@ -520,6 +544,7 @@ class _$ReloadCategoriesImpl implements _ReloadCategories {
     required TResult Function() reloadData,
     required TResult Function() connect,
     required TResult Function() reloadCategories,
+    required TResult Function() logout,
   }) {
     return reloadCategories();
   }
@@ -531,6 +556,7 @@ class _$ReloadCategoriesImpl implements _ReloadCategories {
     TResult? Function()? reloadData,
     TResult? Function()? connect,
     TResult? Function()? reloadCategories,
+    TResult? Function()? logout,
   }) {
     return reloadCategories?.call();
   }
@@ -542,6 +568,7 @@ class _$ReloadCategoriesImpl implements _ReloadCategories {
     TResult Function()? reloadData,
     TResult Function()? connect,
     TResult Function()? reloadCategories,
+    TResult Function()? logout,
     required TResult orElse(),
   }) {
     if (reloadCategories != null) {
@@ -557,6 +584,7 @@ class _$ReloadCategoriesImpl implements _ReloadCategories {
     required TResult Function(_ReloadData value) reloadData,
     required TResult Function(_Connect value) connect,
     required TResult Function(_ReloadCategories value) reloadCategories,
+    required TResult Function(_Logout value) logout,
   }) {
     return reloadCategories(this);
   }
@@ -568,6 +596,7 @@ class _$ReloadCategoriesImpl implements _ReloadCategories {
     TResult? Function(_ReloadData value)? reloadData,
     TResult? Function(_Connect value)? connect,
     TResult? Function(_ReloadCategories value)? reloadCategories,
+    TResult? Function(_Logout value)? logout,
   }) {
     return reloadCategories?.call(this);
   }
@@ -579,6 +608,7 @@ class _$ReloadCategoriesImpl implements _ReloadCategories {
     TResult Function(_ReloadData value)? reloadData,
     TResult Function(_Connect value)? connect,
     TResult Function(_ReloadCategories value)? reloadCategories,
+    TResult Function(_Logout value)? logout,
     required TResult orElse(),
   }) {
     if (reloadCategories != null) {
@@ -590,6 +620,129 @@ class _$ReloadCategoriesImpl implements _ReloadCategories {
 
 abstract class _ReloadCategories implements HomeEvent {
   const factory _ReloadCategories() = _$ReloadCategoriesImpl;
+}
+
+/// @nodoc
+abstract class _$$LogoutImplCopyWith<$Res> {
+  factory _$$LogoutImplCopyWith(
+          _$LogoutImpl value, $Res Function(_$LogoutImpl) then) =
+      __$$LogoutImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$LogoutImplCopyWithImpl<$Res>
+    extends _$HomeEventCopyWithImpl<$Res, _$LogoutImpl>
+    implements _$$LogoutImplCopyWith<$Res> {
+  __$$LogoutImplCopyWithImpl(
+      _$LogoutImpl _value, $Res Function(_$LogoutImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of HomeEvent
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$LogoutImpl implements _Logout {
+  const _$LogoutImpl();
+
+  @override
+  String toString() {
+    return 'HomeEvent.logout()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$LogoutImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(VoidCallback callback) getData,
+    required TResult Function() reloadData,
+    required TResult Function() connect,
+    required TResult Function() reloadCategories,
+    required TResult Function() logout,
+  }) {
+    return logout();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(VoidCallback callback)? getData,
+    TResult? Function()? reloadData,
+    TResult? Function()? connect,
+    TResult? Function()? reloadCategories,
+    TResult? Function()? logout,
+  }) {
+    return logout?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(VoidCallback callback)? getData,
+    TResult Function()? reloadData,
+    TResult Function()? connect,
+    TResult Function()? reloadCategories,
+    TResult Function()? logout,
+    required TResult orElse(),
+  }) {
+    if (logout != null) {
+      return logout();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetData value) getData,
+    required TResult Function(_ReloadData value) reloadData,
+    required TResult Function(_Connect value) connect,
+    required TResult Function(_ReloadCategories value) reloadCategories,
+    required TResult Function(_Logout value) logout,
+  }) {
+    return logout(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetData value)? getData,
+    TResult? Function(_ReloadData value)? reloadData,
+    TResult? Function(_Connect value)? connect,
+    TResult? Function(_ReloadCategories value)? reloadCategories,
+    TResult? Function(_Logout value)? logout,
+  }) {
+    return logout?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetData value)? getData,
+    TResult Function(_ReloadData value)? reloadData,
+    TResult Function(_Connect value)? connect,
+    TResult Function(_ReloadCategories value)? reloadCategories,
+    TResult Function(_Logout value)? logout,
+    required TResult orElse(),
+  }) {
+    if (logout != null) {
+      return logout(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Logout implements HomeEvent {
+  const factory _Logout() = _$LogoutImpl;
 }
 
 /// @nodoc

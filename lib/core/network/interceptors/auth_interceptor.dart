@@ -10,6 +10,8 @@ class AuthInterceptor extends Interceptor {
   late AuthRepository _authRepository;
   static const String _refreshEndpoint = '/auth/refresh-token';
   static const String _googleAuthEndpoint = '/auth/google';
+  static const String _loginEnpoint = '/auth/login';
+  static const String _updatePass = '/users/change-password';
 
   AuthInterceptor(this._dio, this._localDataSource);
 
@@ -39,7 +41,9 @@ class AuthInterceptor extends Interceptor {
   void onError(DioException err, ErrorInterceptorHandler handler) async {
     if ((err.response?.statusCode == 401 || err.response?.statusCode == 417) &&
         err.requestOptions.path != _refreshEndpoint &&
-        err.requestOptions.path != _googleAuthEndpoint) {
+        err.requestOptions.path != _googleAuthEndpoint &&
+        err.requestOptions.path != _loginEnpoint &&
+        err.requestOptions.path != _updatePass) {
       try {
         _authRepository = getIt<AuthRepository>();
         final refreshResult = await _authRepository.refreshToken();

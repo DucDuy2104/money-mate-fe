@@ -50,4 +50,8 @@ class RouteNames {
   // Profile details
   static const String profileDetails = '/profile_details';
   static const String profileDetailsName = 'profile_details';
+
+  // Update password
+  static const String updatePassword = '/update_password';
+  static const String updatePasswordName = 'update_password';
 }

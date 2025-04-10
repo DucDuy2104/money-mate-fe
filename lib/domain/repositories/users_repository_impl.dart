@@ -21,4 +21,11 @@ class UsersRepositoryImpl extends UsersRepository {
     return result.fold(
         (failure) => Left(failure), (userModel) => Right(userModel.toEntity()));
   }
+
+  @override
+  ResultFuture<User> updatePass(String oldPass, String newPass) async {
+    final result = await _usersRemoteDataSource.updatePass(oldPass, newPass);
+    return result.fold(
+        (failure) => Left(failure), (userModel) => Right(userModel.toEntity()));
+  }
 }

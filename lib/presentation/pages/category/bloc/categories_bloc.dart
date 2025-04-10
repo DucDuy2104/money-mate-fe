@@ -21,6 +21,7 @@ class CategoriesBloc extends Bloc<CategoriesEvent, CategoriesState> {
     on<_Reload>(_onReload);
     on<_EnableCategory>(_onEnableCategory);
     on<_DisableCategory>(_onDisableCategory);
+    on<_Logout>(_onLogout);
   }
 
   void _onGetCategories(
@@ -154,13 +155,19 @@ class CategoriesBloc extends Bloc<CategoriesEvent, CategoriesState> {
   bool checkCategory(String categoryId) {
     return state.maybeMap(
         loaded: (data) {
-          final isIn = data.categories.indexWhere((e) => e.id == categoryId && e.isSelected);
+          final isIn = data.categories
+              .indexWhere((e) => e.id == categoryId && e.isSelected);
           return isIn >= 0;
         },
         reloading: (data) {
-          final isIn = data.categories.indexWhere((e) => e.id == categoryId && e.isSelected);
+          final isIn = data.categories
+              .indexWhere((e) => e.id == categoryId && e.isSelected);
           return isIn >= 0;
         },
         orElse: () => false);
+  }
+
+  void _onLogout(_Logout event, Emitter<CategoriesState> emit) {
+    emit(const CategoriesState.initial());
   }
 }

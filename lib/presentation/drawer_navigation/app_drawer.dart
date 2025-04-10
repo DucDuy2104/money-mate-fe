@@ -4,7 +4,11 @@ import 'package:go_router/go_router.dart';
 import 'package:money_mate/presentation/drawer_navigation/drawer_item.dart';
 import 'package:money_mate/presentation/drawer_navigation/drawer_service.dart';
 import 'package:money_mate/presentation/drawer_navigation/widgets/header_skeleton.dart';
+import 'package:money_mate/presentation/pages/category/bloc/categories_bloc.dart';
+import 'package:money_mate/presentation/pages/home/bloc/home_bloc.dart';
 import 'package:money_mate/presentation/pages/profile/bloc/profile_bloc.dart';
+import 'package:money_mate/presentation/routes/bloc/routes_bloc.dart';
+import 'package:money_mate/presentation/routes/route_name.dart';
 import 'package:money_mate/shared/constants/constants.dart';
 
 class AppDrawer extends StatefulWidget {
@@ -72,6 +76,14 @@ class _AppDrawerState extends State<AppDrawer> {
     );
   }
 
+  void _onLogout(BuildContext context) {
+    BlocProvider.of<HomeBloc>(context).add(const HomeEvent.logout());
+    BlocProvider.of<ProfileBloc>(context).add(const ProfileEvent.logout());
+    BlocProvider.of<CategoriesBloc>(context).add(const CategoriesEvent.logout());
+    BlocProvider.of<RoutesBloc>(context).add(const RoutesEvent.logout());
+    context.goNamed(RouteNames.loginName);
+  }
+
   Widget _buildLogoutButton(BuildContext context) {
     final colors = AppColors.colorsData(context);
     return Padding(
@@ -109,7 +121,8 @@ class _AppDrawerState extends State<AppDrawer> {
                   ),
                   TextButton(
                     onPressed: () {
-                      context.go('/login');
+                      _onLogout(context);
+                      context.pop();
                     },
                     child: const Text('Đăng xuất'),
                   ),

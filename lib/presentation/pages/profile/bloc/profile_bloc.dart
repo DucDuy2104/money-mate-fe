@@ -25,6 +25,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     on<_ReloadProfile>(_onReloadProfile);
     on<_ReloadCateogries>(_onReloadCateogries);
     on<_ReloadData>(_onReloadData);
+    on<_Logout>(_onLogout);
   }
 
   void _onGetData(_GetData event, Emitter<ProfileState> emit) async {
@@ -164,5 +165,9 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     _socketService.listen(SocketEnum.updateCategory.name, (data) {
       add(const _ReloadProfile());
     });
+  }
+
+  void _onLogout(_Logout event, Emitter<ProfileState> emit) {
+    emit(const ProfileState.initial());
   }
 }

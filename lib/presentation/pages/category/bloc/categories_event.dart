@@ -9,4 +9,5 @@ class CategoriesEvent with _$CategoriesEvent {
   const factory CategoriesEvent.disableCategory(
       String categoryId, VoidCallback callback) = _DisableCategory;
   const factory CategoriesEvent.reload(String userId) = _Reload;
+  const factory CategoriesEvent.logout() = _Logout;
 }
