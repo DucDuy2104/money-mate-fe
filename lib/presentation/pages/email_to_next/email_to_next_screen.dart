@@ -5,6 +5,7 @@ import 'package:money_mate/presentation/pages/email_to_next/bloc/email_next_bloc
 import 'package:money_mate/presentation/pages/opt_verify/otp_verify_screen.dart';
 import 'package:money_mate/presentation/routes/route_name.dart';
 import 'package:money_mate/shared/components/loading_scafford.dart';
+import 'package:money_mate/shared/constants/app_colors.dart';
 import 'package:money_mate/shared/constants/app_dimens.dart';
 import 'package:money_mate/shared/constants/app_theme.dart';
 import 'package:money_mate/shared/components/app_toast.dart';
@@ -41,6 +42,7 @@ class _EmailToNextScreenState extends State<EmailToNextScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final colors = AppColors.colorsData(context);
     return BlocConsumer<EmailNextBloc, EmailNextState>(
       listener: (BuildContext context, EmailNextState state) {
         state.maybeMap(
@@ -75,9 +77,10 @@ class _EmailToNextScreenState extends State<EmailToNextScreen> {
                     style: Theme.of(context).textTheme.titleLarge,
                   ),
                   AppDimens.spaceSm,
-                  const Text(
+                  Text(
                     'Vui lòng nhập email đã đăng ký để tiếp tục.',
-                    style: TextStyle(color: Colors.grey),
+                    style: context.textTheme.bodyMedium
+                        ?.copyWith(color: colors.subTextColor),
                   ),
                   AppDimens.spaceLg,
                   TextField(
@@ -94,14 +97,6 @@ class _EmailToNextScreenState extends State<EmailToNextScreen> {
                     height: 56,
                     child: ElevatedButton(
                       onPressed: _submitForm,
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.blue,
-                        foregroundColor: Colors.white,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        elevation: 0,
-                      ),
                       child: Text(
                         'TIẾP TỤC',
                         style: context.textTheme.bodyMedium,
@@ -112,9 +107,10 @@ class _EmailToNextScreenState extends State<EmailToNextScreen> {
                   Center(
                     child: TextButton(
                       onPressed: () => context.goNamed(RouteNames.loginName),
-                      child: const Text(
+                      child: Text(
                         'Quay lại đăng nhập',
-                        style: TextStyle(color: Colors.blue),
+                        style: context.textTheme.bodyMedium
+                            ?.copyWith(color: AppColors.primaryColor),
                       ),
                     ),
                   ),

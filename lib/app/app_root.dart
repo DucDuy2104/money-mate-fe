@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-// ignore: depend_on_referenced_packages
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:money_mate/presentation/routes/go_router.dart';
 import 'package:money_mate/shared/constants/constants.dart';
 
 class AppRoot extends StatelessWidget {
   const AppRoot({super.key});
-
 
   @override
   Widget build(BuildContext context) {

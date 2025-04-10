@@ -5,6 +5,7 @@ import 'package:money_mate/domain/entities/user.dart';
 import 'package:money_mate/presentation/pages/reset_password/bloc/reset_pass_bloc.dart';
 import 'package:money_mate/shared/components/app_toast.dart';
 import 'package:money_mate/shared/components/loading_scafford.dart';
+import 'package:money_mate/shared/constants/app_colors.dart';
 import 'package:money_mate/shared/constants/app_dimens.dart';
 import 'package:money_mate/shared/constants/app_theme.dart';
 
@@ -64,6 +65,7 @@ class _ResetPassScreenState extends State<ResetPassScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final colors = AppColors.colorsData(context);
     return BlocConsumer<ResetPassBloc, ResetPassState>(
       listener: (context, state) {
         state.maybeMap(
@@ -97,9 +99,10 @@ class _ResetPassScreenState extends State<ResetPassScreen> {
                     style: Theme.of(context).textTheme.titleLarge,
                   ),
                   AppDimens.spaceSm,
-                  const Text(
+                  Text(
                     'Vui lòng tạo mật khẩu mới cho tài khoản của bạn.',
-                    style: TextStyle(color: Colors.grey),
+                    style: context.textTheme.bodyMedium
+                        ?.copyWith(color: colors.subTextColor),
                   ),
                   AppDimens.spaceLg,
                   TextField(

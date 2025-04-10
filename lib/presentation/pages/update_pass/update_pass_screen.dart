@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:money_mate/presentation/pages/update_pass/bloc/password_bloc.dart';
 import 'package:money_mate/shared/components/app_toast.dart';
 import 'package:money_mate/shared/components/loading_scafford.dart';
+import 'package:money_mate/shared/constants/app_colors.dart';
 import 'package:money_mate/shared/constants/app_dimens.dart';
 import 'package:money_mate/shared/constants/app_theme.dart';
 
@@ -70,6 +71,7 @@ class _UpdatePassScreenState extends State<UpdatePassScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final colors = AppColors.colorsData(context);
     return BlocConsumer<PasswordBloc, PasswordState>(
       listener: (context, state) {
         state.maybeMap(
@@ -105,9 +107,10 @@ class _UpdatePassScreenState extends State<UpdatePassScreen> {
                     style: Theme.of(context).textTheme.titleLarge,
                   ),
                   AppDimens.spaceSm,
-                  const Text(
+                  Text(
                     'Vui lòng nhập mật khẩu hiện tại và mật khẩu mới để cập nhật.',
-                    style: TextStyle(color: Colors.grey),
+                    style: context.textTheme.bodyMedium
+                        ?.copyWith(color: colors.subTextColor),
                   ),
                   AppDimens.spaceLg,
                   TextField(
@@ -175,17 +178,8 @@ class _UpdatePassScreenState extends State<UpdatePassScreen> {
                   AppDimens.spaceLg,
                   SizedBox(
                     width: double.infinity,
-                    height: 56,
                     child: ElevatedButton(
                       onPressed: _submitForm,
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.blue,
-                        foregroundColor: Colors.white,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        elevation: 0,
-                      ),
                       child: Text(
                         'CẬP NHẬT MẬT KHẨU',
                         style: context.textTheme.bodyMedium,
