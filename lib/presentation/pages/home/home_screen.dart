@@ -2,6 +2,7 @@ import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:money_mate/core/service/langs/generated/l10n/l10n.dart';
 import 'package:money_mate/presentation/pages/category/bloc/categories_bloc.dart';
 import 'package:money_mate/presentation/pages/home/bloc/home_bloc.dart';
 import 'package:money_mate/presentation/drawer_navigation/app_drawer.dart';
@@ -53,6 +54,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final s = S.of(context);
     return BlocConsumer<HomeBloc, HomeState>(
       listener: (context, state) {
         // TODO: implement listener
@@ -96,7 +98,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       children: [
                         IncomeExpenseChart(statistic: statistic),
                         AppDimens.spaceSm,
-                        Text("Danh mục tiêu dùng",
+                        Text(s.ownCategories,
                             style: context.textTheme.titleLarge),
                         AppDimens.spaceSm,
                         SizedBox(
@@ -114,7 +116,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                         ),
                         AppDimens.spaceMd,
-                        Text("Chi tiêu gần đây",
+                        Text(s.recentTransactions,
                             style: context.textTheme.titleLarge),
                         AppDimens.spaceSm,
                         Expanded(
@@ -128,7 +130,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             },
                           ),
                         ),
-                        AppDimens.spaceSm, // Add bottom spacing
+                        AppDimens.spaceSm,
                       ],
                     ),
                   ),

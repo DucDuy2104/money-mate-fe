@@ -1,5 +1,6 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:money_mate/core/service/langs/generated/l10n/l10n.dart';
 import 'package:money_mate/domain/entities/statistic.dart';
 import 'package:money_mate/shared/constants/constants.dart';
 import 'package:money_mate/shared/utils/datetime_utils.dart';
@@ -20,6 +21,7 @@ class IncomeExpenseChart extends StatelessWidget {
     final expenses = statistic.expenses;
     final maxY = [...incomes, ...expenses].reduce((a, b) => a > b ? a : b) * 2;
     final colors = AppColors.colorsData(context);
+    final s = S.of(context);
     return ClipRRect(
       borderRadius: BorderRadius.circular(16),
       child: Container(
@@ -166,7 +168,7 @@ class IncomeExpenseChart extends StatelessWidget {
                   const LinearGradient(
                     colors: [Colors.redAccent, Colors.pinkAccent],
                   ),
-                  "Chi tiêu",
+                  s.income,
                 ),
                 const SizedBox(width: 24),
                 _buildLegendItem(
@@ -174,7 +176,7 @@ class IncomeExpenseChart extends StatelessWidget {
                   const LinearGradient(
                     colors: [Colors.blueAccent, Colors.cyanAccent],
                   ),
-                  "Thu nhập",
+                  s.expense,
                 ),
               ],
             ),

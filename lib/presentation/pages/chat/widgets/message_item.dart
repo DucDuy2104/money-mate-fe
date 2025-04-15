@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:money_mate/core/service/langs/generated/l10n/l10n.dart';
 import 'package:money_mate/domain/entities/message.dart';
 import 'package:money_mate/presentation/pages/category/widgets/category_dialogs.dart';
 import 'package:money_mate/presentation/pages/chat/bloc/chat_bloc.dart';
@@ -70,6 +71,7 @@ class _MessageItemState extends State<MessageItem>
 
   @override
   Widget build(BuildContext context) {
+    final s = S.of(context);
     return FadeTransition(
       opacity: _fadeAnimation,
       child: SlideTransition(
@@ -164,7 +166,8 @@ class _MessageItemState extends State<MessageItem>
                           CategoryDialogs.showAddCategoryDialog(
                               context, widget.message.category!, (budget) {
                             BlocProvider.of<ChatBloc>(context).sendMessage(
-                                "Thêm danh mục '${widget.message.category!.name}' với ngân sách $budget ( Tin nhắn tự động )");
+                                s.addBudgetCategoryAutoMessage(
+                                    widget.message.category!.name, budget));
                           }, () {});
                         },
                       )

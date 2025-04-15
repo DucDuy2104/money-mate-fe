@@ -1,5 +1,6 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:money_mate/core/service/langs/generated/l10n/l10n.dart';
 import 'package:money_mate/domain/entities/category.dart';
 import 'package:money_mate/shared/constants/app_dimens.dart';
 import 'package:money_mate/shared/constants/app_theme.dart';
@@ -13,6 +14,7 @@ class ExpensePieChart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final data = getExpenseData(categories);
+    final s = S.of(context);
     if (data.isEmpty) {
       return Padding(
         padding: const EdgeInsets.all(AppDimens.paddingMd),
@@ -25,7 +27,7 @@ class ExpensePieChart extends StatelessWidget {
               fit: BoxFit.contain,
             ),
             AppDimens.spaceMd,
-            Text("Bạn chưa có dữ liệu chi tiêu",
+            Text(s.noTransactions,
                 textAlign: TextAlign.center,
                 style: context.textTheme.bodyLarge),
           ],
@@ -37,7 +39,7 @@ class ExpensePieChart extends StatelessWidget {
       padding: const EdgeInsets.all(AppDimens.paddingMd),
       child: Column(
         children: [
-          Text("Chi tiêu theo danh mục", style: context.textTheme.titleLarge),
+          Text(s.expenseByCategory, style: context.textTheme.titleLarge),
           AppDimens.spaceMd,
           SizedBox(
             height: 300,
@@ -60,7 +62,7 @@ class ExpensePieChart extends StatelessWidget {
                       _formatCurrency(data.values.reduce((a, b) => a + b)),
                       style: context.textTheme.titleLarge
                     ),
-                    Text("Tổng", style: context.textTheme.bodyMedium),
+                    Text(s.total, style: context.textTheme.bodyMedium),
                   ],
                 ),
               ],

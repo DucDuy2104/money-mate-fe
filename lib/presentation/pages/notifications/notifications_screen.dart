@@ -1,6 +1,6 @@
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+import 'package:money_mate/core/service/langs/generated/l10n/l10n.dart';
 import 'package:money_mate/presentation/drawer_navigation/app_drawer.dart';
 import 'package:money_mate/presentation/routes/route_name.dart';
 import 'package:money_mate/shared/constants/app_assets.dart';
@@ -380,10 +380,11 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
   @override
   Widget build(BuildContext context) {
     int unreadCount = _notifications.where((n) => !n.isRead).length;
+    final s = S.of(context);
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Thông báo'),
+        title: Text(s.notifications),
         leading: Builder(
           builder: (context) {
             return IconButton(
@@ -402,7 +403,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
           children: [
             Image.asset(AppAssets.storySetNotiEmpty, width: 200, height: 200),
             AppDimens.spaceMd,
-            const Text('Bạn không có thông báo nào')
+            Text(s.noNotification)
           ],
         ),
       ),

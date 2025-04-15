@@ -1,8 +1,20 @@
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:go_router/go_router.dart';
+import 'package:money_mate/core/service/getit/locator.dart';
+import 'package:money_mate/core/service/langs/cubit/locale_cubit.dart';
+import 'package:money_mate/core/service/langs/generated/l10n/l10n.dart';
+import 'package:money_mate/core/service/langs/localization_service.dart';
+import 'package:money_mate/domain/entities/localization.dart';
 import 'package:money_mate/presentation/drawer_navigation/app_drawer.dart';
+import 'package:money_mate/presentation/pages/category/bloc/categories_bloc.dart';
+import 'package:money_mate/presentation/pages/home/bloc/home_bloc.dart';
+import 'package:money_mate/presentation/pages/profile/bloc/profile_bloc.dart';
 import 'package:money_mate/presentation/routes/route_name.dart';
+import 'package:money_mate/shared/components/confirm_dialog.dart';
+import 'package:money_mate/shared/components/single_choice_dialog.dart';
 import 'package:money_mate/shared/constants/constants.dart';
 
 class SettingsScreen extends StatefulWidget {
@@ -15,18 +27,16 @@ class SettingsScreen extends StatefulWidget {
 class _SettingsScreenState extends State<SettingsScreen> {
   bool _notificationsEnabled = true;
   String _currency = 'VND';
-  String _language = 'Tiếng Việt';
   double _budgetWarningThreshold = 0.8;
 
   final List<String> _currencyOptions = ['VND', 'USD', 'EUR', 'JPY', 'GBP'];
-  
-  final List<String> _languageOptions = ['Tiếng Việt', 'English', '日本語', '한국어', '中文'];
 
   @override
   Widget build(BuildContext context) {
+    final s = S.of(context);
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Cài đặt'),
+        title: Text(s.setting),
         leading: Builder(
           builder: (context) {
             return IconButton(
@@ -45,37 +55,37 @@ class _SettingsScreenState extends State<SettingsScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // General Settings
-            _buildSectionHeader('Chung'),
+            _buildSectionHeader(s.general),
             _buildSettingItem(
               icon: Icons.language,
-              title: 'Ngôn ngữ',
-              subtitle: _language,
-              onTap: () => _showLanguageDialog(),
+              title: s.language,
+              subtitle: _getCurrentLocalization().name,
+              onTap: () => _showLanguageDialog(context),
             ),
             _buildSettingItem(
               icon: Icons.currency_exchange,
-              title: 'Đơn vị tiền tệ',
+              title: s.currencyUnit,
               subtitle: _currency,
               onTap: () => _showCurrencyDialog(),
             ),
             const Divider(height: 1),
-        
+
             // Security
-            _buildSectionHeader('Bảo mật'),
+            _buildSectionHeader(s.security),
             _buildSettingItem(
               icon: Icons.lock,
-              title: 'Đổi mật khẩu',
+              title: s.changePassword,
               onTap: () {
                 context.pushNamed(RouteNames.updatePasswordName);
               },
             ),
             const Divider(height: 1),
-            
+
             // Notifications
-            _buildSectionHeader('Thông báo'),
+            _buildSectionHeader(s.notifications),
             _buildSwitchItem(
               icon: Icons.notifications,
-              title: 'Bật thông báo',
+              title: s.turnOnNotification,
               value: _notificationsEnabled,
               onChanged: (value) {
                 setState(() {
@@ -85,44 +95,19 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ),
             _buildSettingItem(
               icon: Icons.warning_amber,
-              title: 'Cảnh báo ngân sách',
-              subtitle: 'Khi chi tiêu đạt ${(_budgetWarningThreshold * 100).toInt()}% ngân sách',
+              title: s.budgetWarn,
+              subtitle:
+                  s.budgetWarnWhen((_budgetWarningThreshold * 100).toInt()),
               onTap: () => _showBudgetWarningDialog(),
               enabled: _notificationsEnabled,
             ),
             const Divider(height: 1),
-        
-            // Data Management
-            _buildSectionHeader('Dữ liệu'),
-            _buildSettingItem(
-              icon: Icons.backup,
-              title: 'Sao lưu dữ liệu',
-              subtitle: 'Lưu dữ liệu của bạn lên đám mây',
-              onTap: () {
-                // Triển khai chức năng sao lưu dữ liệu ở đây
-              },
-            ),
-            _buildSettingItem(
-              icon: Icons.restore,
-              title: 'Khôi phục dữ liệu',
-              onTap: () {
-                // Triển khai chức năng khôi phục dữ liệu ở đây
-              },
-            ),
-            _buildSettingItem(
-              icon: Icons.delete_forever,
-              title: 'Xóa tất cả dữ liệu',
-              subtitle: 'Xóa toàn bộ giao dịch và cài đặt',
-              onTap: () => _showDeleteAllDataDialog(),
-              danger: true,
-            ),
-            const Divider(height: 1),
-        
+
             // About & Support
-            _buildSectionHeader('Thông tin'),
+            _buildSectionHeader(s.information),
             _buildSettingItem(
               icon: Icons.info,
-              title: 'Về Money Mate',
+              title: s.aboutMoneyMate,
               subtitle: 'Phiên bản 1.0.0',
               onTap: () {
                 // Hiển thị thông tin về ứng dụng
@@ -130,7 +115,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ),
             _buildSettingItem(
               icon: Icons.help,
-              title: 'Trợ giúp & Hỗ trợ',
+              title: s.helpAndSupport,
               onTap: () {
                 // Mở trang trợ giúp
               },
@@ -145,10 +130,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Widget _buildSectionHeader(String title) {
     return Padding(
       padding: const EdgeInsets.only(
-        left: AppDimens.paddingMd, 
-        top: AppDimens.paddingMd, 
-        bottom: AppDimens.paddingXs
-      ),
+          left: AppDimens.paddingMd,
+          top: AppDimens.paddingMd,
+          bottom: AppDimens.paddingXs),
       child: Text(
         title.toUpperCase(),
         style: TextStyle(
@@ -177,12 +161,15 @@ class _SettingsScreenState extends State<SettingsScreen> {
       leading: Icon(
         icon,
         size: AppDimens.iconSize,
-        color: danger ? Colors.red : (enabled ? Colors.grey[300] : Colors.grey[700]),
+        color: danger
+            ? Colors.red
+            : (enabled ? Colors.grey[300] : Colors.grey[700]),
       ),
       title: Text(
         title,
         style: TextStyle(
-          color: danger ? Colors.red : (enabled ? Colors.white : Colors.grey[700]),
+          color:
+              danger ? Colors.red : (enabled ? Colors.white : Colors.grey[700]),
         ),
       ),
       subtitle: subtitle != null
@@ -211,14 +198,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
         horizontal: AppDimens.paddingMd,
         vertical: AppDimens.paddingXs,
       ),
-      leading: Icon(
-        icon, 
-        size: AppDimens.iconSize,
-        color: Colors.grey[300]
-      ),
+      leading: Icon(icon, size: AppDimens.iconSize, color: Colors.grey[300]),
       title: Text(title, style: const TextStyle(color: Colors.white)),
       subtitle: subtitle != null
-          ? Text(subtitle, style: TextStyle(color: Colors.grey[400], fontSize: 13))
+          ? Text(subtitle,
+              style: TextStyle(color: Colors.grey[400], fontSize: 13))
           : null,
       trailing: Switch(
         value: value,
@@ -234,8 +218,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
       context: context,
       builder: (context) => AlertDialog(
         backgroundColor: Colors.grey.shade900,
-        title: const Text('Đơn vị tiền tệ', style: TextStyle(color: Colors.white)),
-        contentPadding: const EdgeInsets.symmetric(vertical: AppDimens.paddingSm),
+        title:
+            const Text('Đơn vị tiền tệ', style: TextStyle(color: Colors.white)),
+        contentPadding:
+            const EdgeInsets.symmetric(vertical: AppDimens.paddingSm),
         content: SizedBox(
           width: double.maxFinite,
           child: ListView.builder(
@@ -244,10 +230,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
             itemBuilder: (context, index) {
               final currency = _currencyOptions[index];
               return ListTile(
-                contentPadding: const EdgeInsets.symmetric(horizontal: AppDimens.paddingMd),
-                title: Text(currency, style: const TextStyle(color: Colors.white)),
+                contentPadding:
+                    const EdgeInsets.symmetric(horizontal: AppDimens.paddingMd),
+                title:
+                    Text(currency, style: const TextStyle(color: Colors.white)),
                 trailing: _currency == currency
-                    ? Icon(Icons.check, color: AppColors.primaryColor, size: AppDimens.iconSizeSmall)
+                    ? const Icon(Icons.check,
+                        color: AppColors.primaryColor,
+                        size: AppDimens.iconSizeSmall)
                     : null,
                 onTap: () {
                   setState(() {
@@ -271,58 +261,15 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
   }
 
-  // Dialog để chọn ngôn ngữ
-  void _showLanguageDialog() {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        backgroundColor: Colors.grey.shade900,
-        title: const Text('Ngôn ngữ', style: TextStyle(color: Colors.white)),
-        contentPadding: const EdgeInsets.symmetric(vertical: AppDimens.paddingSm),
-        content: SizedBox(
-          width: double.maxFinite,
-          child: ListView.builder(
-            shrinkWrap: true,
-            itemCount: _languageOptions.length,
-            itemBuilder: (context, index) {
-              final language = _languageOptions[index];
-              return ListTile(
-                contentPadding: const EdgeInsets.symmetric(horizontal: AppDimens.paddingMd),
-                title: Text(language, style: const TextStyle(color: Colors.white)),
-                trailing: _language == language
-                    ? Icon(Icons.check, color: AppColors.primaryColor, size: AppDimens.iconSizeSmall)
-                    : null,
-                onTap: () {
-                  setState(() {
-                    _language = language;
-                  });
-                  Navigator.pop(context);
-                },
-              );
-            },
-          ),
-        ),
-        actions: [
-          TextButton(
-            child: const Text('Hủy', style: TextStyle(color: Colors.grey)),
-            onPressed: () {
-              Navigator.pop(context);
-            },
-          ),
-        ],
-      ),
-    );
-  }
-
-  // Dialog để cài đặt ngưỡng cảnh báo ngân sách
   void _showBudgetWarningDialog() {
     double tempThreshold = _budgetWarningThreshold;
-    
+
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
         backgroundColor: Colors.grey.shade900,
-        title: const Text('Cảnh báo ngân sách', style: TextStyle(color: Colors.white)),
+        title: const Text('Cảnh báo ngân sách',
+            style: TextStyle(color: Colors.white)),
         contentPadding: const EdgeInsets.all(AppDimens.paddingMd),
         content: StatefulBuilder(
           builder: (context, setState) {
@@ -360,7 +307,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
             },
           ),
           TextButton(
-            child: Text('Lưu', style: TextStyle(color: AppColors.primaryColor)),
+            child: const Text('Lưu',
+                style: TextStyle(color: AppColors.primaryColor)),
             onPressed: () {
               setState(() {
                 _budgetWarningThreshold = tempThreshold;
@@ -372,44 +320,35 @@ class _SettingsScreenState extends State<SettingsScreen> {
       ),
     );
   }
+}
 
-  // Dialog xác nhận xóa tất cả dữ liệu
-  void _showDeleteAllDataDialog() {
-    showDialog(
+void _showLanguageDialog(BuildContext context) {
+  final s = S.of(context);
+  showDialog(
       context: context,
-      builder: (context) => AlertDialog(
-        backgroundColor: Colors.grey.shade900,
-        title: const Text('Xóa tất cả dữ liệu?', style: TextStyle(color: Colors.white)),
-        contentPadding: const EdgeInsets.all(AppDimens.paddingMd),
-        content: const Text(
-          'Hành động này sẽ xóa vĩnh viễn tất cả dữ liệu và cài đặt của bạn. Bạn không thể hoàn tác hành động này.',
-          style: TextStyle(color: Colors.white70),
-        ),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(AppDimens.radiusMd),
-        ),
-        actions: [
-          TextButton(
-            child: const Text('Hủy', style: TextStyle(color: Colors.grey)),
-            onPressed: () {
-              Navigator.pop(context);
-            },
-          ),
-          TextButton(
-            child: const Text('Xóa tất cả', style: TextStyle(color: Colors.red)),
-            onPressed: () {
-              // Triển khai chức năng xóa tất cả dữ liệu ở đây
-              Navigator.pop(context);
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  content: Text('Đã xóa tất cả dữ liệu'),
-                  backgroundColor: Colors.red,
-                ),
-              );
-            },
-          ),
-        ],
-      ),
-    );
-  }
+      builder: (context) => SingleChoiceDialog(
+          title: s.selectLanguage,
+          items: LocalizationService.supportedLocales,
+          displayStringForItem: (localization) => localization.name,
+          initialSelection: _getCurrentLocalization(),
+          onSelect: (item) async {
+            context.pop();
+            showDialog(
+                context: context,
+                builder: (context) => ConfirmDialog(
+                    title: s.restart,
+                    message: s.restartConfirm,
+                    onConfirm: () async {
+                      BlocProvider.of<LocaleCubit>(context)
+                          .changeLocale(item.locale);
+                      Phoenix.rebirth(context);
+                      context.goNamed(RouteNames.homeName);
+                    }));
+          }));
+}
+
+Localization _getCurrentLocalization() {
+  return LocalizationService.supportedLocales.firstWhere((localization) =>
+      localization.locale.languageCode ==
+      getIt<LocalizationService>().getCurrentLocale().languageCode);
 }

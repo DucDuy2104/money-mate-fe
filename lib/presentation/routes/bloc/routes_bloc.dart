@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:money_mate/core/service/getit/locator.dart';
+import 'package:money_mate/core/service/langs/cubit/locale_cubit.dart';
 import 'package:money_mate/core/service/socket/socket_service.dart';
 import 'package:money_mate/data/data_sources/local/local_data_source.dart';
 import 'package:money_mate/core/service/getit/locator.dart' as ls;
@@ -33,6 +34,8 @@ class RoutesBloc extends Bloc<RoutesEvent, RoutesState> {
       await Future.delayed(const Duration(seconds: 2));
       _dataSource = getIt<OnboardLocalDataSource>();
       _service = getIt<SocketService>();
+      // ignore: use_build_context_synchronously
+      BlocProvider.of<LocaleCubit>(event.context).loadLocale();
       final isAuthenticated = _dataSource.isAuthenticated();
       if (isAuthenticated) {
         emit(const RoutesState.auth());

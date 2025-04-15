@@ -2,6 +2,7 @@ import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:money_mate/core/service/langs/generated/l10n/l10n.dart';
 import 'package:money_mate/presentation/drawer_navigation/app_drawer.dart';
 import 'package:money_mate/presentation/pages/home/bloc/home_bloc.dart';
 import 'package:money_mate/presentation/pages/profile/bloc/profile_bloc.dart';
@@ -17,11 +18,12 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final s = S.of(context);
     return DefaultTabController(
       length: 2,
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Tài khoản'),
+          title: Text(s.account),
           leading: Builder(
             builder: (context) {
               return IconButton(
@@ -42,8 +44,8 @@ class ProfileScreen extends StatelessWidget {
                   },
                   child: const ProfileCard()),
               AppDimens.spaceSm,
-              const AppTab(
-                  tab1Name: 'Hôm nay', tab2Name: 'Tháng này', controller: null),
+              AppTab(
+                  tab1Name: s.today, tab2Name: s.thisMonth, controller: null),
               AppDimens.spaceSm,
               Expanded(
                 child: TabBarView(
@@ -52,7 +54,6 @@ class ProfileScreen extends StatelessWidget {
                       builder: (context, state) {
                         return state.maybeMap(
                             loaded: (state) {
-                              debugPrint("loaded: ${state.data.categories.length}");
                               return ExpensePieChart(
                                   categories: state.data.categories);
                             },

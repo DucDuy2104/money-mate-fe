@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:money_mate/core/service/langs/generated/l10n/l10n.dart';
 import 'package:money_mate/presentation/pages/profile/bloc/profile_bloc.dart';
 import 'package:money_mate/shared/components/app_toast.dart';
 import 'package:money_mate/shared/constants/app_colors.dart';
@@ -28,6 +29,7 @@ void showNameUpdateDialog(BuildContext context, String currentName) {
     context: context,
     builder: (BuildContext context) {
       final colors = AppColors.colorsData(context);
+      final s = S.of(context);
       return Dialog(
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -69,7 +71,7 @@ void showNameUpdateDialog(BuildContext context, String currentName) {
                   ),
                   AppDimens.spaceMd,
                   Text(
-                    'Cập nhật tên',
+                    s.updateName,
                     style: context.textTheme.bodyLarge,
                   ),
                 ],
@@ -78,7 +80,7 @@ void showNameUpdateDialog(BuildContext context, String currentName) {
               TextField(
                 controller: nameController,
                 decoration: InputDecoration(
-                  hintText: 'Nhập tên mới',
+                  hintText: s.enterName,
                   contentPadding: const EdgeInsets.symmetric(
                       horizontal: AppDimens.paddingMd,
                       vertical: AppDimens.paddingMd),
@@ -116,15 +118,12 @@ void showNameUpdateDialog(BuildContext context, String currentName) {
                         decoration: BoxDecoration(
                           borderRadius:
                               BorderRadius.circular(AppDimens.radiusSm),
-                          border:
-                              Border.all(color: Colors.grey.withOpacity(0.3)),
+                          border: Border.all(color: colors.subTextColor),
                         ),
-                        child: const Text(
-                          'Hủy',
-                          style: TextStyle(
-                            color: Colors.grey,
-                            fontWeight: FontWeight.w600,
-                          ),
+                        child: Text(
+                          s.cancel,
+                          style: context.textTheme.bodyMedium
+                              ?.copyWith(color: colors.subTextColor),
                         ),
                       ),
                     ),
@@ -155,12 +154,8 @@ void showNameUpdateDialog(BuildContext context, String currentName) {
                             ),
                           ],
                         ),
-                        child: const Text(
-                          'Lưu',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                          ),
+                        child: Text(
+                          s.save,
                         ),
                       ),
                     ),

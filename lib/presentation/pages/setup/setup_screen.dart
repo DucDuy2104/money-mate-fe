@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:money_mate/core/service/langs/generated/l10n/l10n.dart';
 import 'package:money_mate/presentation/pages/setup/bloc/setup_bloc.dart';
 import 'package:money_mate/presentation/routes/route_name.dart';
 import 'package:money_mate/shared/components/app_toast.dart';
@@ -26,25 +27,26 @@ class SetupScreen extends StatelessWidget {
       _budgetFocusNode.unfocus();
 
       if (name.isEmpty || budget.isEmpty) {
-        AppToast.error(context, 'Vui lòng nhập đủ thông tin');
+        AppToast.error(context, S.of(context).passwordLengthLessThanRegulation);
         return;
       }
 
       if (double.tryParse(budget) == null) {
-        AppToast.error(context, 'Ngân sách phải là số');
+        AppToast.error(context, S.of(context).budgetMustBeNum);
         return;
       }
 
       BlocProvider.of<SetupBloc>(context)
           .add(SetupEvent.setup(name, double.tryParse(budget)!));
     } catch (e) {
-      AppToast.error(context, 'Đã có lỗi xảy ra');
+      AppToast.error(context, S.of(context).unknownError);
       debugPrint(e.toString());
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    final s = S.of(context);
     return BlocConsumer<SetupBloc, SetupState>(
       listener: (context, state) {
         state.maybeMap(
@@ -85,7 +87,7 @@ class SetupScreen extends StatelessWidget {
                           ),
                           AppDimens.spaceMd,
                           Text(
-                            'Thiết lập tài khoản',
+                            s.setup,
                             style: context.textTheme.titleLarge?.copyWith(
                               fontWeight: FontWeight.bold,
                             ),
@@ -96,7 +98,7 @@ class SetupScreen extends StatelessWidget {
                             padding: const EdgeInsets.symmetric(
                                 horizontal: AppDimens.paddingMd),
                             child: Text(
-                              'Vui lòng nhập thêm thông tin (Tên và ngân sách hiện tại của bạn) để thiết lập tài khoản',
+                              s.setupPlease,
                               textAlign: TextAlign.center,
                               style: context.textTheme.bodyMedium,
                             ),
@@ -107,7 +109,7 @@ class SetupScreen extends StatelessWidget {
                             focusNode: _nameFocusNode,
                             onSubmitted: (_) => _budgetFocusNode.requestFocus(),
                             decoration: InputDecoration(
-                              labelText: 'Tên của bạn',
+                              labelText: s.name,
                               border: OutlineInputBorder(
                                 borderRadius:
                                     BorderRadius.circular(AppDimens.radiusMd),
@@ -121,7 +123,7 @@ class SetupScreen extends StatelessWidget {
                             onSubmitted: (_) => _onUpdate(context),
                             keyboardType: TextInputType.number,
                             decoration: InputDecoration(
-                              labelText: 'Ngân sách hiện tại (VND)',
+                              labelText: s.currentBudget('VND'),
                               border: OutlineInputBorder(
                                 borderRadius:
                                     BorderRadius.circular(AppDimens.radiusMd),
@@ -140,7 +142,7 @@ class SetupScreen extends StatelessWidget {
                                 ),
                               ),
                               child: Text(
-                                'Tiếp tục',
+                                s.next,
                                 style: context.textTheme.bodyLarge?.copyWith(
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:money_mate/core/service/langs/generated/l10n/l10n.dart';
 import 'package:money_mate/domain/entities/transaction.dart';
 
 class TransactionDialogs {
@@ -15,7 +16,7 @@ class TransactionDialogs {
     VoidCallback onCancel,
   ) async {
     final textTheme = Theme.of(context).textTheme;
-    final colorScheme = Theme.of(context).colorScheme;
+    final s = S.of(context);
 
     return await showDialog<bool>(
       context: context,
@@ -48,7 +49,7 @@ class TransactionDialogs {
                     ),
                     const SizedBox(width: 12),
                     Text(
-                      'Hủy giao dịch',
+                      s.cancelTransaction,
                       style: textTheme.titleLarge?.copyWith(
                         fontWeight: FontWeight.bold,
                       ),
@@ -128,14 +129,6 @@ class TransactionDialogs {
                     ],
                   ),
                 ),
-                const SizedBox(height: 20),
-                Text(
-                  'Bạn có chắc chắn muốn hủy giao dịch này?',
-                  textAlign: TextAlign.center,
-                  style: textTheme.bodyMedium?.copyWith(
-                    color: Colors.grey[300],
-                  ),
-                ),
                 const SizedBox(height: 24),
                 Row(
                   children: [
@@ -151,7 +144,7 @@ class TransactionDialogs {
                           ),
                           padding: const EdgeInsets.symmetric(vertical: 12),
                         ),
-                        child: const Text('Hủy bỏ'),
+                        child: Text(s.cancel),
                       ),
                     ),
                     const SizedBox(width: 12),
@@ -170,9 +163,8 @@ class TransactionDialogs {
                           ),
                           padding: const EdgeInsets.symmetric(vertical: 12),
                         ),
-                        child: const Text(
-                          'Xác nhận hủy',
-                          style: TextStyle(fontWeight: FontWeight.bold),
+                        child: Text(
+                          s.cancelTransaction,
                         ),
                       ),
                     ),
@@ -192,7 +184,7 @@ class TransactionDialogs {
     VoidCallback onEnable,
   ) async {
     final textTheme = Theme.of(context).textTheme;
-    final colorScheme = Theme.of(context).colorScheme;
+    final s = S.of(context);
 
     return await showDialog<bool>(
       context: context,
@@ -225,7 +217,7 @@ class TransactionDialogs {
                     ),
                     const SizedBox(width: 12),
                     Text(
-                      'Khôi phục giao dịch',
+                      s.restoreTransaction,
                       style: textTheme.titleLarge?.copyWith(
                         fontWeight: FontWeight.bold,
                       ),
@@ -305,14 +297,6 @@ class TransactionDialogs {
                     ],
                   ),
                 ),
-                const SizedBox(height: 20),
-                Text(
-                  'Bạn có muốn khôi phục giao dịch này?',
-                  textAlign: TextAlign.center,
-                  style: textTheme.bodyMedium?.copyWith(
-                    color: Colors.grey[300],
-                  ),
-                ),
                 const SizedBox(height: 24),
                 Row(
                   children: [
@@ -328,7 +312,7 @@ class TransactionDialogs {
                           ),
                           padding: const EdgeInsets.symmetric(vertical: 12),
                         ),
-                        child: const Text('Hủy bỏ'),
+                        child: Text(s.cancel),
                       ),
                     ),
                     const SizedBox(width: 12),
@@ -347,9 +331,8 @@ class TransactionDialogs {
                           ),
                           padding: const EdgeInsets.symmetric(vertical: 12),
                         ),
-                        child: const Text(
-                          'Khôi phục',
-                          style: TextStyle(fontWeight: FontWeight.bold),
+                        child: Text(
+                          s.restore,
                         ),
                       ),
                     ),
