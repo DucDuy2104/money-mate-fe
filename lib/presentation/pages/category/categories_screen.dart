@@ -1,6 +1,7 @@
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:money_mate/core/service/langs/generated/l10n/l10n.dart';
 import 'package:money_mate/domain/entities/category.dart';
 import 'package:money_mate/presentation/drawer_navigation/app_drawer.dart';
 import 'package:money_mate/presentation/pages/category/bloc/categories_bloc.dart';
@@ -78,7 +79,7 @@ class _CategoriesScreenState extends State<CategoriesScreen>
         if (category.type == CategoriesType.expense &&
             countSelectedExpenseCategories <= 3) {
           AppToast.warning(
-              context, "Bạn phải chọn ít nhất 3 danh mục chi tiêu");
+              context, S.of(context).selectLessMinExpenseCategoriesError);
           return;
         }
         final countSelectedIncomeCategories =
@@ -86,26 +87,21 @@ class _CategoriesScreenState extends State<CategoriesScreen>
         if (category.type == CategoriesType.income &&
             countSelectedIncomeCategories <= 1) {
           AppToast.warning(
-              context, "Bạn phải chọn ít nhất 1 danh mục thu nhập");
+              context, S.of(context).selectLessMinExpenseIncomeError);
           return;
         }
         disableCategories(category);
       });
       return;
     }
-    final countSelectedCategories =
-        BlocProvider.of<CategoriesBloc>(context).countSelectedCategories();
-    if (countSelectedCategories == 10) {
-      AppToast.warning(context, "Bạn đã chọn quá 10 danh mục");
-    } else {
-      CategoryDialogs.showAddCategoryDialog(context, category, (budget) {
-        enableCategories(category, budget);
-      }, () {});
-    }
+    CategoryDialogs.showAddCategoryDialog(context, category, (budget) {
+      enableCategories(category, budget);
+    }, () {});
   }
 
   @override
   Widget build(BuildContext context) {
+    final s = S.of(context);
     return BlocBuilder<CategoriesBloc, CategoriesState>(
       builder: (context, state) {
         final bloc = BlocProvider.of<CategoriesBloc>(context);
@@ -121,7 +117,7 @@ class _CategoriesScreenState extends State<CategoriesScreen>
               orElse: () => false),
           child: Scaffold(
             appBar: AppBar(
-              title: const Text('Danh mục'),
+              title: Text(s.categories),
               leading: Builder(
                 builder: (context) {
                   return IconButton(
@@ -141,8 +137,8 @@ class _CategoriesScreenState extends State<CategoriesScreen>
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   AppTab(
-                      tab1Name: 'Chi tiêu',
-                      tab2Name: 'Thu nhập',
+                      tab1Name: s.expense,
+                      tab2Name: s.income,
                       controller: _tabController),
                   AppDimens.spaceSm,
                   Expanded(
@@ -153,7 +149,6 @@ class _CategoriesScreenState extends State<CategoriesScreen>
                         children: [
                           Builder(
                             builder: (context) {
-                              bool isExpenseTab = _tabController.index == 0;
                               int selectedCount =
                                   BlocProvider.of<CategoriesBloc>(context)
                                       .countSelectedCategories();
@@ -189,9 +184,8 @@ class _CategoriesScreenState extends State<CategoriesScreen>
                                     AppDimens.spaceSm,
                                     Expanded(
                                       child: Text(
-                                        'Đã chọn $selectedCount danh mục. Nhấn vào danh mục để thêm hoặc cập nhật hạn mức.',
-                                        style: context.textTheme.bodyMedium
-                                      ),
+                                          s.countSelected(selectedCount),
+                                          style: context.textTheme.bodyMedium),
                                     ),
                                   ],
                                 ),

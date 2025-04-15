@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:money_mate/core/service/langs/generated/l10n/l10n.dart';
 import 'package:money_mate/domain/entities/category.dart';
 import 'package:money_mate/presentation/pages/category/bloc/categories_bloc.dart';
 import 'package:money_mate/shared/constants/app_colors.dart';
@@ -21,9 +22,10 @@ class SuggestCategoryItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final s = S.of(context);
     final isIncome = category.type == CategoriesType.income;
     final typeColor = isIncome ? AppColors.upColor : AppColors.downColor;
-    final typeText = isIncome ? "Thu nhập" : "Chi tiêu";
+    final typeText = isIncome ? s.expense : s.income;
 
     return Container(
       width: MediaQuery.of(context).size.width * 0.7,
@@ -84,7 +86,7 @@ class SuggestCategoryItem extends StatelessWidget {
                       elevation: 0,
                     ),
                     child: Text(
-                      "Thêm",
+                      s.add,
                       style: context.textTheme.bodyMedium,
                     ),
                   );

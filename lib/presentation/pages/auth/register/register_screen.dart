@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:money_mate/core/service/langs/generated/l10n/l10n.dart';
 import 'package:money_mate/presentation/pages/auth/bloc/auth_bloc.dart';
 import 'package:money_mate/presentation/pages/opt_verify/otp_verify_screen.dart';
 import 'package:money_mate/presentation/routes/route_name.dart';
@@ -31,12 +32,17 @@ class RegisterScreen extends StatelessWidget {
     _passwordFocusNode.unfocus();
     _confirmPasswordFocusNode.unfocus();
     if (email.isEmpty || password.isEmpty || confirmPassword.isEmpty) {
-      AppToast.warning(context, 'Vui lòng điền đầy đủ thông tin');
+      AppToast.warning(context, S.of(context).emptyFieldError);
+      return;
+    }
+
+    if (password.length < 6) {
+      AppToast.error(context, S.of(context).passwordLengthLessThanRegulation);
       return;
     }
 
     if (password != confirmPassword) {
-      AppToast.warning(context, 'Mật khẩu xác nhận không trùng khớp');
+      AppToast.warning(context, S.of(context).passwordNotMatch);
       return;
     }
 
@@ -47,13 +53,14 @@ class RegisterScreen extends StatelessWidget {
     try {
       BlocProvider.of<AuthBloc>(context).add(const AuthEvent.googleSignin());
     } catch (e) {
-      AppToast.error(context, 'Đã có lỗi xảy ra');
+      AppToast.error(context, S.of(context).unknownError);
       debugPrint(e.toString());
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    final s = S.of(context);
     return BlocConsumer<AuthBloc, AuthState>(
       listener: (BuildContext context, AuthState state) {
         state.maybeMap(
@@ -92,8 +99,8 @@ class RegisterScreen extends StatelessWidget {
                     onSubmitted: (value) {
                       _passwordFocusNode.requestFocus();
                     },
-                    decoration: const InputDecoration(
-                      labelText: 'Email',
+                    decoration: InputDecoration(
+                      labelText: s.email,
                     ),
                   ),
                   AppDimens.spaceMd,
@@ -104,8 +111,8 @@ class RegisterScreen extends StatelessWidget {
                       _confirmPasswordFocusNode.requestFocus();
                     },
                     obscureText: true,
-                    decoration: const InputDecoration(
-                      labelText: 'Mật khẩu',
+                    decoration: InputDecoration(
+                      labelText: s.password,
                     ),
                   ),
                   AppDimens.spaceMd,
@@ -116,8 +123,8 @@ class RegisterScreen extends StatelessWidget {
                       _onRegister(context);
                     },
                     obscureText: true,
-                    decoration: const InputDecoration(
-                      labelText: 'Nhập lại mật khẩu',
+                    decoration: InputDecoration(
+                      labelText: s.confirmPassword,
                     ),
                   ),
                   AppDimens.spaceMd,
@@ -137,7 +144,7 @@ class RegisterScreen extends StatelessWidget {
                         ),
                       ),
                       child: Text(
-                        'Đăng ký',
+                        s.register,
                         style: context.textTheme.bodyLarge
                             ?.copyWith(color: Colors.white),
                       ),
@@ -145,23 +152,23 @@ class RegisterScreen extends StatelessWidget {
                   ),
                   AppDimens.spaceMd,
                   GoogleSignInButton(
-                    content: 'Đăng ký với Google',
+                    content: s.registerWithGoogle,
                     onTap: () {
                       _onGoogleSignin(context);
                     },
                   ),
-                  SizedBox(height: AppDimens.paddingLg),
+                  AppDimens.spaceMd,
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Text("Bạn đã có tài khoản?"),
+                      Text(s.haveAnAccount),
                       AppDimens.spaceSm,
                       GestureDetector(
                         onTap: () {
                           // Navigate to Login screen
                           context.goNamed(RouteNames.loginName);
                         },
-                        child: Text('Đăng nhập ngay',
+                        child: Text(s.registerNow,
                             style: context.textTheme.bodyMedium
                                 ?.copyWith(color: AppColors.primaryColor)),
                       )

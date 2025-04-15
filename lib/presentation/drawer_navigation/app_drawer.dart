@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:money_mate/core/service/langs/cubit/locale_cubit.dart';
+import 'package:money_mate/core/service/langs/generated/l10n/l10n.dart';
 import 'package:money_mate/presentation/drawer_navigation/drawer_item.dart';
 import 'package:money_mate/presentation/drawer_navigation/drawer_service.dart';
 import 'package:money_mate/presentation/drawer_navigation/widgets/header_skeleton.dart';
@@ -64,8 +66,8 @@ class _AppDrawerState extends State<AppDrawer> {
             // App Version
             const Divider(color: Colors.white70),
             Padding(
-              padding:  EdgeInsets.all(AppDimens.paddingMd),
-              child:  Text(
+              padding: EdgeInsets.all(AppDimens.paddingMd),
+              child: Text(
                 'Money Mate Version 1.0.0',
                 style: TextStyle(color: colors.subTextColor),
               ),
@@ -79,20 +81,22 @@ class _AppDrawerState extends State<AppDrawer> {
   void _onLogout(BuildContext context) {
     BlocProvider.of<HomeBloc>(context).add(const HomeEvent.logout());
     BlocProvider.of<ProfileBloc>(context).add(const ProfileEvent.logout());
-    BlocProvider.of<CategoriesBloc>(context).add(const CategoriesEvent.logout());
+    BlocProvider.of<CategoriesBloc>(context)
+        .add(const CategoriesEvent.logout());
     BlocProvider.of<RoutesBloc>(context).add(const RoutesEvent.logout());
     context.goNamed(RouteNames.loginName);
   }
 
   Widget _buildLogoutButton(BuildContext context) {
+    final s = S.of(context);
     final colors = AppColors.colorsData(context);
     return Padding(
       padding: const EdgeInsets.symmetric(
           horizontal: AppDimens.paddingMd, vertical: AppDimens.paddingSm),
       child: ElevatedButton.icon(
-        icon: Icon(Icons.logout, color:  colors.contrastColor),
+        icon: Icon(Icons.logout, color: colors.contrastColor),
         label: Text(
-          'Đăng xuất',
+          s.logout,
           style: context.textTheme.bodyMedium,
         ),
         style: ElevatedButton.styleFrom(
@@ -112,19 +116,19 @@ class _AppDrawerState extends State<AppDrawer> {
             context: context,
             builder: (BuildContext context) {
               return AlertDialog(
-                title: const Text('Xác nhận đăng xuất'),
-                content: const Text('Bạn có chắc chắn muốn đăng xuất?'),
+                title: Text(s.logoutConfirm),
+                content: Text(s.logoutQuestion),
                 actions: [
                   TextButton(
                     onPressed: () => Navigator.pop(context),
-                    child: const Text('Hủy'),
+                    child: Text(s.cancel),
                   ),
                   TextButton(
                     onPressed: () {
                       _onLogout(context);
                       context.pop();
                     },
-                    child: const Text('Đăng xuất'),
+                    child: Text(s.logout),
                   ),
                 ],
               );
@@ -137,6 +141,7 @@ class _AppDrawerState extends State<AppDrawer> {
 
   Widget _buildModernHeader(BuildContext context, bool isDarkMode) {
     final colors = AppColors.colorsData(context);
+    final s = S.of(context);
     return BlocBuilder<ProfileBloc, ProfileState>(
       builder: (context, state) {
         return state.maybeMap(
@@ -207,9 +212,9 @@ class _AppDrawerState extends State<AppDrawer> {
                                   Expanded(
                                     child: Text(
                                       profile.email,
-                                      style: context.textTheme.bodyMedium?.copyWith(
-                                        color: colors.subTextColor
-                                      ),
+                                      style: context.textTheme.bodyMedium
+                                          ?.copyWith(
+                                              color: colors.subTextColor),
                                       overflow: TextOverflow.ellipsis,
                                     ),
                                   ),
@@ -225,20 +230,20 @@ class _AppDrawerState extends State<AppDrawer> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         _buildStatItem(
-                            '${profile.transactionsCount}', 'Giao dịch'),
+                            '${profile.transactionsCount}', s.transactions),
                         Container(
                           height: 24,
                           width: 1,
                           color: colors.contrastColor,
                         ),
                         _buildStatItem(
-                            '${profile.categoriesCount}', 'Danh mục'),
+                            '${profile.categoriesCount}', s.categories),
                         Container(
                           height: 24,
                           width: 1,
                           color: colors.contrastColor,
                         ),
-                        _buildStatItem('${profile.reportsCount}', 'Báo cáo'),
+                        _buildStatItem('${profile.reportsCount}', s.reports),
                       ],
                     ),
                   ],
@@ -306,13 +311,23 @@ class _AppDrawerState extends State<AppDrawer> {
 
                 // Title
                 Expanded(
-                  child: Text(
-                    item.title,
-                    style: TextStyle(
-                      color: isSelected ? null : colors.subTextColor,
-                      fontWeight:
-                          isSelected ? FontWeight.bold : FontWeight.normal,
-                    ),
+                  child: BlocBuilder<LocaleCubit, LocaleState>(
+                    builder: (context, state) {
+                      return Text(
+                        state.maybeMap(
+                            loaded: (value) {
+                              return value.locale.languageCode == 'vi'
+                                  ? item.title
+                                  : item.titleEn;
+                            },
+                            orElse: () => item.titleEn),
+                        style: TextStyle(
+                          color: isSelected ? null : colors.subTextColor,
+                          fontWeight:
+                              isSelected ? FontWeight.bold : FontWeight.normal,
+                        ),
+                      );
+                    },
                   ),
                 ),
 
@@ -361,16 +376,26 @@ class _AppDrawerState extends State<AppDrawer> {
                         ),
                         const SizedBox(width: AppDimens.paddingSm + 4),
                         Expanded(
-                          child: Text(
-                            child.title,
-                            style: TextStyle(
-                              fontWeight: isChildSelected
-                                  ? FontWeight.bold
-                                  : FontWeight.normal,
-                              color: isChildSelected
-                                  ? Colors.white
-                                  : Colors.white70,
-                            ),
+                          child: BlocBuilder<LocaleCubit, LocaleState>(
+                            builder: (context, state) {
+                              return Text(
+                                state.maybeMap(
+                                    loaded: (value) {
+                                      return value.locale.languageCode == 'vi'
+                                          ? child.title
+                                          : child.titleEn;
+                                    },
+                                    orElse: () => child.title),
+                                style: TextStyle(
+                                  fontWeight: isChildSelected
+                                      ? FontWeight.bold
+                                      : FontWeight.normal,
+                                  color: isChildSelected
+                                      ? Colors.white
+                                      : Colors.white70,
+                                ),
+                              );
+                            },
                           ),
                         ),
                       ],

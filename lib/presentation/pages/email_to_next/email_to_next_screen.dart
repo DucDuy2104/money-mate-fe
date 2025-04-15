@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:money_mate/core/service/langs/generated/l10n/l10n.dart';
 import 'package:money_mate/presentation/pages/email_to_next/bloc/email_next_bloc.dart';
 import 'package:money_mate/presentation/pages/opt_verify/otp_verify_screen.dart';
 import 'package:money_mate/presentation/routes/route_name.dart';
@@ -30,7 +31,7 @@ class _EmailToNextScreenState extends State<EmailToNextScreen> {
     String email = _emailController.text.trim();
 
     if (email.isEmpty) {
-      _showError('Vui lòng nhập email');
+      _showError(S.of(context).emailToNext);
       return;
     }
     BlocProvider.of<EmailNextBloc>(context).add(EmailNextEvent.next(email));
@@ -42,6 +43,7 @@ class _EmailToNextScreenState extends State<EmailToNextScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final s = S.of(context);
     final colors = AppColors.colorsData(context);
     return BlocConsumer<EmailNextBloc, EmailNextState>(
       listener: (BuildContext context, EmailNextState state) {
@@ -62,7 +64,7 @@ class _EmailToNextScreenState extends State<EmailToNextScreen> {
               state.maybeMap(loading: (data) => false, orElse: () => false),
           child: Scaffold(
             appBar: AppBar(
-              title: const Text('Quên mật khẩu'),
+              title: Text(s.forgotPassword),
               backgroundColor: Colors.transparent,
               elevation: 0,
             ),
@@ -73,12 +75,12 @@ class _EmailToNextScreenState extends State<EmailToNextScreen> {
                 children: [
                   AppDimens.spaceMd,
                   Text(
-                    'Đặt lại mật khẩu',
+                    s.resetPassword,
                     style: Theme.of(context).textTheme.titleLarge,
                   ),
                   AppDimens.spaceSm,
                   Text(
-                    'Vui lòng nhập email đã đăng ký để tiếp tục.',
+                    s.emailToNext,
                     style: context.textTheme.bodyMedium
                         ?.copyWith(color: colors.subTextColor),
                   ),
@@ -86,9 +88,9 @@ class _EmailToNextScreenState extends State<EmailToNextScreen> {
                   TextField(
                     controller: _emailController,
                     keyboardType: TextInputType.emailAddress,
-                    decoration: const InputDecoration(
-                      labelText: 'Email',
-                      prefixIcon: Icon(Icons.email_outlined),
+                    decoration: InputDecoration(
+                      labelText: s.email,
+                      prefixIcon: const Icon(Icons.email_outlined),
                     ),
                   ),
                   AppDimens.spaceLg,
@@ -98,7 +100,7 @@ class _EmailToNextScreenState extends State<EmailToNextScreen> {
                     child: ElevatedButton(
                       onPressed: _submitForm,
                       child: Text(
-                        'TIẾP TỤC',
+                        s.next,
                         style: context.textTheme.bodyMedium,
                       ),
                     ),
@@ -108,7 +110,7 @@ class _EmailToNextScreenState extends State<EmailToNextScreen> {
                     child: TextButton(
                       onPressed: () => context.goNamed(RouteNames.loginName),
                       child: Text(
-                        'Quay lại đăng nhập',
+                        s.returnToLogin,
                         style: context.textTheme.bodyMedium
                             ?.copyWith(color: AppColors.primaryColor),
                       ),

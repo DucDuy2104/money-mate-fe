@@ -1,12 +1,17 @@
+
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/widgets.dart';
 import 'package:money_mate/core/service/getit/locator.dart';
+import 'package:money_mate/core/service/langs/localization_service.dart';
 import 'package:money_mate/data/data_sources/local/local_data_source.dart';
 import 'package:money_mate/data/repositories/auth_repository.dart';
 
 class AuthInterceptor extends Interceptor {
   final Dio _dio;
   final OnboardLocalDataSource _localDataSource;
+  late LocalizationService _localizationService;
   late AuthRepository _authRepository;
   static const String _refreshEndpoint = '/auth/refresh-token';
   static const String _googleAuthEndpoint = '/auth/google';
@@ -18,6 +23,9 @@ class AuthInterceptor extends Interceptor {
   @override
   void onRequest(
       RequestOptions options, RequestInterceptorHandler handler) async {
+    _localizationService = getIt<LocalizationService>();
+    final locale = _localizationService.getCurrentLocale();
+    options.headers['x-lang'] = locale.languageCode;
     if (options.path == _refreshEndpoint) {
       options.headers['Authorization'] =
           'Bearer ${_localDataSource.getRefreshToken()}';
@@ -29,6 +37,7 @@ class AuthInterceptor extends Interceptor {
         options.headers['Authorization'] = 'Bearer $accessToken';
       }
     }
+    log(options.headers.toString());
     handler.next(options);
   }
 

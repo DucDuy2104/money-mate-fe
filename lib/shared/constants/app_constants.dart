@@ -18,5 +18,5 @@ final class AppConstants {
   static final parentWidgetKey = GlobalKey();
 
   static const tempImage =
-      "https://cdn2.iconfinder.com/data/icons/business-flat-outline-2/614/1049_-_Dollar_With_Man-512.png";
+      "https://i0.wp.com/plopdo.com/wp-content/uploads/2021/11/feature-pic.jpg?fit=537%2C322&ssl=1";
 }

@@ -7,6 +7,8 @@ abstract class OnboardLocalDataSource {
   bool isEulaAccepted();
   Future<void> setAuthenticated();
   bool isAuthenticated();
+  Future<void> setLocalization(String appLocale);
+  String? getLocalization();
 
   /// Save and retrieve authentication tokens
   Future<void> saveAccessToken(String token);
@@ -76,5 +78,15 @@ class OnboardLocalDataSourceImpl implements OnboardLocalDataSource {
   @override
   Future<void> setAuthenticated() async {
     await _appStorage.putBool(key: 'isAuthenticated', value: true);
+  }
+
+  @override
+  String? getLocalization() {
+    return _appStorage.get(key: 'appLocale');
+  }
+
+  @override
+  Future<void> setLocalization(String appLocale) async {
+    await _appStorage.put(key: 'appLocale', value: appLocale);
   }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:money_mate/core/service/langs/generated/l10n/l10n.dart';
 import 'package:money_mate/domain/entities/category.dart';
 import 'package:money_mate/presentation/pages/category/widgets/category_dialogs.dart';
 import 'package:money_mate/presentation/pages/cateogries_first_set/bloc/setup_categories_bloc.dart';
@@ -92,7 +93,7 @@ class _CategoriesSetupScreenState extends State<CategoriesSetupScreen>
       BlocProvider.of<SetupCategoriesBloc>(context)
           .add(SetupCategoriesEvent.getCategories());
     } catch (e) {
-      AppToast.error(context, 'Lỗi khi tải danh mục, vui lòng thử lại');
+      AppToast.error(context, S.of(context).getCategoriesError);
       debugPrint(e.toString());
     }
   }
@@ -101,25 +102,26 @@ class _CategoriesSetupScreenState extends State<CategoriesSetupScreen>
     try {
       final bloc = BlocProvider.of<SetupCategoriesBloc>(context);
       if (bloc.countSelectedExpenseCategories() < 3) {
-        AppToast.error(context, 'Vui lòng chọn ít nhất 3 danh mục chi tiêu');
+        AppToast.error(context, S.of(context).selectLessMinExpenseCategoriesError);
         return;
       }
 
       if (bloc.countSelectedIncomeCategories() == 0) {
-        AppToast.error(context, 'Vui lòng chọn ít nhất 1 danh mục thu nhập');
+        AppToast.error(context, S.of(context).selectLessMinExpenseIncomeError);
         return;
       }
 
       final selectedCategories = bloc.getSelectedCategories();
       bloc.add(SetupCategoriesEvent.setupCategories(selectedCategories));
     } catch (e) {
-      AppToast.error(context, 'Lỗi khi cài đặt danh mục, vui lòng thử lại');
+      AppToast.error(context, S.of(context).setUpCategoriesError);
       debugPrint(e.toString());
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    final s = S.of(context);
     return BlocConsumer<SetupCategoriesBloc, SetupCategoriesState>(
       listener: (context, state) {
         state.maybeMap(
@@ -153,16 +155,16 @@ class _CategoriesSetupScreenState extends State<CategoriesSetupScreen>
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('Chọn danh mục',
+                      Text(s.selectCategories,
                           style: context.textTheme.displaySmall),
                       AppDimens.spaceSm,
-                      const Text(
-                        'Chọn các danh mục phù hợp với thu chi của bạn (tối thiểu 3 danh mục chi tiêu và 1 danh mục thu nhập)',
+                      Text(
+                        s.selectedCategoriesDescription,
                       ),
                       AppDimens.spaceSm,
                       AppTab(
-                          tab1Name: 'Chi tiêu',
-                          tab2Name: 'Thu nhập',
+                          tab1Name: s.expense,
+                          tab2Name: s.income,
                           controller: _tabController),
                       AppDimens.spaceSm,
                       Builder(
@@ -201,7 +203,7 @@ class _CategoriesSetupScreenState extends State<CategoriesSetupScreen>
                                 AppDimens.spaceSm,
                                 Expanded(
                                   child: Text(
-                                    'Đã chọn $selectedCount danh mục. Nhấn vào danh mục để thêm hoặc cập nhật hạn mức.',
+                                    s.countSelected(selectedCount),
                                   ),
                                 ),
                               ],
@@ -233,7 +235,7 @@ class _CategoriesSetupScreenState extends State<CategoriesSetupScreen>
                             onSetupCategories();
                           },
                           child: Text(
-                            'Bắt đầu sử dụng',
+                            s.startUse,
                             style: context.textTheme.bodyLarge
                                 ?.copyWith(color: Colors.white),
                           ),

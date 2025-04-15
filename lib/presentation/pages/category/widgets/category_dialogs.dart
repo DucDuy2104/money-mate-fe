@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:money_mate/core/service/langs/generated/l10n/l10n.dart';
 import 'package:money_mate/domain/entities/category.dart';
 import 'package:money_mate/shared/constants/app_colors.dart';
 import 'package:money_mate/shared/constants/app_dimens.dart';
@@ -20,6 +21,7 @@ class CategoryDialogs {
               : category.budget.toString())
           : '',
     );
+    final s = S.of(context);
 
     return showDialog(
       context: context,
@@ -66,8 +68,8 @@ class CategoryDialogs {
                             AppDimens.divider,
                             Text(
                               category.type == CategoriesType.expense
-                                  ? "Chi tiêu"
-                                  : "Thu nhập"
+                                  ? s.income
+                                  : s.expense
                             ),
                           ],
                         ),
@@ -75,7 +77,7 @@ class CategoryDialogs {
                     ],
                   ),
                   AppDimens.spaceMd,
-                  Text("Ngân sách", style: context.textTheme.bodyMedium),
+                  Text(s.budget, style: context.textTheme.bodyMedium),
                   AppDimens.spaceSm,
                   TextField(
                     controller: budgetController,
@@ -98,7 +100,7 @@ class CategoryDialogs {
                           width: 1.5,
                         ),
                       ),
-                      hintText: "Nhập ngân sách",
+                      hintText: s.enterBudget,
                       contentPadding: const EdgeInsets.symmetric(
                         vertical: AppDimens.paddingMd,
                         horizontal: AppDimens.paddingMd,
@@ -124,7 +126,7 @@ class CategoryDialogs {
                             ),
                           ),
                           child:
-                              Text("Huỷ", style: context.textTheme.bodyMedium),
+                              Text(s.cancel, style: context.textTheme.bodyMedium),
                         ),
                       ),
                       AppDimens.spaceMd,
@@ -144,7 +146,7 @@ class CategoryDialogs {
                                   BorderRadius.circular(AppDimens.radiusMd),
                             ),
                           ),
-                          child: Text("Xoá bỏ",
+                          child: Text(s.delete,
                               style: context.textTheme.bodyMedium),
                         ),
                       ),
@@ -170,7 +172,7 @@ class CategoryDialogs {
                             ),
                             elevation: 0,
                           ),
-                          child: Text("Cập nhật",
+                          child: Text(s.update,
                               style: context.textTheme.bodyMedium),
                         ),
                       ),
@@ -199,6 +201,7 @@ class CategoryDialogs {
               : category.budget.toString())
           : '',
     );
+    final s = S.of(context);
 
     return showDialog(
       context: context,
@@ -238,13 +241,13 @@ class CategoryDialogs {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text("Thêm ${category.name}",
+                            Text(s.addName(category.name),
                                 style: context.textTheme.titleLarge),
                             AppDimens.divider,
                             Text(
                                 category.type == CategoriesType.expense
-                                    ? "Danh mục chi tiêu"
-                                    : "Danh mục thu nhập",
+                                    ? s.expense
+                                    : s.income,
                                 style: context.textTheme.bodyMedium),
                           ],
                         ),
@@ -252,7 +255,7 @@ class CategoryDialogs {
                     ],
                   ),
                   AppDimens.spaceMd,
-                  Text("Đặt ngân sách", style: context.textTheme.bodyMedium),
+                  Text(s.setBudget, style: context.textTheme.bodyMedium),
                   AppDimens.spaceSm,
                   TextField(
                     controller: budgetController,
@@ -275,7 +278,7 @@ class CategoryDialogs {
                           width: 1.5,
                         ),
                       ),
-                      hintText: "Nhập số tiền ngân sách",
+                      hintText: s.enterBudget,
                       contentPadding: const EdgeInsets.all(AppDimens.paddingMd),
                     ),
                   ),
@@ -295,7 +298,7 @@ class CategoryDialogs {
                         const SizedBox(width: 8),
                         Expanded(
                           child: Text(
-                              "Thao tác này sẽ thêm danh mục vào kế hoạch ngân sách của bạn",
+                              s.addCategoryConfirm,
                               style: context.textTheme.bodyMedium),
                         ),
                       ],
@@ -320,7 +323,7 @@ class CategoryDialogs {
                             ),
                           ),
                           child:
-                              Text("Hủy", style: context.textTheme.bodyMedium),
+                              Text(s.cancel, style: context.textTheme.bodyMedium),
                         ),
                       ),
                       AppDimens.spaceMd,
@@ -346,7 +349,7 @@ class CategoryDialogs {
                             elevation: 0,
                           ),
                           child:
-                              Text("Thêm", style: context.textTheme.bodyMedium),
+                              Text(s.add, style: context.textTheme.bodyMedium),
                         ),
                       ),
                     ],

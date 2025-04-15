@@ -122,6 +122,7 @@ class AppThemeData {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(_defaultBorderRadius),
           ),
+          textStyle: context.textTheme.bodyMedium,
           elevation: 1,
         ),
       ),
@@ -296,11 +297,7 @@ class AppThemeData {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(_defaultBorderRadius),
           ),
-          textStyle: GoogleFonts.poppins(
-            fontSize: 15,
-            fontWeight: FontWeight.w600,
-            letterSpacing: 0.3,
-          ),
+          textStyle: context.textTheme.bodyMedium,
           elevation: 1,
         ),
       ),

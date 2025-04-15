@@ -1,6 +1,7 @@
 import 'package:get_it/get_it.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:money_mate/core/network/api_client.dart';
+import 'package:money_mate/core/service/langs/localization_service.dart';
 import 'package:money_mate/core/service/local_storage/app_storage.dart';
 import 'package:money_mate/core/service/socket/socket_service.dart';
 import 'package:money_mate/data/data_sources/local/local_data_source.dart';
@@ -32,6 +33,9 @@ import 'package:money_mate/domain/repositories/users_repository_impl.dart';
 final GetIt getIt = GetIt.instance;
 
 Future<void> setupLocator() async {
+  // Avoid re-registering
+  if (getIt.isRegistered<AppStorage>()) return;
+
   // Ensure Hive is initialized
   await Hive.initFlutter();
 
@@ -45,6 +49,10 @@ Future<void> setupLocator() async {
   getIt.registerLazySingleton<OnboardLocalDataSource>(
     () => OnboardLocalDataSourceImpl(getIt<AppStorage>()),
   );
+
+  // Localization service
+  getIt.registerLazySingleton<LocalizationService>(
+      () => LocalizationService(getIt<OnboardLocalDataSource>()));
 
   // SocketService
   getIt.registerLazySingleton<SocketService>(

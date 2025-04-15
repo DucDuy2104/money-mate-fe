@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:money_mate/core/service/langs/generated/l10n/l10n.dart';
 import 'package:money_mate/presentation/pages/update_pass/bloc/password_bloc.dart';
 import 'package:money_mate/shared/components/app_toast.dart';
 import 'package:money_mate/shared/components/loading_scafford.dart';
@@ -37,23 +38,18 @@ class _UpdatePassScreenState extends State<UpdatePassScreen> {
     String newPass = _newPasswordController.text.trim();
     String confirm = _confirmPasswordController.text.trim();
 
-    if (current.isEmpty) {
-      _showError('Vui lòng nhập mật khẩu hiện tại');
-      return;
-    }
-
-    if (newPass.isEmpty) {
-      _showError('Vui lòng nhập mật khẩu mới');
+    if (current.isEmpty || newPass.isEmpty || confirm.isEmpty) {
+      _showError(S.of(context).emptyFieldError);
       return;
     }
 
     if (newPass.length < 8) {
-      _showError('Mật khẩu phải có ít nhất 8 ký tự');
+      _showError(S.of(context).passwordLengthLessThanRegulation);
       return;
     }
 
     if (confirm != newPass) {
-      _showError('Mật khẩu xác nhận không khớp');
+      _showError(S.of(context).passwordNotMatch);
       return;
     }
 
@@ -72,6 +68,7 @@ class _UpdatePassScreenState extends State<UpdatePassScreen> {
   @override
   Widget build(BuildContext context) {
     final colors = AppColors.colorsData(context);
+    final s = S.of(context);
     return BlocConsumer<PasswordBloc, PasswordState>(
       listener: (context, state) {
         state.maybeMap(
@@ -79,7 +76,7 @@ class _UpdatePassScreenState extends State<UpdatePassScreen> {
               AppToast.error(context, data.err);
             },
             success: (data) {
-              AppToast.success(context, 'Đổi mật khẩu thành công!');
+              AppToast.success(context, s.updatePassSuccess);
               if (context.canPop()) {
                 context.pop();
               }
@@ -92,7 +89,7 @@ class _UpdatePassScreenState extends State<UpdatePassScreen> {
               state.maybeMap(loading: (data) => true, orElse: () => false),
           child: Scaffold(
             appBar: AppBar(
-              title: const Text('Đổi mật khẩu'),
+              title: Text(s.changePassword),
               backgroundColor: Colors.transparent,
               elevation: 0,
             ),
@@ -103,12 +100,12 @@ class _UpdatePassScreenState extends State<UpdatePassScreen> {
                 children: [
                   AppDimens.spaceMd,
                   Text(
-                    'Cập nhật mật khẩu',
+                    s.changePassword,
                     style: Theme.of(context).textTheme.titleLarge,
                   ),
                   AppDimens.spaceSm,
                   Text(
-                    'Vui lòng nhập mật khẩu hiện tại và mật khẩu mới để cập nhật.',
+                    s.changePasswordDescription,
                     style: context.textTheme.bodyMedium
                         ?.copyWith(color: colors.subTextColor),
                   ),
@@ -117,7 +114,7 @@ class _UpdatePassScreenState extends State<UpdatePassScreen> {
                     controller: _currentPasswordController,
                     obscureText: _obscureCurrentPassword,
                     decoration: InputDecoration(
-                      labelText: 'Mật khẩu hiện tại',
+                      labelText: s.currentPassword,
                       prefixIcon: const Icon(Icons.lock_outline),
                       suffixIcon: IconButton(
                         icon: Icon(
@@ -138,7 +135,7 @@ class _UpdatePassScreenState extends State<UpdatePassScreen> {
                     controller: _newPasswordController,
                     obscureText: _obscureNewPassword,
                     decoration: InputDecoration(
-                      labelText: 'Mật khẩu mới',
+                      labelText: s.newPassword,
                       prefixIcon: const Icon(Icons.lock),
                       suffixIcon: IconButton(
                         icon: Icon(
@@ -159,7 +156,7 @@ class _UpdatePassScreenState extends State<UpdatePassScreen> {
                     controller: _confirmPasswordController,
                     obscureText: _obscureConfirmPassword,
                     decoration: InputDecoration(
-                      labelText: 'Xác nhận mật khẩu mới',
+                      labelText: s.confirmNewPassword,
                       prefixIcon: const Icon(Icons.lock),
                       suffixIcon: IconButton(
                         icon: Icon(
@@ -181,7 +178,7 @@ class _UpdatePassScreenState extends State<UpdatePassScreen> {
                     child: ElevatedButton(
                       onPressed: _submitForm,
                       child: Text(
-                        'CẬP NHẬT MẬT KHẨU',
+                        s.changePassword,
                         style: context.textTheme.bodyMedium,
                       ),
                     ),

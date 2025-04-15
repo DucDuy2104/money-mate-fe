@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:money_mate/core/service/getit/locator.dart';
+import 'package:money_mate/core/service/langs/localization_service.dart';
 import 'package:money_mate/core/service/socket/socket_service.dart';
 import 'package:money_mate/data/models/message_model.dart';
 import 'package:money_mate/data/repositories/bots_repository.dart';
@@ -27,6 +28,7 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
       getIt<TransactionsRepository>();
   final BotsRepository _botsRepository = getIt<BotsRepository>();
   final SocketService _socketService = getIt<SocketService>();
+  final LocalizationService _localizationService = getIt<LocalizationService>();
   ChatBloc() : super(const ChatState.initial()) {
     on<_GetChatData>(_onGetChatData);
     on<_Connect>(_onConnect);
@@ -225,7 +227,8 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
           _socketService.emit(SocketEnum.sendMessage.name, {
             "conversation": data.chatData.conversation.id,
             "content": content,
-            "type": "text"
+            "type": "text",
+            "lang": _localizationService.getCurrentLocale().languageCode
           });
         },
         orElse: () {});

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:money_mate/core/service/langs/generated/l10n/l10n.dart';
 import 'package:money_mate/domain/entities/user.dart';
 import 'package:money_mate/presentation/pages/reset_password/bloc/reset_pass_bloc.dart';
+import 'package:money_mate/presentation/routes/route_name.dart';
 import 'package:money_mate/shared/components/app_toast.dart';
 import 'package:money_mate/shared/components/loading_scafford.dart';
 import 'package:money_mate/shared/constants/app_colors.dart';
@@ -36,18 +38,13 @@ class _ResetPassScreenState extends State<ResetPassScreen> {
     String newPass = _newPasswordController.text.trim();
     String confirm = _confirmPasswordController.text.trim();
 
-    if (newPass.isEmpty) {
-      _showError('Vui lòng nhập mật khẩu mới');
-      return;
-    }
-
     if (newPass.length < 6) {
-      _showError('Mật khẩu phải có ít nhất 6 ký tự');
+      _showError(S.of(context).passwordLengthLessThanRegulation);
       return;
     }
 
     if (confirm != newPass) {
-      _showError('Mật khẩu xác nhận không khớp');
+      _showError(S.of(context).passwordNotMatch);
       return;
     }
 
@@ -66,6 +63,7 @@ class _ResetPassScreenState extends State<ResetPassScreen> {
   @override
   Widget build(BuildContext context) {
     final colors = AppColors.colorsData(context);
+    final s = S.of(context);
     return BlocConsumer<ResetPassBloc, ResetPassState>(
       listener: (context, state) {
         state.maybeMap(
@@ -73,8 +71,8 @@ class _ResetPassScreenState extends State<ResetPassScreen> {
               AppToast.error(context, data.error);
             },
             success: (data) {
-              AppToast.success(context, 'Đặt lại mật khẩu thành công!');
-              context.go('/login');
+              AppToast.success(context, s.resetPasswordSuccess);
+              context.goNamed(RouteNames.loginName);
             },
             orElse: () {});
       },
@@ -84,7 +82,7 @@ class _ResetPassScreenState extends State<ResetPassScreen> {
               state.maybeMap(loading: (data) => true, orElse: () => false),
           child: Scaffold(
             appBar: AppBar(
-              title: const Text('Quên mật khẩu'),
+              title: Text(s.resetPassword),
               backgroundColor: Colors.transparent,
               elevation: 0,
             ),
@@ -95,12 +93,12 @@ class _ResetPassScreenState extends State<ResetPassScreen> {
                 children: [
                   AppDimens.spaceMd,
                   Text(
-                    'Đặt lại mật khẩu',
+                    s.resetPassword,
                     style: Theme.of(context).textTheme.titleLarge,
                   ),
                   AppDimens.spaceSm,
                   Text(
-                    'Vui lòng tạo mật khẩu mới cho tài khoản của bạn.',
+                    s.resetPasswordPlease,
                     style: context.textTheme.bodyMedium
                         ?.copyWith(color: colors.subTextColor),
                   ),
@@ -109,7 +107,7 @@ class _ResetPassScreenState extends State<ResetPassScreen> {
                     controller: _newPasswordController,
                     obscureText: _obscureNewPassword,
                     decoration: InputDecoration(
-                      labelText: 'Mật khẩu mới',
+                      labelText: s.password,
                       prefixIcon: const Icon(Icons.lock),
                       suffixIcon: IconButton(
                         icon: Icon(
@@ -130,7 +128,7 @@ class _ResetPassScreenState extends State<ResetPassScreen> {
                     controller: _confirmPasswordController,
                     obscureText: _obscureConfirmPassword,
                     decoration: InputDecoration(
-                      labelText: 'Xác nhận mật khẩu mới',
+                      labelText: s.confirmPassword,
                       prefixIcon: const Icon(Icons.lock),
                       suffixIcon: IconButton(
                         icon: Icon(
@@ -152,7 +150,7 @@ class _ResetPassScreenState extends State<ResetPassScreen> {
                     child: ElevatedButton(
                       onPressed: _submitForm,
                       child: Text(
-                        'ĐẶT LẠI MẬT KHẨU',
+                        s.resetPassword,
                         style: context.textTheme.bodyMedium,
                       ),
                     ),

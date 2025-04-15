@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:money_mate/core/service/langs/generated/l10n/l10n.dart';
 import 'package:money_mate/presentation/pages/auth/bloc/auth_bloc.dart';
 import 'package:money_mate/presentation/pages/opt_verify/otp_verify_screen.dart';
 import 'package:money_mate/presentation/routes/bloc/routes_bloc.dart';
@@ -28,13 +29,13 @@ class LoginScreen extends StatelessWidget {
       _emailFocusNode.unfocus();
       _passwordFocusNode.unfocus();
       if (email.isEmpty || password.isEmpty) {
-        AppToast.error(context, 'Vui lòng nhập đủ thông tin');
+        AppToast.error(context, S.of(context).emptyFieldError);
         return;
       }
 
       BlocProvider.of<AuthBloc>(context).add(AuthEvent.login(email, password));
     } catch (e) {
-      AppToast.error(context, 'Đã có lỗi xảy ra');
+      AppToast.error(context, S.of(context).unknownError);
       debugPrint(e.toString());
     }
   }
@@ -43,13 +44,14 @@ class LoginScreen extends StatelessWidget {
     try {
       BlocProvider.of<AuthBloc>(context).add(const AuthEvent.googleSignin());
     } catch (e) {
-      AppToast.error(context, 'Đã có lỗi xảy ra');
+      AppToast.error(context, S.of(context).unknownError);
       debugPrint(e.toString());
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    final s = S.of(context);
     return BlocConsumer<AuthBloc, AuthState>(
       listener: (context, state) {
         state.maybeMap(
@@ -95,7 +97,7 @@ class LoginScreen extends StatelessWidget {
                     onSubmitted: (value) {
                       _passwordFocusNode.requestFocus();
                     },
-                    decoration: const InputDecoration(labelText: 'Email'),
+                    decoration: InputDecoration(labelText: s.email),
                   ),
                   AppDimens.spaceMd,
                   TextField(
@@ -105,8 +107,8 @@ class LoginScreen extends StatelessWidget {
                       _onLogin(context);
                     },
                     obscureText: true,
-                    decoration: const InputDecoration(
-                      labelText: 'Mật khẩu',
+                    decoration: InputDecoration(
+                      labelText: s.password,
                     ),
                   ),
                   AppDimens.spaceMd,
@@ -117,7 +119,7 @@ class LoginScreen extends StatelessWidget {
                             context.goNamed(RouteNames.emailToNextName);
                           },
                           child: Text(
-                            'Quên mật khẩu?',
+                            s.forgotPassword,
                             style: context.textTheme.bodyMedium
                                 ?.copyWith(color: AppColors.primaryColor),
                           ))),
@@ -130,7 +132,7 @@ class LoginScreen extends StatelessWidget {
                         _onLogin(context);
                       },
                       child: Text(
-                        'Đăng nhập',
+                        s.login,
                         style: context.textTheme.bodyLarge
                             ?.copyWith(color: Colors.white),
                       ),
@@ -138,7 +140,7 @@ class LoginScreen extends StatelessWidget {
                   ),
                   AppDimens.spaceMd,
                   GoogleSignInButton(
-                    content: 'Đăng nhập với Google',
+                    content: s.loginWithGoogle,
                     onTap: () {
                       _onGoogleSignin(context);
                     },
@@ -147,14 +149,14 @@ class LoginScreen extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Text("Bạn chưa có tài khoản?"),
+                      Text(s.notHaveAnAccount),
                       AppDimens.spaceSm,
                       GestureDetector(
                         onTap: () {
                           // TODO: Navigate to Register screen
                           context.goNamed(RouteNames.registerName);
                         },
-                        child: Text('Đăng ký ngay',
+                        child: Text(s.registerNow,
                             style: context.textTheme.bodyMedium
                                 ?.copyWith(color: AppColors.primaryColor)),
                       )

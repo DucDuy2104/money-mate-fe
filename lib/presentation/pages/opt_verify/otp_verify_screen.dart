@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:money_mate/core/service/langs/generated/l10n/l10n.dart';
 import 'package:money_mate/domain/entities/user.dart';
 import 'package:money_mate/presentation/pages/opt_verify/bloc/verification_bloc.dart';
 import 'package:money_mate/presentation/pages/opt_verify/widgets/otp_textfield.dart';
@@ -101,7 +102,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
       // Restart timer
       startTimer();
     } catch (e) {
-      AppToast.error(context, 'Lỗi khi gửi mã OTP, vui lòng thử lại');
+      AppToast.error(context, S.of(context).sendOTPError);
       debugPrint(e.toString());
     }
   }
@@ -110,7 +111,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
     String otp = _otpControllers.map((controller) => controller.text).join();
 
     if (otp.length != 4) {
-      AppToast.warning(context, 'Vui lòng nhập đủ 4 số OTP');
+      AppToast.warning(context, S.of(context).lackOfOTP);
       return;
     }
 
@@ -120,14 +121,15 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final s = S.of(context);
     return BlocConsumer<VerificationBloc, VerificationState>(
       listener: (context, state) {
         state.maybeMap(
             codeSent: (value) {
               if (value.isSuccess) {
-                AppToast.success(context, 'Mã đã được gửi đến mail của bạn');
+                AppToast.success(context, s.otpAlreadySent);
               } else {
-                AppToast.error(context, 'Lỗi khi gửi mã, hãy thử lại');
+                AppToast.error(context, s.otpAlreadySent);
               }
             },
             error: (value) {
@@ -137,19 +139,19 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
             verified: (value) {
               if (widget.type == OtpTypes.resetPass.name) {
               AppToast.success(
-                  context, 'Xác thực thành công');
+                  context, s.verified);
                 context.goNamed(RouteNames.resetPasswordName,
                     extra: value.user);
                 return;
               }
               if (widget.type == OtpTypes.register.name) {
-                AppToast.success(context, 'Xác thực thành công. Vui lòng đăng nhập');
+                AppToast.success(context, s.verified);
                 context.goNamed(RouteNames.loginName);
                 return;
               }
             },
             sendingCode: (value) =>
-                {AppToast.info(context, 'Mã đang được gửi...')},
+                {AppToast.info(context, s.verifyingOtp)},
             orElse: () {});
       },
       builder: (context, state) {
@@ -175,13 +177,13 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                   ),
                   AppDimens.spaceMd,
                   Text(
-                    'Nhập mã OTP',
+                    s.enterOtp,
                     style: context.textTheme.titleLarge,
                     textAlign: TextAlign.center,
                   ),
                   AppDimens.spaceSm,
                   Text(
-                    'Chúng tôi đã gửi mã xác thực đến ${widget.user.email}',
+                    s.otpAlreadySentTo(widget.user.email),
                     textAlign: TextAlign.center,
                   ),
                   AppDimens.spaceMd,
@@ -212,9 +214,8 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                     child: ElevatedButton(
                       onPressed: verifyOtp,
                       child: Text(
-                        'Xác nhận',
+                        s.confirm,
                         style: context.textTheme.bodyLarge
-                            ?.copyWith(color: Colors.white),
                       ),
                     ),
                   ),
@@ -224,8 +225,8 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                     children: [
                       Text(
                         _canResend
-                            ? "Không nhận được mã?"
-                            : "Gửi lại mã sau: ${_secondsRemaining}s",
+                            ? s.notReceivedOtp
+                            : s.resendAfter(_secondsRemaining),
                         style: context.textTheme.bodyMedium,
                       ),
                       if (_canResend) ...[
@@ -234,13 +235,13 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                           onTap: () {
                             if (!_canResend) {
                               AppToast.info(context,
-                                  'Vui lòng đợi trước khi gửi lại mã OTP');
+                                  s.waitingForResending);
                               return;
                             }
                             sendOtp(widget.user.id, context);
                           },
                           child: Text(
-                            'Gửi lại',
+                            s.resend,
                             style: context.textTheme.bodyMedium?.copyWith(
                               color: AppColors.primaryColor,
                               fontWeight: FontWeight.bold,

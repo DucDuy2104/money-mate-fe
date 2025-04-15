@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:money_mate/core/service/langs/generated/l10n/l10n.dart';
 import 'package:money_mate/presentation/pages/profile/bloc/profile_bloc.dart';
 import 'package:money_mate/presentation/pages/profile/widgets/profile_skeleton.dart';
 import 'package:money_mate/shared/constants/constants.dart';
@@ -12,6 +13,7 @@ class ProfileCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
     final colors = AppColors.colorsData(context);
+    final s = S.of(context);
 
     return BlocBuilder<ProfileBloc, ProfileState>(
       builder: (context, state) {
@@ -55,12 +57,12 @@ class ProfileCard extends StatelessWidget {
                       backgroundColor: Colors.white,
                       child: CircleAvatar(
                         radius: (AppDimens.avatarSize / 1.7) - 2,
-                        backgroundImage: NetworkImage(profile.avatarUrl ?? AppConstants.tempImage),
+                        backgroundImage: NetworkImage(
+                            profile.avatarUrl ?? AppConstants.tempImage),
                       ),
                     ),
                   ),
                   AppDimens.spaceMd,
-
                   Expanded(
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
@@ -69,7 +71,8 @@ class ProfileCard extends StatelessWidget {
                         Flexible(
                           child: Text(
                             profile.name!,
-                            style: context.textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold),
+                            style: context.textTheme.bodyLarge
+                                ?.copyWith(fontWeight: FontWeight.bold),
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                           ),
@@ -98,11 +101,11 @@ class ProfileCard extends StatelessWidget {
                       ],
                     ),
                   ),
-
                   Container(
                     height: 44,
                     width: 1.5,
-                    margin: const EdgeInsets.symmetric(horizontal: AppDimens.paddingSm),
+                    margin: const EdgeInsets.symmetric(
+                        horizontal: AppDimens.paddingSm),
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
                         begin: Alignment.topCenter,
@@ -115,19 +118,20 @@ class ProfileCard extends StatelessWidget {
                       ),
                     ),
                   ),
-
                   Container(
                     padding: const EdgeInsets.symmetric(
-                      vertical: AppDimens.paddingSm, 
-                      horizontal: AppDimens.paddingSm + 2
-                    ),
+                        vertical: AppDimens.paddingSm,
+                        horizontal: AppDimens.paddingSm + 2),
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
                         begin: Alignment.topLeft,
                         end: Alignment.bottomRight,
                         colors: isDarkMode
                             ? [const Color(0xFF2E7D32), const Color(0xFF1B5E20)]
-                            : [const Color(0xFFE3F2FD), const Color(0xFFBBDEFB)],
+                            : [
+                                const Color(0xFFE3F2FD),
+                                const Color(0xFFBBDEFB)
+                              ],
                       ),
                       borderRadius: BorderRadius.circular(AppDimens.radiusMd),
                       boxShadow: [
@@ -146,12 +150,14 @@ class ProfileCard extends StatelessWidget {
                       children: [
                         Icon(
                           Icons.account_balance_wallet,
-                          color: isDarkMode ? Colors.greenAccent : Colors.blue[700],
+                          color: isDarkMode
+                              ? Colors.greenAccent
+                              : Colors.blue[700],
                           size: AppDimens.iconSizeSmall,
                         ),
                         AppDimens.divider,
                         Text(
-                          "Số dư",
+                          s.balance,
                           style: context.textTheme.labelSmall?.copyWith(
                             fontWeight: FontWeight.w500,
                           ),

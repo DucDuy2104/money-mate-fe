@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:money_mate/core/service/langs/generated/l10n/l10n.dart';
 import 'package:money_mate/domain/entities/user.dart';
 import 'package:money_mate/presentation/pages/profile_detail/funcs/show_update_name_dialog.dart';
 import 'package:money_mate/shared/components/loading_scafford.dart';
@@ -14,11 +15,12 @@ class ProfileDataWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colors = AppColors.colorsData(context);
+    final s = S.of(context);
     return LoadingScaffold(
       isLoading: isLoading,
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Thông tin hồ sơ'),
+          title: Text(s.record),
         ),
         body: SingleChildScrollView(
           child: Column(
@@ -137,22 +139,21 @@ class ProfileDataWidget extends StatelessWidget {
                     _buildInfoCard(
                       context: context,
                       icon: Icons.badge_outlined,
-                      title: 'Vai trò',
-                      value: user.role,
+                      title: s.role,
+                      value: user.role == 'admin' ? s.admin : s.user,
                     ),
                     _buildInfoCard(
                       context: context,
                       icon: Icons.account_balance_wallet_outlined,
-                      title: 'Ngân sách',
+                      title: s.budget,
                       value: CurrencyHelper.formatCurrency(user.budget),
                       highlightValue: true,
                     ),
                     _buildInfoCard(
                       context: context,
                       icon: Icons.check_circle_outline,
-                      title: 'Trạng thái tài khoản',
-                      value:
-                          user.isActive ? 'Đang hoạt động' : 'Không hoạt động',
+                      title: s.accountStatus,
+                      value: user.isActive ? s.active : s.notActive,
                       valueColor: user.isActive
                           ? const Color(0xFF4CAF50)
                           : const Color(0xFFFF5252),
@@ -160,13 +161,13 @@ class ProfileDataWidget extends StatelessWidget {
                     _buildInfoCard(
                       context: context,
                       icon: Icons.calendar_today_outlined,
-                      title: 'Ngày tạo',
+                      title: s.createdAt,
                       value: DateFormat.yMMMd().format(user.createdAt),
                     ),
                     _buildInfoCard(
                       context: context,
                       icon: Icons.update_outlined,
-                      title: 'Ngày cập nhật',
+                      title: s.lastUpdatedAt,
                       value: DateFormat.yMMMd().format(user.updatedAt),
                       isLast: true,
                     ),
@@ -239,9 +240,7 @@ Widget _buildInfoCard({
                     fontWeight:
                         highlightValue ? FontWeight.bold : FontWeight.normal,
                     color: valueColor ??
-                        (highlightValue
-                            ? const Color(0xFF66B2FF)
-                            : null),
+                        (highlightValue ? const Color(0xFF66B2FF) : null),
                   ),
                 ),
               ],
