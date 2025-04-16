@@ -21,6 +21,7 @@ mixin _$Transaction {
   double get amount => throw _privateConstructorUsedError;
   bool get isCancel => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
+  bool get isShowTime => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
   DateTime get createdAt => throw _privateConstructorUsedError;
 
@@ -43,6 +44,7 @@ abstract class $TransactionCopyWith<$Res> {
       double amount,
       bool isCancel,
       bool isLoading,
+      bool isShowTime,
       String description,
       DateTime createdAt});
 
@@ -69,6 +71,7 @@ class _$TransactionCopyWithImpl<$Res, $Val extends Transaction>
     Object? amount = null,
     Object? isCancel = null,
     Object? isLoading = null,
+    Object? isShowTime = null,
     Object? description = null,
     Object? createdAt = null,
   }) {
@@ -92,6 +95,10 @@ class _$TransactionCopyWithImpl<$Res, $Val extends Transaction>
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isShowTime: null == isShowTime
+          ? _value.isShowTime
+          : isShowTime // ignore: cast_nullable_to_non_nullable
               as bool,
       description: null == description
           ? _value.description
@@ -129,6 +136,7 @@ abstract class _$$TransactionImplCopyWith<$Res>
       double amount,
       bool isCancel,
       bool isLoading,
+      bool isShowTime,
       String description,
       DateTime createdAt});
 
@@ -154,6 +162,7 @@ class __$$TransactionImplCopyWithImpl<$Res>
     Object? amount = null,
     Object? isCancel = null,
     Object? isLoading = null,
+    Object? isShowTime = null,
     Object? description = null,
     Object? createdAt = null,
   }) {
@@ -178,6 +187,10 @@ class __$$TransactionImplCopyWithImpl<$Res>
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
+      isShowTime: null == isShowTime
+          ? _value.isShowTime
+          : isShowTime // ignore: cast_nullable_to_non_nullable
+              as bool,
       description: null == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
@@ -199,6 +212,7 @@ class _$TransactionImpl implements _Transaction {
       required this.amount,
       required this.isCancel,
       this.isLoading = false,
+      this.isShowTime = false,
       required this.description,
       required this.createdAt});
 
@@ -214,13 +228,16 @@ class _$TransactionImpl implements _Transaction {
   @JsonKey()
   final bool isLoading;
   @override
+  @JsonKey()
+  final bool isShowTime;
+  @override
   final String description;
   @override
   final DateTime createdAt;
 
   @override
   String toString() {
-    return 'Transaction(id: $id, category: $category, amount: $amount, isCancel: $isCancel, isLoading: $isLoading, description: $description, createdAt: $createdAt)';
+    return 'Transaction(id: $id, category: $category, amount: $amount, isCancel: $isCancel, isLoading: $isLoading, isShowTime: $isShowTime, description: $description, createdAt: $createdAt)';
   }
 
   @override
@@ -236,6 +253,8 @@ class _$TransactionImpl implements _Transaction {
                 other.isCancel == isCancel) &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
+            (identical(other.isShowTime, isShowTime) ||
+                other.isShowTime == isShowTime) &&
             (identical(other.description, description) ||
                 other.description == description) &&
             (identical(other.createdAt, createdAt) ||
@@ -244,7 +263,7 @@ class _$TransactionImpl implements _Transaction {
 
   @override
   int get hashCode => Object.hash(runtimeType, id, category, amount, isCancel,
-      isLoading, description, createdAt);
+      isLoading, isShowTime, description, createdAt);
 
   /// Create a copy of Transaction
   /// with the given fields replaced by the non-null parameter values.
@@ -262,6 +281,7 @@ abstract class _Transaction implements Transaction {
       required final double amount,
       required final bool isCancel,
       final bool isLoading,
+      final bool isShowTime,
       required final String description,
       required final DateTime createdAt}) = _$TransactionImpl;
 
@@ -275,6 +295,8 @@ abstract class _Transaction implements Transaction {
   bool get isCancel;
   @override
   bool get isLoading;
+  @override
+  bool get isShowTime;
   @override
   String get description;
   @override

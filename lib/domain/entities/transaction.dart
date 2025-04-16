@@ -11,6 +11,7 @@ class Transaction with _$Transaction {
     required double amount,
     required bool isCancel,
     @Default(false) bool isLoading,
+    @Default(false) bool isShowTime,
     required String description,
     required DateTime createdAt
   }) = _Transaction;

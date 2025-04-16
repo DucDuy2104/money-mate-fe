@@ -1,3 +1,5 @@
+import 'package:intl/intl.dart';
+
 extension DatetimeExt on DateTime {
   String toHourMinute() {
     return '${hour.toString().padLeft(2, '0')}:${minute.toString().padLeft(2, '0')}';
@@ -24,5 +26,16 @@ extension DatetimeExt on DateTime {
 
   DateTime toUtcPlus7() {
     return toUtc().add(const Duration(hours: 7));
+  }
+
+  String formatDateTime() {
+    final now = DateTime.now();
+    final isSameDay = year == now.year && month == now.month && day == now.day;
+
+    if (isSameDay) {
+      return 'Hôm nay';
+    } else {
+      return DateFormat('dd/MM/yyyy').format(this);
+    }
   }
 }

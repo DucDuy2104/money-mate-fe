@@ -62,4 +62,8 @@ class RouteNames {
   // Email to next
   static const String emailToNext = '/email_to_next';
   static const String emailToNextName = 'email_to_next';
+
+  // Transactions
+  static const String transactions = '/transactions';
+  static const String transactionsName = 'transactions';
 }

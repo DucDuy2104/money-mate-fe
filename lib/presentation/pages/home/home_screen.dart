@@ -116,8 +116,20 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                         ),
                         AppDimens.spaceMd,
-                        Text(s.recentTransactions,
-                            style: context.textTheme.titleLarge),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: Text(s.recentTransactions,
+                                  style: context.textTheme.titleLarge),
+                            ),
+                            GestureDetector(
+                                onTap: () {
+                                  context
+                                      .pushNamed(RouteNames.transactionsName);
+                                },
+                                child: const Icon(EvaIcons.list))
+                          ],
+                        ),
                         AppDimens.spaceSm,
                         Expanded(
                           child: ListView.separated(
