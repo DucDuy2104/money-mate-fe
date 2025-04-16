@@ -35,19 +35,21 @@ class _ChatScreenState extends State<ChatScreen> {
     });
   }
 
-  @override
-  void dispose() {
-    leaveRoom();
-    _textController.dispose();
-    super.dispose();
-  }
-
   void scrollerListener() {
     _scrollController.addListener(() {
       if (_focusNode.hasFocus) {
         _focusNode.unfocus();
       }
+
+      if (_scrollController.position.pixels >= _scrollController.position.maxScrollExtent - 50) {
+      onScrollToBottom();
+    }
     });
+  }
+
+
+  void onScrollToBottom() {
+    BlocProvider.of<ChatBloc>(context).add(const ChatEvent.loadMoreMessages());
   }
 
   void getBotConversation() {
@@ -73,10 +75,6 @@ class _ChatScreenState extends State<ChatScreen> {
     BlocProvider.of<ChatBloc>(context).add(const ChatEvent.connect());
   }
 
-  void leaveRoom() {
-    BlocProvider.of<ChatBloc>(context).add(const ChatEvent.leaveRoom());
-  }
-
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<ChatBloc, ChatState>(
@@ -86,7 +84,7 @@ class _ChatScreenState extends State<ChatScreen> {
             loaded: (value) {
               final chatData = value.chatData;
               final conversation = chatData.conversation;
-              final messages = chatData.messages;
+              final messages = chatData.messageData.data;
               return LoadingScaffold(
                 isLoading: state.maybeMap(
                     loading: (state) => true, orElse: () => false),

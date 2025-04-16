@@ -29,6 +29,7 @@ import 'package:money_mate/domain/repositories/messages_repository_impl.dart';
 import 'package:money_mate/domain/repositories/statistic_repository_impl.dart';
 import 'package:money_mate/domain/repositories/transactions_repository_impl.dart';
 import 'package:money_mate/domain/repositories/users_repository_impl.dart';
+import 'package:money_mate/shared/helper/upload_helper.dart';
 
 final GetIt getIt = GetIt.instance;
 
@@ -58,9 +59,12 @@ Future<void> setupLocator() async {
   getIt.registerLazySingleton<SocketService>(
       () => SocketService(getIt<OnboardLocalDataSource>()));
 
-  // Register ApiClient
+  // ApiClient
   getIt.registerLazySingleton<ApiClient>(
       () => ApiClientImpl(configureDio(getIt<OnboardLocalDataSource>())));
+
+  // Upload Helper
+  getIt.registerLazySingleton<UploadHelper>(() => UploadHelper());
 
   // Register RemoteDataSources
   registerRemoteDataSources();

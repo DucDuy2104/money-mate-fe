@@ -120,5 +120,17 @@
   "total": "Total",
   "expenseByCategory": "Expenses by Category",
   "noTransactions": "You haven't had any transactions",
-  "noNotification": "You haven't had any notifications"
+  "noNotification": "You haven't had any notifications",
+  "enableAccessTitle": "Enable Access",
+  "cameraPermissionMessage": "To take photos, please enable camera access in Settings.",
+  "photosPermissionMessage": "To select images, please enable photo library access in Settings.",
+  "notificationPermissionMessage": "To receive notifications, please enable notification access in Settings.",
+  "genericPermissionMessage": "To use this feature, please enable permissions in Settings.",
+  "settingsButton": "Settings",
+  "cancelButton": "Cancel",
+  "errorOpenSettings": "Could not open settings.",
+  "locationPermissionTitle": "Location Permission Needed",
+  "locationPermissionMessageIos": "You denied location permission which is required to execute selected operation. Please grant it from app settings.",
+  "okButton": "OK",
+  "permissionDeniedTitle": "Permission Denied"
 }

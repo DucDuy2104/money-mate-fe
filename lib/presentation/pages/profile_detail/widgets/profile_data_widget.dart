@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:money_mate/core/service/langs/generated/l10n/l10n.dart';
 import 'package:money_mate/domain/entities/user.dart';
+import 'package:money_mate/presentation/pages/profile/bloc/profile_bloc.dart';
 import 'package:money_mate/presentation/pages/profile_detail/funcs/show_update_name_dialog.dart';
 import 'package:money_mate/shared/components/loading_scafford.dart';
+import 'package:money_mate/shared/constants/avatar_component.dart';
 import 'package:money_mate/shared/constants/constants.dart';
+import 'package:money_mate/shared/extensions/xfile_ext.dart';
 import 'package:money_mate/shared/helper/currency_heler.dart';
+import 'package:money_mate/shared/helper/gallery_helper.dart';
 
 class ProfileDataWidget extends StatelessWidget {
   final bool isLoading;
@@ -34,28 +39,11 @@ class ProfileDataWidget extends StatelessWidget {
                 ),
                 child: Column(
                   children: [
-                    Container(
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        boxShadow: [
-                          BoxShadow(
-                            color: const Color(0xFF66B2FF).withOpacity(0.3),
-                            spreadRadius: 2,
-                            blurRadius: 10,
-                          ),
-                        ],
-                      ),
-                      child: CircleAvatar(
-                        radius: 50,
-                        backgroundColor: const Color(0xFF66B2FF),
-                        child: CircleAvatar(
-                          radius: 48,
-                          backgroundImage: NetworkImage(
-                            user.avatarUrl ?? AppConstants.tempImage,
-                          ),
-                        ),
-                      ),
-                    ),
+                    AvatarComponent(
+                        url: user.avatar,
+                        onTap: () {
+                          _updateAvatar(context);
+                        }),
                     AppDimens.spaceMd,
                     Row(
                       mainAxisSize: MainAxisSize.min,
@@ -81,7 +69,7 @@ class ProfileDataWidget extends StatelessWidget {
                             child: const Icon(
                               Icons.edit,
                               size: AppDimens.iconSizeSmall,
-                              color: Color(0xFF66B2FF),
+                              color: AppColors.primaryColor,
                             ),
                           ),
                         ),
@@ -94,7 +82,7 @@ class ProfileDataWidget extends StatelessWidget {
                         const Icon(
                           Icons.email_outlined,
                           size: AppDimens.iconSizeSmall,
-                          color: Color(0xFF66B2FF),
+                          color: AppColors.primaryColor,
                         ),
                         AppDimens.spaceSm,
                         Text(
@@ -115,7 +103,7 @@ class ProfileDataWidget extends StatelessWidget {
                             const Icon(
                               Icons.phone_outlined,
                               size: AppDimens.iconSizeSmall,
-                              color: Color(0xFF66B2FF),
+                              color: AppColors.primaryColor,
                             ),
                             AppDimens.spaceSm,
                             Text(
@@ -182,6 +170,14 @@ class ProfileDataWidget extends StatelessWidget {
   }
 }
 
+void _updateAvatar(BuildContext context) async {
+  final xFile = await GalleryHelper.pickImageFromGallery();
+  if (xFile != null) {
+    BlocProvider.of<ProfileBloc>(context)
+        .add(ProfileEvent.uploadAvatar(xFile.toFile()));
+  }
+}
+
 Widget _buildInfoCard({
   required BuildContext context,
   required IconData icon,
@@ -218,7 +214,7 @@ Widget _buildInfoCard({
             ),
             child: Icon(
               icon,
-              color: const Color(0xFF66B2FF),
+              color: AppColors.primaryColor,
               size: AppDimens.iconSize,
             ),
           ),
@@ -240,7 +236,7 @@ Widget _buildInfoCard({
                     fontWeight:
                         highlightValue ? FontWeight.bold : FontWeight.normal,
                     color: valueColor ??
-                        (highlightValue ? const Color(0xFF66B2FF) : null),
+                        (highlightValue ? AppColors.primaryColor : null),
                   ),
                 ),
               ],

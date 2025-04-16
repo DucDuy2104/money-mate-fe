@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:money_mate/core/service/langs/generated/l10n/l10n.dart';
 import 'package:money_mate/domain/entities/category.dart';
 import 'package:money_mate/shared/constants/app_colors.dart';
 import 'package:money_mate/shared/constants/app_dimens.dart';
@@ -23,9 +24,10 @@ class SwitchCategoryItem extends StatelessWidget {
     final Color typeColor = category.type == CategoriesType.income
         ? AppColors.upColor
         : AppColors.downColor;
+    final s = S.of(context);
 
     final String typeText =
-        category.type == CategoriesType.income ? "Thu nhập" : "Chi tiêu";
+        category.type == CategoriesType.income ? s.income : s.expense;
 
     final width = MediaQuery.of(context).size.width * 0.7;
 

@@ -1,3 +1,4 @@
+import 'package:cloudinary_url_gen/cloudinary.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -6,6 +7,7 @@ import 'package:money_mate/core/service/langs/cubit/locale_cubit.dart';
 import 'package:money_mate/core/service/socket/socket_service.dart';
 import 'package:money_mate/data/data_sources/local/local_data_source.dart';
 import 'package:money_mate/core/service/getit/locator.dart' as ls;
+import 'package:money_mate/shared/constants/app_constants.dart';
 
 part 'routes_event.dart';
 part 'routes_state.dart';

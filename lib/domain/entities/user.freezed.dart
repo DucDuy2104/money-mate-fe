@@ -23,7 +23,7 @@ mixin _$User {
   bool get isActive => throw _privateConstructorUsedError;
   bool get isSetup => throw _privateConstructorUsedError;
   double get budget => throw _privateConstructorUsedError;
-  String? get avatarUrl => throw _privateConstructorUsedError;
+  String? get avatar => throw _privateConstructorUsedError;
   String get role => throw _privateConstructorUsedError;
   int get categoriesCount => throw _privateConstructorUsedError;
   int get transactionsCount => throw _privateConstructorUsedError;
@@ -50,7 +50,7 @@ abstract class $UserCopyWith<$Res> {
       bool isActive,
       bool isSetup,
       double budget,
-      String? avatarUrl,
+      String? avatar,
       String role,
       int categoriesCount,
       int transactionsCount,
@@ -81,7 +81,7 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? isActive = null,
     Object? isSetup = null,
     Object? budget = null,
-    Object? avatarUrl = freezed,
+    Object? avatar = freezed,
     Object? role = null,
     Object? categoriesCount = null,
     Object? transactionsCount = null,
@@ -118,9 +118,9 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.budget
           : budget // ignore: cast_nullable_to_non_nullable
               as double,
-      avatarUrl: freezed == avatarUrl
-          ? _value.avatarUrl
-          : avatarUrl // ignore: cast_nullable_to_non_nullable
+      avatar: freezed == avatar
+          ? _value.avatar
+          : avatar // ignore: cast_nullable_to_non_nullable
               as String?,
       role: null == role
           ? _value.role
@@ -165,7 +165,7 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
       bool isActive,
       bool isSetup,
       double budget,
-      String? avatarUrl,
+      String? avatar,
       String role,
       int categoriesCount,
       int transactionsCount,
@@ -193,7 +193,7 @@ class __$$UserImplCopyWithImpl<$Res>
     Object? isActive = null,
     Object? isSetup = null,
     Object? budget = null,
-    Object? avatarUrl = freezed,
+    Object? avatar = freezed,
     Object? role = null,
     Object? categoriesCount = null,
     Object? transactionsCount = null,
@@ -230,9 +230,9 @@ class __$$UserImplCopyWithImpl<$Res>
           ? _value.budget
           : budget // ignore: cast_nullable_to_non_nullable
               as double,
-      avatarUrl: freezed == avatarUrl
-          ? _value.avatarUrl
-          : avatarUrl // ignore: cast_nullable_to_non_nullable
+      avatar: freezed == avatar
+          ? _value.avatar
+          : avatar // ignore: cast_nullable_to_non_nullable
               as String?,
       role: null == role
           ? _value.role
@@ -273,7 +273,7 @@ class _$UserImpl implements _User {
       required this.isActive,
       required this.isSetup,
       required this.budget,
-      this.avatarUrl,
+      this.avatar,
       required this.role,
       required this.categoriesCount,
       required this.transactionsCount,
@@ -296,7 +296,7 @@ class _$UserImpl implements _User {
   @override
   final double budget;
   @override
-  final String? avatarUrl;
+  final String? avatar;
   @override
   final String role;
   @override
@@ -312,7 +312,7 @@ class _$UserImpl implements _User {
 
   @override
   String toString() {
-    return 'User(id: $id, name: $name, email: $email, phoneNumber: $phoneNumber, isActive: $isActive, isSetup: $isSetup, budget: $budget, avatarUrl: $avatarUrl, role: $role, categoriesCount: $categoriesCount, transactionsCount: $transactionsCount, reportsCount: $reportsCount, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'User(id: $id, name: $name, email: $email, phoneNumber: $phoneNumber, isActive: $isActive, isSetup: $isSetup, budget: $budget, avatar: $avatar, role: $role, categoriesCount: $categoriesCount, transactionsCount: $transactionsCount, reportsCount: $reportsCount, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
@@ -329,8 +329,7 @@ class _$UserImpl implements _User {
                 other.isActive == isActive) &&
             (identical(other.isSetup, isSetup) || other.isSetup == isSetup) &&
             (identical(other.budget, budget) || other.budget == budget) &&
-            (identical(other.avatarUrl, avatarUrl) ||
-                other.avatarUrl == avatarUrl) &&
+            (identical(other.avatar, avatar) || other.avatar == avatar) &&
             (identical(other.role, role) || other.role == role) &&
             (identical(other.categoriesCount, categoriesCount) ||
                 other.categoriesCount == categoriesCount) &&
@@ -354,7 +353,7 @@ class _$UserImpl implements _User {
       isActive,
       isSetup,
       budget,
-      avatarUrl,
+      avatar,
       role,
       categoriesCount,
       transactionsCount,
@@ -380,7 +379,7 @@ abstract class _User implements User {
       required final bool isActive,
       required final bool isSetup,
       required final double budget,
-      final String? avatarUrl,
+      final String? avatar,
       required final String role,
       required final int categoriesCount,
       required final int transactionsCount,
@@ -403,7 +402,7 @@ abstract class _User implements User {
   @override
   double get budget;
   @override
-  String? get avatarUrl;
+  String? get avatar;
   @override
   String get role;
   @override

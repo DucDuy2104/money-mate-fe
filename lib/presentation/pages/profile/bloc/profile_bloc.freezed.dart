@@ -21,6 +21,7 @@ mixin _$ProfileEvent {
     required TResult Function(VoidCallback callback) getData,
     required TResult Function() reloadProfile,
     required TResult Function(String name, VoidCallback callback) updateProfile,
+    required TResult Function(File file) uploadAvatar,
     required TResult Function() reloadCateogries,
     required TResult Function() reloadData,
     required TResult Function() logout,
@@ -31,6 +32,7 @@ mixin _$ProfileEvent {
     TResult? Function(VoidCallback callback)? getData,
     TResult? Function()? reloadProfile,
     TResult? Function(String name, VoidCallback callback)? updateProfile,
+    TResult? Function(File file)? uploadAvatar,
     TResult? Function()? reloadCateogries,
     TResult? Function()? reloadData,
     TResult? Function()? logout,
@@ -41,6 +43,7 @@ mixin _$ProfileEvent {
     TResult Function(VoidCallback callback)? getData,
     TResult Function()? reloadProfile,
     TResult Function(String name, VoidCallback callback)? updateProfile,
+    TResult Function(File file)? uploadAvatar,
     TResult Function()? reloadCateogries,
     TResult Function()? reloadData,
     TResult Function()? logout,
@@ -52,6 +55,7 @@ mixin _$ProfileEvent {
     required TResult Function(_GetData value) getData,
     required TResult Function(_ReloadProfile value) reloadProfile,
     required TResult Function(_UpdateProfile value) updateProfile,
+    required TResult Function(_UploadAvatar value) uploadAvatar,
     required TResult Function(_ReloadCateogries value) reloadCateogries,
     required TResult Function(_ReloadData value) reloadData,
     required TResult Function(_Logout value) logout,
@@ -62,6 +66,7 @@ mixin _$ProfileEvent {
     TResult? Function(_GetData value)? getData,
     TResult? Function(_ReloadProfile value)? reloadProfile,
     TResult? Function(_UpdateProfile value)? updateProfile,
+    TResult? Function(_UploadAvatar value)? uploadAvatar,
     TResult? Function(_ReloadCateogries value)? reloadCateogries,
     TResult? Function(_ReloadData value)? reloadData,
     TResult? Function(_Logout value)? logout,
@@ -72,6 +77,7 @@ mixin _$ProfileEvent {
     TResult Function(_GetData value)? getData,
     TResult Function(_ReloadProfile value)? reloadProfile,
     TResult Function(_UpdateProfile value)? updateProfile,
+    TResult Function(_UploadAvatar value)? uploadAvatar,
     TResult Function(_ReloadCateogries value)? reloadCateogries,
     TResult Function(_ReloadData value)? reloadData,
     TResult Function(_Logout value)? logout,
@@ -173,6 +179,7 @@ class _$GetDataImpl implements _GetData {
     required TResult Function(VoidCallback callback) getData,
     required TResult Function() reloadProfile,
     required TResult Function(String name, VoidCallback callback) updateProfile,
+    required TResult Function(File file) uploadAvatar,
     required TResult Function() reloadCateogries,
     required TResult Function() reloadData,
     required TResult Function() logout,
@@ -186,6 +193,7 @@ class _$GetDataImpl implements _GetData {
     TResult? Function(VoidCallback callback)? getData,
     TResult? Function()? reloadProfile,
     TResult? Function(String name, VoidCallback callback)? updateProfile,
+    TResult? Function(File file)? uploadAvatar,
     TResult? Function()? reloadCateogries,
     TResult? Function()? reloadData,
     TResult? Function()? logout,
@@ -199,6 +207,7 @@ class _$GetDataImpl implements _GetData {
     TResult Function(VoidCallback callback)? getData,
     TResult Function()? reloadProfile,
     TResult Function(String name, VoidCallback callback)? updateProfile,
+    TResult Function(File file)? uploadAvatar,
     TResult Function()? reloadCateogries,
     TResult Function()? reloadData,
     TResult Function()? logout,
@@ -216,6 +225,7 @@ class _$GetDataImpl implements _GetData {
     required TResult Function(_GetData value) getData,
     required TResult Function(_ReloadProfile value) reloadProfile,
     required TResult Function(_UpdateProfile value) updateProfile,
+    required TResult Function(_UploadAvatar value) uploadAvatar,
     required TResult Function(_ReloadCateogries value) reloadCateogries,
     required TResult Function(_ReloadData value) reloadData,
     required TResult Function(_Logout value) logout,
@@ -229,6 +239,7 @@ class _$GetDataImpl implements _GetData {
     TResult? Function(_GetData value)? getData,
     TResult? Function(_ReloadProfile value)? reloadProfile,
     TResult? Function(_UpdateProfile value)? updateProfile,
+    TResult? Function(_UploadAvatar value)? uploadAvatar,
     TResult? Function(_ReloadCateogries value)? reloadCateogries,
     TResult? Function(_ReloadData value)? reloadData,
     TResult? Function(_Logout value)? logout,
@@ -242,6 +253,7 @@ class _$GetDataImpl implements _GetData {
     TResult Function(_GetData value)? getData,
     TResult Function(_ReloadProfile value)? reloadProfile,
     TResult Function(_UpdateProfile value)? updateProfile,
+    TResult Function(_UploadAvatar value)? uploadAvatar,
     TResult Function(_ReloadCateogries value)? reloadCateogries,
     TResult Function(_ReloadData value)? reloadData,
     TResult Function(_Logout value)? logout,
@@ -310,6 +322,7 @@ class _$ReloadProfileImpl implements _ReloadProfile {
     required TResult Function(VoidCallback callback) getData,
     required TResult Function() reloadProfile,
     required TResult Function(String name, VoidCallback callback) updateProfile,
+    required TResult Function(File file) uploadAvatar,
     required TResult Function() reloadCateogries,
     required TResult Function() reloadData,
     required TResult Function() logout,
@@ -323,6 +336,7 @@ class _$ReloadProfileImpl implements _ReloadProfile {
     TResult? Function(VoidCallback callback)? getData,
     TResult? Function()? reloadProfile,
     TResult? Function(String name, VoidCallback callback)? updateProfile,
+    TResult? Function(File file)? uploadAvatar,
     TResult? Function()? reloadCateogries,
     TResult? Function()? reloadData,
     TResult? Function()? logout,
@@ -336,6 +350,7 @@ class _$ReloadProfileImpl implements _ReloadProfile {
     TResult Function(VoidCallback callback)? getData,
     TResult Function()? reloadProfile,
     TResult Function(String name, VoidCallback callback)? updateProfile,
+    TResult Function(File file)? uploadAvatar,
     TResult Function()? reloadCateogries,
     TResult Function()? reloadData,
     TResult Function()? logout,
@@ -353,6 +368,7 @@ class _$ReloadProfileImpl implements _ReloadProfile {
     required TResult Function(_GetData value) getData,
     required TResult Function(_ReloadProfile value) reloadProfile,
     required TResult Function(_UpdateProfile value) updateProfile,
+    required TResult Function(_UploadAvatar value) uploadAvatar,
     required TResult Function(_ReloadCateogries value) reloadCateogries,
     required TResult Function(_ReloadData value) reloadData,
     required TResult Function(_Logout value) logout,
@@ -366,6 +382,7 @@ class _$ReloadProfileImpl implements _ReloadProfile {
     TResult? Function(_GetData value)? getData,
     TResult? Function(_ReloadProfile value)? reloadProfile,
     TResult? Function(_UpdateProfile value)? updateProfile,
+    TResult? Function(_UploadAvatar value)? uploadAvatar,
     TResult? Function(_ReloadCateogries value)? reloadCateogries,
     TResult? Function(_ReloadData value)? reloadData,
     TResult? Function(_Logout value)? logout,
@@ -379,6 +396,7 @@ class _$ReloadProfileImpl implements _ReloadProfile {
     TResult Function(_GetData value)? getData,
     TResult Function(_ReloadProfile value)? reloadProfile,
     TResult Function(_UpdateProfile value)? updateProfile,
+    TResult Function(_UploadAvatar value)? uploadAvatar,
     TResult Function(_ReloadCateogries value)? reloadCateogries,
     TResult Function(_ReloadData value)? reloadData,
     TResult Function(_Logout value)? logout,
@@ -475,6 +493,7 @@ class _$UpdateProfileImpl implements _UpdateProfile {
     required TResult Function(VoidCallback callback) getData,
     required TResult Function() reloadProfile,
     required TResult Function(String name, VoidCallback callback) updateProfile,
+    required TResult Function(File file) uploadAvatar,
     required TResult Function() reloadCateogries,
     required TResult Function() reloadData,
     required TResult Function() logout,
@@ -488,6 +507,7 @@ class _$UpdateProfileImpl implements _UpdateProfile {
     TResult? Function(VoidCallback callback)? getData,
     TResult? Function()? reloadProfile,
     TResult? Function(String name, VoidCallback callback)? updateProfile,
+    TResult? Function(File file)? uploadAvatar,
     TResult? Function()? reloadCateogries,
     TResult? Function()? reloadData,
     TResult? Function()? logout,
@@ -501,6 +521,7 @@ class _$UpdateProfileImpl implements _UpdateProfile {
     TResult Function(VoidCallback callback)? getData,
     TResult Function()? reloadProfile,
     TResult Function(String name, VoidCallback callback)? updateProfile,
+    TResult Function(File file)? uploadAvatar,
     TResult Function()? reloadCateogries,
     TResult Function()? reloadData,
     TResult Function()? logout,
@@ -518,6 +539,7 @@ class _$UpdateProfileImpl implements _UpdateProfile {
     required TResult Function(_GetData value) getData,
     required TResult Function(_ReloadProfile value) reloadProfile,
     required TResult Function(_UpdateProfile value) updateProfile,
+    required TResult Function(_UploadAvatar value) uploadAvatar,
     required TResult Function(_ReloadCateogries value) reloadCateogries,
     required TResult Function(_ReloadData value) reloadData,
     required TResult Function(_Logout value) logout,
@@ -531,6 +553,7 @@ class _$UpdateProfileImpl implements _UpdateProfile {
     TResult? Function(_GetData value)? getData,
     TResult? Function(_ReloadProfile value)? reloadProfile,
     TResult? Function(_UpdateProfile value)? updateProfile,
+    TResult? Function(_UploadAvatar value)? uploadAvatar,
     TResult? Function(_ReloadCateogries value)? reloadCateogries,
     TResult? Function(_ReloadData value)? reloadData,
     TResult? Function(_Logout value)? logout,
@@ -544,6 +567,7 @@ class _$UpdateProfileImpl implements _UpdateProfile {
     TResult Function(_GetData value)? getData,
     TResult Function(_ReloadProfile value)? reloadProfile,
     TResult Function(_UpdateProfile value)? updateProfile,
+    TResult Function(_UploadAvatar value)? uploadAvatar,
     TResult Function(_ReloadCateogries value)? reloadCateogries,
     TResult Function(_ReloadData value)? reloadData,
     TResult Function(_Logout value)? logout,
@@ -567,6 +591,176 @@ abstract class _UpdateProfile implements ProfileEvent {
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$UpdateProfileImplCopyWith<_$UpdateProfileImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$UploadAvatarImplCopyWith<$Res> {
+  factory _$$UploadAvatarImplCopyWith(
+          _$UploadAvatarImpl value, $Res Function(_$UploadAvatarImpl) then) =
+      __$$UploadAvatarImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({File file});
+}
+
+/// @nodoc
+class __$$UploadAvatarImplCopyWithImpl<$Res>
+    extends _$ProfileEventCopyWithImpl<$Res, _$UploadAvatarImpl>
+    implements _$$UploadAvatarImplCopyWith<$Res> {
+  __$$UploadAvatarImplCopyWithImpl(
+      _$UploadAvatarImpl _value, $Res Function(_$UploadAvatarImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of ProfileEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? file = null,
+  }) {
+    return _then(_$UploadAvatarImpl(
+      null == file
+          ? _value.file
+          : file // ignore: cast_nullable_to_non_nullable
+              as File,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$UploadAvatarImpl implements _UploadAvatar {
+  const _$UploadAvatarImpl(this.file);
+
+  @override
+  final File file;
+
+  @override
+  String toString() {
+    return 'ProfileEvent.uploadAvatar(file: $file)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$UploadAvatarImpl &&
+            (identical(other.file, file) || other.file == file));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, file);
+
+  /// Create a copy of ProfileEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$UploadAvatarImplCopyWith<_$UploadAvatarImpl> get copyWith =>
+      __$$UploadAvatarImplCopyWithImpl<_$UploadAvatarImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(VoidCallback callback) getData,
+    required TResult Function() reloadProfile,
+    required TResult Function(String name, VoidCallback callback) updateProfile,
+    required TResult Function(File file) uploadAvatar,
+    required TResult Function() reloadCateogries,
+    required TResult Function() reloadData,
+    required TResult Function() logout,
+  }) {
+    return uploadAvatar(file);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(VoidCallback callback)? getData,
+    TResult? Function()? reloadProfile,
+    TResult? Function(String name, VoidCallback callback)? updateProfile,
+    TResult? Function(File file)? uploadAvatar,
+    TResult? Function()? reloadCateogries,
+    TResult? Function()? reloadData,
+    TResult? Function()? logout,
+  }) {
+    return uploadAvatar?.call(file);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(VoidCallback callback)? getData,
+    TResult Function()? reloadProfile,
+    TResult Function(String name, VoidCallback callback)? updateProfile,
+    TResult Function(File file)? uploadAvatar,
+    TResult Function()? reloadCateogries,
+    TResult Function()? reloadData,
+    TResult Function()? logout,
+    required TResult orElse(),
+  }) {
+    if (uploadAvatar != null) {
+      return uploadAvatar(file);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetData value) getData,
+    required TResult Function(_ReloadProfile value) reloadProfile,
+    required TResult Function(_UpdateProfile value) updateProfile,
+    required TResult Function(_UploadAvatar value) uploadAvatar,
+    required TResult Function(_ReloadCateogries value) reloadCateogries,
+    required TResult Function(_ReloadData value) reloadData,
+    required TResult Function(_Logout value) logout,
+  }) {
+    return uploadAvatar(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetData value)? getData,
+    TResult? Function(_ReloadProfile value)? reloadProfile,
+    TResult? Function(_UpdateProfile value)? updateProfile,
+    TResult? Function(_UploadAvatar value)? uploadAvatar,
+    TResult? Function(_ReloadCateogries value)? reloadCateogries,
+    TResult? Function(_ReloadData value)? reloadData,
+    TResult? Function(_Logout value)? logout,
+  }) {
+    return uploadAvatar?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetData value)? getData,
+    TResult Function(_ReloadProfile value)? reloadProfile,
+    TResult Function(_UpdateProfile value)? updateProfile,
+    TResult Function(_UploadAvatar value)? uploadAvatar,
+    TResult Function(_ReloadCateogries value)? reloadCateogries,
+    TResult Function(_ReloadData value)? reloadData,
+    TResult Function(_Logout value)? logout,
+    required TResult orElse(),
+  }) {
+    if (uploadAvatar != null) {
+      return uploadAvatar(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _UploadAvatar implements ProfileEvent {
+  const factory _UploadAvatar(final File file) = _$UploadAvatarImpl;
+
+  File get file;
+
+  /// Create a copy of ProfileEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$UploadAvatarImplCopyWith<_$UploadAvatarImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -614,6 +808,7 @@ class _$ReloadCateogriesImpl implements _ReloadCateogries {
     required TResult Function(VoidCallback callback) getData,
     required TResult Function() reloadProfile,
     required TResult Function(String name, VoidCallback callback) updateProfile,
+    required TResult Function(File file) uploadAvatar,
     required TResult Function() reloadCateogries,
     required TResult Function() reloadData,
     required TResult Function() logout,
@@ -627,6 +822,7 @@ class _$ReloadCateogriesImpl implements _ReloadCateogries {
     TResult? Function(VoidCallback callback)? getData,
     TResult? Function()? reloadProfile,
     TResult? Function(String name, VoidCallback callback)? updateProfile,
+    TResult? Function(File file)? uploadAvatar,
     TResult? Function()? reloadCateogries,
     TResult? Function()? reloadData,
     TResult? Function()? logout,
@@ -640,6 +836,7 @@ class _$ReloadCateogriesImpl implements _ReloadCateogries {
     TResult Function(VoidCallback callback)? getData,
     TResult Function()? reloadProfile,
     TResult Function(String name, VoidCallback callback)? updateProfile,
+    TResult Function(File file)? uploadAvatar,
     TResult Function()? reloadCateogries,
     TResult Function()? reloadData,
     TResult Function()? logout,
@@ -657,6 +854,7 @@ class _$ReloadCateogriesImpl implements _ReloadCateogries {
     required TResult Function(_GetData value) getData,
     required TResult Function(_ReloadProfile value) reloadProfile,
     required TResult Function(_UpdateProfile value) updateProfile,
+    required TResult Function(_UploadAvatar value) uploadAvatar,
     required TResult Function(_ReloadCateogries value) reloadCateogries,
     required TResult Function(_ReloadData value) reloadData,
     required TResult Function(_Logout value) logout,
@@ -670,6 +868,7 @@ class _$ReloadCateogriesImpl implements _ReloadCateogries {
     TResult? Function(_GetData value)? getData,
     TResult? Function(_ReloadProfile value)? reloadProfile,
     TResult? Function(_UpdateProfile value)? updateProfile,
+    TResult? Function(_UploadAvatar value)? uploadAvatar,
     TResult? Function(_ReloadCateogries value)? reloadCateogries,
     TResult? Function(_ReloadData value)? reloadData,
     TResult? Function(_Logout value)? logout,
@@ -683,6 +882,7 @@ class _$ReloadCateogriesImpl implements _ReloadCateogries {
     TResult Function(_GetData value)? getData,
     TResult Function(_ReloadProfile value)? reloadProfile,
     TResult Function(_UpdateProfile value)? updateProfile,
+    TResult Function(_UploadAvatar value)? uploadAvatar,
     TResult Function(_ReloadCateogries value)? reloadCateogries,
     TResult Function(_ReloadData value)? reloadData,
     TResult Function(_Logout value)? logout,
@@ -743,6 +943,7 @@ class _$ReloadDataImpl implements _ReloadData {
     required TResult Function(VoidCallback callback) getData,
     required TResult Function() reloadProfile,
     required TResult Function(String name, VoidCallback callback) updateProfile,
+    required TResult Function(File file) uploadAvatar,
     required TResult Function() reloadCateogries,
     required TResult Function() reloadData,
     required TResult Function() logout,
@@ -756,6 +957,7 @@ class _$ReloadDataImpl implements _ReloadData {
     TResult? Function(VoidCallback callback)? getData,
     TResult? Function()? reloadProfile,
     TResult? Function(String name, VoidCallback callback)? updateProfile,
+    TResult? Function(File file)? uploadAvatar,
     TResult? Function()? reloadCateogries,
     TResult? Function()? reloadData,
     TResult? Function()? logout,
@@ -769,6 +971,7 @@ class _$ReloadDataImpl implements _ReloadData {
     TResult Function(VoidCallback callback)? getData,
     TResult Function()? reloadProfile,
     TResult Function(String name, VoidCallback callback)? updateProfile,
+    TResult Function(File file)? uploadAvatar,
     TResult Function()? reloadCateogries,
     TResult Function()? reloadData,
     TResult Function()? logout,
@@ -786,6 +989,7 @@ class _$ReloadDataImpl implements _ReloadData {
     required TResult Function(_GetData value) getData,
     required TResult Function(_ReloadProfile value) reloadProfile,
     required TResult Function(_UpdateProfile value) updateProfile,
+    required TResult Function(_UploadAvatar value) uploadAvatar,
     required TResult Function(_ReloadCateogries value) reloadCateogries,
     required TResult Function(_ReloadData value) reloadData,
     required TResult Function(_Logout value) logout,
@@ -799,6 +1003,7 @@ class _$ReloadDataImpl implements _ReloadData {
     TResult? Function(_GetData value)? getData,
     TResult? Function(_ReloadProfile value)? reloadProfile,
     TResult? Function(_UpdateProfile value)? updateProfile,
+    TResult? Function(_UploadAvatar value)? uploadAvatar,
     TResult? Function(_ReloadCateogries value)? reloadCateogries,
     TResult? Function(_ReloadData value)? reloadData,
     TResult? Function(_Logout value)? logout,
@@ -812,6 +1017,7 @@ class _$ReloadDataImpl implements _ReloadData {
     TResult Function(_GetData value)? getData,
     TResult Function(_ReloadProfile value)? reloadProfile,
     TResult Function(_UpdateProfile value)? updateProfile,
+    TResult Function(_UploadAvatar value)? uploadAvatar,
     TResult Function(_ReloadCateogries value)? reloadCateogries,
     TResult Function(_ReloadData value)? reloadData,
     TResult Function(_Logout value)? logout,
@@ -872,6 +1078,7 @@ class _$LogoutImpl implements _Logout {
     required TResult Function(VoidCallback callback) getData,
     required TResult Function() reloadProfile,
     required TResult Function(String name, VoidCallback callback) updateProfile,
+    required TResult Function(File file) uploadAvatar,
     required TResult Function() reloadCateogries,
     required TResult Function() reloadData,
     required TResult Function() logout,
@@ -885,6 +1092,7 @@ class _$LogoutImpl implements _Logout {
     TResult? Function(VoidCallback callback)? getData,
     TResult? Function()? reloadProfile,
     TResult? Function(String name, VoidCallback callback)? updateProfile,
+    TResult? Function(File file)? uploadAvatar,
     TResult? Function()? reloadCateogries,
     TResult? Function()? reloadData,
     TResult? Function()? logout,
@@ -898,6 +1106,7 @@ class _$LogoutImpl implements _Logout {
     TResult Function(VoidCallback callback)? getData,
     TResult Function()? reloadProfile,
     TResult Function(String name, VoidCallback callback)? updateProfile,
+    TResult Function(File file)? uploadAvatar,
     TResult Function()? reloadCateogries,
     TResult Function()? reloadData,
     TResult Function()? logout,
@@ -915,6 +1124,7 @@ class _$LogoutImpl implements _Logout {
     required TResult Function(_GetData value) getData,
     required TResult Function(_ReloadProfile value) reloadProfile,
     required TResult Function(_UpdateProfile value) updateProfile,
+    required TResult Function(_UploadAvatar value) uploadAvatar,
     required TResult Function(_ReloadCateogries value) reloadCateogries,
     required TResult Function(_ReloadData value) reloadData,
     required TResult Function(_Logout value) logout,
@@ -928,6 +1138,7 @@ class _$LogoutImpl implements _Logout {
     TResult? Function(_GetData value)? getData,
     TResult? Function(_ReloadProfile value)? reloadProfile,
     TResult? Function(_UpdateProfile value)? updateProfile,
+    TResult? Function(_UploadAvatar value)? uploadAvatar,
     TResult? Function(_ReloadCateogries value)? reloadCateogries,
     TResult? Function(_ReloadData value)? reloadData,
     TResult? Function(_Logout value)? logout,
@@ -941,6 +1152,7 @@ class _$LogoutImpl implements _Logout {
     TResult Function(_GetData value)? getData,
     TResult Function(_ReloadProfile value)? reloadProfile,
     TResult Function(_UpdateProfile value)? updateProfile,
+    TResult Function(_UploadAvatar value)? uploadAvatar,
     TResult Function(_ReloadCateogries value)? reloadCateogries,
     TResult Function(_ReloadData value)? reloadData,
     TResult Function(_Logout value)? logout,

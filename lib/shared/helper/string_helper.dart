@@ -1,10 +1,8 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
-import 'package:money_mate/shared/constants/app_constants.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 abstract class StringHelper {
@@ -101,12 +99,6 @@ abstract class StringHelper {
       locale: 'en_US',
       decimalDigits: 0,
     ).format(value);
-  }
-
-  static String? formatDateTimeRange(DateTimeRange? range) {
-    if (range == null) return null;
-    final dateFormat = DateFormat(AppConstants.formatDateDisplay);
-    return '${dateFormat.format(range.start)}|${dateFormat.format(range.end)}';
   }
 
   static Future<String> imageBase64String(File file) async {

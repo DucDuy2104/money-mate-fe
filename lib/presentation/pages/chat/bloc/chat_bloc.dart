@@ -1,6 +1,10 @@
+import 'dart:async';
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:money_mate/core/network/models/paginated_state.dart';
 import 'package:money_mate/core/service/getit/locator.dart';
 import 'package:money_mate/core/service/langs/localization_service.dart';
 import 'package:money_mate/core/service/socket/socket_service.dart';
@@ -20,7 +24,7 @@ part 'chat_event.dart';
 part 'chat_state.dart';
 part 'chat_bloc.freezed.dart';
 
-class ChatBloc extends Bloc<ChatEvent, ChatState> {
+class ChatBloc extends Bloc<ChatEvent, ChatState> with PaginatedMixin<Message> {
   final ConversationRepository _conversationRepository =
       getIt<ConversationRepository>();
   final MessagesRepository _messagesRepository = getIt<MessagesRepository>();
@@ -40,6 +44,7 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
     on<_SetMessageCancel>(_onSetMessageCancel);
     on<_SetMessageEnable>(_onSetMessageEnable);
     on<_UpdateBot>(_onUpdateBot);
+    on<_LoadMoreMessages>(_onLoadMoreMessages);
   }
 
   Future<void> _onGetChatData(
@@ -67,7 +72,7 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
         messagesResult.fold(
           (failure) => emit(ChatState.error(failure.message)),
           (messages) => emit(ChatState.loaded(ChatLoadedData(
-              messages: messages.reversed.toList(),
+              messageData: handleFirstFetch(messages, PaginatedState()),
               conversation: conversation))),
         );
       }
@@ -139,8 +144,8 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
     state.maybeMap(
       loaded: (data) => emit(
         ChatState.loaded(data.chatData.copyWith(
-            messages: _updateTransactionInMessageList(
-                data.chatData.messages,
+            messageData: _updateTransactionInMessageList(
+                data.chatData.messageData,
                 event.id,
                 (transaction) =>
                     transaction.copyWith(isCancel: true, isLoading: false)))),
@@ -155,8 +160,8 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
     state.maybeMap(
       loaded: (data) => emit(
         ChatState.loaded(data.chatData.copyWith(
-            messages: _updateTransactionInMessageList(
-                data.chatData.messages,
+            messageData: _updateTransactionInMessageList(
+                data.chatData.messageData,
                 event.id,
                 (transaction) =>
                     transaction.copyWith(isCancel: false, isLoading: false)))),
@@ -171,8 +176,8 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
     state.maybeMap(
       loaded: (data) => emit(
         ChatState.loaded(data.chatData.copyWith(
-            messages: _updateTransactionInMessageList(
-                data.chatData.messages,
+            messageData: _updateTransactionInMessageList(
+                data.chatData.messageData,
                 event.id,
                 (transaction) => transaction.copyWith(isLoading: true)))),
       ),
@@ -180,28 +185,58 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
     );
   }
 
+  // Load more messages
+  void _onLoadMoreMessages(
+      _LoadMoreMessages event, Emitter<ChatState> emit) async {
+    final curState =
+        state.maybeMap(loaded: (value) => value.chatData, orElse: () => null);
+
+    if (curState == null ||
+        curState.messageData.isLoading ||
+        !curState.messageData.hasNext) {
+      return;
+    }
+    emit(ChatState.loaded(curState.copyWith(
+        messageData: curState.messageData.copyWith(isLoading: true))));
+    try {
+      final loadMessage = await _messagesRepository.getMessages(
+          curState.conversation.id,
+          lastMessageId: curState.messageData.last?.id);
+      loadMessage.fold((failure) {
+        emit(ChatState.error(failure.message));
+      }, (data) {
+        emit(ChatState.loaded(curState.copyWith(
+            messageData: handleFetchMore(data, curState.messageData))));
+      });
+    } catch (e) {
+      log(e.toString());
+      emit(const ChatState.error('Có lỗi xảy ra'));
+    }
+  }
+
   // Helper function to update a transaction inside a message in the list
-  List<Message> _updateTransactionInMessageList(
-    List<Message> messages,
+  PaginatedState<Message> _updateTransactionInMessageList(
+    PaginatedState<Message> messageState,
     String messageId,
     Transaction Function(Transaction) updateFunction,
   ) {
-    return messages.map((message) {
+    return messageState.copyWith(
+        data: messageState.data.map((message) {
       if (message.id == messageId && message.transaction != null) {
         return message.copyWith(
           transaction: updateFunction(message.transaction!),
         );
       }
       return message;
-    }).toList();
+    }).toList());
   }
 
-// Add new Message
+  // Add new Message
   void _onUpdateMessages(_UpdateMessages event, Emitter<ChatState> emit) {
     state.maybeMap(
       loaded: (data) {
-        emit(ChatState.loaded(data.chatData
-            .copyWith(messages: [event.message, ...data.chatData.messages])));
+        emit(ChatState.loaded(data.chatData.copyWith(
+            messageData: addItem(event.message, data.chatData.messageData))));
       },
       orElse: () {},
     );

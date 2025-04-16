@@ -9,9 +9,10 @@ class MessagesRepositoryImpl extends MessagesRepository {
   final MessagesRemoteDataSource _messagesRemoteDataSource;
   MessagesRepositoryImpl(this._messagesRemoteDataSource);
   @override
-  ResultFuture<List<Message>> getMessages(String conversationId) async {
-    final result =
-        await this._messagesRemoteDataSource.getMessages(conversationId);
+  ResultFuture<List<Message>> getMessages(String conversationId,
+      {String? lastMessageId}) async {
+    final result = await _messagesRemoteDataSource.getMessages(conversationId,
+        lastMessageId: lastMessageId);
     return result.fold(
         (failure) => Left(failure),
         (messageModels) =>

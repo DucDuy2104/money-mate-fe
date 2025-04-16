@@ -1019,6 +1019,111 @@ class S {
       args: [],
     );
   }
+
+  /// `Enable Access`
+  String get enableAccessTitle {
+    return Intl.message(
+      'Enable Access',
+      name: 'enableAccessTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `To take photos, please enable camera access in Settings.`
+  String get cameraPermissionMessage {
+    return Intl.message(
+      'To take photos, please enable camera access in Settings.',
+      name: 'cameraPermissionMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `To select images, please enable photo library access in Settings.`
+  String get photosPermissionMessage {
+    return Intl.message(
+      'To select images, please enable photo library access in Settings.',
+      name: 'photosPermissionMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `To receive notifications, please enable notification access in Settings.`
+  String get notificationPermissionMessage {
+    return Intl.message(
+      'To receive notifications, please enable notification access in Settings.',
+      name: 'notificationPermissionMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `To use this feature, please enable permissions in Settings.`
+  String get genericPermissionMessage {
+    return Intl.message(
+      'To use this feature, please enable permissions in Settings.',
+      name: 'genericPermissionMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Settings`
+  String get settingsButton {
+    return Intl.message('Settings', name: 'settingsButton', desc: '', args: []);
+  }
+
+  /// `Cancel`
+  String get cancelButton {
+    return Intl.message('Cancel', name: 'cancelButton', desc: '', args: []);
+  }
+
+  /// `Could not open settings.`
+  String get errorOpenSettings {
+    return Intl.message(
+      'Could not open settings.',
+      name: 'errorOpenSettings',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Location Permission Needed`
+  String get locationPermissionTitle {
+    return Intl.message(
+      'Location Permission Needed',
+      name: 'locationPermissionTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You denied location permission which is required to execute selected operation. Please grant it from app settings.`
+  String get locationPermissionMessageIos {
+    return Intl.message(
+      'You denied location permission which is required to execute selected operation. Please grant it from app settings.',
+      name: 'locationPermissionMessageIos',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `OK`
+  String get okButton {
+    return Intl.message('OK', name: 'okButton', desc: '', args: []);
+  }
+
+  /// `Permission Denied`
+  String get permissionDeniedTitle {
+    return Intl.message(
+      'Permission Denied',
+      name: 'permissionDeniedTitle',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -1,3 +1,7 @@
+import 'dart:async';
+import 'dart:developer';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -9,6 +13,7 @@ import 'package:money_mate/domain/entities/user.dart';
 import 'package:money_mate/shared/enums/category_format.dart';
 import 'package:money_mate/shared/enums/socket_enum.dart';
 import 'package:money_mate/domain/entities/category.dart';
+import 'package:money_mate/shared/helper/upload_helper.dart';
 
 part 'profile_event.dart';
 part 'profile_state.dart';
@@ -19,6 +24,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   final CategoriesRepository _categoriesRepository =
       getIt<CategoriesRepository>();
   final SocketService _socketService = getIt<SocketService>();
+  final UploadHelper _uploadHelper = getIt<UploadHelper>();
   ProfileBloc() : super(const ProfileState.initial()) {
     on<_GetData>(_onGetData);
     on<_UpdateProfile>(_onUpdateProfile);
@@ -26,6 +32,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     on<_ReloadCateogries>(_onReloadCateogries);
     on<_ReloadData>(_onReloadData);
     on<_Logout>(_onLogout);
+    on<_UploadAvatar>(_onUploadAvatar);
   }
 
   void _onGetData(_GetData event, Emitter<ProfileState> emit) async {
@@ -94,12 +101,46 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       updatedProfile.fold((failure) {
         emit(ProfileState.error(failure.message));
       }, (updatedProfile) {
+        state.maybeMap(
+            updating: (data) {
+              emit(ProfileState.loaded(
+                  data.data.copyWith(profile: data.data.profile.copyWith(name: updatedProfile.name))));
+            },
+            orElse: () {});
         event.callback();
       });
     } catch (e) {
       emit(const ProfileState.error("Có lỗi khi cập nhật"));
       debugPrint(e.toString());
       return;
+    }
+  }
+
+  FutureOr<void> _onUploadAvatar(
+      _UploadAvatar event, Emitter<ProfileState> emit) async {
+    state.maybeMap(
+        loaded: (state) {
+          emit(ProfileState.updating(state.data));
+        },
+        orElse: () {});
+    try {
+      final uploadUrl = await _uploadHelper.uploadFile(event.file);
+      final updateResult =
+          await _usersRepository.update({'avatarUrl': uploadUrl});
+      updateResult.fold((failure) {
+        emit(ProfileState.error(failure.message));
+      }, (updatedProfile) {
+        state.maybeMap(
+            updating: (data) {
+              emit(ProfileState.loaded(data.data.copyWith(
+                  profile: data.data.profile
+                      .copyWith(avatar: updatedProfile.avatar))));
+            },
+            orElse: () {});
+      });
+    } catch (e) {
+      log(e.toString());
+      emit(const ProfileState.error("Có lỗi khi cập nhật"));
     }
   }
 

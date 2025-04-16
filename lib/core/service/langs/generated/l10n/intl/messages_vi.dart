@@ -59,7 +59,11 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "budgetWarn": MessageLookupByLibrary.simpleMessage("Cảnh báo ngân sách"),
     "budgetWarnWhen": m2,
+    "cameraPermissionMessage": MessageLookupByLibrary.simpleMessage(
+      "Để chụp ảnh, vui lòng bật quyền truy cập máy ảnh trong Cài đặt.",
+    ),
     "cancel": MessageLookupByLibrary.simpleMessage("Huỷ"),
+    "cancelButton": MessageLookupByLibrary.simpleMessage("Hủy"),
     "cancelConfirm": MessageLookupByLibrary.simpleMessage("Xác nhận huỷ bỏ"),
     "cancelTransaction": MessageLookupByLibrary.simpleMessage("Huỷ bỏ"),
     "cancelTransactionConfirm": MessageLookupByLibrary.simpleMessage(
@@ -95,15 +99,24 @@ class MessageLookup extends MessageLookupByLibrary {
     "emptyFieldError": MessageLookupByLibrary.simpleMessage(
       "Vui lòng nhập đủ thông tin",
     ),
+    "enableAccessTitle": MessageLookupByLibrary.simpleMessage(
+      "Cho phép truy cập",
+    ),
     "enterBudget": MessageLookupByLibrary.simpleMessage("Nhập ngân sách"),
     "enterName": MessageLookupByLibrary.simpleMessage("Nhập tên"),
     "enterOtp": MessageLookupByLibrary.simpleMessage("Nhập mã OTP"),
+    "errorOpenSettings": MessageLookupByLibrary.simpleMessage(
+      "Không thể mở cài đặt.",
+    ),
     "expense": MessageLookupByLibrary.simpleMessage("Chi tiêu"),
     "expenseByCategory": MessageLookupByLibrary.simpleMessage(
       "Chi tiêu theo danh mục",
     ),
     "forgotPassword": MessageLookupByLibrary.simpleMessage("Quên mật khẩu"),
     "general": MessageLookupByLibrary.simpleMessage("Chung"),
+    "genericPermissionMessage": MessageLookupByLibrary.simpleMessage(
+      "Để sử dụng tính năng này, vui lòng bật quyền trong Cài đặt.",
+    ),
     "getCategoriesError": MessageLookupByLibrary.simpleMessage(
       "Lỗi khi lấy danh mục, vui lòng thử lại",
     ),
@@ -120,6 +133,12 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "language": MessageLookupByLibrary.simpleMessage("Ngôn ngữ"),
     "lastUpdatedAt": MessageLookupByLibrary.simpleMessage("Lần cuối cập nhật"),
+    "locationPermissionMessageIos": MessageLookupByLibrary.simpleMessage(
+      "Bạn đã từ chối quyền truy cập vị trí, điều này cần thiết để thực hiện thao tác đã chọn. Vui lòng cấp quyền từ phần cài đặt ứng dụng.",
+    ),
+    "locationPermissionTitle": MessageLookupByLibrary.simpleMessage(
+      "Yêu cầu quyền truy cập vị trí",
+    ),
     "login": MessageLookupByLibrary.simpleMessage("Đăng nhập"),
     "loginNow": MessageLookupByLibrary.simpleMessage("Đăng nhập ngay"),
     "loginWithGoogle": MessageLookupByLibrary.simpleMessage(
@@ -146,7 +165,11 @@ class MessageLookup extends MessageLookupByLibrary {
     "notReceivedOtp": MessageLookupByLibrary.simpleMessage(
       "Không nhận được mã?",
     ),
+    "notificationPermissionMessage": MessageLookupByLibrary.simpleMessage(
+      "Để nhận thông báo, vui lòng bật quyền truy cập thông báo trong Cài đặt.",
+    ),
     "notifications": MessageLookupByLibrary.simpleMessage("Thông báo"),
+    "okButton": MessageLookupByLibrary.simpleMessage("Đồng ý"),
     "otpAlreadySent": MessageLookupByLibrary.simpleMessage(
       "Mã OTP đã được gửi đến bạn",
     ),
@@ -158,6 +181,12 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "passwordNotMatch": MessageLookupByLibrary.simpleMessage(
       "Mật khẩu không trùng khớp",
+    ),
+    "permissionDeniedTitle": MessageLookupByLibrary.simpleMessage(
+      "Đã từ chối quyền",
+    ),
+    "photosPermissionMessage": MessageLookupByLibrary.simpleMessage(
+      "Để chọn ảnh, vui lòng bật quyền truy cập thư viện ảnh trong Cài đặt.",
     ),
     "recentTransactions": MessageLookupByLibrary.simpleMessage(
       "Chi tiêu gần đây",
@@ -213,6 +242,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Lỗi khi cài đặt danh mục, vui lòng thử lại",
     ),
     "setting": MessageLookupByLibrary.simpleMessage("Cài đặt"),
+    "settingsButton": MessageLookupByLibrary.simpleMessage("Cài đặt"),
     "setup": MessageLookupByLibrary.simpleMessage("Thiết lập tài khoản"),
     "setupPlease": MessageLookupByLibrary.simpleMessage(
       "Vui lòng nhập thêm thông tin (Tên và ngân sách hiện tại của bạn) để thiết lập tài khoản",

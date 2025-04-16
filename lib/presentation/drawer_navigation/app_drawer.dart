@@ -11,6 +11,7 @@ import 'package:money_mate/presentation/pages/home/bloc/home_bloc.dart';
 import 'package:money_mate/presentation/pages/profile/bloc/profile_bloc.dart';
 import 'package:money_mate/presentation/routes/bloc/routes_bloc.dart';
 import 'package:money_mate/presentation/routes/route_name.dart';
+import 'package:money_mate/shared/constants/avatar_component.dart';
 import 'package:money_mate/shared/constants/constants.dart';
 
 class AppDrawer extends StatefulWidget {
@@ -169,27 +170,9 @@ class _AppDrawerState extends State<AppDrawer> {
                   children: [
                     Row(
                       children: [
-                        Container(
-                          width: AppDimens.avatarSize * 1.2,
-                          height: AppDimens.avatarSize * 1.2,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            border: Border.all(color: Colors.white, width: 2),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black.withOpacity(0.3),
-                                blurRadius: 8,
-                                offset: const Offset(0, 3),
-                              ),
-                            ],
-                          ),
-                          child: CircleAvatar(
-                            radius: AppDimens.avatarSize * 0.75,
-                            backgroundImage: NetworkImage(
-                                profile.avatarUrl ?? AppConstants.tempImage),
-                            backgroundColor: Colors.grey[200],
-                          ),
-                        ),
+                        AvatarComponent(
+                            url: profile.avatar,
+                            radius: AppDimens.avatarSize * 0.6),
                         AppDimens.spaceMd,
                         Expanded(
                           child: Column(

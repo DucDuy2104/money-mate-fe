@@ -4,15 +4,19 @@ import 'package:money_mate/data/models/message_model.dart';
 import 'package:money_mate/shared/utils/typedefs.dart';
 
 abstract class MessagesRemoteDataSource {
-  ResultFuture<List<MessageModel>> getMessages(String conversationId);
+  ResultFuture<List<MessageModel>> getMessages(
+      String conversationId, {String? lastMessageId});
 }
 
 class MessagesRemoteDataSourceImpl extends MessagesRemoteDataSource {
   final ApiClient _apiClient;
   MessagesRemoteDataSourceImpl(this._apiClient);
   @override
-  ResultFuture<List<MessageModel>> getMessages(String conversationId) {
-    final req = ApiRequest(url: '/messages/$conversationId');
+  ResultFuture<List<MessageModel>> getMessages(
+      String conversationId, {String? lastMessageId}) {
+    final req = ApiRequest(
+        url: '/messages/$conversationId',
+        query: {'lastMessageId': lastMessageId});
     return _apiClient.get(
         req: req,
         parser: (data) =>
