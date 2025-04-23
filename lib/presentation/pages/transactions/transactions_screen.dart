@@ -9,8 +9,32 @@ import 'package:money_mate/shared/constants/app_theme.dart';
 import 'package:money_mate/shared/extensions/datetime_ext.dart';
 import 'package:money_mate/shared/extensions/transactions_ext.dart';
 
-class TransactionsScreen extends StatelessWidget {
+class TransactionsScreen extends StatefulWidget {
   const TransactionsScreen({super.key});
+
+  @override
+  State<TransactionsScreen> createState() => _TransactionsScreenState();
+}
+
+class _TransactionsScreenState extends State<TransactionsScreen> {
+  final ScrollController _scrollController = ScrollController();
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _scrollController.addListener(() {
+        transactionsListen();
+      });
+    });
+  }
+
+  void transactionsListen() {
+    if (_scrollController.position.pixels >=
+        _scrollController.position.maxScrollExtent - 50) {
+      BlocProvider.of<HomeBloc>(context)
+          .add(const HomeEvent.loadMoreTransactions());
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +43,7 @@ class TransactionsScreen extends StatelessWidget {
       builder: (context, state) {
         final transactions = state.maybeMap(
             loaded: (value) =>
-                value.data.transactions.toFilterTransactionCreatedAt(),
+                value.data.transactionsData.data.toFilterTransactionCreatedAt(),
             orElse: () => [] as List<Transaction>);
         return Scaffold(
           appBar: AppBar(
@@ -29,6 +53,7 @@ class TransactionsScreen extends StatelessWidget {
             padding:
                 const EdgeInsets.symmetric(horizontal: AppDimens.paddingMd),
             child: ListView.separated(
+                controller: _scrollController,
                 itemBuilder: (BuildContext context, int index) {
                   final transaction = transactions.elementAt(index);
                   return Column(

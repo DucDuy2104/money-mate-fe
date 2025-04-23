@@ -10,8 +10,8 @@ class TransactionsRepositoryImpl extends TransactionsRepository {
   TransactionsRepositoryImpl(this._remoteDataSource);
 
   @override
-  ResultFuture<List<Transaction>> getTransactions() async {
-    final result = await _remoteDataSource.getTransactions();
+  ResultFuture<List<Transaction>> getTransactions({String? lastTransactionId}) async {
+    final result = await _remoteDataSource.getTransactions(lastTransactionId: lastTransactionId);
     return result.fold(
         (failure) => Left(failure),
         (transactionModels) =>

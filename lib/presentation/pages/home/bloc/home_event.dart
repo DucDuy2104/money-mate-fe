@@ -7,4 +7,5 @@ class HomeEvent with _$HomeEvent {
   const factory HomeEvent.connect() = _Connect;
   const factory HomeEvent.reloadCategories() = _ReloadCategories;
   const factory HomeEvent.logout() = _Logout;
+  const factory HomeEvent.loadMoreTransactions() = _LoadMoreTransactions;
 }

@@ -23,6 +23,7 @@ mixin _$HomeEvent {
     required TResult Function() connect,
     required TResult Function() reloadCategories,
     required TResult Function() logout,
+    required TResult Function() loadMoreTransactions,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -32,6 +33,7 @@ mixin _$HomeEvent {
     TResult? Function()? connect,
     TResult? Function()? reloadCategories,
     TResult? Function()? logout,
+    TResult? Function()? loadMoreTransactions,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -41,6 +43,7 @@ mixin _$HomeEvent {
     TResult Function()? connect,
     TResult Function()? reloadCategories,
     TResult Function()? logout,
+    TResult Function()? loadMoreTransactions,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -51,6 +54,7 @@ mixin _$HomeEvent {
     required TResult Function(_Connect value) connect,
     required TResult Function(_ReloadCategories value) reloadCategories,
     required TResult Function(_Logout value) logout,
+    required TResult Function(_LoadMoreTransactions value) loadMoreTransactions,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -60,6 +64,7 @@ mixin _$HomeEvent {
     TResult? Function(_Connect value)? connect,
     TResult? Function(_ReloadCategories value)? reloadCategories,
     TResult? Function(_Logout value)? logout,
+    TResult? Function(_LoadMoreTransactions value)? loadMoreTransactions,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -69,6 +74,7 @@ mixin _$HomeEvent {
     TResult Function(_Connect value)? connect,
     TResult Function(_ReloadCategories value)? reloadCategories,
     TResult Function(_Logout value)? logout,
+    TResult Function(_LoadMoreTransactions value)? loadMoreTransactions,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -168,6 +174,7 @@ class _$GetDataImpl implements _GetData {
     required TResult Function() connect,
     required TResult Function() reloadCategories,
     required TResult Function() logout,
+    required TResult Function() loadMoreTransactions,
   }) {
     return getData(callback);
   }
@@ -180,6 +187,7 @@ class _$GetDataImpl implements _GetData {
     TResult? Function()? connect,
     TResult? Function()? reloadCategories,
     TResult? Function()? logout,
+    TResult? Function()? loadMoreTransactions,
   }) {
     return getData?.call(callback);
   }
@@ -192,6 +200,7 @@ class _$GetDataImpl implements _GetData {
     TResult Function()? connect,
     TResult Function()? reloadCategories,
     TResult Function()? logout,
+    TResult Function()? loadMoreTransactions,
     required TResult orElse(),
   }) {
     if (getData != null) {
@@ -208,6 +217,7 @@ class _$GetDataImpl implements _GetData {
     required TResult Function(_Connect value) connect,
     required TResult Function(_ReloadCategories value) reloadCategories,
     required TResult Function(_Logout value) logout,
+    required TResult Function(_LoadMoreTransactions value) loadMoreTransactions,
   }) {
     return getData(this);
   }
@@ -220,6 +230,7 @@ class _$GetDataImpl implements _GetData {
     TResult? Function(_Connect value)? connect,
     TResult? Function(_ReloadCategories value)? reloadCategories,
     TResult? Function(_Logout value)? logout,
+    TResult? Function(_LoadMoreTransactions value)? loadMoreTransactions,
   }) {
     return getData?.call(this);
   }
@@ -232,6 +243,7 @@ class _$GetDataImpl implements _GetData {
     TResult Function(_Connect value)? connect,
     TResult Function(_ReloadCategories value)? reloadCategories,
     TResult Function(_Logout value)? logout,
+    TResult Function(_LoadMoreTransactions value)? loadMoreTransactions,
     required TResult orElse(),
   }) {
     if (getData != null) {
@@ -299,6 +311,7 @@ class _$ReloadDataImpl implements _ReloadData {
     required TResult Function() connect,
     required TResult Function() reloadCategories,
     required TResult Function() logout,
+    required TResult Function() loadMoreTransactions,
   }) {
     return reloadData();
   }
@@ -311,6 +324,7 @@ class _$ReloadDataImpl implements _ReloadData {
     TResult? Function()? connect,
     TResult? Function()? reloadCategories,
     TResult? Function()? logout,
+    TResult? Function()? loadMoreTransactions,
   }) {
     return reloadData?.call();
   }
@@ -323,6 +337,7 @@ class _$ReloadDataImpl implements _ReloadData {
     TResult Function()? connect,
     TResult Function()? reloadCategories,
     TResult Function()? logout,
+    TResult Function()? loadMoreTransactions,
     required TResult orElse(),
   }) {
     if (reloadData != null) {
@@ -339,6 +354,7 @@ class _$ReloadDataImpl implements _ReloadData {
     required TResult Function(_Connect value) connect,
     required TResult Function(_ReloadCategories value) reloadCategories,
     required TResult Function(_Logout value) logout,
+    required TResult Function(_LoadMoreTransactions value) loadMoreTransactions,
   }) {
     return reloadData(this);
   }
@@ -351,6 +367,7 @@ class _$ReloadDataImpl implements _ReloadData {
     TResult? Function(_Connect value)? connect,
     TResult? Function(_ReloadCategories value)? reloadCategories,
     TResult? Function(_Logout value)? logout,
+    TResult? Function(_LoadMoreTransactions value)? loadMoreTransactions,
   }) {
     return reloadData?.call(this);
   }
@@ -363,6 +380,7 @@ class _$ReloadDataImpl implements _ReloadData {
     TResult Function(_Connect value)? connect,
     TResult Function(_ReloadCategories value)? reloadCategories,
     TResult Function(_Logout value)? logout,
+    TResult Function(_LoadMoreTransactions value)? loadMoreTransactions,
     required TResult orElse(),
   }) {
     if (reloadData != null) {
@@ -422,6 +440,7 @@ class _$ConnectImpl implements _Connect {
     required TResult Function() connect,
     required TResult Function() reloadCategories,
     required TResult Function() logout,
+    required TResult Function() loadMoreTransactions,
   }) {
     return connect();
   }
@@ -434,6 +453,7 @@ class _$ConnectImpl implements _Connect {
     TResult? Function()? connect,
     TResult? Function()? reloadCategories,
     TResult? Function()? logout,
+    TResult? Function()? loadMoreTransactions,
   }) {
     return connect?.call();
   }
@@ -446,6 +466,7 @@ class _$ConnectImpl implements _Connect {
     TResult Function()? connect,
     TResult Function()? reloadCategories,
     TResult Function()? logout,
+    TResult Function()? loadMoreTransactions,
     required TResult orElse(),
   }) {
     if (connect != null) {
@@ -462,6 +483,7 @@ class _$ConnectImpl implements _Connect {
     required TResult Function(_Connect value) connect,
     required TResult Function(_ReloadCategories value) reloadCategories,
     required TResult Function(_Logout value) logout,
+    required TResult Function(_LoadMoreTransactions value) loadMoreTransactions,
   }) {
     return connect(this);
   }
@@ -474,6 +496,7 @@ class _$ConnectImpl implements _Connect {
     TResult? Function(_Connect value)? connect,
     TResult? Function(_ReloadCategories value)? reloadCategories,
     TResult? Function(_Logout value)? logout,
+    TResult? Function(_LoadMoreTransactions value)? loadMoreTransactions,
   }) {
     return connect?.call(this);
   }
@@ -486,6 +509,7 @@ class _$ConnectImpl implements _Connect {
     TResult Function(_Connect value)? connect,
     TResult Function(_ReloadCategories value)? reloadCategories,
     TResult Function(_Logout value)? logout,
+    TResult Function(_LoadMoreTransactions value)? loadMoreTransactions,
     required TResult orElse(),
   }) {
     if (connect != null) {
@@ -545,6 +569,7 @@ class _$ReloadCategoriesImpl implements _ReloadCategories {
     required TResult Function() connect,
     required TResult Function() reloadCategories,
     required TResult Function() logout,
+    required TResult Function() loadMoreTransactions,
   }) {
     return reloadCategories();
   }
@@ -557,6 +582,7 @@ class _$ReloadCategoriesImpl implements _ReloadCategories {
     TResult? Function()? connect,
     TResult? Function()? reloadCategories,
     TResult? Function()? logout,
+    TResult? Function()? loadMoreTransactions,
   }) {
     return reloadCategories?.call();
   }
@@ -569,6 +595,7 @@ class _$ReloadCategoriesImpl implements _ReloadCategories {
     TResult Function()? connect,
     TResult Function()? reloadCategories,
     TResult Function()? logout,
+    TResult Function()? loadMoreTransactions,
     required TResult orElse(),
   }) {
     if (reloadCategories != null) {
@@ -585,6 +612,7 @@ class _$ReloadCategoriesImpl implements _ReloadCategories {
     required TResult Function(_Connect value) connect,
     required TResult Function(_ReloadCategories value) reloadCategories,
     required TResult Function(_Logout value) logout,
+    required TResult Function(_LoadMoreTransactions value) loadMoreTransactions,
   }) {
     return reloadCategories(this);
   }
@@ -597,6 +625,7 @@ class _$ReloadCategoriesImpl implements _ReloadCategories {
     TResult? Function(_Connect value)? connect,
     TResult? Function(_ReloadCategories value)? reloadCategories,
     TResult? Function(_Logout value)? logout,
+    TResult? Function(_LoadMoreTransactions value)? loadMoreTransactions,
   }) {
     return reloadCategories?.call(this);
   }
@@ -609,6 +638,7 @@ class _$ReloadCategoriesImpl implements _ReloadCategories {
     TResult Function(_Connect value)? connect,
     TResult Function(_ReloadCategories value)? reloadCategories,
     TResult Function(_Logout value)? logout,
+    TResult Function(_LoadMoreTransactions value)? loadMoreTransactions,
     required TResult orElse(),
   }) {
     if (reloadCategories != null) {
@@ -668,6 +698,7 @@ class _$LogoutImpl implements _Logout {
     required TResult Function() connect,
     required TResult Function() reloadCategories,
     required TResult Function() logout,
+    required TResult Function() loadMoreTransactions,
   }) {
     return logout();
   }
@@ -680,6 +711,7 @@ class _$LogoutImpl implements _Logout {
     TResult? Function()? connect,
     TResult? Function()? reloadCategories,
     TResult? Function()? logout,
+    TResult? Function()? loadMoreTransactions,
   }) {
     return logout?.call();
   }
@@ -692,6 +724,7 @@ class _$LogoutImpl implements _Logout {
     TResult Function()? connect,
     TResult Function()? reloadCategories,
     TResult Function()? logout,
+    TResult Function()? loadMoreTransactions,
     required TResult orElse(),
   }) {
     if (logout != null) {
@@ -708,6 +741,7 @@ class _$LogoutImpl implements _Logout {
     required TResult Function(_Connect value) connect,
     required TResult Function(_ReloadCategories value) reloadCategories,
     required TResult Function(_Logout value) logout,
+    required TResult Function(_LoadMoreTransactions value) loadMoreTransactions,
   }) {
     return logout(this);
   }
@@ -720,6 +754,7 @@ class _$LogoutImpl implements _Logout {
     TResult? Function(_Connect value)? connect,
     TResult? Function(_ReloadCategories value)? reloadCategories,
     TResult? Function(_Logout value)? logout,
+    TResult? Function(_LoadMoreTransactions value)? loadMoreTransactions,
   }) {
     return logout?.call(this);
   }
@@ -732,6 +767,7 @@ class _$LogoutImpl implements _Logout {
     TResult Function(_Connect value)? connect,
     TResult Function(_ReloadCategories value)? reloadCategories,
     TResult Function(_Logout value)? logout,
+    TResult Function(_LoadMoreTransactions value)? loadMoreTransactions,
     required TResult orElse(),
   }) {
     if (logout != null) {
@@ -743,6 +779,136 @@ class _$LogoutImpl implements _Logout {
 
 abstract class _Logout implements HomeEvent {
   const factory _Logout() = _$LogoutImpl;
+}
+
+/// @nodoc
+abstract class _$$LoadMoreTransactionsImplCopyWith<$Res> {
+  factory _$$LoadMoreTransactionsImplCopyWith(_$LoadMoreTransactionsImpl value,
+          $Res Function(_$LoadMoreTransactionsImpl) then) =
+      __$$LoadMoreTransactionsImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$LoadMoreTransactionsImplCopyWithImpl<$Res>
+    extends _$HomeEventCopyWithImpl<$Res, _$LoadMoreTransactionsImpl>
+    implements _$$LoadMoreTransactionsImplCopyWith<$Res> {
+  __$$LoadMoreTransactionsImplCopyWithImpl(_$LoadMoreTransactionsImpl _value,
+      $Res Function(_$LoadMoreTransactionsImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of HomeEvent
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$LoadMoreTransactionsImpl implements _LoadMoreTransactions {
+  const _$LoadMoreTransactionsImpl();
+
+  @override
+  String toString() {
+    return 'HomeEvent.loadMoreTransactions()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$LoadMoreTransactionsImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(VoidCallback callback) getData,
+    required TResult Function() reloadData,
+    required TResult Function() connect,
+    required TResult Function() reloadCategories,
+    required TResult Function() logout,
+    required TResult Function() loadMoreTransactions,
+  }) {
+    return loadMoreTransactions();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(VoidCallback callback)? getData,
+    TResult? Function()? reloadData,
+    TResult? Function()? connect,
+    TResult? Function()? reloadCategories,
+    TResult? Function()? logout,
+    TResult? Function()? loadMoreTransactions,
+  }) {
+    return loadMoreTransactions?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(VoidCallback callback)? getData,
+    TResult Function()? reloadData,
+    TResult Function()? connect,
+    TResult Function()? reloadCategories,
+    TResult Function()? logout,
+    TResult Function()? loadMoreTransactions,
+    required TResult orElse(),
+  }) {
+    if (loadMoreTransactions != null) {
+      return loadMoreTransactions();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetData value) getData,
+    required TResult Function(_ReloadData value) reloadData,
+    required TResult Function(_Connect value) connect,
+    required TResult Function(_ReloadCategories value) reloadCategories,
+    required TResult Function(_Logout value) logout,
+    required TResult Function(_LoadMoreTransactions value) loadMoreTransactions,
+  }) {
+    return loadMoreTransactions(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetData value)? getData,
+    TResult? Function(_ReloadData value)? reloadData,
+    TResult? Function(_Connect value)? connect,
+    TResult? Function(_ReloadCategories value)? reloadCategories,
+    TResult? Function(_Logout value)? logout,
+    TResult? Function(_LoadMoreTransactions value)? loadMoreTransactions,
+  }) {
+    return loadMoreTransactions?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetData value)? getData,
+    TResult Function(_ReloadData value)? reloadData,
+    TResult Function(_Connect value)? connect,
+    TResult Function(_ReloadCategories value)? reloadCategories,
+    TResult Function(_Logout value)? logout,
+    TResult Function(_LoadMoreTransactions value)? loadMoreTransactions,
+    required TResult orElse(),
+  }) {
+    if (loadMoreTransactions != null) {
+      return loadMoreTransactions(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _LoadMoreTransactions implements HomeEvent {
+  const factory _LoadMoreTransactions() = _$LoadMoreTransactionsImpl;
 }
 
 /// @nodoc
@@ -1371,7 +1537,8 @@ abstract class _Loaded implements HomeState {
 
 /// @nodoc
 mixin _$HomeData {
-  List<Transaction> get transactions => throw _privateConstructorUsedError;
+  PaginatedState<Transaction> get transactionsData =>
+      throw _privateConstructorUsedError;
   List<Category> get categories => throw _privateConstructorUsedError;
   FourMonthsStatistic get statistic => throw _privateConstructorUsedError;
 
@@ -1388,10 +1555,11 @@ abstract class $HomeDataCopyWith<$Res> {
       _$HomeDataCopyWithImpl<$Res, HomeData>;
   @useResult
   $Res call(
-      {List<Transaction> transactions,
+      {PaginatedState<Transaction> transactionsData,
       List<Category> categories,
       FourMonthsStatistic statistic});
 
+  $PaginatedStateCopyWith<Transaction, $Res> get transactionsData;
   $FourMonthsStatisticCopyWith<$Res> get statistic;
 }
 
@@ -1410,15 +1578,15 @@ class _$HomeDataCopyWithImpl<$Res, $Val extends HomeData>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? transactions = null,
+    Object? transactionsData = null,
     Object? categories = null,
     Object? statistic = null,
   }) {
     return _then(_value.copyWith(
-      transactions: null == transactions
-          ? _value.transactions
-          : transactions // ignore: cast_nullable_to_non_nullable
-              as List<Transaction>,
+      transactionsData: null == transactionsData
+          ? _value.transactionsData
+          : transactionsData // ignore: cast_nullable_to_non_nullable
+              as PaginatedState<Transaction>,
       categories: null == categories
           ? _value.categories
           : categories // ignore: cast_nullable_to_non_nullable
@@ -1428,6 +1596,17 @@ class _$HomeDataCopyWithImpl<$Res, $Val extends HomeData>
           : statistic // ignore: cast_nullable_to_non_nullable
               as FourMonthsStatistic,
     ) as $Val);
+  }
+
+  /// Create a copy of HomeData
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $PaginatedStateCopyWith<Transaction, $Res> get transactionsData {
+    return $PaginatedStateCopyWith<Transaction, $Res>(_value.transactionsData,
+        (value) {
+      return _then(_value.copyWith(transactionsData: value) as $Val);
+    });
   }
 
   /// Create a copy of HomeData
@@ -1450,10 +1629,12 @@ abstract class _$$HomeDataImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {List<Transaction> transactions,
+      {PaginatedState<Transaction> transactionsData,
       List<Category> categories,
       FourMonthsStatistic statistic});
 
+  @override
+  $PaginatedStateCopyWith<Transaction, $Res> get transactionsData;
   @override
   $FourMonthsStatisticCopyWith<$Res> get statistic;
 }
@@ -1471,15 +1652,15 @@ class __$$HomeDataImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? transactions = null,
+    Object? transactionsData = null,
     Object? categories = null,
     Object? statistic = null,
   }) {
     return _then(_$HomeDataImpl(
-      transactions: null == transactions
-          ? _value._transactions
-          : transactions // ignore: cast_nullable_to_non_nullable
-              as List<Transaction>,
+      transactionsData: null == transactionsData
+          ? _value.transactionsData
+          : transactionsData // ignore: cast_nullable_to_non_nullable
+              as PaginatedState<Transaction>,
       categories: null == categories
           ? _value._categories
           : categories // ignore: cast_nullable_to_non_nullable
@@ -1496,20 +1677,13 @@ class __$$HomeDataImplCopyWithImpl<$Res>
 
 class _$HomeDataImpl implements _HomeData {
   const _$HomeDataImpl(
-      {required final List<Transaction> transactions,
+      {required this.transactionsData,
       required final List<Category> categories,
       required this.statistic})
-      : _transactions = transactions,
-        _categories = categories;
+      : _categories = categories;
 
-  final List<Transaction> _transactions;
   @override
-  List<Transaction> get transactions {
-    if (_transactions is EqualUnmodifiableListView) return _transactions;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_transactions);
-  }
-
+  final PaginatedState<Transaction> transactionsData;
   final List<Category> _categories;
   @override
   List<Category> get categories {
@@ -1523,7 +1697,7 @@ class _$HomeDataImpl implements _HomeData {
 
   @override
   String toString() {
-    return 'HomeData(transactions: $transactions, categories: $categories, statistic: $statistic)';
+    return 'HomeData(transactionsData: $transactionsData, categories: $categories, statistic: $statistic)';
   }
 
   @override
@@ -1531,8 +1705,8 @@ class _$HomeDataImpl implements _HomeData {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$HomeDataImpl &&
-            const DeepCollectionEquality()
-                .equals(other._transactions, _transactions) &&
+            (identical(other.transactionsData, transactionsData) ||
+                other.transactionsData == transactionsData) &&
             const DeepCollectionEquality()
                 .equals(other._categories, _categories) &&
             (identical(other.statistic, statistic) ||
@@ -1540,11 +1714,8 @@ class _$HomeDataImpl implements _HomeData {
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(_transactions),
-      const DeepCollectionEquality().hash(_categories),
-      statistic);
+  int get hashCode => Object.hash(runtimeType, transactionsData,
+      const DeepCollectionEquality().hash(_categories), statistic);
 
   /// Create a copy of HomeData
   /// with the given fields replaced by the non-null parameter values.
@@ -1557,12 +1728,12 @@ class _$HomeDataImpl implements _HomeData {
 
 abstract class _HomeData implements HomeData {
   const factory _HomeData(
-      {required final List<Transaction> transactions,
+      {required final PaginatedState<Transaction> transactionsData,
       required final List<Category> categories,
       required final FourMonthsStatistic statistic}) = _$HomeDataImpl;
 
   @override
-  List<Transaction> get transactions;
+  PaginatedState<Transaction> get transactionsData;
   @override
   List<Category> get categories;
   @override
