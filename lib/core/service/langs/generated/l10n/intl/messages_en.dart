@@ -58,7 +58,11 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "budgetWarn": MessageLookupByLibrary.simpleMessage("Budget Warning"),
     "budgetWarnWhen": m2,
+    "cameraPermissionMessage": MessageLookupByLibrary.simpleMessage(
+      "To take photos, please enable camera access in Settings.",
+    ),
     "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
+    "cancelButton": MessageLookupByLibrary.simpleMessage("Cancel"),
     "cancelConfirm": MessageLookupByLibrary.simpleMessage(
       "Confirm cancellation",
     ),
@@ -92,15 +96,22 @@ class MessageLookup extends MessageLookupByLibrary {
     "emptyFieldError": MessageLookupByLibrary.simpleMessage(
       "Please fill in all required fields",
     ),
+    "enableAccessTitle": MessageLookupByLibrary.simpleMessage("Enable Access"),
     "enterBudget": MessageLookupByLibrary.simpleMessage("Enter budget"),
     "enterName": MessageLookupByLibrary.simpleMessage("Enter Name"),
     "enterOtp": MessageLookupByLibrary.simpleMessage("Enter OTP"),
+    "errorOpenSettings": MessageLookupByLibrary.simpleMessage(
+      "Could not open settings.",
+    ),
     "expense": MessageLookupByLibrary.simpleMessage("Expense"),
     "expenseByCategory": MessageLookupByLibrary.simpleMessage(
       "Expenses by Category",
     ),
     "forgotPassword": MessageLookupByLibrary.simpleMessage("Forgot password"),
     "general": MessageLookupByLibrary.simpleMessage("General"),
+    "genericPermissionMessage": MessageLookupByLibrary.simpleMessage(
+      "To use this feature, please enable permissions in Settings.",
+    ),
     "getCategoriesError": MessageLookupByLibrary.simpleMessage(
       "Failed to fetch categories, please try again",
     ),
@@ -115,6 +126,12 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "language": MessageLookupByLibrary.simpleMessage("Language"),
     "lastUpdatedAt": MessageLookupByLibrary.simpleMessage("Last updated at"),
+    "locationPermissionMessageIos": MessageLookupByLibrary.simpleMessage(
+      "You denied location permission which is required to execute selected operation. Please grant it from app settings.",
+    ),
+    "locationPermissionTitle": MessageLookupByLibrary.simpleMessage(
+      "Location Permission Needed",
+    ),
     "login": MessageLookupByLibrary.simpleMessage("Login"),
     "loginNow": MessageLookupByLibrary.simpleMessage("Login now"),
     "loginWithGoogle": MessageLookupByLibrary.simpleMessage(
@@ -141,7 +158,11 @@ class MessageLookup extends MessageLookupByLibrary {
     "notReceivedOtp": MessageLookupByLibrary.simpleMessage(
       "Didn\'t receive the code?",
     ),
+    "notificationPermissionMessage": MessageLookupByLibrary.simpleMessage(
+      "To receive notifications, please enable notification access in Settings.",
+    ),
     "notifications": MessageLookupByLibrary.simpleMessage("Notifications"),
+    "okButton": MessageLookupByLibrary.simpleMessage("OK"),
     "otpAlreadySent": MessageLookupByLibrary.simpleMessage(
       "OTP has been sent to you",
     ),
@@ -155,6 +176,12 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "passwordNotMatch": MessageLookupByLibrary.simpleMessage(
       "Passwords do not match",
+    ),
+    "permissionDeniedTitle": MessageLookupByLibrary.simpleMessage(
+      "Permission Denied",
+    ),
+    "photosPermissionMessage": MessageLookupByLibrary.simpleMessage(
+      "To select images, please enable photo library access in Settings.",
     ),
     "recentTransactions": MessageLookupByLibrary.simpleMessage(
       "Recent transactions",
@@ -212,6 +239,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Failed to set up categories, please try again",
     ),
     "setting": MessageLookupByLibrary.simpleMessage("Setting"),
+    "settingsButton": MessageLookupByLibrary.simpleMessage("Settings"),
     "setup": MessageLookupByLibrary.simpleMessage("Account setup"),
     "setupPlease": MessageLookupByLibrary.simpleMessage(
       "Please enter your name and current budget to set up your account",

@@ -24,12 +24,24 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final ScrollController _transactionsController = ScrollController();
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       getData();
+      _transactionsController.addListener(() {
+        transactionsListen();
+      });
     });
+  }
+
+  void transactionsListen() {
+    if (_transactionsController.position.pixels >=
+        _transactionsController.position.maxScrollExtent - 50) {
+      BlocProvider.of<HomeBloc>(context)
+          .add(const HomeEvent.loadMoreTransactions());
+    }
   }
 
   void getCategories() {
@@ -62,7 +74,7 @@ class _HomeScreenState extends State<HomeScreen> {
       builder: (context, state) {
         return state.maybeMap(
             loaded: (state) {
-              final transactions = state.data.transactions;
+              final transactions = state.data.transactionsData.data;
               final categories = state.data.categories;
               final statistic = state.data.statistic;
               return LoadingScaffold(
@@ -116,11 +128,24 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                         ),
                         AppDimens.spaceMd,
-                        Text(s.recentTransactions,
-                            style: context.textTheme.titleLarge),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: Text(s.recentTransactions,
+                                  style: context.textTheme.titleLarge),
+                            ),
+                            GestureDetector(
+                                onTap: () {
+                                  context
+                                      .pushNamed(RouteNames.transactionsName);
+                                },
+                                child: const Icon(EvaIcons.list))
+                          ],
+                        ),
                         AppDimens.spaceSm,
                         Expanded(
                           child: ListView.separated(
+                            controller: _transactionsController,
                             separatorBuilder: (context, index) =>
                                 AppDimens.divider,
                             itemCount: transactions.length,

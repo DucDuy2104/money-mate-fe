@@ -4,7 +4,8 @@ import 'package:money_mate/data/models/transaction_model.dart';
 import 'package:money_mate/shared/utils/typedefs.dart';
 
 abstract class TransactionsRemoteDataSource {
-  ResultFuture<List<TransactionModel>> getTransactions();
+  ResultFuture<List<TransactionModel>> getTransactions(
+      {String? lastTransactionId});
   ResultFuture<TransactionModel> enableTransaction(String id);
   ResultFuture<TransactionModel> cancelTransaction(String id);
 }
@@ -13,8 +14,10 @@ class TransactionsRemoteDataSourceImpl extends TransactionsRemoteDataSource {
   final ApiClient _client;
   TransactionsRemoteDataSourceImpl(this._client);
   @override
-  ResultFuture<List<TransactionModel>> getTransactions() {
-    final req = ApiRequest(url: '/transactions');
+  ResultFuture<List<TransactionModel>> getTransactions(
+      {String? lastTransactionId}) {
+    final req = ApiRequest(
+        url: '/transactions', query: {'lastTransactionId': lastTransactionId});
     return _client.get(
         req: req,
         parser: (data) =>

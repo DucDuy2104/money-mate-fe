@@ -18,7 +18,6 @@ void showNameUpdateDialog(BuildContext context, String currentName) {
     }
     final profileBloc = BlocProvider.of<ProfileBloc>(context);
     profileBloc.add(ProfileEvent.updateProfile(nameController.text.trim(), () {
-      profileBloc.add(const ProfileEvent.reloadProfile());
       nameController.clear();
     }));
 

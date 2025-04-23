@@ -12,4 +12,5 @@ class ChatEvent with _$ChatEvent {
   const factory ChatEvent.setMessageCancel(String id) = _SetMessageCancel;
   const factory ChatEvent.setMessageEnable(String id) = _SetMessageEnable;
   const factory ChatEvent.updateBot(BuildContext context, Bot bot) = _UpdateBot;
+  const factory ChatEvent.loadMoreMessages() = _LoadMoreMessages;
 }

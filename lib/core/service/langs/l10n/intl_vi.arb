@@ -120,5 +120,17 @@
   "total": "Tổng",
   "expenseByCategory": "Chi tiêu theo danh mục",
   "noTransactions": "Bạn chưa có dữ liệu chi tiêu nào",
-  "noNotification": "Bạn không có thông báo nào"
+  "noNotification": "Bạn không có thông báo nào",
+  "enableAccessTitle": "Cho phép truy cập",
+  "cameraPermissionMessage": "Để chụp ảnh, vui lòng bật quyền truy cập máy ảnh trong Cài đặt.",
+  "photosPermissionMessage": "Để chọn ảnh, vui lòng bật quyền truy cập thư viện ảnh trong Cài đặt.",
+  "notificationPermissionMessage": "Để nhận thông báo, vui lòng bật quyền truy cập thông báo trong Cài đặt.",
+  "genericPermissionMessage": "Để sử dụng tính năng này, vui lòng bật quyền trong Cài đặt.",
+  "settingsButton": "Cài đặt",
+  "cancelButton": "Hủy",
+  "errorOpenSettings": "Không thể mở cài đặt.",
+  "locationPermissionTitle": "Yêu cầu quyền truy cập vị trí",
+  "locationPermissionMessageIos": "Bạn đã từ chối quyền truy cập vị trí, điều này cần thiết để thực hiện thao tác đã chọn. Vui lòng cấp quyền từ phần cài đặt ứng dụng.",
+  "okButton": "Đồng ý",
+  "permissionDeniedTitle": "Đã từ chối quyền"
 }

@@ -11,7 +11,7 @@ class ChatState with _$ChatState {
 @freezed
 class ChatLoadedData with _$ChatLoadedData {
   const factory ChatLoadedData({
-    required List<Message> messages,
+    required PaginatedState<Message> messageData,
     required Conversation conversation,
     @Default(false) bool isLoading,
   }) = _ChatLoadedData;

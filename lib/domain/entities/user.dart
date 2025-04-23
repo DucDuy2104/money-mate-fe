@@ -12,7 +12,7 @@ class User with _$User {
     required bool isActive,
     required bool isSetup,
     required double budget,
-    String? avatarUrl,
+    String? avatar,
     required String role,
     required int categoriesCount,
     required int transactionsCount,

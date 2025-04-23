@@ -11,7 +11,7 @@ class HomeState with _$HomeState {
 @freezed
 class HomeData with _$HomeData {
   const factory HomeData({
-    required List<Transaction> transactions,
+    required PaginatedState<Transaction> transactionsData,
     required List<Category> categories,
     required FourMonthsStatistic statistic,
   }) = _HomeData;

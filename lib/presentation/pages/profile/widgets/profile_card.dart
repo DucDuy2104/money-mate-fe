@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:money_mate/core/service/langs/generated/l10n/l10n.dart';
 import 'package:money_mate/presentation/pages/profile/bloc/profile_bloc.dart';
 import 'package:money_mate/presentation/pages/profile/widgets/profile_skeleton.dart';
+import 'package:money_mate/shared/constants/avatar_component.dart';
 import 'package:money_mate/shared/constants/constants.dart';
 import 'package:money_mate/shared/helper/currency_heler.dart';
 
@@ -38,30 +39,7 @@ class ProfileCard extends StatelessWidget {
               ),
               child: Row(
                 children: [
-                  Container(
-                    padding: const EdgeInsets.all(2.5),
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: AppColors.primaryColor,
-                      boxShadow: [
-                        BoxShadow(
-                          color: AppColors.primaryColor.withOpacity(0.3),
-                          blurRadius: 8,
-                          spreadRadius: 1,
-                          offset: const Offset(0, 2),
-                        ),
-                      ],
-                    ),
-                    child: CircleAvatar(
-                      radius: AppDimens.avatarSize / 1.7,
-                      backgroundColor: Colors.white,
-                      child: CircleAvatar(
-                        radius: (AppDimens.avatarSize / 1.7) - 2,
-                        backgroundImage: NetworkImage(
-                            profile.avatarUrl ?? AppConstants.tempImage),
-                      ),
-                    ),
-                  ),
+                  AvatarComponent(url: profile.avatar, radius: AppDimens.avatarSize / 1.7),
                   AppDimens.spaceMd,
                   Expanded(
                     child: Column(

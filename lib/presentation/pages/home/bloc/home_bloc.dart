@@ -1,6 +1,9 @@
+import 'dart:async';
+
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:money_mate/core/network/models/paginated_state.dart';
 import 'package:money_mate/core/service/getit/locator.dart';
 import 'package:money_mate/core/service/socket/socket_service.dart';
 import 'package:money_mate/data/repositories/categories_repository.dart';
@@ -16,7 +19,8 @@ part 'home_event.dart';
 part 'home_state.dart';
 part 'home_bloc.freezed.dart';
 
-class HomeBloc extends Bloc<HomeEvent, HomeState> {
+class HomeBloc extends Bloc<HomeEvent, HomeState>
+    with PaginatedMixin<Transaction> {
   final TransactionsRepository _transactionsRepository =
       getIt<TransactionsRepository>();
   final CategoriesRepository _categoriesRepository =
@@ -29,6 +33,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     on<_ReloadData>(_onReloadData);
     on<_ReloadCategories>(_onReloadCategories);
     on<_Logout>(_onLogout);
+    on<_LoadMoreTransactions>(_onLoadMoreTransactions);
   }
 
   void _onGetData(_GetData event, Emitter<HomeState> emit) async {
@@ -73,7 +78,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       );
 
       emit(HomeState.loaded(HomeData(
-          transactions: transactions,
+          transactionsData:
+              handleFirstFetch(transactions, PaginatedState<Transaction>()),
           categories: categories,
           statistic: statistic!)));
       event.callback();
@@ -119,7 +125,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       );
 
       emit(HomeState.loaded(HomeData(
-          transactions: transactions,
+          transactionsData:
+              handleFirstFetch(transactions, PaginatedState<Transaction>()),
           categories: categories,
           statistic: statistic!)));
     } catch (e) {
@@ -171,5 +178,30 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
   void _onLogout(_Logout event, Emitter<HomeState> emit) {
     emit(const HomeState.initial());
+  }
+
+  FutureOr<void> _onLoadMoreTransactions(
+      _LoadMoreTransactions event, Emitter<HomeState> emit) async {
+    final curState =
+        state.maybeMap(loaded: (data) => data.data, orElse: () => null);
+    if (curState == null ||
+        curState.transactionsData.isLoading ||
+        !curState.transactionsData.hasNext) {
+      return;
+    }
+    try {
+      final transactionsResult = await _transactionsRepository.getTransactions(
+          lastTransactionId: curState.transactionsData.last?.id);
+      transactionsResult.fold((failure) {
+        emit(const HomeState.error("Có lỗi xảy ra!"));
+      }, (transactions) {
+        emit(HomeState.loaded(curState.copyWith(
+            transactionsData:
+                handleFetchMore(transactions, curState.transactionsData))));
+      });
+    } catch (e) {
+      emit(const HomeState.error("Có lỗi xảy ra!"));
+      debugPrint(e.toString());
+    }
   }
 }
