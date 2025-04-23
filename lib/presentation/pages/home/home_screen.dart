@@ -25,6 +25,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final ScrollController _transactionsController = ScrollController();
+
   @override
   void initState() {
     super.initState();
@@ -62,6 +63,16 @@ class _HomeScreenState extends State<HomeScreen> {
             }));
           }));
         });
+  }
+
+  Future<void> _onRefresh() async {
+    // Refresh all data
+    final homeBloc = BlocProvider.of<HomeBloc>(context);
+    homeBloc.add(HomeEvent.getData(() {
+      BlocProvider.of<ProfileBloc>(context).add(ProfileEvent.getData(() {
+        getCategories();
+      }));
+    }));
   }
 
   @override
@@ -102,61 +113,66 @@ class _HomeScreenState extends State<HomeScreen> {
                       },
                       child: Image.asset(AppAssets.appLogo,
                           width: 100, height: 100, fit: BoxFit.cover)),
-                  body: Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: AppDimens.paddingMd),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        IncomeExpenseChart(statistic: statistic),
-                        AppDimens.spaceSm,
-                        Text(s.ownCategories,
-                            style: context.textTheme.titleLarge),
-                        AppDimens.spaceSm,
-                        SizedBox(
-                          height: 85,
-                          child: ListView.separated(
-                            scrollDirection: Axis.horizontal,
-                            itemCount: categories.length,
-                            itemBuilder: (context, index) {
-                              final category = categories[index];
-                              return CategoryItem(category: category);
-                            },
-                            separatorBuilder:
-                                (BuildContext context, int index) =>
-                                    AppDimens.divider,
-                          ),
-                        ),
-                        AppDimens.spaceMd,
-                        Row(
-                          children: [
-                            Expanded(
-                              child: Text(s.recentTransactions,
-                                  style: context.textTheme.titleLarge),
+                  body: RefreshIndicator(
+                    onRefresh: _onRefresh,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: AppDimens.paddingMd),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          IncomeExpenseChart(statistic: statistic),
+                          AppDimens.spaceSm,
+                          Text(s.ownCategories,
+                              style: context.textTheme.titleLarge),
+                          AppDimens.spaceSm,
+                          SizedBox(
+                            height: 85,
+                            child: ListView.separated(
+                              scrollDirection: Axis.horizontal,
+                              itemCount: categories.length,
+                              itemBuilder: (context, index) {
+                                final category = categories[index];
+                                return CategoryItem(category: category);
+                              },
+                              separatorBuilder:
+                                  (BuildContext context, int index) =>
+                                      AppDimens.divider,
                             ),
-                            GestureDetector(
-                                onTap: () {
-                                  context
-                                      .pushNamed(RouteNames.transactionsName);
-                                },
-                                child: const Icon(EvaIcons.list))
-                          ],
-                        ),
-                        AppDimens.spaceSm,
-                        Expanded(
-                          child: ListView.separated(
-                            controller: _transactionsController,
-                            separatorBuilder: (context, index) =>
-                                AppDimens.divider,
-                            itemCount: transactions.length,
-                            itemBuilder: (context, index) {
-                              final transaction = transactions[index];
-                              return TransactionItem(transaction: transaction);
-                            },
                           ),
-                        ),
-                        AppDimens.spaceSm,
-                      ],
+                          AppDimens.spaceMd,
+                          Row(
+                            children: [
+                              Expanded(
+                                child: Text(s.recentTransactions,
+                                    style: context.textTheme.titleLarge),
+                              ),
+                              GestureDetector(
+                                  onTap: () {
+                                    context
+                                        .pushNamed(RouteNames.transactionsName);
+                                  },
+                                  child: const Icon(EvaIcons.list))
+                            ],
+                          ),
+                          AppDimens.spaceSm,
+                          Expanded(
+                            child: ListView.separated(
+                              controller: _transactionsController,
+                              physics: const AlwaysScrollableScrollPhysics(),
+                              separatorBuilder: (context, index) =>
+                                  AppDimens.divider,
+                              itemCount: transactions.length,
+                              itemBuilder: (context, index) {
+                                final transaction = transactions[index];
+                                return TransactionItem(
+                                    transaction: transaction);
+                              },
+                            ),
+                          ),
+                          AppDimens.spaceSm,
+                        ],
+                      ),
                     ),
                   ),
                 ),

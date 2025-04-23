@@ -25,7 +25,7 @@ class SuggestCategoryItem extends StatelessWidget {
     final s = S.of(context);
     final isIncome = category.type == CategoriesType.income;
     final typeColor = isIncome ? AppColors.upColor : AppColors.downColor;
-    final typeText = isIncome ? s.expense : s.income;
+    final typeText = isIncome ? s.income : s.expense;
 
     return Container(
       width: MediaQuery.of(context).size.width * 0.7,
