@@ -5,6 +5,8 @@ import 'package:money_mate/core/service/langs/generated/l10n/l10n.dart';
 import 'package:money_mate/domain/entities/message.dart';
 import 'package:money_mate/presentation/pages/category/widgets/category_dialogs.dart';
 import 'package:money_mate/presentation/pages/chat/bloc/chat_bloc.dart';
+import 'package:money_mate/presentation/pages/chat/cubit/selected_invoices_cubit.dart';
+import 'package:money_mate/presentation/pages/chat/widgets/invoice_item_ui.dart';
 import 'package:money_mate/presentation/pages/chat/widgets/suggest_category.dart';
 import 'package:money_mate/presentation/pages/chat/widgets/transaction_dialogs.dart';
 import 'package:money_mate/presentation/pages/chat/widgets/transaction_message.dart';
@@ -16,6 +18,7 @@ import 'package:money_mate/shared/constants/app_dimens.dart';
 import 'package:money_mate/shared/constants/app_theme.dart';
 import 'package:money_mate/shared/enums/message_type.dart';
 import 'package:money_mate/shared/extensions/datetime_ext.dart';
+import 'package:money_mate/shared/extensions/invoice_items_ext.dart';
 
 class MessageItem extends StatefulWidget {
   final Message message;
@@ -91,45 +94,52 @@ class _MessageItemState extends State<MessageItem>
                       ? CrossAxisAlignment.end
                       : CrossAxisAlignment.start,
                   children: [
-                    Container(
-                      constraints: BoxConstraints(
-                        maxWidth: MediaQuery.of(context).size.width * 0.7,
-                      ),
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: AppDimens.paddingMd,
-                        vertical: AppDimens.paddingMd,
-                      ),
-                      decoration: BoxDecoration(
-                          color: widget.message.isSentByMe
-                              ? AppColors.darkCardColor
-                              : (widget.message.type == MessageType.error
-                                  ? Colors.pinkAccent
-                                  : Colors.grey[200]),
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(widget.message.isSentByMe
-                                ? AppDimens.radiusMd
-                                : AppDimens.radiusSm / 2),
-                            topRight: Radius.circular(widget.message.isSentByMe
-                                ? AppDimens.radiusSm / 2
-                                : AppDimens.radiusMd),
-                            bottomLeft: Radius.circular(
-                                widget.message.isSentByMe
-                                    ? AppDimens.radiusMd
-                                    : AppDimens.radiusMd),
-                            bottomRight: Radius.circular(
-                                widget.message.isSentByMe
-                                    ? AppDimens.radiusMd
-                                    : AppDimens.radiusMd),
-                          )),
-                      child: widget.message.content == null  || widget.message.content!.isEmpty? const SizedBox() : Text(
-                        widget.message.content!,
-                        style: context.textTheme.bodyMedium?.copyWith(
-                          color: widget.message.isSentByMe
-                              ? Colors.white
-                              : Colors.black87,
-                        ),
-                      ),
-                    ),
+                    widget.message.content == null ||
+                            widget.message.content!.isEmpty
+                        ? const SizedBox()
+                        : Container(
+                            constraints: BoxConstraints(
+                              maxWidth: widget.message.isSentByMe
+                                  ? MediaQuery.of(context).size.width * 0.7
+                                  : MediaQuery.of(context).size.width * 0.8,
+                            ),
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: AppDimens.paddingMd,
+                              vertical: AppDimens.paddingMd,
+                            ),
+                            decoration: BoxDecoration(
+                                color: widget.message.isSentByMe
+                                    ? AppColors.darkCardColor
+                                    : (widget.message.type == MessageType.error
+                                        ? Colors.pinkAccent
+                                        : Colors.grey[200]),
+                                borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(
+                                      widget.message.isSentByMe
+                                          ? AppDimens.radiusMd
+                                          : AppDimens.radiusSm / 2),
+                                  topRight: Radius.circular(
+                                      widget.message.isSentByMe
+                                          ? AppDimens.radiusSm / 2
+                                          : AppDimens.radiusMd),
+                                  bottomLeft: Radius.circular(
+                                      widget.message.isSentByMe
+                                          ? AppDimens.radiusMd
+                                          : AppDimens.radiusMd),
+                                  bottomRight: Radius.circular(
+                                      widget.message.isSentByMe
+                                          ? AppDimens.radiusMd
+                                          : AppDimens.radiusMd),
+                                )),
+                            child: Text(
+                              widget.message.content!,
+                              style: context.textTheme.bodyMedium?.copyWith(
+                                color: widget.message.isSentByMe
+                                    ? Colors.white
+                                    : Colors.black87,
+                              ),
+                            ),
+                          ),
                     if (!widget.message.isSentByMe &&
                         widget.message.type == MessageType.transaction) ...[
                       AppDimens.spaceSm,
@@ -181,6 +191,71 @@ class _MessageItemState extends State<MessageItem>
                           context,
                           MediaQuery.of(context).size.width * 0.7,
                           widget.message.isSentByMe)
+                    ],
+                    if (widget.message.type == MessageType.invoice &&
+                        widget.message.invoiceItems != null) ...[
+                      AppDimens.spaceSm,
+                      ...widget.message.invoiceItems!.map((item) {
+                        return Column(
+                          children: [
+                            InvoiceItemUI(
+                              item: item,
+                              onSelectChanged: () {
+                                context
+                                    .read<SelectedInvoicesCubit>()
+                                    .toggleInvoiceSelection(item);
+                              },
+                            ),
+                            if (item != widget.message.invoiceItems!.last)
+                              AppDimens.divider,
+                          ],
+                        );
+                      }),
+                      AppDimens.divider,
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.8,
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: ElevatedButton(
+                                  style: context.theme.elevatedButtonTheme.style
+                                      ?.copyWith(
+                                    backgroundColor:
+                                        MaterialStateProperty.all(Colors.teal),
+                                  ),
+                                  onPressed: () {
+                                    context
+                                        .read<SelectedInvoicesCubit>()
+                                        .addAll(widget.message.invoiceItems!);
+                                  },
+                                  child: Text(
+                                    'Chọn tất cả',
+                                    style: context.textTheme.titleMedium,
+                                  )),
+                            ),
+                            AppDimens.divider,
+                            Expanded(
+                              child: ElevatedButton(
+                                  onPressed: () {
+                                    final invoiceItems = context
+                                        .read<SelectedInvoicesCubit>()
+                                        .getList();
+                                    if(invoiceItems.isEmpty) return;
+                                    context
+                                        .read<ChatBloc>()
+                                        .sendMessage(invoiceItems.toMessage());
+                                    context
+                                        .read<SelectedInvoicesCubit>()
+                                        .clear();
+                                  },
+                                  child: Text(
+                                    'Xác nhận',
+                                    style: context.textTheme.titleMedium,
+                                  )),
+                            )
+                          ],
+                        ),
+                      )
                     ],
                     Padding(
                       padding: const EdgeInsets.only(

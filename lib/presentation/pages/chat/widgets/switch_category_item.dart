@@ -29,7 +29,7 @@ class SwitchCategoryItem extends StatelessWidget {
     final String typeText =
         category.type == CategoriesType.income ? s.income : s.expense;
 
-    final width = MediaQuery.of(context).size.width * 0.7;
+    final width = MediaQuery.of(context).size.width * 0.8;
 
     return Container(
       width: width,

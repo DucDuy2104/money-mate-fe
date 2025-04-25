@@ -20,6 +20,7 @@ mixin _$Message {
   String get user => throw _privateConstructorUsedError;
   String get conversation => throw _privateConstructorUsedError;
   Transaction? get transaction => throw _privateConstructorUsedError;
+  List<InvoiceItem>? get invoiceItems => throw _privateConstructorUsedError;
   Category? get category => throw _privateConstructorUsedError;
   MessageType get type => throw _privateConstructorUsedError;
   String? get content => throw _privateConstructorUsedError;
@@ -43,6 +44,7 @@ abstract class $MessageCopyWith<$Res> {
       String user,
       String conversation,
       Transaction? transaction,
+      List<InvoiceItem>? invoiceItems,
       Category? category,
       MessageType type,
       String? content,
@@ -73,6 +75,7 @@ class _$MessageCopyWithImpl<$Res, $Val extends Message>
     Object? user = null,
     Object? conversation = null,
     Object? transaction = freezed,
+    Object? invoiceItems = freezed,
     Object? category = freezed,
     Object? type = null,
     Object? content = freezed,
@@ -97,6 +100,10 @@ class _$MessageCopyWithImpl<$Res, $Val extends Message>
           ? _value.transaction
           : transaction // ignore: cast_nullable_to_non_nullable
               as Transaction?,
+      invoiceItems: freezed == invoiceItems
+          ? _value.invoiceItems
+          : invoiceItems // ignore: cast_nullable_to_non_nullable
+              as List<InvoiceItem>?,
       category: freezed == category
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
@@ -165,6 +172,7 @@ abstract class _$$MessageImplCopyWith<$Res> implements $MessageCopyWith<$Res> {
       String user,
       String conversation,
       Transaction? transaction,
+      List<InvoiceItem>? invoiceItems,
       Category? category,
       MessageType type,
       String? content,
@@ -195,6 +203,7 @@ class __$$MessageImplCopyWithImpl<$Res>
     Object? user = null,
     Object? conversation = null,
     Object? transaction = freezed,
+    Object? invoiceItems = freezed,
     Object? category = freezed,
     Object? type = null,
     Object? content = freezed,
@@ -219,6 +228,10 @@ class __$$MessageImplCopyWithImpl<$Res>
           ? _value.transaction
           : transaction // ignore: cast_nullable_to_non_nullable
               as Transaction?,
+      invoiceItems: freezed == invoiceItems
+          ? _value._invoiceItems
+          : invoiceItems // ignore: cast_nullable_to_non_nullable
+              as List<InvoiceItem>?,
       category: freezed == category
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
@@ -255,13 +268,15 @@ class _$MessageImpl implements _Message {
       required this.user,
       required this.conversation,
       required this.transaction,
+      required final List<InvoiceItem>? invoiceItems,
       required this.category,
       required this.type,
       required this.content,
       required final List<String> assets,
       required this.isSentByMe,
       required this.createdAt})
-      : _assets = assets;
+      : _invoiceItems = invoiceItems,
+        _assets = assets;
 
   @override
   final String id;
@@ -271,6 +286,16 @@ class _$MessageImpl implements _Message {
   final String conversation;
   @override
   final Transaction? transaction;
+  final List<InvoiceItem>? _invoiceItems;
+  @override
+  List<InvoiceItem>? get invoiceItems {
+    final value = _invoiceItems;
+    if (value == null) return null;
+    if (_invoiceItems is EqualUnmodifiableListView) return _invoiceItems;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
   @override
   final Category? category;
   @override
@@ -292,7 +317,7 @@ class _$MessageImpl implements _Message {
 
   @override
   String toString() {
-    return 'Message(id: $id, user: $user, conversation: $conversation, transaction: $transaction, category: $category, type: $type, content: $content, assets: $assets, isSentByMe: $isSentByMe, createdAt: $createdAt)';
+    return 'Message(id: $id, user: $user, conversation: $conversation, transaction: $transaction, invoiceItems: $invoiceItems, category: $category, type: $type, content: $content, assets: $assets, isSentByMe: $isSentByMe, createdAt: $createdAt)';
   }
 
   @override
@@ -306,6 +331,8 @@ class _$MessageImpl implements _Message {
                 other.conversation == conversation) &&
             (identical(other.transaction, transaction) ||
                 other.transaction == transaction) &&
+            const DeepCollectionEquality()
+                .equals(other._invoiceItems, _invoiceItems) &&
             (identical(other.category, category) ||
                 other.category == category) &&
             (identical(other.type, type) || other.type == type) &&
@@ -324,6 +351,7 @@ class _$MessageImpl implements _Message {
       user,
       conversation,
       transaction,
+      const DeepCollectionEquality().hash(_invoiceItems),
       category,
       type,
       content,
@@ -346,6 +374,7 @@ abstract class _Message implements Message {
       required final String user,
       required final String conversation,
       required final Transaction? transaction,
+      required final List<InvoiceItem>? invoiceItems,
       required final Category? category,
       required final MessageType type,
       required final String? content,
@@ -361,6 +390,8 @@ abstract class _Message implements Message {
   String get conversation;
   @override
   Transaction? get transaction;
+  @override
+  List<InvoiceItem>? get invoiceItems;
   @override
   Category? get category;
   @override

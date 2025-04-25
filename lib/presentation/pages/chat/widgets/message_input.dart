@@ -37,7 +37,7 @@ class MessageInput extends StatelessWidget {
               if (value.isNotEmpty) {
                 context.read<EnableChatCubit>().sendAvailable();
               } else {
-                context.read<EnableChatCubit>().close();
+                context.read<EnableChatCubit>().closeGallery();
               }
             },
             decoration: InputDecoration(

@@ -70,9 +70,10 @@ class EnableChatCubit extends Cubit<EnableChatState>
   }
 
   void setImageSending() {
-    final curState = state.maybeMap(galleryOpening: (value) => value, orElse: () => null);
+    final curState =
+        state.maybeMap(galleryOpening: (value) => value, orElse: () => null);
     if (curState == null) return;
-    emit(curState.copyWith(isSending: true)); 
+    emit(curState.copyWith(isSending: true));
   }
 
   void setSendingComplete() {
@@ -82,6 +83,15 @@ class EnableChatCubit extends Cubit<EnableChatState>
     );
     if (curState == null) return;
     emit(curState.copyWith(isSending: false));
+  }
+
+  void clear() {
+    final curState = state.maybeMap(
+      galleryOpening: (value) => value,
+      orElse: () => null,
+    );
+    if (curState == null) return;
+    emit(curState.copyWith(selectedAssets: []));
   }
 }
 
@@ -124,8 +134,8 @@ Future<int> getAssetPageCount() async {
 
   if (ps.isAuth) {
     List<AssetPathEntity> albums = await PhotoManager.getAssetPathList(
-        type: RequestType.image,
-        onlyAll: true,
+      type: RequestType.image,
+      onlyAll: true,
     );
 
     if (albums.isNotEmpty) {

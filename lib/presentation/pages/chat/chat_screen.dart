@@ -77,6 +77,7 @@ class _ChatScreenState extends State<ChatScreen> {
     context.read<ChatBloc>().sendImageMessage(assets, () {
       context.read<EnableChatCubit>().setSendingComplete();
     });
+    context.read<EnableChatCubit>().clear();
   }
 
   void onSendMessage() {

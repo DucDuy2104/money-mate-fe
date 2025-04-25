@@ -4,6 +4,7 @@ enum MessageType {
   delete,
   image,
   recommend,
+  invoice,
   error,
   transaction;
 

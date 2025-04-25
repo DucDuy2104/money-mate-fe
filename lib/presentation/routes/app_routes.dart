@@ -9,6 +9,7 @@ import 'package:money_mate/presentation/pages/chat/bloc/chat_bloc.dart';
 import 'package:money_mate/presentation/pages/chat/chat_screen.dart';
 import 'package:money_mate/presentation/pages/auth/login/login_screen.dart';
 import 'package:money_mate/presentation/pages/chat/cubit/enable_chat_cubit.dart';
+import 'package:money_mate/presentation/pages/chat/cubit/selected_invoices_cubit.dart';
 import 'package:money_mate/presentation/pages/email_to_next/bloc/email_next_bloc.dart';
 import 'package:money_mate/presentation/pages/email_to_next/email_to_next_screen.dart';
 import 'package:money_mate/presentation/pages/home/home_screen.dart';
@@ -90,6 +91,7 @@ final List<GoRoute> appRoutes = [
               BlocProvider(
                 create: (context) => EnableChatCubit(),
               ),
+              BlocProvider(create: (context) => SelectedInvoicesCubit())
             ],
             child: const ChatScreen(),
           )),
