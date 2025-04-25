@@ -2,6 +2,7 @@ enum MessageType {
   text,
   add,
   delete,
+  image,
   recommend,
   error,
   transaction;

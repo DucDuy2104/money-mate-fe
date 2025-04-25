@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:money_mate/core/service/langs/generated/l10n/l10n.dart';
@@ -120,8 +121,8 @@ class _MessageItemState extends State<MessageItem>
                                     ? AppDimens.radiusMd
                                     : AppDimens.radiusMd),
                           )),
-                      child: Text(
-                        widget.message.content,
+                      child: widget.message.content == null  || widget.message.content!.isEmpty? const SizedBox() : Text(
+                        widget.message.content!,
                         style: context.textTheme.bodyMedium?.copyWith(
                           color: widget.message.isSentByMe
                               ? Colors.white
@@ -172,6 +173,15 @@ class _MessageItemState extends State<MessageItem>
                         },
                       )
                     ],
+                    if (widget.message.type == MessageType.image &&
+                        widget.message.assets.isNotEmpty) ...[
+                      AppDimens.spaceSm,
+                      _renderImages(
+                          widget.message,
+                          context,
+                          MediaQuery.of(context).size.width * 0.7,
+                          widget.message.isSentByMe)
+                    ],
                     Padding(
                       padding: const EdgeInsets.only(
                           top: AppDimens.paddingXs,
@@ -208,4 +218,43 @@ class _MessageItemState extends State<MessageItem>
     homeBloc.add(const HomeEvent.reloadData());
     profileBloc.add(const ProfileEvent.reloadData());
   }
+}
+
+Widget _renderImages(
+    Message message, BuildContext context, double maxWidth, bool isInMenu) {
+  final files = message.assets;
+  final fileCount = files.length;
+  final isLastMessseExpand = fileCount % 2 != 0;
+  const gap = 2;
+  return SizedBox(
+    width: maxWidth,
+    child: Wrap(
+      children: files.asMap().entries.map((entry) {
+        final isLast = entry.key == files.length - 1;
+        final isExpand = isLast && isLastMessseExpand;
+        return Padding(
+          padding: const EdgeInsets.all(gap / 2),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(AppDimens.radiusSm),
+            child: Hero(
+              tag: 'asset ${entry.value}',
+              child: GestureDetector(
+                onTap: () {
+                  // if (!isInMenu) {
+                  //   context.pushNamed(AppRoutes.viewMediaName,
+                  //       extra: entry.value);
+                  // }
+                },
+                child: CachedNetworkImage(
+                    imageUrl: entry.value,
+                    width: isExpand ? maxWidth : (maxWidth / 2 - gap),
+                    height: isExpand ? null : maxWidth / 2 - gap,
+                    fit: isExpand ? BoxFit.contain : BoxFit.cover),
+              ),
+            ),
+          ),
+        );
+      }).toList(),
+    ),
+  );
 }

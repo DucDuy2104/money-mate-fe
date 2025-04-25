@@ -1,5 +1,6 @@
 enum SocketEnum {
   sendMessage,
+  sendImage,
   newMessage,
   joinRoom,
   leaveRoom,

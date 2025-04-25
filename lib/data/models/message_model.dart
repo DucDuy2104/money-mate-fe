@@ -17,8 +17,9 @@ class MessageModel with _$MessageModel {
     required TransactionModel? transaction,
     required CategoryModel? category,
     required String type,
-    required String content,
+    required String? content,
     required bool isSentByMe,
+    required List<String>? assets,
     required DateTime createdAt,
   }) = _MessageModel;
 
@@ -38,7 +39,7 @@ extension MessageModelX on MessageModel {
       type: MessageType.fromString(type),
       content: content,
       isSentByMe: isSentByMe,
-      createdAt: createdAt.toUtcPlus7(),
+      createdAt: createdAt.toUtcPlus7(), assets: assets ?? [],
     );
   }
 }

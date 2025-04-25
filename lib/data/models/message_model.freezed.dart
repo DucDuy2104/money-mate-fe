@@ -26,8 +26,9 @@ mixin _$MessageModel {
   TransactionModel? get transaction => throw _privateConstructorUsedError;
   CategoryModel? get category => throw _privateConstructorUsedError;
   String get type => throw _privateConstructorUsedError;
-  String get content => throw _privateConstructorUsedError;
+  String? get content => throw _privateConstructorUsedError;
   bool get isSentByMe => throw _privateConstructorUsedError;
+  List<String>? get assets => throw _privateConstructorUsedError;
   DateTime get createdAt => throw _privateConstructorUsedError;
 
   /// Serializes this MessageModel to a JSON map.
@@ -53,8 +54,9 @@ abstract class $MessageModelCopyWith<$Res> {
       TransactionModel? transaction,
       CategoryModel? category,
       String type,
-      String content,
+      String? content,
       bool isSentByMe,
+      List<String>? assets,
       DateTime createdAt});
 
   $TransactionModelCopyWith<$Res>? get transaction;
@@ -82,8 +84,9 @@ class _$MessageModelCopyWithImpl<$Res, $Val extends MessageModel>
     Object? transaction = freezed,
     Object? category = freezed,
     Object? type = null,
-    Object? content = null,
+    Object? content = freezed,
     Object? isSentByMe = null,
+    Object? assets = freezed,
     Object? createdAt = null,
   }) {
     return _then(_value.copyWith(
@@ -111,14 +114,18 @@ class _$MessageModelCopyWithImpl<$Res, $Val extends MessageModel>
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as String,
-      content: null == content
+      content: freezed == content
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       isSentByMe: null == isSentByMe
           ? _value.isSentByMe
           : isSentByMe // ignore: cast_nullable_to_non_nullable
               as bool,
+      assets: freezed == assets
+          ? _value.assets
+          : assets // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
       createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -170,8 +177,9 @@ abstract class _$$MessageModelImplCopyWith<$Res>
       TransactionModel? transaction,
       CategoryModel? category,
       String type,
-      String content,
+      String? content,
       bool isSentByMe,
+      List<String>? assets,
       DateTime createdAt});
 
   @override
@@ -199,8 +207,9 @@ class __$$MessageModelImplCopyWithImpl<$Res>
     Object? transaction = freezed,
     Object? category = freezed,
     Object? type = null,
-    Object? content = null,
+    Object? content = freezed,
     Object? isSentByMe = null,
+    Object? assets = freezed,
     Object? createdAt = null,
   }) {
     return _then(_$MessageModelImpl(
@@ -228,14 +237,18 @@ class __$$MessageModelImplCopyWithImpl<$Res>
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as String,
-      content: null == content
+      content: freezed == content
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       isSentByMe: null == isSentByMe
           ? _value.isSentByMe
           : isSentByMe // ignore: cast_nullable_to_non_nullable
               as bool,
+      assets: freezed == assets
+          ? _value._assets
+          : assets // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
       createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -256,7 +269,9 @@ class _$MessageModelImpl implements _MessageModel {
       required this.type,
       required this.content,
       required this.isSentByMe,
-      required this.createdAt});
+      required final List<String>? assets,
+      required this.createdAt})
+      : _assets = assets;
 
   factory _$MessageModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$MessageModelImplFromJson(json);
@@ -274,15 +289,25 @@ class _$MessageModelImpl implements _MessageModel {
   @override
   final String type;
   @override
-  final String content;
+  final String? content;
   @override
   final bool isSentByMe;
+  final List<String>? _assets;
+  @override
+  List<String>? get assets {
+    final value = _assets;
+    if (value == null) return null;
+    if (_assets is EqualUnmodifiableListView) return _assets;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
   @override
   final DateTime createdAt;
 
   @override
   String toString() {
-    return 'MessageModel(id: $id, user: $user, conversation: $conversation, transaction: $transaction, category: $category, type: $type, content: $content, isSentByMe: $isSentByMe, createdAt: $createdAt)';
+    return 'MessageModel(id: $id, user: $user, conversation: $conversation, transaction: $transaction, category: $category, type: $type, content: $content, isSentByMe: $isSentByMe, assets: $assets, createdAt: $createdAt)';
   }
 
   @override
@@ -302,14 +327,25 @@ class _$MessageModelImpl implements _MessageModel {
             (identical(other.content, content) || other.content == content) &&
             (identical(other.isSentByMe, isSentByMe) ||
                 other.isSentByMe == isSentByMe) &&
+            const DeepCollectionEquality().equals(other._assets, _assets) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, id, user, conversation,
-      transaction, category, type, content, isSentByMe, createdAt);
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      user,
+      conversation,
+      transaction,
+      category,
+      type,
+      content,
+      isSentByMe,
+      const DeepCollectionEquality().hash(_assets),
+      createdAt);
 
   /// Create a copy of MessageModel
   /// with the given fields replaced by the non-null parameter values.
@@ -335,8 +371,9 @@ abstract class _MessageModel implements MessageModel {
       required final TransactionModel? transaction,
       required final CategoryModel? category,
       required final String type,
-      required final String content,
+      required final String? content,
       required final bool isSentByMe,
+      required final List<String>? assets,
       required final DateTime createdAt}) = _$MessageModelImpl;
 
   factory _MessageModel.fromJson(Map<String, dynamic> json) =
@@ -355,9 +392,11 @@ abstract class _MessageModel implements MessageModel {
   @override
   String get type;
   @override
-  String get content;
+  String? get content;
   @override
   bool get isSentByMe;
+  @override
+  List<String>? get assets;
   @override
   DateTime get createdAt;
 

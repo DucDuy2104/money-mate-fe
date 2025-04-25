@@ -14,7 +14,8 @@ class Message with _$Message {
     required Transaction? transaction,
     required Category? category,
     required MessageType type,
-    required String content,
+    required String? content,
+    required List<String> assets,
     required bool isSentByMe,
     required DateTime createdAt,
   }) = _Message;

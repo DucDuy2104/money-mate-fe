@@ -19,8 +19,10 @@ _$MessageModelImpl _$$MessageModelImplFromJson(Map<String, dynamic> json) =>
           ? null
           : CategoryModel.fromJson(json['category'] as Map<String, dynamic>),
       type: json['type'] as String,
-      content: json['content'] as String,
+      content: json['content'] as String?,
       isSentByMe: json['isSentByMe'] as bool,
+      assets:
+          (json['assets'] as List<dynamic>?)?.map((e) => e as String).toList(),
       createdAt: DateTime.parse(json['createdAt'] as String),
     );
 
@@ -34,5 +36,6 @@ Map<String, dynamic> _$$MessageModelImplToJson(_$MessageModelImpl instance) =>
       'type': instance.type,
       'content': instance.content,
       'isSentByMe': instance.isSentByMe,
+      'assets': instance.assets,
       'createdAt': instance.createdAt.toIso8601String(),
     };
