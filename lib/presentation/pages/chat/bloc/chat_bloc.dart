@@ -1,9 +1,11 @@
 import 'dart:async';
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:money_mate/core/network/models/paginated_state.dart';
 import 'package:money_mate/core/service/getit/locator.dart';
 import 'package:money_mate/core/service/langs/localization_service.dart';
@@ -19,6 +21,10 @@ import 'package:money_mate/domain/entities/message.dart';
 import 'package:money_mate/domain/entities/transaction.dart';
 import 'package:money_mate/shared/components/app_toast.dart';
 import 'package:money_mate/shared/enums/socket_enum.dart';
+import 'package:money_mate/shared/extensions/asset_entities_ext.dart';
+import 'package:money_mate/shared/extensions/xfile_ext.dart';
+import 'package:money_mate/shared/helper/upload_helper.dart';
+import 'package:photo_manager/photo_manager.dart';
 
 part 'chat_event.dart';
 part 'chat_state.dart';
@@ -33,6 +39,8 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> with PaginatedMixin<Message> {
   final BotsRepository _botsRepository = getIt<BotsRepository>();
   final SocketService _socketService = getIt<SocketService>();
   final LocalizationService _localizationService = getIt<LocalizationService>();
+  final UploadHelper _uploadHelper = getIt<UploadHelper>();
+
   ChatBloc() : super(const ChatState.initial()) {
     on<_GetChatData>(_onGetChatData);
     on<_Connect>(_onConnect);
@@ -267,6 +275,28 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> with PaginatedMixin<Message> {
           });
         },
         orElse: () {});
+  }
+
+  // Send image
+  void sendImageMessage(List<AssetEntity> assets, VoidCallback callback) async {
+    List<String> urls = [];
+    for (var asset in assets) {
+      File? file = await asset.toFile();
+      if(file == null) continue;
+      final url = await _uploadHelper.uploadFile(file);
+      urls.add(url);
+    }
+    state.maybeMap(
+        loaded: (data) {
+          _socketService.emit(SocketEnum.sendImage.name, {
+            "conversation": data.chatData.conversation.id,
+            "type": "image",
+            "assets": urls,
+            "lang": _localizationService.getCurrentLocale().languageCode,
+          });
+        },
+        orElse: () {});
+    callback();
   }
 
   void _onConnect(_Connect event, Emitter<ChatState> emit) {

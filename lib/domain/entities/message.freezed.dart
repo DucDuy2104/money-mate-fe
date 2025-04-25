@@ -20,9 +20,11 @@ mixin _$Message {
   String get user => throw _privateConstructorUsedError;
   String get conversation => throw _privateConstructorUsedError;
   Transaction? get transaction => throw _privateConstructorUsedError;
+  List<InvoiceItem>? get invoiceItems => throw _privateConstructorUsedError;
   Category? get category => throw _privateConstructorUsedError;
   MessageType get type => throw _privateConstructorUsedError;
-  String get content => throw _privateConstructorUsedError;
+  String? get content => throw _privateConstructorUsedError;
+  List<String> get assets => throw _privateConstructorUsedError;
   bool get isSentByMe => throw _privateConstructorUsedError;
   DateTime get createdAt => throw _privateConstructorUsedError;
 
@@ -42,9 +44,11 @@ abstract class $MessageCopyWith<$Res> {
       String user,
       String conversation,
       Transaction? transaction,
+      List<InvoiceItem>? invoiceItems,
       Category? category,
       MessageType type,
-      String content,
+      String? content,
+      List<String> assets,
       bool isSentByMe,
       DateTime createdAt});
 
@@ -71,9 +75,11 @@ class _$MessageCopyWithImpl<$Res, $Val extends Message>
     Object? user = null,
     Object? conversation = null,
     Object? transaction = freezed,
+    Object? invoiceItems = freezed,
     Object? category = freezed,
     Object? type = null,
-    Object? content = null,
+    Object? content = freezed,
+    Object? assets = null,
     Object? isSentByMe = null,
     Object? createdAt = null,
   }) {
@@ -94,6 +100,10 @@ class _$MessageCopyWithImpl<$Res, $Val extends Message>
           ? _value.transaction
           : transaction // ignore: cast_nullable_to_non_nullable
               as Transaction?,
+      invoiceItems: freezed == invoiceItems
+          ? _value.invoiceItems
+          : invoiceItems // ignore: cast_nullable_to_non_nullable
+              as List<InvoiceItem>?,
       category: freezed == category
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
@@ -102,10 +112,14 @@ class _$MessageCopyWithImpl<$Res, $Val extends Message>
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as MessageType,
-      content: null == content
+      content: freezed == content
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
+      assets: null == assets
+          ? _value.assets
+          : assets // ignore: cast_nullable_to_non_nullable
+              as List<String>,
       isSentByMe: null == isSentByMe
           ? _value.isSentByMe
           : isSentByMe // ignore: cast_nullable_to_non_nullable
@@ -158,9 +172,11 @@ abstract class _$$MessageImplCopyWith<$Res> implements $MessageCopyWith<$Res> {
       String user,
       String conversation,
       Transaction? transaction,
+      List<InvoiceItem>? invoiceItems,
       Category? category,
       MessageType type,
-      String content,
+      String? content,
+      List<String> assets,
       bool isSentByMe,
       DateTime createdAt});
 
@@ -187,9 +203,11 @@ class __$$MessageImplCopyWithImpl<$Res>
     Object? user = null,
     Object? conversation = null,
     Object? transaction = freezed,
+    Object? invoiceItems = freezed,
     Object? category = freezed,
     Object? type = null,
-    Object? content = null,
+    Object? content = freezed,
+    Object? assets = null,
     Object? isSentByMe = null,
     Object? createdAt = null,
   }) {
@@ -210,6 +228,10 @@ class __$$MessageImplCopyWithImpl<$Res>
           ? _value.transaction
           : transaction // ignore: cast_nullable_to_non_nullable
               as Transaction?,
+      invoiceItems: freezed == invoiceItems
+          ? _value._invoiceItems
+          : invoiceItems // ignore: cast_nullable_to_non_nullable
+              as List<InvoiceItem>?,
       category: freezed == category
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
@@ -218,10 +240,14 @@ class __$$MessageImplCopyWithImpl<$Res>
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as MessageType,
-      content: null == content
+      content: freezed == content
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
+      assets: null == assets
+          ? _value._assets
+          : assets // ignore: cast_nullable_to_non_nullable
+              as List<String>,
       isSentByMe: null == isSentByMe
           ? _value.isSentByMe
           : isSentByMe // ignore: cast_nullable_to_non_nullable
@@ -242,11 +268,15 @@ class _$MessageImpl implements _Message {
       required this.user,
       required this.conversation,
       required this.transaction,
+      required final List<InvoiceItem>? invoiceItems,
       required this.category,
       required this.type,
       required this.content,
+      required final List<String> assets,
       required this.isSentByMe,
-      required this.createdAt});
+      required this.createdAt})
+      : _invoiceItems = invoiceItems,
+        _assets = assets;
 
   @override
   final String id;
@@ -256,12 +286,30 @@ class _$MessageImpl implements _Message {
   final String conversation;
   @override
   final Transaction? transaction;
+  final List<InvoiceItem>? _invoiceItems;
+  @override
+  List<InvoiceItem>? get invoiceItems {
+    final value = _invoiceItems;
+    if (value == null) return null;
+    if (_invoiceItems is EqualUnmodifiableListView) return _invoiceItems;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
   @override
   final Category? category;
   @override
   final MessageType type;
   @override
-  final String content;
+  final String? content;
+  final List<String> _assets;
+  @override
+  List<String> get assets {
+    if (_assets is EqualUnmodifiableListView) return _assets;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_assets);
+  }
+
   @override
   final bool isSentByMe;
   @override
@@ -269,7 +317,7 @@ class _$MessageImpl implements _Message {
 
   @override
   String toString() {
-    return 'Message(id: $id, user: $user, conversation: $conversation, transaction: $transaction, category: $category, type: $type, content: $content, isSentByMe: $isSentByMe, createdAt: $createdAt)';
+    return 'Message(id: $id, user: $user, conversation: $conversation, transaction: $transaction, invoiceItems: $invoiceItems, category: $category, type: $type, content: $content, assets: $assets, isSentByMe: $isSentByMe, createdAt: $createdAt)';
   }
 
   @override
@@ -283,10 +331,13 @@ class _$MessageImpl implements _Message {
                 other.conversation == conversation) &&
             (identical(other.transaction, transaction) ||
                 other.transaction == transaction) &&
+            const DeepCollectionEquality()
+                .equals(other._invoiceItems, _invoiceItems) &&
             (identical(other.category, category) ||
                 other.category == category) &&
             (identical(other.type, type) || other.type == type) &&
             (identical(other.content, content) || other.content == content) &&
+            const DeepCollectionEquality().equals(other._assets, _assets) &&
             (identical(other.isSentByMe, isSentByMe) ||
                 other.isSentByMe == isSentByMe) &&
             (identical(other.createdAt, createdAt) ||
@@ -294,8 +345,19 @@ class _$MessageImpl implements _Message {
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, id, user, conversation,
-      transaction, category, type, content, isSentByMe, createdAt);
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      user,
+      conversation,
+      transaction,
+      const DeepCollectionEquality().hash(_invoiceItems),
+      category,
+      type,
+      content,
+      const DeepCollectionEquality().hash(_assets),
+      isSentByMe,
+      createdAt);
 
   /// Create a copy of Message
   /// with the given fields replaced by the non-null parameter values.
@@ -312,9 +374,11 @@ abstract class _Message implements Message {
       required final String user,
       required final String conversation,
       required final Transaction? transaction,
+      required final List<InvoiceItem>? invoiceItems,
       required final Category? category,
       required final MessageType type,
-      required final String content,
+      required final String? content,
+      required final List<String> assets,
       required final bool isSentByMe,
       required final DateTime createdAt}) = _$MessageImpl;
 
@@ -327,11 +391,15 @@ abstract class _Message implements Message {
   @override
   Transaction? get transaction;
   @override
+  List<InvoiceItem>? get invoiceItems;
+  @override
   Category? get category;
   @override
   MessageType get type;
   @override
-  String get content;
+  String? get content;
+  @override
+  List<String> get assets;
   @override
   bool get isSentByMe;
   @override

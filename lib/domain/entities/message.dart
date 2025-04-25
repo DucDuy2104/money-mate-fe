@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:money_mate/domain/entities/category.dart';
+import 'package:money_mate/domain/entities/invoice_item.dart';
 import 'package:money_mate/domain/entities/transaction.dart';
 import 'package:money_mate/shared/enums/message_type.dart';
 
@@ -12,9 +13,11 @@ class Message with _$Message {
     required String user,
     required String conversation,
     required Transaction? transaction,
+    required List<InvoiceItem>? invoiceItems,
     required Category? category,
     required MessageType type,
-    required String content,
+    required String? content,
+    required List<String> assets,
     required bool isSentByMe,
     required DateTime createdAt,
   }) = _Message;
